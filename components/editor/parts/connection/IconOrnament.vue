@@ -87,7 +87,7 @@ const {
   font-size: .375em;
   white-space-collapse: preserve-breaks;
   text-wrap: nowrap;
-  color: var(--blue-ratp-paper);
+  color: var(--brand-color);
 }
 
 .ornament-bottom .joint {

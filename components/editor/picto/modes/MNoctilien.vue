@@ -13,7 +13,7 @@
 
   .layer1 {
     mask: url(assets/svg/modes/noctilien_1.svg) no-repeat center;
-    background-color: var(--blue-ratp-paper);
+    background-color: var(--brand-color);
     mask-size: contain;
   }
 

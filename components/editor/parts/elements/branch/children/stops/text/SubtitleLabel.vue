@@ -15,7 +15,7 @@ const { value } = defineProps<{
   display: flex;
   flex-direction: column;
   gap: .0625em;
-  color: var(--blue-ratp-paper);
+  color: var(--brand-color);
   font-weight: bold;
   font-size: .5em;
   font-style: italic;

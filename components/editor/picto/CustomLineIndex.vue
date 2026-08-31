@@ -69,7 +69,7 @@ const textColor = computed(() => textContrast(color) ? 'var(--light-text)' : 'va
   display: flex;
   flex-direction: row;
   align-items: start;
-  font-family: "Parisine Ptf", sans-serif;
+  font-family: var(--brand-font);
   font-weight: 600;
   font-size: 0.75em;
   position: absolute;

@@ -42,6 +42,12 @@
       "generic": "Genérico",
       "ory": "Orly"
     },
+    "brand_style": {
+      "idfm": "Île-de-France Mobilités",
+      "ratp": "RATP (París)",
+      "tcl": "TCL (Lyon)",
+      "tus": "TUS (Santander)"
+    },
     "colors": {
       "custom": "Personalizado"
     },
@@ -308,6 +314,7 @@
           "right": "Derecha",
           "title": "Dirección de accesibilidad PMR"
         },
+        "branch_color": "Color de la rama",
         "city_name": "Ciudad",
         "closed": "Cerrado",
         "end_of_line_connection": {
@@ -397,6 +404,7 @@
       "watermark": "Creado con BULB"
     },
     "menu": {
+      "brand_style": "Estilo gráfico",
       "custom_indices": "Índices personalizados",
       "export": "Exportar como PNG",
       "export_pdf": "Exportar como PDF",

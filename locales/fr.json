@@ -42,6 +42,12 @@
       "generic": "Générique",
       "ory": "Orly"
     },
+    "brand_style": {
+      "idfm": "Île-de-France Mobilités",
+      "ratp": "RATP (Paris)",
+      "tcl": "TCL (Lyon)",
+      "tus": "TUS (Santander)"
+    },
     "colors": {
       "custom": "Personnalisée"
     },
@@ -302,18 +308,19 @@
           "undefined": "Indéfinie",
           "yes": "Oui"
         },
+        "accessible_direction": {
+          "both": "Les deux",
+          "left": "Gauche",
+          "right": "Droite",
+          "title": "Direction d'accessibilité UFR"
+        },
+        "branch_color": "Couleur de branche",
         "city_name": "Ville",
         "closed": "Fermé",
         "end_of_line_connection": {
           "line": "Ligne",
           "mode": "Mode de transport",
           "title": "Prolongement de bout de ligne"
-        },
-        "accessible_direction": {
-          "both": "Les deux",
-          "left": "Gauche",
-          "right": "Droite",
-          "title": "Direction d'accessibilité UFR"
         },
         "header": "Propriétés d’arrêt",
         "interest_point": "Point d’intérêt",
@@ -397,6 +404,7 @@
       "watermark": "Créé à l’aide de BULB"
     },
     "menu": {
+      "brand_style": "Style graphique",
       "custom_indices": "Indices personnalisés",
       "export": "Exporter au format PNG",
       "export_pdf": "Exporter au format PDF",

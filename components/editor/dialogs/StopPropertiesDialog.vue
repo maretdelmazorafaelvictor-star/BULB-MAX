@@ -42,6 +42,11 @@ const poiColor = computed({
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const horizontal = breakpoints.greaterOrEqual('lg')
+const branchColor = computed<string | null>({
+  get: () => stop.value.$stop.branch_color ?? null,
+  set: value => stop.value.$stop.branch_color = value,
+})
+
 watch(() => stop.value.$stop.name, val => stop.value.$stop.name = cleanName(val))
 watch(() => stop.value.$stop.placeName, val => stop.value.$stop.placeName = cleanName(val))
 watch(() => stop.value.$stop.subtitle, val => stop.value.$stop.subtitle = cleanName(val))
@@ -173,6 +178,20 @@ function openConnectionsEditor() {
             option-value="value"
             :allow-empty="false"
           />
+        </div>
+
+        <div v-if="stop.$stop.terminus" class="flex flex-col gap-1">
+          <label>{{ $t('ui.dialogs.stop_properties.branch_color') }}</label>
+          <div class="flex items-center gap-2">
+            <ColorSelect v-model="branchColor" show-clear />
+            <Button
+              v-if="branchColor !== null"
+              text
+              rounded
+              icon="i-tabler-x"
+              @click="branchColor = null"
+            />
+          </div>
         </div>
 
         <div class="flex flex-col gap-1">

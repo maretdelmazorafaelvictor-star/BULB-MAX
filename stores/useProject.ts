@@ -18,6 +18,7 @@ export const useProject = defineStore('project', () => {
     dotsColorPolicy: 'INHERIT',
     fullyAccessible: false,
     frameTerminusNames: true,
+    brandStyle: 'RATP',
     mapSize: 15,
     topology: [{
       id: '1',
@@ -39,6 +40,7 @@ export const useProject = defineStore('project', () => {
     line.dotsColorPolicy = 'INHERIT'
     line.fullyAccessible = false
     line.frameTerminusNames = true
+    line.brandStyle = 'RATP'
     line.mapSize = 15
     line.topology = [{
       id: '1',
@@ -66,6 +68,9 @@ export const useProject = defineStore('project', () => {
         const object = JSON.parse(value)
         if (object.version === undefined) {
           object.version = null
+        }
+        if (object.line && object.line.brandStyle === undefined) {
+          object.line.brandStyle = 'RATP'
         }
 
         return object as Record<string, any>

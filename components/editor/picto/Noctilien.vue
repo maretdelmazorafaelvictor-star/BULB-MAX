@@ -20,7 +20,7 @@ defineProps<{
   border-bottom: .1em solid #a0006e;
   background: #0a0082;
   color: white;
-  font-family: "Parisine Ptf", sans-serif;
+  font-family: var(--brand-font);
   font-size: .5em;
   font-weight: 600;
   line-height: 1;

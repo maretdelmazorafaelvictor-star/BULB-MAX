@@ -14,7 +14,7 @@ const {
 
 <style scoped lang="scss">
 .sep-line {
-  background: var(--blue-ratp-paper);
+  background: var(--brand-color);
   display: block;
   width: .0625em;
   min-height: .25em;

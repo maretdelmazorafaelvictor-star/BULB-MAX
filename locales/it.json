@@ -42,6 +42,12 @@
       "generic": "Generico",
       "ory": "Orly"
     },
+    "brand_style": {
+      "idfm": "Île-de-France Mobilités",
+      "ratp": "RATP (Parigi)",
+      "tcl": "TCL (Lione)",
+      "tus": "TUS (Santander)"
+    },
     "colors": {
       "custom": "Personalizzato"
     },
@@ -302,18 +308,19 @@
           "undefined": "Non definita",
           "yes": "Sì"
         },
+        "accessible_direction": {
+          "both": "Entrambi",
+          "left": "Sinistro",
+          "right": "Destro",
+          "title": "Direzione accessibile"
+        },
+        "branch_color": "Colore della diramazione",
         "city_name": "Città",
         "closed": "Fermata chiusa",
         "end_of_line_connection": {
           "line": "Linea",
           "mode": "Modo di trasporto",
           "title": "Prolungamento di fine linea"
-        },
-        "accessible_direction": {
-          "both": "Entrambi",
-          "left": "Sinistro",
-          "right": "Destro",
-          "title": "Direzione accessibile"
         },
         "header": "Proprietà fermata",
         "interest_point": "Punto d'interesse",
@@ -397,6 +404,7 @@
       "watermark": "Realizzato tramite BULB"
     },
     "menu": {
+      "brand_style": "Stile grafico",
       "custom_indices": "Indici personalizzati",
       "export": "Esporta in PNG",
       "export_pdf": "Esporta in PDF",

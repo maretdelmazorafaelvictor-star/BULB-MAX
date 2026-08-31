@@ -18,10 +18,12 @@ useLocale()
 
 <style lang="scss">
 :root {
-  --blue-ratp: #0a0082;
-  --blue-ratp-paper: #1F3C90;
-  --blue-ratp-paper-secondary: rgba(31, 59, 143, 0.125);
-  --yellow-ratp: #ffbe00;
+  /* Brand tokens, see assets/style/custom.css for the per-brand mapping */
+  --ratp-blue: #1F3C90;
+  --ratp-blue-secondary: rgba(31, 59, 143, 0.125);
+  --idfm-anthracite: #25303B;
+  --idfm-anthracite-secondary: rgba(37, 48, 59, 0.125);
+  --idfm-blue: #64B5F6;
   --place-brown: #80551A;
   --gray: #414241;
   --background-color: #eaeaea;

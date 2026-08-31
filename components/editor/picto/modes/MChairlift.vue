@@ -12,7 +12,7 @@
 
   .layer1 {
     mask: url(assets/svg/modes/chairlift.svg) no-repeat center;
-    background-color: var(--blue-ratp-paper);
+    background-color: var(--brand-color);
     mask-size: contain;
   }
 

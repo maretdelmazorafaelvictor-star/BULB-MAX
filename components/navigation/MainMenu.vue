@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 import { useConfirm } from 'primevue/useconfirm'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -6,7 +7,9 @@ import OpenPresetButton from '~/components/navigation/menu/OpenPresetButton.vue'
 import useLoadProject from '~/composables/useLoadProject'
 import { useProject } from '~/stores/useProject'
 
-const { reset } = useProject()
+const projectStore = useProject()
+const { reset } = projectStore
+const { line } = storeToRefs(projectStore)
 
 const showLineIndexDirectory = ref(false)
 const showSaveDialog = ref(false)
@@ -37,6 +40,11 @@ function newProject() {
 
 <template>
   <div class="flex flex-col items-stretch flex-grow">
+    <div class="flex flex-col gap-1 px-3 py-2">
+      <span class="text-nowrap">{{ $t('ui.menu.brand_style') }}</span>
+      <BrandStyleSelect v-model="line.brandStyle" />
+    </div>
+    <Divider />
     <Button
       pt:root:class="important-justify-start"
       :label="$t('ui.menu.custom_indices')"

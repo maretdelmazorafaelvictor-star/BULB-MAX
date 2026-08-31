@@ -42,6 +42,12 @@
       "generic": "無名",
       "ory": "パリ＝オルリー空港"
     },
+    "brand_style": {
+      "idfm": "Île-de-France Mobilités",
+      "ratp": "RATP（パリ）",
+      "tcl": "TCL（リヨン）",
+      "tus": "TUS（サンタンデール）"
+    },
     "colors": {
       "custom": "特注の色"
     },
@@ -308,6 +314,7 @@
           "right": "右",
           "title": "アクセス可能な方向"
         },
+        "branch_color": "線路の色",
         "city_name": "市の名前",
         "closed": "運休",
         "end_of_line_connection": {
@@ -397,6 +404,7 @@
       "watermark": "BULBで作成"
     },
     "menu": {
+      "brand_style": "グラフィックスタイル",
       "custom_indices": "特注の路線記号",
       "export": "PNGにエクスポート",
       "export_pdf": "PDFにエクスポート",

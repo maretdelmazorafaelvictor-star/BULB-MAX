@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const {
   backgroundColor,
-  foregroundColor = 'var(--blue-ratp-paper)',
+  foregroundColor = 'var(--brand-color)',
   showcase = false,
 } = defineProps<{
   backgroundColor: string

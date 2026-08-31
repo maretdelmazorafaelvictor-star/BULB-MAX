@@ -195,6 +195,7 @@ declare global {
     $stop: {
       name: string
       subtitle: string | null
+      branch_color?: string | null
       placeName: string | null
       accessible: boolean | 'undefined'
       accessibleDirection?: 'left' | 'right' | null
@@ -288,6 +289,7 @@ declare global {
   type LineIndex = BuiltinLineIndex | CustomLineIndex
 
   type LineStyle = 'PLAIN' | 'STRIPED'
+  type BrandStyle = 'RATP' | 'IDFM' | 'TCL' | 'TUS'
   type DotsColorPolicy = 'INHERIT' | 'WHITE'
 
   interface Line {
@@ -300,6 +302,7 @@ declare global {
     mapSize: number | null
     fullyAccessible: boolean
     frameTerminusNames: boolean
+    brandStyle: BrandStyle
     topology: LineSection[]
   }
 

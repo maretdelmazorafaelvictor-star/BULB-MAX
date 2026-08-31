@@ -14,7 +14,7 @@ const { value } = defineProps<{
 
 <style scoped lang="scss">
 .title {
-  color: var(--blue-ratp-paper);
+  color: var(--brand-color);
   font-weight: bold;
 }
 

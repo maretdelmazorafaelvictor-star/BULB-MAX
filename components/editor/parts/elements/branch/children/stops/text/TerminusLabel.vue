@@ -32,7 +32,7 @@ const placeNameParts = computed(() => placeName?.split('\n').filter(part => part
 .frame {
   display: flex;
   flex-direction: column;
-  background-color: var(--blue-ratp-paper);
+  background-color: var(--brand-color);
   color: white;
   font-weight: bold;
   width: fit-content;

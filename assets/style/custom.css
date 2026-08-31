@@ -74,3 +74,45 @@ body {
   font-weight: bold;
   font-style: italic;
 }
+
+@font-face {
+  font-family: "IDF Voyageur";
+  src: url("assets/fonts/IDFVoyageur-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "IDF Voyageur";
+  src: url("assets/fonts/IDFVoyageur-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "IDF Voyageur";
+  src: url("assets/fonts/IDFVoyageur-Bold.woff2") format("woff2");
+  font-weight: 600 700;
+  font-style: normal;
+}
+
+/* Brand styles: applied on the map canvas root, consumed through --brand-* */
+.brand-ratp {
+  --brand-color: var(--ratp-blue);
+  --brand-color-secondary: var(--ratp-blue-secondary);
+  --brand-font: "Parisine Ptf", sans-serif;
+}
+
+.brand-idfm {
+  --brand-color: var(--idfm-anthracite);
+  --brand-color-secondary: var(--idfm-anthracite-secondary);
+  --brand-font: "IDF Voyageur", sans-serif;
+}
+
+/* TODO: TCL and TUS styles, placeholders for now */
+.brand-tcl,
+.brand-tus {
+  --brand-color: var(--ratp-blue);
+  --brand-color-secondary: var(--ratp-blue-secondary);
+  --brand-font: "Parisine Ptf", sans-serif;
+}

@@ -42,6 +42,12 @@
       "generic": "Generic",
       "ory": "Orly"
     },
+    "brand_style": {
+      "idfm": "Île-de-France Mobilités",
+      "ratp": "RATP (Paris)",
+      "tcl": "TCL (Lyon)",
+      "tus": "TUS (Santander)"
+    },
     "colors": {
       "custom": "Custom"
     },
@@ -308,6 +314,7 @@
           "right": "Right",
           "title": "Accessible direction"
         },
+        "branch_color": "Branch color",
         "city_name": "City",
         "closed": "Closed",
         "end_of_line_connection": {
@@ -397,6 +404,7 @@
       "watermark": "Created with BULB"
     },
     "menu": {
+      "brand_style": "Graphic style",
       "custom_indices": "Custom indices",
       "export": "Export as PNG",
       "export_pdf": "Export as PDF",

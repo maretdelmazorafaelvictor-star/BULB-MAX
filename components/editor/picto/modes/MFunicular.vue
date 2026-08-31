@@ -17,7 +17,7 @@ import funicular from '~/assets/svg/modes/funicular.svg'
 
   .layer1 {
     mask: url(assets/svg/modes/funicular.svg) no-repeat center;
-    background-color: var(--blue-ratp-paper);
+    background-color: var(--brand-color);
     mask-size: contain;
   }
 

@@ -23,7 +23,7 @@ const customTheme = definePreset(Aura, {
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
-    baseURL: '/BULB-MAX/',
+    baseURL: '/BULB-RATP/',
     head: {
       title: 'BULB • Beautiful Urban Line Builder',
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
