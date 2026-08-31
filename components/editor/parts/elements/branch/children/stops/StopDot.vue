@@ -16,9 +16,10 @@ const {
 
 const lineContext = inject<LineContext>(LineContextKey)!
 const idfm = computed(() => lineContext.brandStyle.value === 'IDFM')
+// En IDFM le blanc du point est imposé par la classe .idfm ; dotColor garde son
+// sens d'origine et reste utilisé tel quel par le point central du terminus.
 const dotColor = computed(() => {
-  // IDFM : point blanc, l'anneau porte la couleur
-  if (idfm.value || lineContext.dotsColorPolicy.value === 'WHITE') {
+  if (lineContext.dotsColorPolicy.value === 'WHITE') {
     return 'white'
   }
   return color
