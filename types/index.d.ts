@@ -314,6 +314,7 @@ declare global {
     lineStyle: Ref<LineStyle>
     dotsColorPolicy: Ref<DotsColorPolicy>
     frameTerminusNames: Ref<boolean>
+    brandStyle: Ref<BrandStyle>
   }
 
   /*

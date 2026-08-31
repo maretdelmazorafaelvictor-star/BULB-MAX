@@ -15,8 +15,10 @@ const {
 }>()
 
 const lineContext = inject<LineContext>(LineContextKey)!
+const idfm = computed(() => lineContext.brandStyle.value === 'IDFM')
 const dotColor = computed(() => {
-  if (lineContext.dotsColorPolicy.value === 'WHITE') {
+  // IDFM : point blanc, l'anneau porte la couleur
+  if (idfm.value || lineContext.dotsColorPolicy.value === 'WHITE') {
     return 'white'
   }
   return color
@@ -25,7 +27,7 @@ const dotColor = computed(() => {
 
 <template>
   <div class="w-1em h-1em flex items-center justify-center relative">
-    <div class="absolute dot dynamic-part" :class="{ terminus, connection: connection || closed }">
+    <div class="absolute dot dynamic-part" :class="{ terminus, connection: connection || closed, idfm }">
       <span v-if="terminus" class="inner-dot" :style="{ backgroundColor: dotColor }" />
     </div>
     <img v-if="closed" class="absolute closed" src="~/assets/svg/closed.svg">
@@ -48,6 +50,16 @@ const dotColor = computed(() => {
   &.connection {
     background-color: white;
     border: calc(2em / 16) solid black;
+  }
+
+  /* IDFM : point blanc cerclé de la couleur de la ligne, anneau noir en correspondance */
+  &.idfm:not(.terminus) {
+    background-color: white;
+    border: calc(3em / 16) solid v-bind(color);
+
+    &.connection {
+      border-color: black;
+    }
   }
 
   &.terminus {
