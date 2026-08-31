@@ -55,7 +55,7 @@ const dotColor = computed(() => {
   /* IDFM : point blanc cerclé de la couleur de la ligne, anneau noir en correspondance */
   &.idfm:not(.terminus) {
     background-color: white;
-    border: calc(3em / 16) solid v-bind(color);
+    border: calc(2em / 16) solid v-bind(color);
 
     &.connection {
       border-color: black;
