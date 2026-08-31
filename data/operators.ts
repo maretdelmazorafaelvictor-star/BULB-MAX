@@ -1,5 +1,5 @@
 import keolis from '~/assets/svg/brands/keolis.svg'
-import ratp from '~/assets/svg/brands/ratp.svg'
+import ratp from '~/assets/svg/brands/ratp_h.png'
 import sncf from '~/assets/svg/brands/sncf_voyageurs.svg'
 import transdev from '~/assets/svg/brands/transdev.svg'
 

@@ -26,13 +26,14 @@ const date = useDateFormat(now.value, 'DD.MM.YYYY')
     v-bind="$attrs" class="relative content bg-white flex gap-10 flex-row" :class="`brand-${brand.value.toLowerCase()}`"
     :style="{ minHeight: `${line.mapSize}em` }"
   >
-    <div class="ml-3 flex flex-col min-w-fit gap-3" :class="{ 'side-column-idfm': idfm }">
+    <div class="flex flex-col min-w-fit gap-3" :class="idfm ? 'side-column-idfm' : 'ml-3'">
       <!-- IDFM: authority logo on an anthracite band -->
-      <div v-if="idfm" class="w-full flex justify-center items-center bg-[var(--brand-color)] py-.625em px-.75em mt-.75em">
+      <div v-if="idfm" class="band-idfm flex justify-center items-center bg-[var(--brand-color)] py-.625em px-.75em">
         <img :src="idfmLogo" alt="Île-de-France Mobilités" class="authority-logo">
       </div>
       <div v-else class="w-full h-8 bg-[var(--brand-color)]" />
-      <div class="w-full flex flex-row gap-3 justify-center items-center text-4em" :class="{ 'mt-.375em': idfm }">
+      <div v-if="idfm" class="flex-grow" />
+      <div class="w-full flex flex-row gap-3 justify-center items-center text-4em">
         <Mode :mode="line.mode" />
         <LineIndex :mode="line.mode" :index="line.index" />
       </div>
@@ -90,6 +91,11 @@ const date = useDateFormat(now.value, 'DD.MM.YYYY')
   border-right: .0625em solid var(--brand-color);
   padding-left: .75em;
   padding-right: .75em;
+}
+
+.band-idfm {
+  margin-left: -.75em;
+  width: calc(100% + 1.5em);
 }
 
 .authority-logo {
