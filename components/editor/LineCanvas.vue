@@ -2,11 +2,15 @@
 import { useNow } from '@vueuse/core'
 import { useDateFormat } from '@vueuse/shared'
 import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 import useVersion from '~/composables/useVersion'
+import { findBrandStyleByValue } from '~/data/brands'
 import { useProject } from '~/stores/useProject'
 
 const { applicationVersion } = useVersion()
 const { line, outdated, presetBased } = storeToRefs(useProject())
+
+const brand = computed(() => findBrandStyleByValue(line.value.brandStyle) ?? findBrandStyleByValue('RATP')!)
 
 const now = useNow()
 const date = useDateFormat(now.value, 'DD.MM.YYYY')
@@ -14,7 +18,7 @@ const date = useDateFormat(now.value, 'DD.MM.YYYY')
 
 <template>
   <div
-    v-bind="$attrs" class="relative content bg-white flex gap-10 flex-row" :class="`brand-${(line.brandStyle ?? 'RATP').toLowerCase()}`"
+    v-bind="$attrs" class="relative content bg-white flex gap-10 flex-row" :class="`brand-${brand.value.toLowerCase()}`"
     :style="{ minHeight: `${line.mapSize}em` }"
   >
     <div class="ml-3 flex flex-col min-w-fit gap-3">
@@ -32,7 +36,7 @@ const date = useDateFormat(now.value, 'DD.MM.YYYY')
       <div class="flex-grow" />
       <div class="text-.25em flex flex-col line-height-1.75 text-[var(--brand-color)] mb-3">
         <div class="flex flex-row gap-.5">
-          <span>BULB-Paris •</span>
+          <span>BULB-{{ brand.footer }} •</span>
           <!-- Preset Based Project -->
           <span v-if="presetBased">PBP •</span>
           <!-- Project Version Unsupported / Project Version Supported -->

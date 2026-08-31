@@ -1,13 +1,15 @@
 export interface BrandStyleChoice {
   value: BrandStyle
   label: string
+  /** Suffix shown in the map footer, e.g. "BULB-Paris" */
+  footer: string
 }
 
 export const BRAND_STYLES: BrandStyleChoice[] = [
-  { value: 'RATP', label: 'data.brand_style.ratp' },
-  { value: 'IDFM', label: 'data.brand_style.idfm' },
-  { value: 'TCL', label: 'data.brand_style.tcl' },
-  { value: 'TUS', label: 'data.brand_style.tus' },
+  { value: 'RATP', label: 'data.brand_style.ratp', footer: 'Paris' },
+  { value: 'IDFM', label: 'data.brand_style.idfm', footer: 'IDFM' },
+  { value: 'TCL', label: 'data.brand_style.tcl', footer: 'Lyon' },
+  { value: 'TUS', label: 'data.brand_style.tus', footer: 'Santander' },
 ]
 
 export function findBrandStyleByValue(value: BrandStyle | null): BrandStyleChoice | null {
