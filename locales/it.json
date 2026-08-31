@@ -90,6 +90,13 @@
       "transilien": "Transilien",
       "val": "VAL"
     },
+    "operator": {
+      "keolis": "Keolis",
+      "none": "Nessuno",
+      "ratp": "RATP",
+      "sncf": "SNCF Voyageurs",
+      "transdev": "Transdev"
+    },
     "services": {
       "airport": "Aeroporto",
       "bullet_train": "Treno ad alta velocità",
@@ -424,6 +431,7 @@
       "line_style": "Stile linea",
       "line_thickness": "Spessore linea",
       "mode": "Mezzo di trasporto",
+      "operator": "Operatore",
       "size": "Dimensione riquadro mappa",
       "title": "Proprietà",
       "use_preset": "Caricare un modello"

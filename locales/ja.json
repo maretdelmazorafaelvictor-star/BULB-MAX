@@ -90,6 +90,13 @@
       "transilien": "Transilien",
       "val": "VAL"
     },
+    "operator": {
+      "keolis": "Keolis",
+      "none": "なし",
+      "ratp": "RATP",
+      "sncf": "SNCF Voyageurs",
+      "transdev": "Transdev"
+    },
     "services": {
       "airport": "空港",
       "bullet_train": "新幹線",
@@ -424,6 +431,7 @@
       "line_style": "路線のスタイル",
       "line_thickness": "路線の太さ",
       "mode": "交通機関",
+      "operator": "運行事業者",
       "size": "路線図の額のサイズ",
       "title": "プロパティ",
       "use_preset": "プリセット値の使用"

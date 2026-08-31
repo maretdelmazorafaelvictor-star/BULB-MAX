@@ -3,14 +3,19 @@ import { useNow } from '@vueuse/core'
 import { useDateFormat } from '@vueuse/shared'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
+import idfmLogo from '~/assets/svg/brands/idfm.svg'
 import useVersion from '~/composables/useVersion'
 import { findBrandStyleByValue } from '~/data/brands'
+import { findOperatorByValue } from '~/data/operators'
 import { useProject } from '~/stores/useProject'
 
 const { applicationVersion } = useVersion()
 const { line, outdated, presetBased } = storeToRefs(useProject())
 
 const brand = computed(() => findBrandStyleByValue(line.value.brandStyle) ?? findBrandStyleByValue('RATP')!)
+
+const idfm = computed(() => brand.value.value === 'IDFM')
+const operator = computed(() => findOperatorByValue(line.value.operator))
 
 const now = useNow()
 const date = useDateFormat(now.value, 'DD.MM.YYYY')
@@ -21,19 +26,29 @@ const date = useDateFormat(now.value, 'DD.MM.YYYY')
     v-bind="$attrs" class="relative content bg-white flex gap-10 flex-row" :class="`brand-${brand.value.toLowerCase()}`"
     :style="{ minHeight: `${line.mapSize}em` }"
   >
-    <div class="ml-3 flex flex-col min-w-fit gap-3">
-      <div class="w-full h-8 bg-[var(--brand-color)]" />
-      <div class="w-full flex flex-row gap-3 justify-center items-center text-4em">
+    <div class="ml-3 flex flex-col min-w-fit gap-3" :class="{ 'side-column-idfm': idfm }">
+      <!-- IDFM: authority logo on an anthracite band -->
+      <div v-if="idfm" class="w-full flex justify-center items-center bg-[var(--brand-color)] py-.75em px-.5em">
+        <img :src="idfmLogo" alt="Île-de-France Mobilités" class="authority-logo">
+      </div>
+      <div v-else class="w-full h-8 bg-[var(--brand-color)]" />
+      <div class="w-full flex flex-row gap-3 justify-center items-center text-4em" :class="{ 'mt-1em': idfm }">
         <Mode :mode="line.mode" />
         <LineIndex :mode="line.mode" :index="line.index" />
       </div>
       <div
         v-if="line.fullyAccessible"
-        class="w-full flex flex-row gap-3 justify-center items-center bg-[var(--brand-color-secondary)]/50 mt-.5em py-3 text-1.75em"
+        class="w-full flex flex-row gap-3 justify-center items-center mt-.5em py-3 text-1.75em"
+        :class="idfm ? '' : 'bg-[var(--brand-color-secondary)]/50'"
       >
         <Wheelchair />
       </div>
       <div class="flex-grow" />
+      <!-- IDFM: operator -->
+      <div v-if="idfm && operator?.logo" class="flex flex-col items-start gap-.375em mb-1em px-.5em">
+        <span class="operated-by">OPÉRÉ PAR</span>
+        <img :src="operator.logo" :alt="operator.value" class="operator-logo">
+      </div>
       <div class="text-.25em flex flex-col line-height-1.75 text-[var(--brand-color)] mb-3">
         <div class="flex flex-row gap-.5">
           <span>BULB-{{ brand.footer }} •</span>
@@ -69,6 +84,30 @@ const date = useDateFormat(now.value, 'DD.MM.YYYY')
 
   overflow: hidden;
   min-width: max-content;
+}
+
+.side-column-idfm {
+  border-right: .0625em solid var(--brand-color);
+  padding-right: .75em;
+}
+
+.authority-logo {
+  width: 6em;
+  height: auto;
+}
+
+.operated-by {
+  color: var(--idfm-blue);
+  font-size: .4em;
+  font-weight: 600;
+  letter-spacing: .05em;
+}
+
+.operator-logo {
+  width: 5em;
+  max-height: 3em;
+  height: auto;
+  object-fit: contain;
 }
 
 .legal-notice {

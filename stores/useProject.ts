@@ -19,6 +19,7 @@ export const useProject = defineStore('project', () => {
     fullyAccessible: false,
     frameTerminusNames: true,
     brandStyle: 'RATP',
+    operator: 'RATP',
     mapSize: 15,
     topology: [{
       id: '1',
@@ -41,6 +42,7 @@ export const useProject = defineStore('project', () => {
     line.fullyAccessible = false
     line.frameTerminusNames = true
     line.brandStyle = 'RATP'
+    line.operator = 'RATP'
     line.mapSize = 15
     line.topology = [{
       id: '1',
@@ -71,6 +73,9 @@ export const useProject = defineStore('project', () => {
         }
         if (object.line && object.line.brandStyle === undefined) {
           object.line.brandStyle = 'RATP'
+        }
+        if (object.line && object.line.operator === undefined) {
+          object.line.operator = 'RATP'
         }
 
         return object as Record<string, any>

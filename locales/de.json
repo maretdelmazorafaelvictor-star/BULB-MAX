@@ -90,6 +90,13 @@
       "transilien": "Transilien",
       "val": "VAL"
     },
+    "operator": {
+      "keolis": "Keolis",
+      "none": "Keiner",
+      "ratp": "RATP",
+      "sncf": "SNCF Voyageurs",
+      "transdev": "Transdev"
+    },
     "services": {
       "airport": "Flughafen",
       "bullet_train": "Fernverkehr",
@@ -424,6 +431,7 @@
       "line_style": "Stil",
       "line_thickness": "Dicke",
       "mode": "Transportmittel",
+      "operator": "Betreiber",
       "size": "Höhe des Linienbandes",
       "title": "Optionen",
       "use_preset": "Vorlage verwenden"

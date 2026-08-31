@@ -90,6 +90,13 @@
       "transilien": "Transilien",
       "val": "VAL"
     },
+    "operator": {
+      "keolis": "Keolis",
+      "none": "None",
+      "ratp": "RATP",
+      "sncf": "SNCF Voyageurs",
+      "transdev": "Transdev"
+    },
     "services": {
       "airport": "Airport",
       "bullet_train": "Bullet train",
@@ -424,6 +431,7 @@
       "line_style": "Line style",
       "line_thickness": "Line thickness",
       "mode": "Transport mode",
+      "operator": "Operator",
       "size": "Frame size",
       "title": "Properties",
       "use_preset": "Use a preset"

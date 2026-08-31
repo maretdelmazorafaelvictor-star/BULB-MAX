@@ -58,6 +58,7 @@ export default function useLoadProject() {
     line.value.fullyAccessible = project.line.fullyAccessible
     line.value.mapSize = project.line.mapSize
     line.value.brandStyle = project.line.brandStyle ?? 'RATP'
+    line.value.operator = project.line.operator ?? 'RATP'
     line.value.topology = project.line.topology
 
     if (loadCustomIndices) {

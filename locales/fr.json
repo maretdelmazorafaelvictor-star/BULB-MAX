@@ -90,6 +90,13 @@
       "transilien": "Transilien",
       "val": "VAL"
     },
+    "operator": {
+      "keolis": "Keolis",
+      "none": "Aucun",
+      "ratp": "RATP",
+      "sncf": "SNCF Voyageurs",
+      "transdev": "Transdev"
+    },
     "services": {
       "airport": "Aéroport",
       "bullet_train": "Train à grande vitesse",
@@ -424,6 +431,7 @@
       "line_style": "Style de ligne",
       "line_thickness": "Épaisseur de ligne",
       "mode": "Mode de transport",
+      "operator": "Opérateur",
       "size": "Taille du cadre",
       "title": "Propriétés",
       "use_preset": "Utiliser un préréglage"

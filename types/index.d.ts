@@ -290,6 +290,7 @@ declare global {
 
   type LineStyle = 'PLAIN' | 'STRIPED'
   type BrandStyle = 'RATP' | 'IDFM' | 'TCL' | 'TUS'
+  type Operator = 'NONE' | 'RATP' | 'SNCF' | 'KEOLIS' | 'TRANSDEV'
   type DotsColorPolicy = 'INHERIT' | 'WHITE'
 
   interface Line {
@@ -303,6 +304,7 @@ declare global {
     fullyAccessible: boolean
     frameTerminusNames: boolean
     brandStyle: BrandStyle
+    operator: Operator
     topology: LineSection[]
   }
 

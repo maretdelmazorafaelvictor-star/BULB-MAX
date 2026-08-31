@@ -37,6 +37,11 @@ function updateColor(newColor: string | null) {
         <IndexSelect v-model="line.index" :mode="line.mode" @update-color="updateColor" />
       </div>
 
+      <div v-if="line.brandStyle === 'IDFM'" class="flex flex-col gap-1 flex-auto">
+        <span class="text-nowrap">{{ $t('ui.properties.operator') }}</span>
+        <OperatorSelect v-model="line.operator" />
+      </div>
+
       <div class="flex flex-col gap-1 flex-auto">
         <span class="text-nowrap">{{ $t('ui.properties.color') }}</span>
         <ColorSelect v-model="line.color" />
