@@ -28,11 +28,11 @@ const date = useDateFormat(now.value, 'DD.MM.YYYY')
   >
     <div class="ml-3 flex flex-col min-w-fit gap-3" :class="{ 'side-column-idfm': idfm }">
       <!-- IDFM: authority logo on an anthracite band -->
-      <div v-if="idfm" class="w-full flex justify-center items-center bg-[var(--brand-color)] py-.75em px-.5em">
+      <div v-if="idfm" class="w-full flex justify-center items-center bg-[var(--brand-color)] py-.625em px-.75em mt-.75em">
         <img :src="idfmLogo" alt="Île-de-France Mobilités" class="authority-logo">
       </div>
       <div v-else class="w-full h-8 bg-[var(--brand-color)]" />
-      <div class="w-full flex flex-row gap-3 justify-center items-center text-4em" :class="{ 'mt-1em': idfm }">
+      <div class="w-full flex flex-row gap-3 justify-center items-center text-4em" :class="{ 'mt-.375em': idfm }">
         <Mode :mode="line.mode" />
         <LineIndex :mode="line.mode" :index="line.index" />
       </div>
@@ -45,7 +45,7 @@ const date = useDateFormat(now.value, 'DD.MM.YYYY')
       </div>
       <div class="flex-grow" />
       <!-- IDFM: operator -->
-      <div v-if="idfm && operator?.logo" class="flex flex-col items-start gap-.375em mb-1em px-.5em">
+      <div v-if="idfm && operator?.logo" class="flex flex-col items-start gap-.375em mb-.75em px-.75em">
         <span class="operated-by">OPÉRÉ PAR</span>
         <img :src="operator.logo" :alt="operator.value" class="operator-logo">
       </div>
@@ -88,6 +88,7 @@ const date = useDateFormat(now.value, 'DD.MM.YYYY')
 
 .side-column-idfm {
   border-right: .0625em solid var(--brand-color);
+  padding-left: .75em;
   padding-right: .75em;
 }
 
