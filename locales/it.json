@@ -71,19 +71,24 @@
       "boat": "Battello",
       "brt": "Autobus in sede riservata",
       "bus": "Autobus",
-      "cable": "Funivia",
+      "aerial_tramway": "Funivia",
+      "gondola": "Cabinovia",
+      "chairlift": "Seggiovia",
       "metro": "Metrpolitana",
       "noctilien": "Noctilien",
       "rer": "RER",
+      "ski_lift": "Sciovia",
       "tram": "Tram",
-      "transilien": "Transilien"
+      "tram_train": "Tram-treno",
+      "funicular": "Funicolare",
+      "transilien": "Transilien",
+      "val": "VAL"
     },
     "services": {
       "airport": "Aeroporto",
       "bullet_train": "Treno ad alta velocità",
       "cdg_express": "CDG Express",
       "cdgval": "CDGVAL",
-      "funicular": "Funicolare",
       "long_distance_bus": "Pullman",
       "main_station": "Stazione importante",
       "orlyval": "OrlyVal",
@@ -105,6 +110,15 @@
     "temporary": "Temporaneo"
   },
   "ui": {
+    "changelog": {
+      "entries_type": {
+        "added": "Novità",
+        "changed": "Modifiche",
+        "fixed": "Correzioni",
+        "removed": "Rimozioni"
+      },
+      "title": "Registro delle modifiche"
+    },
     "dialogs": {
       "branch_properties": {
         "element_spacing": "Intervallo tra gli elementi",
@@ -121,6 +135,7 @@
         "unsupported_browsers": "Browser non supportati"
       },
       "connections_editor": {
+        "copy": "Copia",
         "group": {
           "delete": "Elimina",
           "header": "Gruppo di coincidenze #{index}",
@@ -143,6 +158,7 @@
         "header": "Coincidenze a “{stopName}”",
         "mode": "Mezzi di trasporto",
         "or": "o",
+        "paste": "Incolla",
         "service": "servizi di trasporto"
       },
       "custom_index_editor": {
@@ -158,11 +174,17 @@
         "value": "Valore"
       },
       "custom_indices": {
+        "export_all": "Esporta pittogrammi",
+        "export_one": "Esporta pittogramma",
         "header": "Elenco indici personalizzati"
       },
       "custom_line_thickness": {
         "accept": "OK",
         "header": "Spessore linea personalizzato"
+      },
+      "custom_map_size": {
+        "accept": "OK",
+        "header": "Dimensione personalizzata del riquadro"
       },
       "end_of_year_celebrations": {
         "close": "Chiudi",
@@ -179,8 +201,8 @@
         },
         "header": "Proprietà del bivio",
         "orientation": {
-          "left": "Verso destra",
-          "right": "Verso sinistra",
+          "left": "Verso sinistra",
+          "right": "Verso destra",
           "title": "Orientamento"
         },
         "shape": {
@@ -200,8 +222,8 @@
       "loop_properties": {
         "header": "Proprietà del cappio di ritorno",
         "orientation": {
-          "left": "Verso destra",
-          "right": "Verso sinistra",
+          "left": "Verso sinistra",
+          "right": "Verso destra",
           "title": "Orientamento"
         }
       },
@@ -252,8 +274,18 @@
         "section_1_level": "Livello sezione 1",
         "section_2_level": "Livello sezione 2"
       },
+      "pdf_export_notice": {
+        "header": "Esportazione in formato PDF",
+        "message_1": "Per generare la mappa in formato PDF verrà aperta una nuova pagina. Una volta visibile la mappa, comparirà la finestra di stampa, dalla quale è possibile scegliere se stampare la mappa o salvarla in formato PDF.",
+        "message_2": "Se la finestra di stampa non compare, verificare che le finestre pop-up siano consentite per questo sito. In alternativa è possibile premere {printShortcut}.",
+        "unexpected_behaviors_notice": "L'esportazione con questo metodo può causare comportamenti anomali, come elementi mancanti o mal posizionati. In caso di problemi, si consiglia di esportare in formato PNG.",
+        "dont_show_again": "Non mostrare più questo messaggio",
+        "cancel": "Annulla",
+        "proceed": "Continua"
+      },
       "save_project": {
         "cancel": "Annulla",
+        "custom_indices_notice": "Gli indici personalizzati verranno inclusi nel file",
         "header": "Salvataggio del progetto",
         "project_name": "Nome del progetto",
         "save": "Salva"
@@ -264,14 +296,37 @@
         "spacer_export_notice": "Nota: il distanziale non viene visualizzato nel rendering finale."
       },
       "stop_properties": {
+        "accessible": {
+          "no": "No",
+          "title": "Accessibilità PMR",
+          "undefined": "Non definita",
+          "yes": "Sì"
+        },
         "city_name": "Città",
         "closed": "Fermata chiusa",
+        "end_of_line_connection": {
+          "line": "Linea",
+          "mode": "Modo di trasporto",
+          "title": "Prolungamento di fine linea"
+        },
+        "accessible_direction": {
+          "both": "Entrambi",
+          "left": "Sinistro",
+          "right": "Destro",
+          "title": "Direzione accessibile"
+        },
         "header": "Proprietà fermata",
         "interest_point": "Punto d'interesse",
+        "interest_point_color": "Colore del punto d'interesse",
         "inverted_elements": "Elementi invertiti",
         "preventOverlapping": "Impedisci sovrapposizioni tra nome e sottotitolo",
         "reverse": "Inverti etichetta",
         "stop_name": "Nome",
+        "stop_state": {
+          "close": "Chiusa",
+          "open": "Aperta",
+          "title": "Stato della fermata"
+        },
         "stop_type": {
           "regular": "Normale",
           "terminus": "Capolinea",
@@ -308,7 +363,7 @@
         },
         "header": "Assistente WarpAdd",
         "linebreak": "Premere {shortcut} per andare a capo",
-        "notice": "L'assistente WarpAdd permette di aggiungere rapidamente le fermate ad una linea o diramazione. Basta scrivere il nome della fermata e premere {nextShortcut} per passare a quella successiva.",
+        "notice": "L'assistente WarpAdd permette di aggiungere rapidamente le fermate ad una linea o diramazione. Basta scrivere il nome della fermata e premere {nextShortcut} per passare a quella successiva. Una volta inserite tutte le fermate, è possibile premere {submitShortcut} per terminare.",
         "positioning": {
           "left": "Inizio",
           "right": "Fine",
@@ -405,7 +460,9 @@
       }
     },
     "topbar": {
+      "editor": "Editor di mappe",
       "faq": "FAQ",
+      "changelog": "Registro delle modifiche",
       "catch_phrase": "Bello eh? È made in France 🇫🇷"
     }
   }

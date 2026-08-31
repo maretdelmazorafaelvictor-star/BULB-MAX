@@ -8,15 +8,19 @@ const {
   placeName = '',
   subtitle = '',
   interestPoint = false,
+  interestPointColor,
   accessible = 'undefined',
+  accessibleDirection = null,
   reverse = false,
 } = defineProps<{
   value: string
   placeName?: string | null
   subtitle?: string | null
   interestPoint?: boolean
+  interestPointColor?: string
   reverse?: boolean
   accessible?: boolean | 'undefined' | undefined
+  accessibleDirection?: 'left' | 'right' | null
 }>()
 
 const stopContext = inject<StopContext>(StopContextKey)!
@@ -61,9 +65,9 @@ onUnmounted(() => {
       <div ref="frame" class="flex flex-col items-end gap-1" :class="{ 'opacity-50 export-hide': !effectiveValue }">
         <div class="title-holder">
           <TerminusLabel :value="effectiveValue || $t('ui.map_editor.toolbox.untitled_stop')" :place-name="placeName" />
-          <Wheelchair v-if="accessible !== 'undefined'" :off="!accessible" />
+          <Wheelchair v-if="accessible !== 'undefined'" :off="!accessible" :direction="accessibleDirection" />
         </div>
-        <StopSubtitle v-if="subtitle && reverse" :interest-point="interestPoint" :value="subtitle" />
+        <StopSubtitle v-if="subtitle && reverse" :interest-point="interestPoint" :interest-point-color="interestPointColor" :value="subtitle" />
       </div>
     </TiltedText>
     <TiltedText
@@ -73,7 +77,7 @@ onUnmounted(() => {
         'interest-point': interestPoint,
       }"
     >
-      <StopSubtitle :interest-point="interestPoint" :value="subtitle" />
+      <StopSubtitle :interest-point="interestPoint" :interest-point-color="interestPointColor" :value="subtitle" />
     </TiltedText>
   </div>
 </template>

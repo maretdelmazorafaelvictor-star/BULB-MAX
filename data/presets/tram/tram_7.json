@@ -422,13 +422,20 @@
                           }
                         },
                         {
-                          "id": "29c48aff-6010-481d-9fdb-2574018f6b4b",
-                          "$serviceConnection": {
+                          "id": "6f736734-0a82-47c9-9078-223fa259eebd",
+                          "$modeConnection": {
+                            "mode": "VAL",
                             "elements": [
                               {
-                                "id": "a561832d-d49b-4a44-8c97-3d5a5ab13cfb",
-                                "$serviceConnectionElement": {
-                                  "service": "ORLYVAL_LARGE",
+                                "id": "b1b77f58-c4f0-4e67-ba0a-1d9937b6de22",
+                                "$modeConnectionElement": {
+                                  "lineIndex": {
+                                    "mode": "VAL",
+                                    "$builtinLineIndex": {
+                                      "index": "ORLYVAL"
+                                    }
+                                  },
+                                  "walk": false,
                                   "ornament": null
                                 }
                               }

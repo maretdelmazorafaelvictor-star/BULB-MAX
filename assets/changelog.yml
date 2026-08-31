@@ -1,5 +1,33 @@
 ---
 changelog:
+  - version : 1.5.5-alpha
+    date: '2026-08-29T00:00:00.000Z'
+    entries:
+      ADDED:
+        - Ajout du télésiège en tant que mode de transport
+        - Ajout de la télécabine en tant que mode de transport
+        - Ajout du téléphérique en tant que mode de transport
+        - Ajout du téléski en tant que mode de transport
+        - Ajout de la connection de fin de ligne
+        - Ajout du copier-coller de correspondances
+      CHANGED:
+        - Le téléphérique est converti en télécabine
+  - version: 1.5.4-alpha
+    date: '2026-06-14T00:00:00.000Z'
+    entries:
+      ADDED:
+        - Ajout du tram-train en tant que mode de transport
+        - Ajout du VAL (Véhicule Automatique Léger) en tant que mode de transport
+      CHANGED:
+        - Les lignes de tram T11, T12, T13 et T14 sont désormais classées comme des tram-trains
+        - Les lignes Orlyval et CDGVAL sont désormais classées comme des VAL et non plus comme des services de transport
+  - version: 1.5.3-alpha
+    date: '2026-05-29T00:00:00.000Z'
+    entries:
+      ADDED:
+        - Ajout de la ligne "Montmartre" du funiculaire
+      CHANGED :
+        - Le funiculaire est désormais classé comme un mode de transport
   - version: 1.5.2-alpha
     date: '2025-11-09T00:00:00.000Z'
     entries:

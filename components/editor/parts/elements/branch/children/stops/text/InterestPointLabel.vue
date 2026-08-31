@@ -1,11 +1,22 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-const { value } = defineProps<{
+const { value, backgroundColor = '#80551A' } = defineProps<{
   value: string
+  backgroundColor?: string
 }>()
 
 const valueParts = computed(() => value.split('\n').filter(part => part.trim() !== ''))
+
+// Calculate luminance to determine text color
+const textColor = computed(() => {
+  const hex = backgroundColor.replace('#', '')
+  const r = parseInt(hex.substring(0, 2), 16)
+  const g = parseInt(hex.substring(2, 4), 16)
+  const b = parseInt(hex.substring(4, 6), 16)
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b)
+  return luminance > 150 ? '#000000' : '#FFFFFF'
+})
 </script>
 
 <template>
@@ -22,8 +33,8 @@ const valueParts = computed(() => value.split('\n').filter(part => part.trim() !
   display: flex;
   flex-direction: column;
   gap: .0625em;
-  background-color: var(--place-brown);
-  color: white;
+  background-color: v-bind(backgroundColor);
+  color: v-bind(textColor);
   font-weight: bold;
   font-style: italic;
   width: fit-content;

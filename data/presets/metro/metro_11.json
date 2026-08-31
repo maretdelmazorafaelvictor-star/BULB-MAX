@@ -31,9 +31,9 @@
                     "id": "88048a89-6b03-449d-9b8e-f158a11b8d38",
                     "$stop": {
                       "name": "Châtelet",
-                      "subtitle": "",
+                      "subtitle": "Secteur Seine",
                       "placeName": "",
-                      "interestPoint": false,
+                      "interestPoint": true,
                       "preventSubtitleOverlapping": true,
                       "terminus": true,
                       "connections": [
@@ -159,7 +159,8 @@
                       ],
                       "accessible": "undefined",
                       "closed": false,
-                      "reverse": false
+                      "reverse": false,
+                      "interestPointColor": "#3A5572"
                     }
                   },
                   {

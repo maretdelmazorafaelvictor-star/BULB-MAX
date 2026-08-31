@@ -521,9 +521,9 @@
                     "id": "2711bd8a-320d-458e-bd1b-0e0533bdd985",
                     "$stop": {
                       "name": "Les Halles",
-                      "subtitle": "",
+                      "subtitle": "Secteur Forum",
                       "placeName": "",
-                      "interestPoint": false,
+                      "interestPoint": true,
                       "preventSubtitleOverlapping": true,
                       "terminus": false,
                       "connections": [
@@ -583,16 +583,17 @@
                       ],
                       "accessible": "undefined",
                       "closed": false,
-                      "reverse": false
+                      "reverse": false,
+                      "interestPointColor": "#9A9778"
                     }
                   },
                   {
                     "id": "a55e202d-675e-416e-a501-5bf3212f0a6d",
                     "$stop": {
                       "name": "Châtelet",
-                      "subtitle": "",
+                      "subtitle": "Secteur Rivoli",
                       "placeName": "",
-                      "interestPoint": false,
+                      "interestPoint": true,
                       "preventSubtitleOverlapping": true,
                       "terminus": false,
                       "connections": [
@@ -665,7 +666,8 @@
                       ],
                       "accessible": "undefined",
                       "closed": false,
-                      "reverse": false
+                      "reverse": false,
+                      "interestPointColor": "#5D4A4B"
                     }
                   },
                   {

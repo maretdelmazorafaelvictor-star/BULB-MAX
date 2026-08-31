@@ -16,11 +16,16 @@ const { findIndexById } = useCustomLineIndices()
 
 const transparent = computed(() => {
   switch (mode) {
+    case 'AERIAL_TRAMWAY':
     case 'BOAT':
     case 'BUS':
     case 'BRT':
-    case 'CABLE':
+    case 'CHAIRLIFT':
+    case 'FUNICULAR':
+    case 'GONDOLA':
+    case 'SKI_LIFT':
     case 'TRAM':
+    case 'TRAM_TRAIN':
     case 'VELO':
       return true
     default:
@@ -47,11 +52,15 @@ const customIndex = computed(() => {
 <template>
   <div v-if="index !== null" :class="{ 'rounded bg-white': transparent }">
     <Bus v-if="isBuiltin(index) && index.mode === 'BUS'" :line="index.$builtinLineIndex.index" />
-    <Cable v-if="isBuiltin(index) && index.mode === 'CABLE'" :line="index.$builtinLineIndex.index" />
+    <Gondola v-if="isBuiltin(index) && index.mode === 'GONDOLA'" :line="index.$builtinLineIndex.index" />
+    <Funicular v-if="isBuiltin(index) && index.mode === 'FUNICULAR'" :line="index.$builtinLineIndex.index" />
     <Metro v-else-if="isBuiltin(index) && index.mode === 'METRO'" :line="index.$builtinLineIndex.index" />
+    <Noctilien v-else-if="isBuiltin(index) && index.mode === 'NOCTILIEN'" :line="index.$builtinLineIndex.index" />
     <ExpressTrain v-else-if="isBuiltin(index) && index.mode === 'RER'" :line="index.$builtinLineIndex.index" />
     <Train v-else-if="isBuiltin(index) && index.mode === 'TRAIN'" :line="index.$builtinLineIndex.index" />
     <Tram v-else-if="isBuiltin(index) && index.mode === 'TRAM'" :line="index.$builtinLineIndex.index" />
+    <Tram_Train v-else-if="isBuiltin(index) && index.mode === 'TRAM_TRAIN'" :line="index.$builtinLineIndex.index" />
+    <Val v-else-if="isBuiltin(index) && index.mode === 'VAL'" :line="index.$builtinLineIndex.index" />
     <CustomLineIndex
       v-else-if="isCustom(index)"
       :shape="customIndex.shape"

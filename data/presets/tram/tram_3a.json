@@ -823,32 +823,20 @@
                             ],
                             "walk": false
                           }
-                        },
-                        {
-                          "id": "0a742a3b-90ca-4ad8-80b8-a57931ade937",
-                          "$modeConnection": {
-                            "mode": "TRAM",
-                            "elements": [
-                              {
-                                "id": "be938df0-b61f-4d96-89af-c36fbeae545f",
-                                "$modeConnectionElement": {
-                                  "lineIndex": {
-                                    "mode": "TRAM",
-                                    "$builtinLineIndex": {
-                                      "index": "3b"
-                                    }
-                                  },
-                                  "walk": false,
-                                  "ornament": null
-                                }
-                              }
-                            ],
-                            "walk": false
-                          }
                         }
                       ],
                       "accessible": "undefined",
-                      "reverse": false
+                      "reverse": false,
+                      "endOfLineConnection": {
+                        "mode": "TRAM",
+                        "lineIndex": {
+                          "mode": "TRAM",
+                          "$builtinLineIndex": {
+                            "index": "3b"
+                          }
+                        },
+                        "color": "#008c5a"
+                      }
                     }
                   }
                 ],

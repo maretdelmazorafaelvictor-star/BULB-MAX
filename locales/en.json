@@ -71,19 +71,24 @@
       "boat": "River shuttle",
       "brt": "Bus Rapid Transit",
       "bus": "Bus",
-      "cable": "Cable car",
+      "aerial_tramway": "Aerial tramway",
+      "gondola": "Gondola lift",
+      "chairlift": "Chairlift",
       "metro": "Metro",
       "noctilien": "Noctilien",
       "rer": "RER",
+      "ski_lift": "Ski lift",
       "tram": "Tramway",
-      "transilien": "Transilien"
+      "tram_train": "Tram-train",
+      "funicular": "Funicular",
+      "transilien": "Transilien",
+      "val": "VAL"
     },
     "services": {
       "airport": "Airport",
       "bullet_train": "Bullet train",
       "cdg_express": "CDG Express",
       "cdgval": "CDGVAL",
-      "funicular": "Funicular",
       "long_distance_bus": "Long-distance bus",
       "main_station": "Main station",
       "orlyval": "OrlyVal",
@@ -130,6 +135,7 @@
         "unsupported_browsers": "Unsupported browsers"
       },
       "connections_editor": {
+        "copy": "Copy",
         "group": {
           "delete": "Delete",
           "header": "Connections group #{index}",
@@ -152,6 +158,7 @@
         "header": "Connections of “{stopName}”",
         "mode": "Transport mode",
         "or": "Or",
+        "paste": "Paste",
         "service": "Transportation service"
       },
       "custom_index_editor": {
@@ -167,6 +174,8 @@
         "value": "Value"
       },
       "custom_indices": {
+        "export_all": "Export pictograms",
+        "export_one": "Export pictogram",
         "header": "Custom indices directory"
       },
       "custom_line_thickness": {
@@ -293,10 +302,22 @@
           "undefined": "Undefined",
           "yes": "Yes"
         },
+        "accessible_direction": {
+          "both": "Both",
+          "left": "Left",
+          "right": "Right",
+          "title": "Accessible direction"
+        },
         "city_name": "City",
         "closed": "Closed",
+        "end_of_line_connection": {
+          "line": "Line",
+          "mode": "Transport mode",
+          "title": "End-of-line connection"
+        },
         "header": "Stop properties",
         "interest_point": "Interest point",
+        "interest_point_color": "Interest point color",
         "inverted_elements": "Inverted elements",
         "preventOverlapping": "Prevent name and subtitle from coliding",
         "reverse": "Reversed",

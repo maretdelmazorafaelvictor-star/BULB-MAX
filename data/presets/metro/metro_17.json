@@ -14,7 +14,7 @@
     "dotsColorPolicy": "INHERIT",
     "fullyAccessible": true,
     "frameTerminusNames": true,
-    "mapSize": 15,
+    "mapSize": 18,
     "topology": [
       {
         "id": "1",
@@ -268,13 +268,13 @@
                         {
                           "id": "ce17ddc4-7bc9-4679-b88c-65b1763361c2",
                           "$modeConnection": {
-                            "mode": "TRAM",
+                            "mode": "TRAM_TRAIN",
                             "elements": [
                               {
                                 "id": "6adcee46-328d-4fea-b11d-6c80f673c610",
                                 "$modeConnectionElement": {
                                   "lineIndex": {
-                                    "mode": "TRAM",
+                                    "mode": "TRAM_TRAIN",
                                     "$builtinLineIndex": {
                                       "index": "11"
                                     }
@@ -449,16 +449,31 @@
                           }
                         },
                         {
+                          "id": "993cc691-7a2e-4db2-b539-5ccd09fb2d09",
+                          "$modeConnection": {
+                            "mode": "VAL",
+                            "elements": [
+                              {
+                                "id": "077dbce2-786f-4644-8c0b-b3e5604c2c36",
+                                "$modeConnectionElement": {
+                                  "lineIndex": {
+                                    "mode": "VAL",
+                                    "$builtinLineIndex": {
+                                      "index": "CDGVAL"
+                                    }
+                                  },
+                                  "walk": false,
+                                  "ornament": null
+                                }
+                              }
+                            ],
+                            "walk": false
+                          }
+                        },
+                        {
                           "id": "66930e1f-0660-44d9-b6e9-ec02c0f90799",
                           "$serviceConnection": {
                             "elements": [
-                              {
-                                "id": "4b6175f3-88fe-459d-b010-4a8b06442f58",
-                                "$serviceConnectionElement": {
-                                  "service": "CDGVAL",
-                                  "ornament": null
-                                }
-                              },
                               {
                                 "id": "de989730-6b32-4687-94d3-561ff9c7b55a",
                                 "$serviceConnectionElement": {

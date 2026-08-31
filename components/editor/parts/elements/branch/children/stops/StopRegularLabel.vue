@@ -8,7 +8,9 @@ const {
   preventSubtitleOverlapping,
   subtitle = '',
   interestPoint = false,
+  interestPointColor,
   accessible = 'undefined',
+  accessibleDirection = null,
   reverse = false,
 } = defineProps<{
   value: string
@@ -16,7 +18,9 @@ const {
   placeName: string | null
   subtitle?: string | null
   accessible?: boolean | 'undefined' | undefined
+  accessibleDirection?: 'left' | 'right' | null
   interestPoint?: boolean
+  interestPointColor?: string
   reverse?: boolean
 }>()
 
@@ -50,6 +54,7 @@ watch([shift, () => interestPoint, () => subtitle], ([_shift, _interestPoint, _s
           <Wheelchair
             v-if="index === valueParts.length - 1 && accessible !== 'undefined'"
             :off="!accessible"
+            :direction="accessibleDirection"
           />
         </div>
       </TiltedText>
@@ -66,7 +71,7 @@ watch([shift, () => interestPoint, () => subtitle], ([_shift, _interestPoint, _s
       }"
     >
       <TiltedText :reverse="reverse">
-        <StopSubtitle :interest-point="interestPoint" :value="subtitle" />
+        <StopSubtitle :interest-point="interestPoint" :interest-point-color="interestPointColor" :value="subtitle" />
       </TiltedText>
     </div>
   </div>

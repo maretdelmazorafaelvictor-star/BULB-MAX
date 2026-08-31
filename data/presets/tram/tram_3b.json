@@ -59,32 +59,20 @@
                             ],
                             "walk": false
                           }
-                        },
-                        {
-                          "id": "9f29f77a-0937-41c8-b044-422b4dbb700b",
-                          "$modeConnection": {
-                            "mode": "TRAM",
-                            "elements": [
-                              {
-                                "id": "a26ef604-5fd3-4236-9c76-1d00ae4c0f7d",
-                                "$modeConnectionElement": {
-                                  "lineIndex": {
-                                    "mode": "TRAM",
-                                    "$builtinLineIndex": {
-                                      "index": "3a"
-                                    }
-                                  },
-                                  "walk": false,
-                                  "ornament": null
-                                }
-                              }
-                            ],
-                            "walk": false
-                          }
                         }
                       ],
                       "accessible": "undefined",
-                      "reverse": false
+                      "reverse": false,
+                      "endOfLineConnection": {
+                        "mode": "TRAM",
+                        "lineIndex": {
+                          "mode": "TRAM",
+                          "$builtinLineIndex": {
+                            "index": "3a"
+                          }
+                        },
+                        "color": "#f78f4b"
+                      }
                     }
                   },
                   {

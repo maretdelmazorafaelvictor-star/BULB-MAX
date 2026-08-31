@@ -203,12 +203,19 @@
                       "connections": [
                         {
                           "id": "87ca7d6e-ed7e-4b98-9bdd-938719570e52",
-                          "$serviceConnection": {
+                          "$modeConnection": {
+                            "mode": "FUNICULAR",
                             "elements": [
                               {
                                 "id": "e0e06101-05bd-4f70-af96-19d053bd7164",
-                                "$serviceConnectionElement": {
-                                  "service": "FUNICULAR",
+                                "$modeConnectionElement": {
+                                  "lineIndex": {
+                                    "mode": "FUNICULAR",
+                                    "$builtinLineIndex": {
+                                      "index": "MONTMARTRE"
+                                    }
+                                  },
+                                  "walk": false,
                                   "ornament": {
                                     "position": "BOTTOM",
                                     "$textOrnament": {

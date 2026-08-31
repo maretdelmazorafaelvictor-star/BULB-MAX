@@ -71,19 +71,24 @@
       "boat": "水上バス",
       "brt": "高速バス",
       "bus": "バス",
-      "cable": "ロープウェイ",
+      "aerial_tramway": "ロープウェイ",
+      "gondola": "ゴンドラリフト",
+      "chairlift": "チェアリフト",
       "metro": "地下鉄",
       "noctilien": "Noctilien",
       "rer": "RER",
+      "ski_lift": "スキーリフト",
       "tram": "路面電車",
-      "transilien": "Transilien"
+      "tram_train": "トラムトレイン",
+      "funicular": "ケーブルカー",
+      "transilien": "Transilien",
+      "val": "VAL"
     },
     "services": {
       "airport": "空港",
       "bullet_train": "新幹線",
       "cdg_express": "CDG Express",
       "cdgval": "CDGVAL",
-      "funicular": "ケーブルカー",
       "long_distance_bus": "高速バス",
       "main_station": "主要駅",
       "orlyval": "OrlyVal",
@@ -105,6 +110,15 @@
     "temporary": "臨時"
   },
   "ui": {
+    "changelog": {
+      "entries_type": {
+        "added": "追加",
+        "changed": "変更",
+        "fixed": "修正",
+        "removed": "削除"
+      },
+      "title": "変更履歴"
+    },
     "dialogs": {
       "branch_properties": {
         "element_spacing": "要素スペーシング",
@@ -121,6 +135,7 @@
         "unsupported_browsers": "サポートされていないブラウザ"
       },
       "connections_editor": {
+        "copy": "コピー",
         "group": {
           "delete": "消す",
           "header": "{index}番目の乗り換えのグループ",
@@ -143,6 +158,7 @@
         "header": "{stopName}駅の乗り換え",
         "mode": "交通機関",
         "or": "又は",
+        "paste": "貼り付け",
         "service": "交通サービス"
       },
       "custom_index_editor": {
@@ -158,11 +174,17 @@
         "value": "値"
       },
       "custom_indices": {
+        "export_all": "ピクトグラムをエクスポート",
+        "export_one": "ピクトグラムをエクスポート",
         "header": "特注の路線記号帳"
       },
       "custom_line_thickness": {
         "accept": "確定",
         "header": "カスタム線の太さ"
+      },
+      "custom_map_size": {
+        "accept": "確定",
+        "header": "枠のサイズを指定"
       },
       "end_of_year_celebrations": {
         "close": "閉じる",
@@ -252,6 +274,15 @@
         "section_1_level": "並行の線路の1番目の部分の段階",
         "section_2_level": "並行の線路の2番目の部分の段階"
       },
+      "pdf_export_notice": {
+        "header": "PDF形式でエクスポート",
+        "message_1": "PDF形式で路線図を生成するため、新しいページが開きます。路線図が表示されると印刷ダイアログが現れますので、そこで印刷するかPDFとして保存するかを選択できます。",
+        "message_2": "印刷ダイアログが表示されない場合は、このサイトのポップアップが許可されているかご確認ください。または、{printShortcut}を押すこともできます。",
+        "unexpected_behaviors_notice": "この方法でのエクスポートでは、要素が欠けたり位置がずれたりするなど、予期せぬ動作が発生する場合があります。問題が起きた場合はPNG形式でのエクスポートをお試しください。",
+        "dont_show_again": "今後このメッセージを表示しない",
+        "cancel": "キャンセル",
+        "proceed": "続行"
+      },
       "save_project": {
         "cancel": "キャンセル",
         "custom_indices_notice": "特注の路線記号はファイルにまとめられます",
@@ -271,10 +302,22 @@
           "undefined": "未定義",
           "yes": "有り"
         },
+        "accessible_direction": {
+          "both": "両方",
+          "left": "左",
+          "right": "右",
+          "title": "アクセス可能な方向"
+        },
         "city_name": "市の名前",
         "closed": "運休",
+        "end_of_line_connection": {
+          "line": "路線",
+          "mode": "交通機関",
+          "title": "終点接続"
+        },
         "header": "駅のプロパティ",
         "interest_point": "興味ポイント",
+        "interest_point_color": "興味ポイントの色",
         "inverted_elements": "逆さまの要素",
         "preventOverlapping": "名前と副題が衝突しないようにする",
         "reverse": "逆さま",
@@ -417,7 +460,9 @@
       }
     },
     "topbar": {
+      "editor": "路線図エディター",
       "faq": "FAQ",
+      "changelog": "変更履歴",
       "catch_phrase": "いいですね？ フランス製 🇫🇷"
     }
   }

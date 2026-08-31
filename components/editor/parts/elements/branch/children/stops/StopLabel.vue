@@ -8,9 +8,11 @@ const props = defineProps<{
   subtitle: string | null
   preventSubtitleOverlapping: boolean
   interestPoint?: boolean
+  interestPointColor?: string
   terminus?: boolean
   reverse: boolean
   accessible: boolean | 'undefined' | undefined
+  accessibleDirection?: 'left' | 'right' | null
 }>()
 
 const lineContext = inject<LineContext>(LineContextKey)!

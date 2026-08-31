@@ -28,7 +28,7 @@
                   {
                     "id": "0dd2ce87-caa7-430e-b251-0ee318d73fc9",
                     "$lineSection": {
-                      "levelOffset": "1.75",
+                      "levelOffset": "2",
                       "elements": [
                         {
                           "id": "c1ba35fc-9bec-466c-b95f-623a7d467725",
@@ -399,12 +399,21 @@
                                               "walk": false,
                                               "ornament": null
                                             }
-                                          },
+                                          }
+                                        ],
+                                        "walk": false
+                                      }
+                                    },
+                                    {
+                                      "id": "984f61c4-a03d-4bdd-a165-2660be3e0235",
+                                      "$modeConnection": {
+                                        "mode": "TRAM_TRAIN",
+                                        "elements": [
                                           {
                                             "id": "7b365355-d9da-4b3a-be48-0b653a0bbe80",
                                             "$modeConnectionElement": {
                                               "lineIndex": {
-                                                "mode": "TRAM",
+                                                "mode": "TRAM_TRAIN",
                                                 "$builtinLineIndex": {
                                                   "index": "11"
                                                 }
@@ -866,7 +875,7 @@
                   {
                     "id": "1b5f0fdb-4572-4c53-86ae-ac31cca36247",
                     "$lineSection": {
-                      "levelOffset": "-1.75",
+                      "levelOffset": "-2",
                       "elements": [
                         {
                           "id": "58286075-de69-4873-b53d-d15b8c0f88fe",
@@ -1027,13 +1036,13 @@
                                                 {
                                                   "id": "5199604f-c3f3-4a3f-ad79-4ecc1ec1b660",
                                                   "$modeConnection": {
-                                                    "mode": "TRAM",
+                                                    "mode": "TRAM_TRAIN",
                                                     "elements": [
                                                       {
                                                         "id": "358f2550-d7cd-4af6-a49e-1a7b29f26929",
                                                         "$modeConnectionElement": {
                                                           "lineIndex": {
-                                                            "mode": "TRAM",
+                                                            "mode": "TRAM_TRAIN",
                                                             "$builtinLineIndex": {
                                                               "index": "13"
                                                             }
@@ -1388,7 +1397,7 @@
                   1,
                   -1
                 ],
-                "offsetMultiplier": "1.75"
+                "offsetMultiplier": "2"
               }
             },
             {
@@ -2056,13 +2065,13 @@
                                     {
                                       "id": "6167b9a6-8096-4030-ae11-903373d3c92c",
                                       "$modeConnection": {
-                                        "mode": "TRAM",
+                                        "mode": "TRAM_TRAIN",
                                         "elements": [
                                           {
                                             "id": "884176e9-6f13-451c-9cfa-b6f2b9c52948",
                                             "$modeConnectionElement": {
                                               "lineIndex": {
-                                                "mode": "TRAM",
+                                                "mode": "TRAM_TRAIN",
                                                 "$builtinLineIndex": {
                                                   "index": "12"
                                                 }
@@ -2719,13 +2728,13 @@
                                     {
                                       "id": "ffbbaf80-a192-43cc-8cf5-f9d3260c95fa",
                                       "$modeConnection": {
-                                        "mode": "TRAM",
+                                        "mode": "TRAM_TRAIN",
                                         "elements": [
                                           {
                                             "id": "42c18466-a79a-4f97-90d4-c962428629b9",
                                             "$modeConnectionElement": {
                                               "lineIndex": {
-                                                "mode": "TRAM",
+                                                "mode": "TRAM_TRAIN",
                                                 "$builtinLineIndex": {
                                                   "index": "12"
                                                 }

@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia'
 import { useConfirm } from 'primevue/useconfirm'
 import { useI18n } from 'vue-i18n'
 import useVersion from '~/composables/useVersion'
-import { METRO_LINES, RER_LINES, TRAM_LINES, TRANSILIEN_LINES } from '~/data/lines'
+import { METRO_LINES, RER_LINES, TRAM_LINES, TRANSILIEN_LINES, TRAM_TRAIN_LINES } from '~/data/lines'
 import { getPreset } from '~/data/presets'
 import { useProject } from '~/stores/useProject'
 import {
@@ -16,7 +16,8 @@ import {
 const FULL_TEMPLATE = {
   METRO: ['1', '2', '3', '3bis', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '16', '17', '18'],
   RER: ['A', 'B', 'C', 'E'],
-  TRAM: ['1', '2', '3a', '3b', '5', '6', '7', '9', '10', '11', '12', '13', '14'],
+  TRAM: ['1', '2', '3a', '3b', '5', '6', '7', '9', '10'],
+  TRAM_TRAIN: ['11', '12', '13', '14'],
   TRAIN: ['K', 'N', 'U', 'V'],
 }
 
@@ -158,6 +159,26 @@ function loadPreset(_mode: Mode, _index: LineIndex, _color?: string) {
             <LineIndex mode="TRAM" :index="tram.value" />
             <i
               v-if="FULL_TEMPLATE.TRAM.includes(tram.value.$builtinLineIndex.index)"
+              class="absolute bottom-0 right-0 badge"
+            />
+          </div>
+        </Button>
+      </div>
+    </Fieldset>
+    <Fieldset :legend="$t('data.mode.tram_train')">
+      <div class="btn-group">
+        <Button
+          v-for="tram in TRAM_TRAIN_LINES"
+          :key="tram.label"
+          text
+          severity="secondary"
+          :pt="{ root: { class: 'important-p-1 important-text-5xl' } }"
+          @click="loadPreset('TRAM_TRAIN', tram.value, tram.color)"
+        >
+          <div class="relative">
+            <LineIndex mode="TRAM_TRAIN" :index="tram.value" />
+            <i
+              v-if="FULL_TEMPLATE.TRAM_TRAIN.includes(tram.value.$builtinLineIndex.index)"
               class="absolute bottom-0 right-0 badge"
             />
           </div>

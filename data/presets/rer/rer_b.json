@@ -14,7 +14,7 @@
     "dotsColorPolicy": "WHITE",
     "fullyAccessible": true,
     "frameTerminusNames": false,
-    "mapSize": 22,
+    "mapSize": 25,
     "topology": [
       {
         "id": "1",
@@ -172,16 +172,31 @@
                                       }
                                     },
                                     {
+                                      "id": "eef1e9cb-b144-4930-898a-743814e1fbb7",
+                                      "$modeConnection": {
+                                        "mode": "VAL",
+                                        "elements": [
+                                          {
+                                            "id": "f4d4c405-5e30-4df0-af0e-07c557b5c951",
+                                            "$modeConnectionElement": {
+                                              "lineIndex": {
+                                                "mode": "VAL",
+                                                "$builtinLineIndex": {
+                                                  "index": "CDGVAL"
+                                                }
+                                              },
+                                              "walk": false,
+                                              "ornament": null
+                                            }
+                                          }
+                                        ],
+                                        "walk": false
+                                      }
+                                    },
+                                    {
                                       "id": "ed904287-361d-4d68-b899-d19d1fbdcedc",
                                       "$serviceConnection": {
                                         "elements": [
-                                          {
-                                            "id": "f020a678-f43c-4124-bc57-2d7bbbe89a67",
-                                            "$serviceConnectionElement": {
-                                              "service": "CDGVAL",
-                                              "ornament": null
-                                            }
-                                          },
                                           {
                                             "id": "c008fb29-0b8e-411a-9252-fc78ba4d4812",
                                             "$serviceConnectionElement": {
@@ -246,13 +261,20 @@
                                       }
                                     },
                                     {
-                                      "id": "0bf08d6a-aec1-4ee8-970c-59e0d9cbcd18",
-                                      "$serviceConnection": {
+                                      "id": "b325e614-3016-4f6d-9ece-78ba91f70a93",
+                                      "$modeConnection": {
+                                        "mode": "VAL",
                                         "elements": [
                                           {
-                                            "id": "ee1ffcfb-96f8-4b0e-8f69-575f1fbec895",
-                                            "$serviceConnectionElement": {
-                                              "service": "CDGVAL",
+                                            "id": "55d4092c-41db-480d-a2e5-3e8593df83ae",
+                                            "$modeConnectionElement": {
+                                              "lineIndex": {
+                                                "mode": "VAL",
+                                                "$builtinLineIndex": {
+                                                  "index": "CDGVAL"
+                                                }
+                                              },
+                                              "walk": false,
                                               "ornament": null
                                             }
                                           }
@@ -651,10 +673,10 @@
                     "$stop": {
                       "name": "Châtelet – Les Halles",
                       "placeName": "",
-                      "subtitle": "",
+                      "subtitle": "Secteur Forum",
                       "accessible": "undefined",
                       "reverse": false,
-                      "interestPoint": false,
+                      "interestPoint": true,
                       "preventSubtitleOverlapping": true,
                       "closed": false,
                       "terminus": false,
@@ -774,7 +796,8 @@
                             "walk": false
                           }
                         }
-                      ]
+                      ],
+                      "interestPointColor": "#9A9778"
                     }
                   },
                   {
@@ -1150,13 +1173,20 @@
                                   "terminus": false,
                                   "connections": [
                                     {
-                                      "id": "ed259439-2cd6-4c4f-8b81-9db05750a056",
-                                      "$serviceConnection": {
+                                      "id": "4166be43-e568-49fd-93c7-bc9e87c4d3dd",
+                                      "$modeConnection": {
+                                        "mode": "VAL",
                                         "elements": [
                                           {
-                                            "id": "be5c27af-2477-4c90-a632-48fa74805897",
-                                            "$serviceConnectionElement": {
-                                              "service": "ORLYVAL_LARGE_2",
+                                            "id": "95b7c3a1-98ad-4de2-a94b-928b4dcae278",
+                                            "$modeConnectionElement": {
+                                              "lineIndex": {
+                                                "mode": "VAL",
+                                                "$builtinLineIndex": {
+                                                  "index": "ORLYVAL"
+                                                }
+                                              },
+                                              "walk": false,
                                               "ornament": null
                                             }
                                           }

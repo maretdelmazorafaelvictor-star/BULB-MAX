@@ -7,24 +7,30 @@ const {
   mode: Mode | null
 }>()
 
-const circle = computed(() => mode === 'METRO')
+const circle = computed(() => ['METRO', 'VAL'].includes(mode ?? ''))
 const roundRectangle = computed(() => ['RER', 'TER', 'TRAIN', 'TRAIN_RER'].includes(mode ?? ''))
-const square = computed(() => ['BOAT', 'BUS', 'BRT', 'CABLE', 'NOCTILIEN', 'TRAM', 'VELO'].includes(mode ?? ''))
+const square = computed(() => ['AERIAL_TRAMWAY', 'BOAT', 'BUS', 'BRT', 'CHAIRLIFT', 'FUNICULAR', 'GONDOLA', 'NOCTILIEN', 'SKI_LIFT', 'TRAM', 'TRAM_TRAIN', 'VELO'].includes(mode ?? ''))
 </script>
 
 <template>
   <div class="relative picto-wrapper">
     <div class="absolute" :class="{ circle, 'round-rectangle': roundRectangle, square }" />
     <MBoat v-if="mode === 'BOAT'" />
+    <MAerialTramway v-if="mode === 'AERIAL_TRAMWAY'" />
     <MBRT v-if="mode === 'BRT'" />
     <MBus v-if="mode === 'BUS'" />
-    <MCable v-if="mode === 'CABLE'" />
+    <MGondola v-if="mode === 'GONDOLA'" />
+    <MChairlift v-if="mode === 'CHAIRLIFT'" />
     <MMetro v-if="mode === 'METRO'" />
     <MNoctilien v-if="mode === 'NOCTILIEN'" />
     <MRER v-if="mode === 'RER'" />
+    <MSkiLift v-if="mode === 'SKI_LIFT'" />
     <MTram v-if="mode === 'TRAM'" />
+    <MTramTrain v-if="mode === 'TRAM_TRAIN'" />
+    <MFunicular v-if="mode === 'FUNICULAR'" />
     <MTransilien v-if="mode === 'TRAIN'" />
     <MVelo v-if="mode === 'VELO'" />
+    <MVal v-if="mode === 'VAL'" />
   </div>
 </template>
 

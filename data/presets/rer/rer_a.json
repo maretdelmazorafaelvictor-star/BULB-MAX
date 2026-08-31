@@ -1016,8 +1016,8 @@
                     "$stop": {
                       "name": "Châtelet – Les Halles",
                       "placeName": "",
-                      "subtitle": "",
-                      "interestPoint": false,
+                      "subtitle": "Secteur Forum",
+                      "interestPoint": true,
                       "preventSubtitleOverlapping": true,
                       "closed": false,
                       "terminus": false,
@@ -1143,7 +1143,8 @@
                             "walk": false
                           }
                         }
-                      ]
+                      ],
+                      "interestPointColor": "#9A9778"
                     }
                   },
                   {

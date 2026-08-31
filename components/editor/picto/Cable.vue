@@ -5,7 +5,7 @@ import LINE_1 from '~/assets/svg/lines/cable/cable_1.svg'
 const {
   line,
 } = defineProps<{
-  line: CableLine
+  line: GondolaLine
 }>()
 
 const picto = computed(() => {

@@ -531,9 +531,9 @@
                     "id": "f6e6f5bd-bdd6-4df7-b9fc-75ea647c0c14",
                     "$stop": {
                       "name": "Châtelet",
-                      "subtitle": "",
+                      "subtitle": "Secteur Rivoli",
                       "placeName": "",
-                      "interestPoint": false,
+                      "interestPoint": true,
                       "preventSubtitleOverlapping": true,
                       "terminus": false,
                       "connections": [
@@ -654,7 +654,8 @@
                       ],
                       "accessible": "undefined",
                       "closed": false,
-                      "reverse": false
+                      "reverse": false,
+                      "interestPointColor": "#5D4A4B"
                     }
                   },
                   {
@@ -1184,13 +1185,20 @@
                           }
                         },
                         {
-                          "id": "65e50222-5714-4760-b86f-7a0c555a4354",
-                          "$serviceConnection": {
+                          "id": "cf8ec81c-c5dd-41a6-845b-4ee486bf2ef5",
+                          "$modeConnection": {
+                            "mode": "VAL",
                             "elements": [
                               {
-                                "id": "9142a132-0dd5-4352-aa50-f27206a9954d",
-                                "$serviceConnectionElement": {
-                                  "service": "ORLYVAL_LARGE",
+                                "id": "0c862942-2947-4823-9164-c94f0856ca76",
+                                "$modeConnectionElement": {
+                                  "lineIndex": {
+                                    "mode": "VAL",
+                                    "$builtinLineIndex": {
+                                      "index": "ORLYVAL"
+                                    }
+                                  },
+                                  "walk": false,
                                   "ornament": null
                                 }
                               }

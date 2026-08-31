@@ -6,17 +6,22 @@ declare global {
     'BOAT'
     | 'BRT'
     | 'BUS'
-    | 'CABLE'
+    | 'AERIAL_TRAMWAY'
+    | 'GONDOLA'
+    | 'CHAIRLIFT'
     | 'METRO'
     | 'NOCTILIEN'
     | 'RER'
+    | 'SKI_LIFT'
     | 'TRAIN'
     | 'TRAIN_RER'
     | 'TRAM'
+    | 'TRAM_TRAIN'
+    | 'FUNICULAR'
+    | 'VAL'
     | 'VELO'
   type Service =
-    'FUNICULAR'
-    | 'MAIN_STATION'
+    'MAIN_STATION'
     | 'BULLET_TRAIN'
     | 'SUBURBAN_TRAIN'
     | 'TGV'
@@ -25,14 +30,12 @@ declare global {
     | 'AIRPORT'
     | 'ROISSY_BUS'
     | 'ORLY_BUS'
-    | 'CDGVAL'
-    | 'ORLYVAL'
-    | 'ORLYVAL_LARGE'
-    | 'ORLYVAL_LARGE_2'
     | 'CDG_EXPRESS'
 
   type BusLine = 'tzen1' | 'tzen2' | 'tzen3' | 'tzen4' | 'tzen5' | 'tzen6' | 'tvm' | '393' | string
-  type CableLine = '1' | string
+  type GondolaLine = '1' | string
+  type FunicularLine = 'MONTMARTRE' | string
+  type VALLine = 'CDGVAL' | 'ORLYVAL' | string
   type MetroLine =
     '1'
     | '2'
@@ -55,10 +58,14 @@ declare global {
     | '17'
     | '18'
     | string
+  type NoctilienLine =
+    'N01'
+    | 'N02'
+    | string
   type RerLine = 'A' | 'B' | 'C' | 'D' | 'E' | string
   type TrainLine = 'H' | 'J' | 'K' | 'L' | 'N' | 'P' | 'R' | 'U' | 'V' | string
   type TramLine = '1' | '2' | '3a' | '3b' | '4' | '5' | '6' | '7' | '8' | '11' | '12' | '13' | '14' | string
-
+  type Tram_TrainLine = '11' | '12' | '13' | '14' | string
   type IndexShape = 'CIRCLE' | 'ROUNDED_SQUARE' | 'LINES' | 'RECTANGLE' | 'CUT_RECTANGLE'
 
   interface ColorChoice {
@@ -177,6 +184,12 @@ declare global {
 
   type Connection = ModeConnection | ServiceConnection
 
+  interface EndOfLineConnection {
+    mode: Mode | null
+    lineIndex: LineIndex | null
+    color: string | null
+  }
+
   interface Stop {
     id: string
     $stop: {
@@ -184,8 +197,11 @@ declare global {
       subtitle: string | null
       placeName: string | null
       accessible: boolean | 'undefined'
+      accessibleDirection?: 'left' | 'right' | null
       preventSubtitleOverlapping: boolean
       interestPoint: boolean
+      interestPointColor?: string
+      endOfLineConnection?: EndOfLineConnection | null
       terminus: boolean
       closed: boolean
       reverse: boolean
@@ -201,6 +217,8 @@ declare global {
   }
 
   type BranchElement = Stop | Spacer
+
+  type BranchElementPosition = 'START' | 'END' | null
 
   interface Branch {
     id: string
@@ -291,6 +309,17 @@ declare global {
     lineStyle: Ref<LineStyle>
     dotsColorPolicy: Ref<DotsColorPolicy>
     frameTerminusNames: Ref<boolean>
+  }
+
+  /*
+   * Débordements demandés par les extrémités de la branche, en pixels. Un prolongement
+   * de bout de ligne sort du cadre de son arrêt ; la branche s’élargit d’autant.
+   */
+  export interface BranchContext {
+    overflow: {
+      start: number
+      end: number
+    }
   }
 
   export interface StopContext {

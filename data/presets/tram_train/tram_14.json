@@ -1,17 +1,17 @@
 {
   "version": "1.4.0-alpha",
   "line": {
-    "mode": "TRAM",
+    "mode": "TRAM_TRAIN",
     "index": {
-      "mode": "TRAM",
+      "mode": "TRAM_TRAIN",
       "$builtinLineIndex": {
         "index": "14"
       }
     },
     "color": "#00b397",
-    "lineThickness": "0.625",
+    "lineThickness": "0.8",
     "lineStyle": "STRIPED",
-    "dotsColorPolicy": "INHERIT",
+    "dotsColorPolicy": "WHITE",
     "fullyAccessible": false,
     "frameTerminusNames": true,
     "mapSize": 15,

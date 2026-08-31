@@ -286,13 +286,13 @@
                         {
                           "id": "e1e20f94-1e01-4473-aaf2-d16dc2dfed83",
                           "$modeConnection": {
-                            "mode": "TRAM",
+                            "mode": "TRAM_TRAIN",
                             "elements": [
                               {
                                 "id": "69ced43c-1d74-4a86-b05e-cfadf6549084",
                                 "$modeConnectionElement": {
                                   "lineIndex": {
-                                    "mode": "TRAM",
+                                    "mode": "TRAM_TRAIN",
                                     "$builtinLineIndex": {
                                       "index": "11"
                                     }

@@ -32,7 +32,7 @@ const date = useDateFormat(now.value, 'DD.MM.YYYY')
       <div class="flex-grow" />
       <div class="text-.25em flex flex-col line-height-1.75 text-[var(--blue-ratp-paper)] mb-3">
         <div class="flex flex-row gap-.5">
-          <span>BULB •</span>
+          <span>BULB-Paris •</span>
           <!-- Preset Based Project -->
           <span v-if="presetBased">PBP •</span>
           <!-- Project Version Unsupported / Project Version Supported -->

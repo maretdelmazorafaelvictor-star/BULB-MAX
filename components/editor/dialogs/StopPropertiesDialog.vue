@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import { watch } from 'vue'
+import { computed, watch } from 'vue'
 import { cleanName } from '~/utils/text'
 
 const { allowCity } = defineProps<{
@@ -27,12 +27,54 @@ const stopTypeOptions = [
   { label: 'ui.dialogs.stop_properties.stop_type.terminus', value: true },
 ]
 
+const accessibleDirectionOptions = [
+  { label: 'ui.dialogs.stop_properties.accessible_direction.both', value: null },
+  { label: 'ui.dialogs.stop_properties.accessible_direction.left', value: 'left' },
+  { label: 'ui.dialogs.stop_properties.accessible_direction.right', value: 'right' },
+]
+/* Le brun par défaut du point d’intérêt : --place-brown, défini dans app.vue. */
+const POI_DEFAUT = '#80551A'
+
+const poiColor = computed({
+  get: () => stop.value.$stop.interestPointColor || POI_DEFAUT,
+  set: (val: string | undefined) => { stop.value.$stop.interestPointColor = val },
+})
+
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const horizontal = breakpoints.greaterOrEqual('lg')
-
 watch(() => stop.value.$stop.name, val => stop.value.$stop.name = cleanName(val))
 watch(() => stop.value.$stop.placeName, val => stop.value.$stop.placeName = cleanName(val))
 watch(() => stop.value.$stop.subtitle, val => stop.value.$stop.subtitle = cleanName(val))
+
+watch(() => stop.value.$stop.interestPoint, (newVal) => {
+  if (newVal && !stop.value.$stop.interestPointColor) {
+    stop.value.$stop.interestPointColor = POI_DEFAUT
+  }
+})
+
+/*
+ * Prolongement de bout de ligne : uniquement proposé sur un terminus.
+ * Décocher la case efface le prolongement, cocher le crée vide.
+ */
+const endOfLineEnabled = computed({
+  get: () => !!stop.value.$stop.endOfLineConnection,
+  set: (enabled) => {
+    stop.value.$stop.endOfLineConnection = enabled
+      ? { mode: null, lineIndex: null, color: null }
+      : null
+  },
+})
+
+watch(() => stop.value.$stop.terminus, (terminus) => {
+  if (!terminus) stop.value.$stop.endOfLineConnection = null
+})
+
+watch(() => stop.value.$stop.endOfLineConnection?.mode, () => {
+  const connection = stop.value.$stop.endOfLineConnection
+  if (!connection) return
+  connection.lineIndex = null
+  connection.color = null
+})
 
 function openConnectionsEditor() {
   emit('openConnections')
@@ -83,16 +125,30 @@ function openConnectionsEditor() {
       <Divider v-else layout="horizontal" pt:root:class="important-mx-1" />
 
       <div class="flex flex-col gap-4 min-w-20em">
-        <div class="flex flex-col gap-1">
-          <label>{{ $t('ui.dialogs.stop_properties.accessible.title') }}</label>
-          <SelectButton
-            v-model="stop.$stop.accessible"
-            pt:pc-toggle-button:root:class="flex-grow"
-            :options="accessibilityOptions"
-            :option-label="option => $t(option.label)"
-            option-value="value"
-            :allow-empty="false"
-          />
+        <div class="flex flex-row gap-4">
+          <div class="flex flex-col gap-1 flex-1">
+            <label>{{ $t('ui.dialogs.stop_properties.accessible.title') }}</label>
+            <SelectButton
+              v-model="stop.$stop.accessible"
+              pt:pc-toggle-button:root:class="flex-grow"
+              :options="accessibilityOptions"
+              :option-label="option => $t(option.label)"
+              option-value="value"
+              :allow-empty="false"
+            />
+          </div>
+
+          <div v-if="stop.$stop.accessible === false" class="flex flex-col gap-1 flex-1">
+            <label>{{ $t('ui.dialogs.stop_properties.accessible_direction.title') }}</label>
+            <SelectButton
+              v-model="stop.$stop.accessibleDirection"
+              pt:pc-toggle-button:root:class="flex-grow"
+              :options="accessibleDirectionOptions"
+              :option-label="option => $t(option.label)"
+              option-value="value"
+              :allow-empty="false"
+            />
+          </div>
         </div>
 
         <div class="flex flex-col gap-1">
@@ -134,7 +190,36 @@ function openConnectionsEditor() {
                 $t('ui.dialogs.stop_properties.interest_point')
               }}</label>
             </div>
+            <div v-if="stop.$stop.interestPoint" class="flex flex-col gap-1 ml-6">
+              <label>{{ $t('ui.dialogs.stop_properties.interest_point_color') }}</label>
+              <BColorPicker v-model="poiColor" />
+            </div>
           </div>
+        </div>
+
+        <div v-if="stop.$stop.terminus" class="flex flex-col gap-2">
+          <div class="flex items-center gap-1">
+            <Checkbox v-model="endOfLineEnabled" binary :input-id="`${stop.id}_endOfLine`" />
+            <label :for="`${stop.id}_endOfLine`" class="ml-2">{{
+              $t('ui.dialogs.stop_properties.end_of_line_connection.title')
+            }}</label>
+          </div>
+
+          <template v-if="stop.$stop.endOfLineConnection">
+            <div class="flex flex-col gap-1">
+              <label>{{ $t('ui.dialogs.stop_properties.end_of_line_connection.mode') }}</label>
+              <ModeSelect v-model="stop.$stop.endOfLineConnection.mode" />
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label>{{ $t('ui.dialogs.stop_properties.end_of_line_connection.line') }}</label>
+              <IndexSelect
+                v-model="stop.$stop.endOfLineConnection.lineIndex"
+                :mode="stop.$stop.endOfLineConnection.mode"
+                @update-color="color => stop.$stop.endOfLineConnection && (stop.$stop.endOfLineConnection.color = color)"
+              />
+            </div>
+          </template>
         </div>
       </div>
     </div>

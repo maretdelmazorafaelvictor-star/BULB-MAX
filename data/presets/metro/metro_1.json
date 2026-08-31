@@ -553,9 +553,9 @@
                     "id": "fbe9ac03-ec15-4aba-bd17-d199ac290e63",
                     "$stop": {
                       "name": "Châtelet",
-                      "subtitle": "",
+                      "subtitle": "Secteur Rivoli",
                       "placeName": "",
-                      "interestPoint": false,
+                      "interestPoint": true,
                       "preventSubtitleOverlapping": true,
                       "terminus": false,
                       "connections": [
@@ -681,7 +681,8 @@
                       ],
                       "accessible": "undefined",
                       "closed": false,
-                      "reverse": false
+                      "reverse": false,
+                      "interestPointColor": "#5D4A4B"
                     }
                   },
                   {

@@ -6,11 +6,21 @@
     "color_select": {
       "placeholder": "Seleccionar un color"
     },
+    "dots_color_select": {
+      "placeholder": "Seleccionar una opción"
+    },
     "line_index_select": {
       "custom_indices": "Índices personalizados",
       "line_name": "Línea {index}",
       "official_indices": "Índices oficiales",
-      "placeholder": "Seleccionar un índice"
+      "placeholder": "Seleccionar un índice",
+      "unknown_index": "Desconocido"
+    },
+    "line_style_select": {
+      "placeholder": "Seleccionar un estilo"
+    },
+    "line_thickness_select": {
+      "placeholder": "Seleccionar un grosor"
     },
     "map_size_select": {
       "placeholder": "Seleccionar un tamaño"
@@ -35,6 +45,20 @@
     "colors": {
       "custom": "Personalizado"
     },
+    "dots_color": {
+      "inherit": "Heredado",
+      "white": "Blanco"
+    },
+    "line_style": {
+      "plain": "Sólida",
+      "striped": "Rayada"
+    },
+    "line_thickness": {
+      "custom": "Personalizado",
+      "medium": "Medio",
+      "normal": "Normal",
+      "thick": "Grueso"
+    },
     "map_size": {
       "big": "Muy grande",
       "custom": "Personalizado",
@@ -47,19 +71,24 @@
       "boat": "Lanzadera fluvial",
       "brt": "BRT (Autobús de tránsito rápido)",
       "bus": "Autobús",
-      "cable": "Teleférico",
+      "aerial_tramway": "Teleférico",
+      "gondola": "Telecabina",
+      "chairlift": "Telesilla",
       "metro": "Metro",
       "noctilien": "Noctilien",
       "rer": "RER",
+      "ski_lift": "Telesquí",
       "tram": "Tranvía",
-      "transilien": "Transilien"
+      "tram_train": "Tren-tranvía",
+      "funicular": "Funicular",
+      "transilien": "Transilien",
+      "val": "VAL"
     },
     "services": {
       "airport": "Aeropuerto",
       "bullet_train": "Tren de alta velocidad",
       "cdg_express": "CDG Express",
       "cdgval": "CDGVAL",
-      "funicular": "Funicular",
       "long_distance_bus": "Autocar",
       "main_station": "Estación principal",
       "orlyval": "OrlyVal",
@@ -69,6 +98,7 @@
     },
     "shapes": {
       "circle": "Círculo",
+      "cut_rectangle": "Rectángulo cortado",
       "lines": "Líneas",
       "rectangle": "Rectángulo",
       "rounded_square": "Cuadrado redondeado"
@@ -76,9 +106,19 @@
   },
   "misc": {
     "beta": "Beta",
+    "new": "Nuevo",
     "temporary": "Temporal"
   },
   "ui": {
+    "changelog": {
+      "entries_type": {
+        "added": "Novedades",
+        "changed": "Modificaciones",
+        "fixed": "Correcciones",
+        "removed": "Eliminaciones"
+      },
+      "title": "Registro de cambios"
+    },
     "dialogs": {
       "branch_properties": {
         "element_spacing": "Espaciado de elementos",
@@ -95,6 +135,7 @@
         "unsupported_browsers": "Navegadores no soportados"
       },
       "connections_editor": {
+        "copy": "Copiar",
         "group": {
           "delete": "Eliminar",
           "header": "Grupo de correspondencias #{index}",
@@ -117,6 +158,7 @@
         "header": "Correspondencias de “{stopName}”",
         "mode": "Modo de transporte",
         "or": "O",
+        "paste": "Pegar",
         "service": "Servicio de transporte"
       },
       "custom_index_editor": {
@@ -132,9 +174,31 @@
         "value": "Valor"
       },
       "custom_indices": {
+        "export_all": "Exportar pictogramas",
+        "export_one": "Exportar pictograma",
         "header": "Directorio de índices personalizados"
       },
+      "custom_line_thickness": {
+        "accept": "Listo",
+        "header": "Grosor de línea personalizado"
+      },
+      "custom_map_size": {
+        "accept": "Listo",
+        "header": "Tamaño del marco personalizado"
+      },
+      "end_of_year_celebrations": {
+        "close": "Cerrar",
+        "disable_and_close": "Desactivar y cerrar",
+        "header": "Felices fiestas",
+        "summary": "Con motivo de las fiestas, la nieve llega a BULB. Puede desactivarla en cualquier momento desde la barra superior."
+      },
       "fork_properties": {
+        "directional_arrows": {
+          "clockwise": "Sentido horario",
+          "counterclockwise": "Sentido antihorario",
+          "none": "Ninguna",
+          "title": "Flechas direccionales"
+        },
         "header": "Propiedades de bifurcación",
         "orientation": {
           "left": "Izquierda",
@@ -210,8 +274,18 @@
         "section_1_level": "Nivel de la sección 1",
         "section_2_level": "Nivel de la sección 2"
       },
+      "pdf_export_notice": {
+        "header": "Exportación en formato PDF",
+        "message_1": "Para generar el plano en formato PDF, se abrirá una nueva página. Una vez que el plano sea visible, aparecerá el cuadro de diálogo de impresión. Podrá entonces elegir entre imprimir el plano o guardarlo en formato PDF.",
+        "message_2": "Si no ve el cuadro de diálogo de impresión, compruebe que las ventanas emergentes estén permitidas para este sitio. También puede pulsar {printShortcut}.",
+        "unexpected_behaviors_notice": "La exportación con este método puede provocar comportamientos inesperados, como elementos ausentes o mal colocados. Si encuentra problemas, pruebe a exportar en formato PNG.",
+        "dont_show_again": "No volver a mostrar este mensaje",
+        "cancel": "Cancelar",
+        "proceed": "Continuar"
+      },
       "save_project": {
         "cancel": "Cancelar",
+        "custom_indices_notice": "Los índices personalizados se incluirán en el archivo",
         "header": "Guardar proyecto",
         "project_name": "Nombre del proyecto",
         "save": "Guardar"
@@ -222,13 +296,41 @@
         "spacer_export_notice": "Nota: el espaciado se volverá invisible al exportar."
       },
       "stop_properties": {
+        "accessible": {
+          "no": "No",
+          "title": "Accesibilidad PMR",
+          "undefined": "Sin definir",
+          "yes": "Sí"
+        },
+        "accessible_direction": {
+          "both": "Los dos",
+          "left": "Izquierda",
+          "right": "Derecha",
+          "title": "Dirección de accesibilidad PMR"
+        },
         "city_name": "Ciudad",
         "closed": "Cerrado",
+        "end_of_line_connection": {
+          "line": "Línea",
+          "mode": "Modo de transporte",
+          "title": "Prolongación de final de línea"
+        },
         "header": "Propiedades de la parada",
         "interest_point": "Punto de interés",
+        "interest_point_color": "Color del punto de interés",
+        "inverted_elements": "Elementos invertidos",
+        "preventOverlapping": "Impedir la colisión del nombre y el subtítulo",
+        "reverse": "Invertido",
         "stop_name": "Nombre",
+        "stop_state": {
+          "close": "Cerrada",
+          "open": "Abierta",
+          "title": "Estado de la parada"
+        },
         "stop_type": {
-          "terminus": "Final de línea"
+          "regular": "Normal",
+          "terminus": "Final de línea",
+          "title": "Tipo de parada"
         },
         "subtitle": "Subtítulo",
         "terminus": "Final de línea"
@@ -253,12 +355,25 @@
       },
       "warp_add": {
         "add_all_stops": "Añadir las paradas",
+        "city_name": "Ciudad",
+        "direction": {
+          "left": "De derecha a izquierda",
+          "right": "De izquierda a derecha",
+          "title": "Sentido de inserción"
+        },
         "header": "Asistente WarpAdd",
-        "notice": "El asistente WarpAdd permite agregar paradas rápidamente a una rama. Solo escriba el nombre de una parada y luego presione {nextShortcut} para pasar a la parada siguiente.",
+        "linebreak": "Pulse {shortcut} para insertar un salto de línea",
+        "notice": "El asistente WarpAdd permite agregar paradas rápidamente a una rama. Solo escriba el nombre de una parada y luego presione {nextShortcut} para pasar a la parada siguiente. Cuando haya introducido todas las paradas, puede pulsar {submitShortcut} para terminar.",
+        "positioning": {
+          "left": "Al principio",
+          "right": "Al final",
+          "title": "Posicionamiento"
+        },
         "reset": "Reiniciar",
         "stop_name": "Nombre de la parada",
         "stops_list": "Lista de paradas",
-        "stops_list_empty": "Ninguna parada"
+        "stops_list_empty": "Ninguna parada",
+        "subtitle": "Subtítulo"
       }
     },
     "map_editor": {
@@ -294,7 +409,12 @@
     "nag": "<b>ATENCIÓN</b>: Aplicación en fase de desarrollo. Algunas funcionalidades no están disponibles o están incompletas.",
     "properties": {
       "color": "Color del plano",
+      "dots_color": "Color de los puntos",
+      "frame_terminus_names": "Nombres de los finales de línea en un marco",
+      "fully_accessible": "Línea totalmente accesible PMR",
       "index": "Índice de línea",
+      "line_style": "Estilo de línea",
+      "line_thickness": "Grosor de línea",
       "mode": "Modo de transporte",
       "size": "Tamaño del marco",
       "title": "Propiedades",
@@ -340,7 +460,9 @@
       }
     },
     "topbar": {
+      "editor": "Editor de planos",
       "faq": "FAQ",
+      "changelog": "Registro de cambios",
       "catch_phrase": "No está mal, ¿verdad? ¡Es francés 🇫🇷!"
     }
   }

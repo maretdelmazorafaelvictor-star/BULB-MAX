@@ -1,8 +1,24 @@
 <script setup lang="ts">
 import { v4 as uuidv4 } from 'uuid'
+import { computed } from 'vue'
+import { useConnectionsClipboard } from '~/stores/useConnectionsClipboard'
 
 const visible = defineModel<boolean>('visible')
 const stop = defineModel<Stop>('stop', { required: true })
+
+const clipboard = useConnectionsClipboard()
+const copiable = computed(() => stop.value.$stop.connections.length > 0)
+
+function copyConnections() {
+  clipboard.copy(stop.value.$stop.connections)
+}
+
+/* Le collage remplace : les correspondances de l’arrêt cible sont écrasées. */
+function pasteConnections() {
+  const pasted = clipboard.paste()
+  if (pasted === null) return
+  stop.value.$stop.connections = pasted
+}
 
 function addModeConnection() {
   stop.value.$stop.connections.push({
@@ -39,12 +55,30 @@ function deleteConnection(index: number) {
     }"
   >
     <template #header>
-      <div class="flex flex-row gap-4">
+      <div class="flex flex-row items-center gap-4">
         <Tag severity="warn">
           <i class="i-tabler-traffic-cone" />
           WIP
         </Tag>
         <span class="p-dialog-title" data-pc-section="title">{{ $t('ui.dialogs.connections_editor.header', { stopName: stop.$stop.name }) }}</span>
+        <div class="flex flex-row gap-2">
+          <Button
+            size="small"
+            severity="secondary"
+            icon="i-tabler-copy"
+            :label="$t('ui.dialogs.connections_editor.copy')"
+            :disabled="!copiable"
+            @click="copyConnections()"
+          />
+          <Button
+            size="small"
+            severity="secondary"
+            icon="i-tabler-clipboard"
+            :label="$t('ui.dialogs.connections_editor.paste')"
+            :disabled="!clipboard.filled"
+            @click="pasteConnections()"
+          />
+        </div>
       </div>
     </template>
     <div class="connections">

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { DraggableEvent, SortableEvent } from 'vue-draggable-plus'
 import { useCssVar, useElementSize } from '@vueuse/core'
-import { computed, inject, ref } from 'vue'
+import { computed, inject, provide, reactive, ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 import useElementGrabbing from '~/composables/useElementGrabbing'
-import { LineContextKey } from '~/utils/symbols'
+import { BranchContextKey, LineContextKey } from '~/utils/symbols'
 
 const {
   fluid = false,
@@ -34,9 +34,30 @@ const elementSpacing = computed(() => `${branch.value.$branch.elementSpacing}em`
 const leftMargin = computed(() => `${branch.value.$branch.marginLeft || 0}em`)
 const rightMargin = computed(() => `${branch.value.$branch.marginRight || 0}em`)
 
+/*
+ * Place réservée aux prolongements de bout de ligne, qui débordent du cadre de leur
+ * arrêt. C’est du rembourrage, pas de la marge : le tracé de la branche est positionné
+ * sur la boîte de rembourrage, il démarre donc après et ne ressort pas sous les tirets.
+ */
+const branchOverflow = reactive({ start: 0, end: 0 })
+provide<BranchContext>(BranchContextKey, { overflow: branchOverflow })
+
+const overflowStart = computed(() => `${branchOverflow.start}px`)
+const overflowEnd = computed(() => `${branchOverflow.end}px`)
+
 const color = computed(() => lineContext?.color.value ?? '#000000')
 const lineWidth = computed(() => lineContext.lineThickness.value)
 const lineOffset = computed(() => sizeFactor.value * lineWidth.value * 16 / 2)
+
+/*
+ * Position d’un élément dans la branche : le premier est en tête, le dernier en queue.
+ * Sert à déduire de quel côté part le prolongement de bout de ligne d’un terminus.
+ */
+function elementPosition(index: number): BranchElementPosition {
+  if (index === 0) return 'START'
+  if (index === elements.value.length - 1) return 'END'
+  return null
+}
 
 /* Simply because the lib is muffin broken */
 function moveOut(event: DraggableEvent<BranchElement>) {
@@ -81,6 +102,7 @@ function moveOut(event: DraggableEvent<BranchElement>) {
         v-model="elements[i]"
         :data-id="element.id"
         :reverse="branch.$branch.invertedElements"
+        :position="elementPosition(i)"
       />
     </VueDraggable>
     <div ref="line" class="line">
@@ -113,6 +135,9 @@ function moveOut(event: DraggableEvent<BranchElement>) {
 
   position: relative;
   z-index: 2;
+
+  padding-left: v-bind(overflowStart);
+  padding-right: v-bind(overflowEnd);
 
   &.fluid {
     flex-grow: 1;
@@ -210,10 +235,17 @@ function moveOut(event: DraggableEvent<BranchElement>) {
 
 .line {
   position: absolute;
-  left: 0;
+
+  /*
+   * Bornée par la place réservée aux prolongements : un élément positionné se cale sur
+   * la boîte de rembourrage, le padding de la branche ne suffirait donc pas à décaler
+   * le tracé, et il ressortirait sous les tirets.
+   */
+  left: v-bind(overflowStart);
+  right: v-bind(overflowEnd);
   top: 50%;
   transform: translateY(-50%);
-  width: 100%;
+  width: auto;
   padding: 0 calc(v-bind(lineWidth) * .5em / v-bind(lineWidth));
   z-index: -1;
 }

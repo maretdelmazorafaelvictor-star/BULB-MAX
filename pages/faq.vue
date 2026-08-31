@@ -84,8 +84,8 @@ definePageMeta({
           <AccordionHeader>Quels modes de transport sont disponibles ?</AccordionHeader>
           <AccordionContent>
             <p>
-              Tous. Plus précisément les navettes fluviales, les bus, les téléphériques, les métros, les RER, les
-              Transiliens, les tramways, et même les vélos.
+              Presque tous. Plus précisément les navettes fluviales, les bus, les télécabines, les téléphériques, les
+              télésièges, les téléskis, les métros, les RER, les Transiliens, les tramways, et même les vélos.
             </p>
             <br>
             <p>

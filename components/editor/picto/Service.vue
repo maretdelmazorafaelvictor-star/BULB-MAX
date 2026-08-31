@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import bulletTrain from 'assets/svg/services/bullet_train.svg'
-import funicular from 'assets/svg/services/funicular.svg'
 import longDistanceBus from 'assets/svg/services/long_distance_bus.svg'
 import mainStation from 'assets/svg/services/main_station.svg'
 import suburbanTrain from 'assets/svg/services/suburban_train.svg'
@@ -9,11 +8,7 @@ import tgv from 'assets/svg/services/tgv.svg'
 import { computed } from 'vue'
 import airport from '~/assets/svg/airport/airport-generic.svg'
 import cdgExpress from '~/assets/svg/services/cdg_express.svg'
-import cdgval from '~/assets/svg/services/cdgval.svg'
 import orlyBus from '~/assets/svg/services/orlybus.svg'
-import orlyval from '~/assets/svg/services/orlyval.svg'
-import orlyvalLarge from '~/assets/svg/services/orlyval_lg.svg'
-import orlyvalLarge2 from '~/assets/svg/services/orlyval_lg_2.svg'
 import roissyBus from '~/assets/svg/services/roissybus.svg'
 
 const {
@@ -24,8 +19,6 @@ const {
 
 const icon = computed(() => {
   switch (service) {
-    case 'FUNICULAR':
-      return funicular
     case 'MAIN_STATION':
       return mainStation
     case 'BULLET_TRAIN':
@@ -44,14 +37,6 @@ const icon = computed(() => {
       return roissyBus
     case 'ORLY_BUS':
       return orlyBus
-    case 'CDGVAL':
-      return cdgval
-    case 'ORLYVAL':
-      return orlyval
-    case 'ORLYVAL_LARGE':
-      return orlyvalLarge
-    case 'ORLYVAL_LARGE_2':
-      return orlyvalLarge2
     case 'CDG_EXPRESS':
       return cdgExpress
   }

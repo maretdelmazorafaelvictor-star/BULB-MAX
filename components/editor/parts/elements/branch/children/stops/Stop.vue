@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useElementHover, useElementSize } from '@vueuse/core'
-import { computed, inject, provide, reactive, ref } from 'vue'
+import { computed, inject, onUnmounted, provide, reactive, ref, watch } from 'vue'
 import { STOP_PADDING } from '~/utils/dimensions'
-import { LineContextKey, StopContextKey } from '~/utils/symbols'
+import { BranchContextKey, LineContextKey, StopContextKey } from '~/utils/symbols'
 
-const { reverse = false } = defineProps<{
+const { reverse = false, position = null } = defineProps<{
   reverse?: boolean
+  position?: BranchElementPosition
 }>()
 const stop = defineModel<Stop>({ required: true })
 const lineContext = inject<LineContext>(LineContextKey)!
@@ -38,6 +39,41 @@ const names = ref()
 const { width } = useElementSize(names)
 const namesWidth = computed(() => `${width.value}px`)
 
+const endOfLineConnection = computed(() => stop.value.$stop.endOfLineConnection ?? null)
+const showEndOfLineConnection = computed(() =>
+  stop.value.$stop.terminus
+  && endOfLineConnection.value !== null
+  && endOfLineConnection.value.lineIndex !== null,
+)
+/* Terminus en tête de branche : le prolongement part vers la gauche, sinon vers la droite. */
+const endOfLineTowardStart = computed(() => position === 'START')
+
+const endOfLine = ref()
+const { width: endOfLineWidth } = useElementSize(endOfLine)
+const endOfLineOffset = computed(() =>
+  showEndOfLineConnection.value && endOfLineTowardStart.value ? `${endOfLineWidth.value}px` : '0px',
+)
+
+/*
+ * Le prolongement sort du cadre de l’arrêt, du côté du terminus. On signale ce
+ * débordement à la branche, qui s’élargit d’autant : sans cela il empiète sur ce qui
+ * borde le plan, le pictogramme d’accessibilité du cadre par exemple.
+ */
+const branchContext = inject<BranchContext | undefined>(BranchContextKey, undefined)
+
+watch([showEndOfLineConnection, endOfLineTowardStart, endOfLineWidth, () => position], () => {
+  if (!branchContext) return
+  const overflow = showEndOfLineConnection.value ? endOfLineWidth.value : 0
+  if (position === 'START') branchContext.overflow.start = overflow
+  if (position === 'END') branchContext.overflow.end = overflow
+}, { immediate: true })
+
+onUnmounted(() => {
+  if (!branchContext) return
+  if (position === 'START') branchContext.overflow.start = 0
+  if (position === 'END') branchContext.overflow.end = 0
+})
+
 provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
 </script>
 
@@ -60,9 +96,11 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
           :subtitle="stop.$stop.subtitle"
           :place-name="stop.$stop.placeName"
           :interest-point="stop.$stop.interestPoint"
+          :interest-point-color="stop.$stop.interestPointColor"
           :prevent-subtitle-overlapping="stop.$stop.preventSubtitleOverlapping"
           :terminus="stop.$stop.terminus"
           :accessible="stop.$stop.accessible"
+          :accessible-direction="stop.$stop.accessibleDirection"
           :reverse="inverted"
           @click="(e: Event) => {
             e.stopPropagation()
@@ -70,8 +108,14 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
           }"
         />
       </div>
-      <div class="dot-connections">
-        <div class="dot">
+      <div class="dot-connections" :class="{ 'has-end-of-line': showEndOfLineConnection }">
+        <div
+          class="dot"
+          :class="{
+            'toward-start': endOfLineTowardStart,
+            'has-end-of-line': showEndOfLineConnection,
+          }"
+        >
           <StopDot
             class="branch-element-handle z-1"
             :terminus="stop.$stop.terminus"
@@ -79,6 +123,16 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
             :color="lineContext.color.value"
             :closed="stop.$stop.closed"
             @click="(e: Event) => e.stopPropagation()"
+          />
+          <EndOfLineConnection
+            v-if="showEndOfLineConnection"
+            ref="endOfLine"
+            :connection="endOfLineConnection!"
+            :reverse="endOfLineTowardStart"
+            @click="(e: Event) => {
+              e.stopPropagation()
+              showPropertiesDialog = true
+            }"
           />
         </div>
         <div class="w-0 connections dynamic-part">
@@ -135,7 +189,7 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
     }
 
     .dot-connections {
-      margin-left: calc((v-bind(namesWidth) - 1em) / 2);
+      margin-left: calc((v-bind(namesWidth) - 1em) / 2 - v-bind(endOfLineOffset));
     }
   }
 
@@ -148,6 +202,12 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
       margin-right: 0;
     }
 
+    /*
+     * Reste à 1em même avec un prolongement : le tracé de la branche est dessiné sur
+     * toute la largeur du conteneur, l’élargir le ferait passer sous les tirets et
+     * reboucher les intervalles. Le prolongement déborde donc à droite, comme il
+     * déborde à gauche en tête de branche.
+     */
     .dot-connections {
       width: 1em;
     }
@@ -185,7 +245,7 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
   flex-direction: column;
   align-items: start;
 
-  margin-left: calc((v-bind(namesWidth) - 1em) / 2 + v-bind(padding));
+  margin-left: calc((v-bind(namesWidth) - 1em) / 2 + v-bind(padding) - v-bind(endOfLineOffset));
 
   .reverse & {
     flex-direction: column-reverse;
@@ -200,6 +260,43 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  /*
+   * En queue de branche cette rangée est contrainte à 1em : sans cela la pastille
+   * se comprime et la barre de liaison vient chevaucher la pastille colorée.
+   */
+  > * {
+    flex: none;
+  }
+
+  &.toward-start {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  &.has-end-of-line {
+    /*
+     * La rangée couvre aussi les tirets et le picto : sans cela, les survoler
+     * éclairerait le symbole. Seules les pastilles et la barre restent sensibles,
+     * elles se réactivent dans EndOfLineConnection.vue.
+     */
+    pointer-events: none;
+
+    > :deep(.branch-element-handle) {
+      pointer-events: auto;
+    }
+
+    /*
+     * Le terminus et la pastille du prolongement forment un seul symbole : les deux
+     * pastilles et leur barre de liaison s’éclairent ensemble, pas chacune de son côté.
+     */
+    &:hover {
+      :deep(.dot),
+      :deep(.link) {
+        filter: brightness(.5);
+      }
+    }
+  }
 }
 
 .connections {
@@ -207,6 +304,12 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
   position: relative;
   top: v-bind(connectionsMargin);
   height: 0;
+
+  /*
+   * En tête de branche, le prolongement pousse la colonne vers la gauche.
+   * On rattrape ici pour que les correspondances restent sous la pastille.
+   */
+  left: v-bind(endOfLineOffset);
 
   .reverse & {
     top: auto;

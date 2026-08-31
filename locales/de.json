@@ -71,19 +71,24 @@
       "boat": "Fähre",
       "brt": "Bus Rapid Transit",
       "bus": "Bus",
-      "cable": "Seilbahn",
+      "aerial_tramway": "Luftseilbahn",
+      "gondola": "Gondelbahn",
+      "chairlift": "Sessellift",
       "metro": "U-Bahn",
       "noctilien": "Noctilien",
       "rer": "RER",
+      "ski_lift": "Schlepplift",
       "tram": "Straßenbahn",
-      "transilien": "Transilien"
+      "tram_train": "Tram-Train",
+      "funicular": "Standseilbahn",
+      "transilien": "Transilien",
+      "val": "VAL"
     },
     "services": {
       "airport": "Flughafen",
       "bullet_train": "Fernverkehr",
       "cdg_express": "CDG Express",
       "cdgval": "CDGVAL",
-      "funicular": "Standseilbahn",
       "long_distance_bus": "Fernbus",
       "main_station": "Bahnhof",
       "orlyval": "OrlyVal",
@@ -105,7 +110,7 @@
     "temporary": "temporär"
   },
   "ui": {
-        "changelog": {
+    "changelog": {
       "entries_type": {
         "added": "Neuerungen",
         "changed": "Änderungen",
@@ -130,6 +135,7 @@
         "unsupported_browsers": "Nicht-unterstützte Browser"
       },
       "connections_editor": {
+        "copy": "Kopieren",
         "group": {
           "delete": "Löschen",
           "header": "Umstiegsmöglichkeiten #{index}",
@@ -152,6 +158,7 @@
         "header": "Umstiegsmöglichkeiten “{stopName}”",
         "mode": "Transportmittel",
         "or": "oder",
+        "paste": "Einfügen",
         "service": "Knotenpunkt"
       },
       "custom_index_editor": {
@@ -167,6 +174,8 @@
         "value": "Bezeichnung"
       },
       "custom_indices": {
+        "export_all": "Piktogramme exportieren",
+        "export_one": "Piktogramm exportieren",
         "header": "Benutzerdefinierte Liniensignale"
       },
       "custom_line_thickness": {
@@ -293,10 +302,22 @@
           "undefined": "unbestimmt",
           "yes": "ja"
         },
+        "accessible_direction": {
+          "both": "Beide",
+          "left": "Links",
+          "right": "Rechts",
+          "title": "Barrierefreie Richtung"
+        },
         "city_name": "Ort",
         "closed": "Aufgelassen",
+        "end_of_line_connection": {
+          "line": "Linie",
+          "mode": "Verkehrsmittel",
+          "title": "Anschluss am Streckenende"
+        },
         "header": "Haltestelle: Optionen",
         "interest_point": "relevanter Ort",
+        "interest_point_color": "Farbe des relevanten Ortes",
         "inverted_elements": "Invertierte Elemente",
         "preventOverlapping": "Vermeide Kolissionen zwischen dem Haltestellennamen und -zusatz.",
         "reverse": "Invertieren",
