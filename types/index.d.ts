@@ -290,7 +290,7 @@ declare global {
   type LineIndex = BuiltinLineIndex | CustomLineIndex
 
   type LineStyle = 'PLAIN' | 'STRIPED'
-  type BrandStyle = 'RATP' | 'IDFM' | 'TCL' | 'TUS'
+  type BrandStyle = 'RATP' | 'IDFM' | 'TCL' | 'SNCF'
   type Operator = 'NONE' | 'RATP' | 'SNCF' | 'KEOLIS' | 'TRANSDEV'
   type DotsColorPolicy = 'INHERIT' | 'WHITE'
 

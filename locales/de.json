@@ -45,8 +45,8 @@
     "brand_style": {
       "idfm": "Île-de-France Mobilités",
       "ratp": "RATP (Paris)",
-      "tcl": "TCL (Lyon)",
-      "tus": "TUS (Santander)"
+      "sncf": "SNCF Voyageurs",
+      "tcl": "TCL (Lyon)"
     },
     "colors": {
       "custom": "benutzerdefiniert"

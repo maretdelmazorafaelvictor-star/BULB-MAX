@@ -74,8 +74,8 @@ const mapArea = ref<HTMLElement | null>(null)
 
     <div class="mr-3 my-3 rotate-180 text-[var(--brand-color)] text-.125em opacity-50">
       <div class="legal-notice flex flex-col line-height-1">
-        <span>Non affilié à la RATP, à Île-de-France Mobilités, à TCL, à TUS ou à toute autre société. Les pictogrammes ainsi que les polices utilisés demeurent la propriété intellectuelle exclusive des entités susmentionnées.</span>
-        <span class="italic text-.75em">Not affiliated with RATP, Île-de-France Mobilités, TCL, TUS or any other company. The pictograms and fonts used remain the exclusive intellectual property of the aforementioned entities.</span>
+        <span>Non affilié à la RATP, à Île-de-France Mobilités, à TCL, à SNCF Voyageurs ou à toute autre société. Les pictogrammes ainsi que les polices utilisés demeurent la propriété intellectuelle exclusive des entités susmentionnées.</span>
+        <span class="italic text-.75em">Not affiliated with RATP, Île-de-France Mobilités, TCL, SNCF Voyageurs or any other company. The pictograms and fonts used remain the exclusive intellectual property of the aforementioned entities.</span>
       </div>
     </div>
   </div>

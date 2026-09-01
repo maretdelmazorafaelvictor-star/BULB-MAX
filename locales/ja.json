@@ -45,8 +45,8 @@
     "brand_style": {
       "idfm": "Île-de-France Mobilités",
       "ratp": "RATP（パリ）",
-      "tcl": "TCL（リヨン）",
-      "tus": "TUS（サンタンデール）"
+      "sncf": "SNCF Voyageurs",
+      "tcl": "TCL（リヨン）"
     },
     "colors": {
       "custom": "特注の色"

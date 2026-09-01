@@ -71,7 +71,7 @@ export const useProject = defineStore('project', () => {
         if (object.version === undefined) {
           object.version = null
         }
-        if (object.line && object.line.brandStyle === undefined) {
+        if (object.line && (object.line.brandStyle === undefined || object.line.brandStyle === 'TUS')) {
           object.line.brandStyle = 'RATP'
         }
         if (object.line && object.line.operator === undefined) {
