@@ -306,7 +306,8 @@
       "spacer_properties": {
         "header": "Propriétés d’espacement",
         "size": "Longueur de l’espacement",
-        "spacer_export_notice": "Remarque : l’espacement deviendra invisible au moment du rendu."
+        "spacer_export_notice": "Remarque : l’espacement deviendra invisible au moment du rendu.",
+        "hatched": "Tronçon hachuré (hors Île-de-France)"
       },
       "stop_properties": {
         "accessible": {
@@ -348,7 +349,8 @@
           "title": "Type d’arrêt"
         },
         "subtitle": "Sous-titre",
-        "terminus": "Terminus"
+        "terminus": "Terminus",
+        "hatched": "Tronçon hachuré (hors Île-de-France)"
       },
       "troubleshooting": {
         "github": "ouvrir un ticket sur GitHub",

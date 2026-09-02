@@ -306,7 +306,8 @@
       "spacer_properties": {
         "header": "Flexibler Abschnitt: Optionen",
         "size": "Länge",
-        "spacer_export_notice": "Anmerkung: Die Hilfspfeile werden beim Export nicht angezeigt."
+        "spacer_export_notice": "Anmerkung: Die Hilfspfeile werden beim Export nicht angezeigt.",
+        "hatched": "Schraffierter Abschnitt (außerhalb der Île-de-France)"
       },
       "stop_properties": {
         "accessible": {
@@ -348,7 +349,8 @@
           "title": "Haltestellenart"
         },
         "subtitle": "Untertitel",
-        "terminus": "Endstation"
+        "terminus": "Endstation",
+        "hatched": "Schraffierter Abschnitt (außerhalb der Île-de-France)"
       },
       "troubleshooting": {
         "github": "erstellen Sie ein Issue auf GitHub",

@@ -306,7 +306,8 @@
       "spacer_properties": {
         "header": "Spacer properties",
         "size": "Spacer length",
-        "spacer_export_notice": "Notice: The spacer will become invisible at render time."
+        "spacer_export_notice": "Notice: The spacer will become invisible at render time.",
+        "hatched": "Hatched section (outside Île-de-France)"
       },
       "stop_properties": {
         "accessible": {
@@ -348,7 +349,8 @@
           "title": "Stop type"
         },
         "subtitle": "Subtitle",
-        "terminus": "Terminus"
+        "terminus": "Terminus",
+        "hatched": "Hatched section (outside Île-de-France)"
       },
       "troubleshooting": {
         "github": "open a GitHub issue",

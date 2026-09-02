@@ -206,6 +206,7 @@ declare global {
       endOfLineConnection?: EndOfLineConnection | null
       terminus: boolean
       closed: boolean
+      hatched?: boolean
       reverse: boolean
       connections: Connection[]
     }
@@ -215,6 +216,7 @@ declare global {
     id: string
     $spacer: {
       size: number
+      hatched?: boolean
     }
   }
 

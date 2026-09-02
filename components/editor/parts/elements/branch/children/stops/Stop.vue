@@ -117,6 +117,7 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
             'has-end-of-line': showEndOfLineConnection,
           }"
         >
+          <div v-if="stop.$stop.hatched" class="hatch-overlay" />
           <StopDot
             class="branch-element-handle z-1"
             :terminus="stop.$stop.terminus"
@@ -256,6 +257,25 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
 .dot {
   .debug & {
     outline: 1px solid magenta;
+  }
+
+  position: relative;
+
+  /*
+   * Hachure du tronçon : des interstices blancs recouvrent le tracé continu sur toute
+   * la largeur de l'élément (pastille + marges des noms), ce qui le découpe en tirets
+   * couleur de ligne. Sous la pastille (z-1), au-dessus du tracé.
+   */
+  .hatch-overlay {
+    position: absolute;
+    top: 50%;
+    left: calc(-1 * v-bind(leftMargin));
+    right: calc(-1 * v-bind(rightMargin));
+    height: calc(v-bind('lineContext.lineThickness.value') * 1em + 4px);
+    transform: translateY(-50%);
+    background: repeating-linear-gradient(90deg, transparent 0 .21875em, white .21875em .4375em);
+    pointer-events: none;
+    z-index: 0;
   }
 
   display: flex;

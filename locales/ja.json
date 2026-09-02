@@ -306,7 +306,8 @@
       "spacer_properties": {
         "header": "スペーサーのプロパティ",
         "size": "スペーサーのサイズ",
-        "spacer_export_notice": "お知らせ：スペーサーはレンダリング時に見えなくなります。"
+        "spacer_export_notice": "お知らせ：スペーサーはレンダリング時に見えなくなります。",
+        "hatched": "破線区間（イル・ド・フランス外）"
       },
       "stop_properties": {
         "accessible": {
@@ -348,7 +349,8 @@
           "title": "駅のタイプ"
         },
         "subtitle": "副題",
-        "terminus": "終着駅"
+        "terminus": "終着駅",
+        "hatched": "破線区間（イル・ド・フランス外）"
       },
       "troubleshooting": {
         "github": "GitHubの課題を開く",

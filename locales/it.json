@@ -306,7 +306,8 @@
       "spacer_properties": {
         "header": "Proprietà distanziale",
         "size": "Lunghezza del distanziale",
-        "spacer_export_notice": "Nota: il distanziale non viene visualizzato nel rendering finale."
+        "spacer_export_notice": "Nota: il distanziale non viene visualizzato nel rendering finale.",
+        "hatched": "Tratto tratteggiato (fuori dall'Île-de-France)"
       },
       "stop_properties": {
         "accessible": {
@@ -348,7 +349,8 @@
           "title": "Tipo di fermata"
         },
         "subtitle": "Sottotitolo",
-        "terminus": "Capolinea"
+        "terminus": "Capolinea",
+        "hatched": "Tratto tratteggiato (fuori dall'Île-de-France)"
       },
       "troubleshooting": {
         "github": "aprire un ticket su GitHub",

@@ -306,7 +306,8 @@
       "spacer_properties": {
         "header": "Propiedades de espaciado",
         "size": "Longitud del espaciado",
-        "spacer_export_notice": "Nota: el espaciado se volverá invisible al exportar."
+        "spacer_export_notice": "Nota: el espaciado se volverá invisible al exportar.",
+        "hatched": "Tramo rayado (fuera de Île-de-France)"
       },
       "stop_properties": {
         "accessible": {
@@ -348,7 +349,8 @@
           "title": "Tipo de parada"
         },
         "subtitle": "Subtítulo",
-        "terminus": "Final de línea"
+        "terminus": "Final de línea",
+        "hatched": "Tramo rayado (fuera de Île-de-France)"
       },
       "troubleshooting": {
         "github": "abrir un ticket en GitHub",
