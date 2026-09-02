@@ -29,7 +29,7 @@ const dotColor = computed(() => {
 <template>
   <div class="w-1em h-1em flex items-center justify-center relative">
     <div class="absolute dot dynamic-part" :class="{ terminus, connection: connection || closed, idfm }">
-      <span v-if="terminus" class="inner-dot" :style="{ backgroundColor: dotColor }" />
+      <span v-if="terminus" class="inner-dot" :style="{ backgroundColor: idfm ? color : dotColor }" />
     </div>
     <img v-if="closed" class="absolute closed" src="~/assets/svg/closed.svg">
   </div>
