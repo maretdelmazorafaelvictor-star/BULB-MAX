@@ -275,7 +275,7 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
     transform: translateY(-50%);
     background: repeating-linear-gradient(90deg, transparent 0 .21875em, white .21875em .4375em);
     pointer-events: none;
-    z-index: 0;
+    z-index: 1;
   }
 
   display: flex;
