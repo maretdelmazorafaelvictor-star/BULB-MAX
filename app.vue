@@ -1,9 +1,26 @@
 <script setup lang="ts">
+import { useHead } from '#imports'
+import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 import useLocale from '~/composables/useLocale'
 import useVersionTracking from '~/composables/useVersionTracking'
+import { findBrandStyleByValue } from '~/data/brands'
+import { useProject } from '~/stores/useProject'
 
 useVersionTracking()
 useLocale()
+
+/*
+ * La charte est portée par le body, et pas seulement par le cadre du plan : les menus
+ * de PrimeVue sont téléportés hors de ce cadre, et leurs pictogrammes y perdraient
+ * la couleur de marque.
+ */
+const { line } = storeToRefs(useProject())
+const brandClass = computed(() => {
+  const brand = findBrandStyleByValue(line.value.brandStyle) ?? findBrandStyleByValue('RATP')!
+  return `brand-${brand.value.toLowerCase()}`
+})
+useHead({ bodyAttrs: { class: brandClass } })
 </script>
 
 <template>
@@ -27,6 +44,15 @@ useLocale()
   --place-brown: #80551A;
   --gray: #414241;
   --background-color: #eaeaea;
+
+  /*
+   * Repli de charte. Les classes .brand-* (custom.css) surchargent ces valeurs, mais
+   * un pictogramme rendu hors de leur portée — un menu PrimeVue est téléporté dans le
+   * body — doit rester visible plutôt que de virer au transparent.
+   */
+  --brand-color: var(--ratp-blue);
+  --brand-color-secondary: var(--ratp-blue-secondary);
+  --brand-font: "Parisine Ptf", sans-serif;
 }
 
 html, body {
