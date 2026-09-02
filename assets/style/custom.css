@@ -130,7 +130,8 @@ body {
   --brand-font: "IDF Voyageur", sans-serif;
 }
 
-.brand-sncf {
+.brand-sncf,
+.brand-sncf_d {
   --brand-color: var(--sncf-anthracite);
   --brand-color-secondary: var(--sncf-red);
   --brand-font: "Avenir", sans-serif;
