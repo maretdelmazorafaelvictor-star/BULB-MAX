@@ -64,7 +64,7 @@ function elementPosition(index: number): BranchElementPosition {
  * branche, sur l'intervalle couvert par les éléments cochés, étendu à mi-chemin des
  * voisins (l'espace entre éléments n'appartient à aucun élément avec space-evenly).
  */
-interface OutsideZone { left: number, width: number, gray: boolean, top?: string, bottom?: string }
+interface OutsideZone { left: number, width: number, gray: boolean, top?: string, bottom?: string, atStart?: boolean, atEnd?: boolean }
 const hatchZones = ref<OutsideZone[]>([])
 const grayZones = ref<OutsideZone[]>([])
 
@@ -101,7 +101,7 @@ function measureZones() {
       for (let k = i; k <= j; k++) {
         if (!zoneFlag(elements.value[k], 'grayed')) gray = false
       }
-      out.push({ left, width: Math.max(0, right - left), gray })
+      out.push({ left, width: Math.max(0, right - left), gray, atStart: i === 0, atEnd: j === elements.value.length - 1 })
       i = j + 1
     }
     return out
@@ -121,7 +121,20 @@ function measureZones() {
       .filter(node => node !== wrapper && !node.contains(wrapper) && !wrapper.contains(node))
       .map(node => node.getBoundingClientRect())
     const centerY = (base.top + base.bottom) / 2
+    /* Bornes horizontales : les branches de même rangée limitent l'extension aux bords */
+    const sameRow = others.filter(r => r.bottom > base.top && r.top < base.bottom)
+    const leftBound = Math.max(mapRect.left, ...sameRow.filter(r => r.right <= base.left + 1).map(r => r.right))
+    const rightBound = Math.min(mapRect.right, ...sameRow.filter(r => r.left >= base.right - 1).map(r => r.left))
     for (const zone of gz) {
+      /* Au bout de la branche, l'aplat court jusqu'au bord du plan (rendu ligne K) */
+      if (zone.atStart) {
+        const extension = Math.max(0, (base.left + zone.left) - leftBound)
+        zone.left -= extension
+        zone.width += extension
+      }
+      if (zone.atEnd) {
+        zone.width += Math.max(0, rightBound - (base.left + zone.left + zone.width))
+      }
       const x1 = base.left + zone.left
       const x2 = x1 + zone.width
       let topLimit = mapRect.top
