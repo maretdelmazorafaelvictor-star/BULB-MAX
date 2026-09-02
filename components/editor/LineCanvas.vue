@@ -38,7 +38,7 @@ const mapArea = ref<HTMLElement | null>(null)
       </div>
       <div v-else class="w-full h-8" :class="sncf ? '' : 'bg-[var(--brand-color)]'" />
       <div v-if="idfm" class="flex-grow" />
-      <div class="w-full flex flex-row gap-3 justify-center items-center text-4em">
+      <div class="w-full flex flex-row gap-3 justify-center items-center text-4em" :style="sncf ? { transform: 'translateX(-.125em)' } : undefined">
         <Mode :mode="line.mode" />
         <LineIndex :mode="line.mode" :index="line.index" />
       </div>
