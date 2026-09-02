@@ -96,6 +96,27 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Avenir";
+  src: url("assets/fonts/Avenir-Book.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Avenir";
+  src: url("assets/fonts/Avenir-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Avenir";
+  src: url("assets/fonts/Avenir-Heavy.woff2") format("woff2");
+  font-weight: 600 800;
+  font-style: normal;
+}
+
 /* Brand styles: applied on the map canvas root, consumed through --brand-* */
 .brand-ratp {
   --brand-color: var(--ratp-blue);
@@ -109,9 +130,8 @@ body {
   --brand-font: "IDF Voyageur", sans-serif;
 }
 
-/* TODO: SNCF style, placeholder for now */
 .brand-sncf {
-  --brand-color: var(--ratp-blue);
-  --brand-color-secondary: var(--ratp-blue-secondary);
-  --brand-font: "Parisine Ptf", sans-serif;
+  --brand-color: var(--sncf-anthracite);
+  --brand-color-secondary: var(--sncf-red);
+  --brand-font: "Avenir", sans-serif;
 }

@@ -9,6 +9,7 @@ changelog:
         - Colonne de gauche IDFM avec le logo Île-de-France Mobilités et la mention « Opéré par » avec le logo de l’opérateur
         - Propriété « Opérateur » du plan (RATP, SNCF Voyageurs, Keolis, Transdev), visible en style IDFM
         - Points d’arrêt IDFM (point blanc cerclé de la couleur de la ligne, noir pour les correspondances)
+        - Socle du style SNCF Voyageurs (police Avenir, anthracite SNCF et rouge SNCF en couleurs de marque)
       CHANGED:
         - Le pictogramme fauteuil suit la couleur du style graphique
         - Le pied de plan indique le style utilisé (BULB-Paris, BULB-IDFM…)
