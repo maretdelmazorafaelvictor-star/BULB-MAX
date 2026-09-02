@@ -48,9 +48,9 @@ const mapArea = ref<HTMLElement | null>(null)
       </div>
       <div class="flex-grow" />
       <!-- IDFM: operator -->
-      <div v-if="idfm && operator?.logo" class="flex flex-col items-start gap-.375em mb-.75em px-.75em">
+      <div v-if="idfm && operator && operator.logos.length" class="flex flex-col items-start gap-.375em mb-.75em px-.75em">
         <span class="operated-by">OPÉRÉ PAR</span>
-        <img :src="operator.logo" :alt="operator.value" class="operator-logo">
+        <img v-for="logo of operator.logos" :key="logo" :src="logo" :alt="operator.value" class="operator-logo">
       </div>
       <div class="text-.25em flex flex-col line-height-1.75 text-[var(--brand-color)] mb-3">
         <div class="flex flex-row gap-.5">

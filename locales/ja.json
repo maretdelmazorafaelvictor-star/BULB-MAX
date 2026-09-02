@@ -94,6 +94,7 @@
       "keolis": "Keolis",
       "none": "なし",
       "ratp": "RATP",
+      "ratp_sncf": "RATP & SNCF Voyageurs",
       "sncf": "SNCF Voyageurs",
       "transdev": "Transdev"
     },

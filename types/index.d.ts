@@ -291,7 +291,7 @@ declare global {
 
   type LineStyle = 'PLAIN' | 'STRIPED'
   type BrandStyle = 'RATP' | 'IDFM' | 'TCL' | 'SNCF'
-  type Operator = 'NONE' | 'RATP' | 'SNCF' | 'KEOLIS' | 'TRANSDEV'
+  type Operator = 'NONE' | 'RATP' | 'SNCF' | 'RATP_SNCF' | 'KEOLIS' | 'TRANSDEV'
   type DotsColorPolicy = 'INHERIT' | 'WHITE'
 
   interface Line {

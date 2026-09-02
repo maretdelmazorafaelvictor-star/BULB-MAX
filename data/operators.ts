@@ -7,16 +7,17 @@ import { isCustom } from '~/utils/types'
 export interface OperatorChoice {
   value: Operator
   label: string
-  /** Logo asset URL, null when no logo is displayed */
-  logo: string | null
+  /** Logo asset URLs, empty when no logo is displayed */
+  logos: string[]
 }
 
 export const OPERATORS: OperatorChoice[] = [
-  { value: 'RATP', label: 'data.operator.ratp', logo: ratp },
-  { value: 'SNCF', label: 'data.operator.sncf', logo: sncf },
-  { value: 'KEOLIS', label: 'data.operator.keolis', logo: keolis },
-  { value: 'TRANSDEV', label: 'data.operator.transdev', logo: transdev },
-  { value: 'NONE', label: 'data.operator.none', logo: null },
+  { value: 'RATP', label: 'data.operator.ratp', logos: [ratp] },
+  { value: 'SNCF', label: 'data.operator.sncf', logos: [sncf] },
+  { value: 'RATP_SNCF', label: 'data.operator.ratp_sncf', logos: [ratp, sncf] },
+  { value: 'KEOLIS', label: 'data.operator.keolis', logos: [keolis] },
+  { value: 'TRANSDEV', label: 'data.operator.transdev', logos: [transdev] },
+  { value: 'NONE', label: 'data.operator.none', logos: [] },
 ]
 
 const SNCF_RER = ['C', 'D', 'E']
@@ -30,8 +31,12 @@ const SNCF_TRAMS = ['4']
 export function defaultOperatorFor(mode: Mode | null, index: LineIndex | null): Operator {
   const builtin = index && !isCustom(index) ? index.$builtinLineIndex.index : null
   switch (mode) {
+    case 'BUS':
+    case 'BRT':
+    case 'NOCTILIEN':
+      return 'NONE'
     case 'RER':
-      return builtin && SNCF_RER.includes(builtin) ? 'SNCF' : 'RATP'
+      return builtin && SNCF_RER.includes(builtin) ? 'SNCF' : 'RATP_SNCF'
     case 'TRAIN':
       return 'SNCF'
     case 'TRAM':
