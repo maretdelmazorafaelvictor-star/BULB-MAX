@@ -71,8 +71,8 @@ definePageMeta({
           <AccordionContent>
             <p>
               Oui. Le style graphique se choisit dans le menu principal : RATP ou Île-de-France Mobilités (plan de
-              ligne embarqué, police IDF Voyageur, anthracite Mobilités). Les styles TCL (Lyon) et SNCF Voyageurs
-              sont prévus et apparaissent déjà dans la liste, mais ne sont pas encore finalisés.
+              ligne embarqué, police IDF Voyageur, anthracite Mobilités). Le style SNCF Voyageurs
+              est prévu et apparaît déjà dans la liste, mais n’est pas encore finalisé.
             </p>
             <br>
             <p>

@@ -45,8 +45,7 @@
     "brand_style": {
       "idfm": "Île-de-France Mobilités",
       "ratp": "RATP（パリ）",
-      "sncf": "SNCF Voyageurs",
-      "tcl": "TCL（リヨン）"
+      "sncf": "SNCF Voyageurs"
     },
     "colors": {
       "custom": "特注の色"

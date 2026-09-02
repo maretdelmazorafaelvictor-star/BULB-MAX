@@ -45,8 +45,7 @@
     "brand_style": {
       "idfm": "Île-de-France Mobilités",
       "ratp": "RATP (Parigi)",
-      "sncf": "SNCF Voyageurs",
-      "tcl": "TCL (Lione)"
+      "sncf": "SNCF Voyageurs"
     },
     "colors": {
       "custom": "Personalizzato"

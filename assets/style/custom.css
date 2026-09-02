@@ -109,8 +109,7 @@ body {
   --brand-font: "IDF Voyageur", sans-serif;
 }
 
-/* TODO: TCL and SNCF styles, placeholders for now */
-.brand-tcl,
+/* TODO: SNCF style, placeholder for now */
 .brand-sncf {
   --brand-color: var(--ratp-blue);
   --brand-color-secondary: var(--ratp-blue-secondary);

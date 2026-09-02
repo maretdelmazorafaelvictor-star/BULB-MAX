@@ -45,8 +45,7 @@
     "brand_style": {
       "idfm": "Île-de-France Mobilités",
       "ratp": "RATP (Paris)",
-      "sncf": "SNCF Voyageurs",
-      "tcl": "TCL (Lyon)"
+      "sncf": "SNCF Voyageurs"
     },
     "colors": {
       "custom": "Personnalisée"
