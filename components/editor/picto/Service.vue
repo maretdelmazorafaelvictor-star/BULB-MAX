@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import bulletTrain from 'assets/svg/services/bullet_train.svg'
-import longDistanceBus from 'assets/svg/services/long_distance_bus.svg'
-import mainStation from 'assets/svg/services/main_station.svg'
-import suburbanTrain from 'assets/svg/services/suburban_train.svg'
-import ter from 'assets/svg/services/ter.svg'
-import tgv from 'assets/svg/services/tgv.svg'
+import bulletTrain from 'assets/svg/services/bullet_train.svg?raw'
+import longDistanceBus from 'assets/svg/services/long_distance_bus.svg?raw'
+import mainStation from 'assets/svg/services/main_station.svg?raw'
+import suburbanTrain from 'assets/svg/services/suburban_train.svg?raw'
+import ter from 'assets/svg/services/ter.svg?raw'
+import tgv from 'assets/svg/services/tgv.svg?raw'
 import { computed } from 'vue'
 import airport from '~/assets/svg/airport/airport-generic.svg'
 import cdgExpress from '~/assets/svg/services/cdg_express.svg'
@@ -16,6 +16,9 @@ const {
 } = defineProps<{
   service: Service | null
 }>()
+
+// SVG bruts (couleur de marque via currentColor) ; les autres restent des URL d'images
+const isUrl = computed(() => ['AIRPORT', 'ROISSY_BUS', 'ORLY_BUS', 'CDG_EXPRESS'].includes(service ?? ''))
 
 const icon = computed(() => {
   switch (service) {
@@ -45,12 +48,24 @@ const icon = computed(() => {
 </script>
 
 <template>
-  <img v-if="icon" :src="icon" alt="service" class="picto">
+  <img v-if="isUrl" :src="icon!" alt="service" class="picto">
+  <div v-else-if="icon" class="picto inline-svg" role="img" aria-label="service" v-html="icon" />
 </template>
 
 <style scoped lang="scss">
 .picto {
   //width: 1em;
   height: 1em;
+}
+
+/* Pictos monochromes : suivent la couleur de marque */
+.inline-svg {
+  color: var(--brand-color);
+
+  :deep(svg) {
+    display: block;
+    width: auto;
+    height: 100%;
+  }
 }
 </style>
