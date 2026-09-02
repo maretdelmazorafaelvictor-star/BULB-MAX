@@ -16,8 +16,9 @@ const {
 
 const lineContext = inject<LineContext>(LineContextKey)!
 const idfm = computed(() => lineContext.brandStyle.value === 'IDFM')
-// En IDFM le blanc du point est imposé par la classe .idfm ; dotColor garde son
-// sens d'origine et reste utilisé tel quel par le point central du terminus.
+const sncf = computed(() => lineContext.brandStyle.value === 'SNCF')
+// En IDFM et SNCF le point central du terminus reste couleur de ligne, même en
+// politique de points blancs ; dotColor garde son sens d'origine ailleurs.
 const dotColor = computed(() => {
   if (lineContext.dotsColorPolicy.value === 'WHITE') {
     return 'white'
@@ -29,7 +30,7 @@ const dotColor = computed(() => {
 <template>
   <div class="w-1em h-1em flex items-center justify-center relative">
     <div class="absolute dot dynamic-part" :class="{ terminus, connection: connection || closed, idfm }">
-      <span v-if="terminus" class="inner-dot" :style="{ backgroundColor: idfm ? color : dotColor }" />
+      <span v-if="terminus" class="inner-dot" :style="{ backgroundColor: (idfm || sncf) ? color : dotColor }" />
     </div>
     <img v-if="closed" class="absolute closed" src="~/assets/svg/closed.svg">
   </div>
