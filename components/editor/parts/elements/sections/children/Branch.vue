@@ -67,6 +67,9 @@ function elementPosition(index: number): BranchElementPosition {
 interface OutsideZone { left: number, width: number, gray: boolean }
 const hatchZones = ref<OutsideZone[]>([])
 const grayZones = ref<OutsideZone[]>([])
+/* Débords verticaux de l'aplat gris, mesurés jusqu'aux bords haut et bas du plan */
+const grayTop = ref<string>('-4em')
+const grayBottom = ref<string>('-2em')
 
 function zoneFlag(e: BranchElement, key: 'hatched' | 'grayed'): boolean {
   return ('$stop' in e ? e.$stop[key] : e.$spacer[key]) ?? false
@@ -108,6 +111,13 @@ function measureZones() {
   }
   hatchZones.value = build('hatched')
   grayZones.value = build('grayed')
+
+  const map = wrapper.closest('.content.bg-white') as HTMLElement | null
+  if (map) {
+    const mapRect = map.getBoundingClientRect()
+    grayTop.value = `${mapRect.top - base.top}px`
+    grayBottom.value = `${base.bottom - mapRect.bottom}px`
+  }
 }
 
 onMounted(() => nextTick(measureZones))
@@ -175,9 +185,10 @@ function moveOut(event: DraggableEvent<BranchElement>) {
     </div>
     <div
       v-for="(zone, i) in grayZones" :key="`gray-${i}`" class="zone-gray"
-      :style="{ left: `${zone.left}px`, width: `${zone.width}px` }"
+      :style="{ left: `${zone.left}px`, width: `${zone.width}px`, top: grayTop, bottom: grayBottom }"
     >
-      <span class="zone-gray-label">HORS TARIFICATION ÎLE-DE-FRANCE</span>
+      <span class="zone-gray-label label-top">HORS TARIFICATION ÎLE-DE-FRANCE</span>
+      <span class="zone-gray-label label-bottom">HORS TARIFICATION ÎLE-DE-FRANCE</span>
     </div>
     <div
       v-for="(zone, i) in hatchZones" :key="`hatch-${i}`" class="zone-hatch"
@@ -319,8 +330,6 @@ function moveOut(event: DraggableEvent<BranchElement>) {
 
 .zone-gray {
   position: absolute;
-  top: -4em;
-  bottom: -2em;
   background: var(--hors-idf-gray);
   pointer-events: none;
   z-index: -2;
@@ -330,14 +339,21 @@ function moveOut(event: DraggableEvent<BranchElement>) {
 
 .zone-gray-label {
   position: absolute;
-  top: .375em;
   font-size: .35em;
-  font-weight: bold;
+  font-weight: 800;
   letter-spacing: .08em;
   color: #3A3A3A;
   text-align: center;
   max-width: 90%;
   font-family: var(--brand-font);
+
+  &.label-top {
+    top: .5em;
+  }
+
+  &.label-bottom {
+    bottom: .5em;
+  }
 }
 
 .zone-hatch {
