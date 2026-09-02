@@ -16,6 +16,8 @@ const { target = null } = defineProps<{
   target?: HTMLElement | null
 }>()
 
+const emit = defineEmits<{ hasBottomBand: [value: boolean] }>()
+
 interface Span { label: string, left: number, right: number }
 interface Dot { center: number, y: number, top: number, bottom: number, height: number, label: string }
 interface Band { spans: Span[], boundaries: { x: number, from: number, to: number }[] }
@@ -110,6 +112,7 @@ function measure() {
   } else {
     bottomBand.value = { spans: [], boundaries: [] }
   }
+  emit('hasBottomBand', bottomBand.value.spans.length > 0)
 }
 
 function schedule() {
@@ -151,7 +154,7 @@ useMutationObserver(targetRef, schedule, {
       :style="{ left: `${b.x}px`, height: `${b.to}px` }"
     />
   </div>
-  <div v-if="bottomBand.spans.length > 0" class="commune-band commune-band-bottom" :style="{ width: `${width}px`, top: `${containerHeight}px` }">
+  <div v-if="bottomBand.spans.length > 0" class="commune-band commune-band-bottom" :style="{ width: `${width}px` }">
     <div class="rule rule-bottom" />
     <div
       v-for="span in bottomBand.spans"
@@ -165,7 +168,7 @@ useMutationObserver(targetRef, schedule, {
       v-for="(b, i) in bottomBand.boundaries"
       :key="`boundary-bottom-${i}`"
       class="boundary boundary-bottom"
-      :style="{ left: `${b.x}px`, top: `${b.from - containerHeight}px`, height: `${containerHeight - b.from}px` }"
+      :style="{ left: `${b.x}px`, bottom: `1.1em`, height: `${containerHeight - b.from}px` }"
     />
   </div>
 </template>
@@ -174,6 +177,7 @@ useMutationObserver(targetRef, schedule, {
 .commune-band {
   position: absolute;
   top: 0;
+  height: 0;
   left: 0;
   z-index: 0;
   pointer-events: none;
@@ -210,12 +214,20 @@ useMutationObserver(targetRef, schedule, {
   opacity: .45;
 }
 
+.commune-band-bottom {
+  top: auto;
+  bottom: 0;
+  height: 1.5em;
+}
+
 .rule-bottom {
-  top: 0;
+  top: auto;
+  bottom: 1.1em;
 }
 
 .label-bottom {
-  top: .35em;
+  top: auto;
+  bottom: .35em;
 }
 
 .boundary-bottom {

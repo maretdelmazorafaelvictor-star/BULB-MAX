@@ -20,6 +20,8 @@ const idfm = computed(() => brand.value.value === 'IDFM')
 const sncf = computed(() => brand.value.value === 'SNCF')
 const operator = computed(() => findOperatorByValue(line.value.operator))
 
+const hasBottomCommunes = ref(false)
+
 const now = useNow()
 const date = useDateFormat(now.value, 'DD.MM.YYYY')
 
@@ -73,8 +75,8 @@ const mapArea = ref<HTMLElement | null>(null)
         </div>
       </div>
     </div>
-    <div ref="mapArea" class="relative w-max-content flex items-center">
-      <CommuneBand :target="mapArea" />
+    <div ref="mapArea" class="relative w-max-content flex items-center" :class="{ 'pb-2em': hasBottomCommunes }">
+      <CommuneBand :target="mapArea" @has-bottom-band="hasBottomCommunes = $event" />
       <SectionsGroup
         v-model="line.topology"
         class="w-max-content min-h-15em p-1em pt-20 pr-10em"
