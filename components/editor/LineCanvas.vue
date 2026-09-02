@@ -4,6 +4,7 @@ import { useDateFormat } from '@vueuse/shared'
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 import idfmLogo from '~/assets/svg/brands/idfm.svg'
+import idfmLightLogo from '~/assets/svg/brands/idfm_light.png'
 import transilienSncfLogo from '~/assets/svg/brands/transilien_sncf.png'
 import useVersion from '~/composables/useVersion'
 import { findBrandStyleByValue } from '~/data/brands'
@@ -55,12 +56,10 @@ const mapArea = ref<HTMLElement | null>(null)
         <img v-for="logo of operator.logos" :key="logo" :src="logo" :alt="operator.value" class="operator-logo">
       </div>
       <!-- SNCF: Transilien SNCF Voyageurs pour Île-de-France Mobilités -->
-      <div v-if="sncf" class="flex flex-row items-center gap-.375em mb-.75em px-.75em">
+      <div v-if="sncf" class="flex flex-row items-end gap-.25em mb-.75em px-.75em">
         <img :src="transilienSncfLogo" alt="Transilien SNCF Voyageurs" class="transilien-logo">
         <span class="brand-pour">pour</span>
-        <span class="idfm-chip bg-[var(--idfm-anthracite)]">
-          <img :src="idfmLogo" alt="Île-de-France Mobilités" class="idfm-inline-logo">
-        </span>
+        <img :src="idfmLightLogo" alt="Île-de-France Mobilités" class="idfm-inline-logo">
       </div>
       <div class="text-.25em flex flex-col line-height-1.75 text-[var(--brand-color)] mb-3">
         <div class="flex flex-row gap-.5">
@@ -133,27 +132,22 @@ const mapArea = ref<HTMLElement | null>(null)
 }
 
 .transilien-logo {
-  height: 1.125em;
-  width: auto;
+  width: 3.5em;
+  height: auto;
   object-fit: contain;
 }
 
 .brand-pour {
-  font-size: .5em;
+  font-size: .35em;
   font-weight: 500;
   color: var(--gray);
-}
-
-.idfm-chip {
-  display: inline-flex;
-  align-items: center;
-  padding: .175em .3em;
-  border-radius: .15em;
+  align-self: flex-end;
+  padding-bottom: .25em;
 }
 
 .idfm-inline-logo {
-  height: .875em;
-  width: auto;
+  width: 2.25em;
+  height: auto;
   object-fit: contain;
 }
 
