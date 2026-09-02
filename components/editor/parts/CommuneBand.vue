@@ -200,7 +200,8 @@ useMutationObserver(targetRef, schedule, {
   top: 0;
   height: 0;
   left: 0;
-  z-index: 0;
+  /* Au-dessus des branches (z 2) pour rester visible sur l'aplat hors Île-de-France */
+  z-index: 5;
   pointer-events: none;
   color: var(--brand-color);
 }
