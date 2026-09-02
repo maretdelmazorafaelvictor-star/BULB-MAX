@@ -1,6 +1,17 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 const visible = defineModel<boolean>('visible', { required: true })
 const spacer = defineModel<Spacer>({ required: true })
+
+// Hors Île-de-France : une seule case pour les hachures et le fond gris
+const outsideIdf = computed({
+  get: () => (spacer.value.$spacer.hatched ?? false) || (spacer.value.$spacer.grayed ?? false),
+  set: (val: boolean) => {
+    spacer.value.$spacer.hatched = val
+    spacer.value.$spacer.grayed = val
+  },
+})
 </script>
 
 <template>
@@ -24,12 +35,8 @@ const spacer = defineModel<Spacer>({ required: true })
         <BInputNumber :id="`${spacer.id}_placeName`" v-model="spacer.$spacer.size" />
       </div>
       <div class="flex items-center gap-1">
-        <Checkbox v-model="spacer.$spacer.hatched" binary :input-id="`${spacer.id}_hatched`" />
-        <label :for="`${spacer.id}_hatched`" class="ml-2">{{ $t('ui.dialogs.spacer_properties.hatched') }}</label>
-      </div>
-      <div class="flex items-center gap-1">
-        <Checkbox v-model="spacer.$spacer.grayed" binary :input-id="`${spacer.id}_grayed`" />
-        <label :for="`${spacer.id}_grayed`" class="ml-2">{{ $t('ui.dialogs.spacer_properties.grayed') }}</label>
+        <Checkbox v-model="outsideIdf" binary :input-id="`${spacer.id}_outsideIdf`" />
+        <label :for="`${spacer.id}_outsideIdf`" class="ml-2">{{ $t('ui.dialogs.spacer_properties.outside_idf') }}</label>
       </div>
       <div class="opacity-50">
         {{ $t('ui.dialogs.spacer_properties.spacer_export_notice') }}

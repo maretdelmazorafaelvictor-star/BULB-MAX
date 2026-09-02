@@ -11,6 +11,15 @@ const emit = defineEmits<{
 }>()
 const visible = defineModel<boolean>('visible', { required: true })
 const stop = defineModel<Stop>({ required: true })
+
+// Hors Île-de-France : une seule case pour les hachures et le fond gris
+const outsideIdf = computed({
+  get: () => (stop.value.$stop.hatched ?? false) || (stop.value.$stop.grayed ?? false),
+  set: (val: boolean) => {
+    stop.value.$stop.hatched = val
+    stop.value.$stop.grayed = val
+  },
+})
 const accessibilityOptions = [
   { label: 'ui.dialogs.stop_properties.accessible.undefined', value: 'undefined' },
   { label: 'ui.dialogs.stop_properties.accessible.yes', value: true },
@@ -209,12 +218,8 @@ function openConnectionsEditor() {
 
           <div class="flex flex-col gap-1">
             <div class="flex items-center gap-1">
-              <Checkbox v-model="stop.$stop.hatched" binary :input-id="`${stop.id}_hatched`" />
-              <label :for="`${stop.id}_hatched`" class="ml-2">{{ $t('ui.dialogs.stop_properties.hatched') }}</label>
-            </div>
-            <div class="flex items-center gap-1">
-              <Checkbox v-model="stop.$stop.grayed" binary :input-id="`${stop.id}_grayed`" />
-              <label :for="`${stop.id}_grayed`" class="ml-2">{{ $t('ui.dialogs.stop_properties.grayed') }}</label>
+              <Checkbox v-model="outsideIdf" binary :input-id="`${stop.id}_outsideIdf`" />
+              <label :for="`${stop.id}_outsideIdf`" class="ml-2">{{ $t('ui.dialogs.stop_properties.outside_idf') }}</label>
             </div>
           </div>
 

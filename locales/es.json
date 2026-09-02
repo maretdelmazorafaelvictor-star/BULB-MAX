@@ -307,8 +307,7 @@
         "header": "Propiedades de espaciado",
         "size": "Longitud del espaciado",
         "spacer_export_notice": "Nota: el espaciado se volverá invisible al exportar.",
-        "hatched": "Tramo rayado (fuera de Île-de-France)",
-        "grayed": "Fondo gris (fuera de la zona tarifaria de Île-de-France)"
+        "outside_idf": "Fuera de Île-de-France (rayado y fondo gris)"
       },
       "stop_properties": {
         "accessible": {
@@ -351,8 +350,7 @@
         },
         "subtitle": "Subtítulo",
         "terminus": "Final de línea",
-        "hatched": "Tramo rayado (fuera de Île-de-France)",
-        "grayed": "Fondo gris (fuera de la zona tarifaria de Île-de-France)"
+        "outside_idf": "Fuera de Île-de-France (rayado y fondo gris)"
       },
       "troubleshooting": {
         "github": "abrir un ticket en GitHub",

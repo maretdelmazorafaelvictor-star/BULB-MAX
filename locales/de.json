@@ -307,8 +307,7 @@
         "header": "Flexibler Abschnitt: Optionen",
         "size": "Länge",
         "spacer_export_notice": "Anmerkung: Die Hilfspfeile werden beim Export nicht angezeigt.",
-        "hatched": "Schraffierter Abschnitt (außerhalb der Île-de-France)",
-        "grayed": "Grauer Hintergrund (außerhalb des Île-de-France-Tarifgebiets)"
+        "outside_idf": "Außerhalb der Île-de-France (Schraffur und grauer Hintergrund)"
       },
       "stop_properties": {
         "accessible": {
@@ -351,8 +350,7 @@
         },
         "subtitle": "Untertitel",
         "terminus": "Endstation",
-        "hatched": "Schraffierter Abschnitt (außerhalb der Île-de-France)",
-        "grayed": "Grauer Hintergrund (außerhalb des Île-de-France-Tarifgebiets)"
+        "outside_idf": "Außerhalb der Île-de-France (Schraffur und grauer Hintergrund)"
       },
       "troubleshooting": {
         "github": "erstellen Sie ein Issue auf GitHub",

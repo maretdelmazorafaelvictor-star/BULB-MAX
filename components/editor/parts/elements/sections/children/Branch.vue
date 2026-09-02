@@ -319,7 +319,7 @@ function moveOut(event: DraggableEvent<BranchElement>) {
 
 .zone-gray {
   position: absolute;
-  top: -2em;
+  top: -4em;
   bottom: -2em;
   background: var(--hors-idf-gray);
   pointer-events: none;
@@ -330,7 +330,7 @@ function moveOut(event: DraggableEvent<BranchElement>) {
 
 .zone-gray-label {
   position: absolute;
-  top: .5em;
+  top: .375em;
   font-size: .35em;
   font-weight: bold;
   letter-spacing: .08em;

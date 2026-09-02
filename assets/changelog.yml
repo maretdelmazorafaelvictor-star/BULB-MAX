@@ -13,8 +13,7 @@ changelog:
         - Bloc de marque « Transilien SNCF Voyageurs pour Île-de-France Mobilités » en bas de la colonne de gauche en style SNCF
         - Terminus SNCF pilotés par options: cartouche anthracite (T12/ligne J), gras noir (RER D/E) ou gras couleur de ligne (RER C)
         - Option « Terminus en couleur de ligne » dans les propriétés, visible en style SNCF sans cartouche
-        - Tronçons hachurés hors Île-de-France : case à cocher par arrêt et par espaceur, hachure du tracé sur la largeur de l'élément
-        - Fond gris « hors tarification Île-de-France » par arrêt et par espaceur, avec libellé dans l'aplat ; les interstices de hachure s'adaptent au fond gris
+        - Option « Hors Île-de-France » par arrêt et par espaceur : tronçon hachuré et fond gris avec libellé « Hors tarification Île-de-France »
       CHANGED:
         - Le pictogramme fauteuil suit la couleur du style graphique
         - Le pied de plan indique le style utilisé (BULB-Paris, BULB-IDFM…)

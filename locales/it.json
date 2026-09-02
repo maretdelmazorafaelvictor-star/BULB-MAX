@@ -307,8 +307,7 @@
         "header": "Proprietà distanziale",
         "size": "Lunghezza del distanziale",
         "spacer_export_notice": "Nota: il distanziale non viene visualizzato nel rendering finale.",
-        "hatched": "Tratto tratteggiato (fuori dall'Île-de-France)",
-        "grayed": "Sfondo grigio (fuori dalla zona tariffaria dell'Île-de-France)"
+        "outside_idf": "Fuori dall'Île-de-France (tratteggio e sfondo grigio)"
       },
       "stop_properties": {
         "accessible": {
@@ -351,8 +350,7 @@
         },
         "subtitle": "Sottotitolo",
         "terminus": "Capolinea",
-        "hatched": "Tratto tratteggiato (fuori dall'Île-de-France)",
-        "grayed": "Sfondo grigio (fuori dalla zona tariffaria dell'Île-de-France)"
+        "outside_idf": "Fuori dall'Île-de-France (tratteggio e sfondo grigio)"
       },
       "troubleshooting": {
         "github": "aprire un ticket su GitHub",

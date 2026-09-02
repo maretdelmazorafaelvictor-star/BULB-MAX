@@ -307,8 +307,7 @@
         "header": "Spacer properties",
         "size": "Spacer length",
         "spacer_export_notice": "Notice: The spacer will become invisible at render time.",
-        "hatched": "Hatched section (outside Île-de-France)",
-        "grayed": "Gray background (outside Île-de-France fare zone)"
+        "outside_idf": "Outside Île-de-France (hatching and gray background)"
       },
       "stop_properties": {
         "accessible": {
@@ -351,8 +350,7 @@
         },
         "subtitle": "Subtitle",
         "terminus": "Terminus",
-        "hatched": "Hatched section (outside Île-de-France)",
-        "grayed": "Gray background (outside Île-de-France fare zone)"
+        "outside_idf": "Outside Île-de-France (hatching and gray background)"
       },
       "troubleshooting": {
         "github": "open a GitHub issue",

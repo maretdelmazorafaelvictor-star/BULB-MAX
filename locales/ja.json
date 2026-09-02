@@ -307,8 +307,7 @@
         "header": "スペーサーのプロパティ",
         "size": "スペーサーのサイズ",
         "spacer_export_notice": "お知らせ：スペーサーはレンダリング時に見えなくなります。",
-        "hatched": "破線区間（イル・ド・フランス外）",
-        "grayed": "グレー背景（イル・ド・フランス運賃圏外）"
+        "outside_idf": "イル・ド・フランス外（破線とグレー背景）"
       },
       "stop_properties": {
         "accessible": {
@@ -351,8 +350,7 @@
         },
         "subtitle": "副題",
         "terminus": "終着駅",
-        "hatched": "破線区間（イル・ド・フランス外）",
-        "grayed": "グレー背景（イル・ド・フランス運賃圏外）"
+        "outside_idf": "イル・ド・フランス外（破線とグレー背景）"
       },
       "troubleshooting": {
         "github": "GitHubの課題を開く",
