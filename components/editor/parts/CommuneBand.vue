@@ -78,41 +78,62 @@ function measure() {
   }
 
   /*
-   * Les branches superposées occupent les mêmes abscisses avec des communes
-   * différentes : un tri gauche-droite global les entrelace. On regroupe donc
-   * d’abord les pastilles par rangée verticale (tolérance ≈ 1,5 hauteur de
-   * pastille), puis chaque rangée est traitée indépendamment : la rangée du
-   * haut alimente le bandeau supérieur, celle du bas le bandeau inférieur,
-   * comme sur les plans officiels (T4). Les rangées intermédiaires éventuelles
-   * ne sont pas affichées.
+   * Le bandeau du haut suit, à chaque abscisse, l’arrêt le plus haut : sur un
+   * tronçon à branche unique (tronc commun), c’est lui qui parle. Le bandeau
+   * du bas n’existe que là où deux rangées coexistent, et il est découpé en
+   * segments indépendants (une ligne peut avoir des branches aux deux bouts,
+   * comme le RER B) pour ne pas tirer de libellés ni de limites à travers le
+   * tronc commun.
    */
-  const tolerance = 1.5 * Math.max(...dots.map(dot => dot.height))
-  const rows: Dot[][] = []
-  for (const dot of [...dots].sort((a, b) => a.y - b.y)) {
-    const row = rows.find(r => Math.abs(r[0].y - dot.y) < tolerance)
-    if (row) row.push(dot)
-    else rows.push([dot])
-  }
-  rows.forEach(row => row.sort((a, b) => a.center - b.center))
+  const heightTol = 1.5 * Math.max(...dots.map(dot => dot.height))
+  const gaps = dots.slice(1).map((dot, i) => dot.center - dots[i].center).filter(g => g > 1).sort((a, b) => a - b)
+  const spacing = gaps.length ? gaps[Math.floor(gaps.length / 2)] : 1
+  const window = 2 * spacing
 
-  const first = rows[0]
-  const topResult = makeSpans(first, base.width)
+  const isTop = (dot: Dot) => !dots.some(other => other !== dot
+    && dot.y - other.y > heightTol && Math.abs(other.center - dot.center) <= window)
+  const isBottom = (dot: Dot) => !dots.some(other => other !== dot
+    && other.y - dot.y > heightTol && Math.abs(other.center - dot.center) <= window)
+
+  const topDots = dots.filter(dot => isTop(dot))
+  const bottomDots = dots.filter(dot => !isTop(dot) && isBottom(dot))
+
+  const topResult = makeSpans(topDots, base.width)
   topBand.value = {
     spans: topResult.spans,
-    boundaries: topResult.cuts.map(x => ({ x, from: 0, to: Math.max(...first.map(dot => dot.bottom)) })),
+    boundaries: topResult.cuts.map(x => ({
+      x,
+      from: 0,
+      to: Math.max(...topDots.filter(dot => Math.abs(dot.center - x) <= window).map(dot => dot.bottom), 0),
+    })),
   }
 
-  if (rows.length > 1) {
-    const last = rows[rows.length - 1]
-    const bottomResult = makeSpans(last, base.width)
-    bottomBand.value = {
-      spans: bottomResult.spans,
-      boundaries: bottomResult.cuts.map(x => ({ x, from: Math.min(...last.map(dot => dot.top)), to: base.height })),
-    }
-  } else {
-    bottomBand.value = { spans: [], boundaries: [] }
+  /* Segments du bas : coupure dès qu’un trou de plus de 3 interstations apparaît. */
+  const clusters: Dot[][] = []
+  for (const dot of bottomDots) {
+    const current = clusters[clusters.length - 1]
+    if (current && dot.center - current[current.length - 1].center <= 3 * spacing) current.push(dot)
+    else clusters.push([dot])
   }
-  emit('hasBottomBand', bottomBand.value.spans.length > 0)
+  const spans: Span[] = []
+  const boundaries: { x: number, from: number, to: number }[] = []
+  for (const cluster of clusters) {
+    const left = Math.max(0, cluster[0].center - spacing)
+    const right = Math.min(base.width, cluster[cluster.length - 1].center + spacing)
+    const result = makeSpans(cluster, base.width)
+    for (const [i, span] of result.spans.entries()) {
+      spans.push({
+        label: span.label,
+        left: i === 0 ? left : span.left,
+        right: i === result.spans.length - 1 ? right : span.right,
+      })
+    }
+    for (const x of result.cuts) {
+      boundaries.push({ x, from: Math.min(...cluster.map(dot => dot.top)), to: base.height })
+    }
+  }
+  bottomBand.value = { spans, boundaries }
+  emit('hasBottomBand', spans.length > 0)
 }
 
 function schedule() {
