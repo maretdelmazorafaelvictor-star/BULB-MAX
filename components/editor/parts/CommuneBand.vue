@@ -210,9 +210,9 @@ useMutationObserver(targetRef, schedule, {
   top: .75em;
   left: 0;
   width: 100%;
-  height: 1px;
+  height: calc(2em / 16);
   background: currentColor;
-  opacity: .45;
+  opacity: .6;
 }
 
 .label {
@@ -220,8 +220,9 @@ useMutationObserver(targetRef, schedule, {
   top: 0;
   text-align: center;
   font-size: .4em;
+  font-weight: 700;
   line-height: 1;
-  opacity: .65;
+  opacity: .85;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -231,8 +232,8 @@ useMutationObserver(targetRef, schedule, {
   position: absolute;
   top: .75em;
   width: 0;
-  border-left: 1px dotted currentColor;
-  opacity: .45;
+  border-left: calc(2em / 16) dotted currentColor;
+  opacity: .6;
 }
 
 .commune-band-bottom {
