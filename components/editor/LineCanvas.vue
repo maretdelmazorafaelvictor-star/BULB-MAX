@@ -64,7 +64,7 @@ const mapArea = ref<HTMLElement | null>(null)
         </div>
       </div>
     </div>
-    <div ref="mapArea" class="relative w-max-content">
+    <div ref="mapArea" class="relative w-max-content flex items-center">
       <CommuneBand :target="mapArea" />
       <SectionsGroup
         v-model="line.topology"
