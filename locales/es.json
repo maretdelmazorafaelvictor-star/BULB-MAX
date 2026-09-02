@@ -324,6 +324,7 @@
         "branch_color": "Color de la rama",
         "city_name": "Ciudad",
         "closed": "Cerrado",
+        "commune": "Municipio",
         "end_of_line_connection": {
           "line": "Línea",
           "mode": "Modo de transporte",

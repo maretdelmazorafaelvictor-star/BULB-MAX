@@ -324,6 +324,7 @@
         "branch_color": "Couleur de branche",
         "city_name": "Ville",
         "closed": "Fermé",
+        "commune": "Commune",
         "end_of_line_connection": {
           "line": "Ligne",
           "mode": "Mode de transport",

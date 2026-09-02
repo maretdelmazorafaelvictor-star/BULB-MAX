@@ -2,7 +2,7 @@
 import { useNow } from '@vueuse/core'
 import { useDateFormat } from '@vueuse/shared'
 import { storeToRefs } from 'pinia'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import idfmLogo from '~/assets/svg/brands/idfm.svg'
 import useVersion from '~/composables/useVersion'
 import { findBrandStyleByValue } from '~/data/brands'
@@ -19,6 +19,8 @@ const operator = computed(() => findOperatorByValue(line.value.operator))
 
 const now = useNow()
 const date = useDateFormat(now.value, 'DD.MM.YYYY')
+
+const mapArea = ref<HTMLElement | null>(null)
 </script>
 
 <template>
@@ -62,10 +64,13 @@ const date = useDateFormat(now.value, 'DD.MM.YYYY')
         </div>
       </div>
     </div>
-    <SectionsGroup
-      v-model="line.topology"
-      class="w-max-content min-h-15em p-1em pt-20 pr-10em"
-    />
+    <div ref="mapArea" class="relative w-max-content">
+      <CommuneBand :target="mapArea" />
+      <SectionsGroup
+        v-model="line.topology"
+        class="w-max-content min-h-15em p-1em pt-20 pr-10em"
+      />
+    </div>
 
     <div class="mr-3 my-3 rotate-180 text-[var(--brand-color)] text-.125em opacity-50">
       <div class="legal-notice flex flex-col line-height-1">

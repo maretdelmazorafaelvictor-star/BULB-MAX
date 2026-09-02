@@ -324,6 +324,7 @@
         "branch_color": "線路の色",
         "city_name": "市の名前",
         "closed": "運休",
+        "commune": "自治体",
         "end_of_line_connection": {
           "line": "路線",
           "mode": "交通機関",

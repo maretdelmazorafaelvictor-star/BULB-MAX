@@ -51,9 +51,9 @@ definePageMeta({
             </p>
             <br>
             <p>
-              À noter que ces indices personnalisés sont en cours de développement, et répondent actuellement à la
-              charte graphique
-              de la RATP. Certains problème graphiques peuvent survenir lors de l’utilisation d’indices personnalisés.
+              À noter que ces indices personnalisés sont en cours de développement, et suivent le style graphique
+              sélectionné (RATP ou Île-de-France Mobilités). Certains problèmes graphiques peuvent survenir lors de
+              l’utilisation d’indices personnalisés.
             </p>
           </AccordionContent>
         </AccordionPanel>
@@ -67,11 +67,12 @@ definePageMeta({
           </AccordionContent>
         </AccordionPanel>
         <AccordionPanel value="4">
-          <AccordionHeader>Pourra-t-on utiliser une autre charte que celle de la RATP ?</AccordionHeader>
+          <AccordionHeader>Peut-on utiliser une autre charte que celle de la RATP ?</AccordionHeader>
           <AccordionContent>
             <p>
-              Oui. Pour la première version, il faudra faire avec la charte de la RATP, mais il est prévu d’ajouter à
-              minima celles de la SNCF et de IDFM. D’autres chartes pourront également être ajoutées par la suite.
+              Oui. Le style graphique se choisit dans le menu principal : RATP ou Île-de-France Mobilités (plan de
+              ligne embarqué, police IDF Voyageur, anthracite Mobilités). Les styles TCL (Lyon) et SNCF Voyageurs
+              sont prévus et apparaissent déjà dans la liste, mais ne sont pas encore finalisés.
             </p>
             <br>
             <p>
@@ -139,11 +140,11 @@ definePageMeta({
             <p>
               Oui, le code est consultable sur le
               <Button
-                link as="a" href="https://github.com/SlamaFR/BULB" label="dépôt GitHub"
+                link as="a" href="https://github.com/maretdelmazorafaelvictor-star/BULB-MAX" label="dépôt GitHub"
                 pt:root:class="important-p-0"
               />
-              . Toutes les
-              ressources à l’exception de la police “Parisine” sont disponibles dessus.
+              (fork de <Button link as="a" href="https://github.com/SlamaFR/BULB" label="SlamaFR/BULB" pt:root:class="important-p-0" />).
+              Les polices “Parisine” et “IDF Voyageur” restent la propriété de la RATP et d’Île-de-France Mobilités.
             </p>
           </AccordionContent>
         </AccordionPanel>

@@ -324,6 +324,7 @@
         "branch_color": "Colore della diramazione",
         "city_name": "Città",
         "closed": "Fermata chiusa",
+        "commune": "Comune",
         "end_of_line_connection": {
           "line": "Linea",
           "mode": "Modo di trasporto",

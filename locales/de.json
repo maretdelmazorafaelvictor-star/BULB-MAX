@@ -324,6 +324,7 @@
         "branch_color": "Farbe des Abschnitts",
         "city_name": "Ort",
         "closed": "Aufgelassen",
+        "commune": "Gemeinde",
         "end_of_line_connection": {
           "line": "Linie",
           "mode": "Verkehrsmittel",

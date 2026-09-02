@@ -111,6 +111,7 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
       <div class="dot-connections" :class="{ 'has-end-of-line': showEndOfLineConnection }">
         <div
           class="dot"
+          :data-commune="stop.$stop.commune || null"
           :class="{
             'toward-start': endOfLineTowardStart,
             'has-end-of-line': showEndOfLineConnection,

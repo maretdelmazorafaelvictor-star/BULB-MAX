@@ -1,6 +1,20 @@
 ---
 changelog:
-  - version : 1.5.5-alpha
+  - version: 1.6.0-alpha
+    date: '2026-09-01T00:00:00.000Z'
+    entries:
+      ADDED:
+        - Sélecteur de style graphique dans le menu principal (RATP, Île-de-France Mobilités, TCL, SNCF Voyageurs)
+        - Style Île-de-France Mobilités (plan de ligne embarqué) avec la police IDF Voyageur et l’anthracite Mobilités
+        - Colonne de gauche IDFM avec le logo Île-de-France Mobilités et la mention « Opéré par » avec le logo de l’opérateur
+        - Propriété « Opérateur » du plan (RATP, SNCF Voyageurs, Keolis, Transdev), visible en style IDFM
+        - Points d’arrêt IDFM (point blanc cerclé de la couleur de la ligne, noir pour les correspondances)
+      CHANGED:
+        - Le pictogramme fauteuil suit la couleur du style graphique
+        - Le pied de plan indique le style utilisé (BULB-Paris, BULB-IDFM…)
+      FIXED:
+        - Les pictogrammes de mode s’affichent en noir dans le sélecteur de mode
+  - version: 1.5.5-alpha
     date: '2026-08-29T00:00:00.000Z'
     entries:
       ADDED:
