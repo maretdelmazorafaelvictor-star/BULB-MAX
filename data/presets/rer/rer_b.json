@@ -399,13 +399,13 @@
                         {
                           "id": "7781d193-3dc9-4d1b-a85b-8c30a2ba86a0",
                           "$modeConnection": {
-                            "mode": "TRAM",
+                            "mode": "TRAM_TRAIN",
                             "elements": [
                               {
                                 "id": "3d186968-960e-4bc5-9441-f8348ee39cdd",
                                 "$modeConnectionElement": {
                                   "lineIndex": {
-                                    "mode": "TRAM",
+                                    "mode": "TRAM_TRAIN",
                                     "$builtinLineIndex": {
                                       "index": "4"
                                     }
@@ -467,13 +467,13 @@
                         {
                           "id": "87a3ee4e-3570-4bf2-bcca-6d04ff751972",
                           "$modeConnection": {
-                            "mode": "TRAM",
+                            "mode": "TRAM_TRAIN",
                             "elements": [
                               {
                                 "id": "fd2f0e2d-ab50-4bc0-9334-9d04a1b17c7a",
                                 "$modeConnectionElement": {
                                   "lineIndex": {
-                                    "mode": "TRAM",
+                                    "mode": "TRAM_TRAIN",
                                     "$builtinLineIndex": {
                                       "index": "11"
                                     }
@@ -1325,13 +1325,13 @@
                                     {
                                       "id": "e1d95c2a-1d8e-47d4-abda-877ac4c4a2d4",
                                       "$modeConnection": {
-                                        "mode": "TRAM",
+                                        "mode": "TRAM_TRAIN",
                                         "elements": [
                                           {
                                             "id": "587b3da3-6115-41db-b530-59d6c6fe5385",
                                             "$modeConnectionElement": {
                                               "lineIndex": {
-                                                "mode": "TRAM",
+                                                "mode": "TRAM_TRAIN",
                                                 "$builtinLineIndex": {
                                                   "index": "12"
                                                 }

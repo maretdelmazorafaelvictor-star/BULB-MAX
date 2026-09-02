@@ -442,13 +442,13 @@
                         {
                           "id": "dbd276fe-313b-43a1-a955-03cfa47a6edd",
                           "$modeConnection": {
-                            "mode": "TRAM",
+                            "mode": "TRAM_TRAIN",
                             "elements": [
                               {
                                 "id": "4c84571d-2a48-4c4a-94eb-884c091bd04f",
                                 "$modeConnectionElement": {
                                   "lineIndex": {
-                                    "mode": "TRAM",
+                                    "mode": "TRAM_TRAIN",
                                     "$builtinLineIndex": {
                                       "index": "4"
                                     }
