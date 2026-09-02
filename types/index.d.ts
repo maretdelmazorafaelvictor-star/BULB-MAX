@@ -207,6 +207,7 @@ declare global {
       terminus: boolean
       closed: boolean
       hatched?: boolean
+      grayed?: boolean
       reverse: boolean
       connections: Connection[]
     }
@@ -217,6 +218,7 @@ declare global {
     $spacer: {
       size: number
       hatched?: boolean
+      grayed?: boolean
     }
   }
 

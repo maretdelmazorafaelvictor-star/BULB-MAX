@@ -212,6 +212,10 @@ function openConnectionsEditor() {
               <Checkbox v-model="stop.$stop.hatched" binary :input-id="`${stop.id}_hatched`" />
               <label :for="`${stop.id}_hatched`" class="ml-2">{{ $t('ui.dialogs.stop_properties.hatched') }}</label>
             </div>
+            <div class="flex items-center gap-1">
+              <Checkbox v-model="stop.$stop.grayed" binary :input-id="`${stop.id}_grayed`" />
+              <label :for="`${stop.id}_grayed`" class="ml-2">{{ $t('ui.dialogs.stop_properties.grayed') }}</label>
+            </div>
           </div>
 
           <div class="flex flex-col gap-1">

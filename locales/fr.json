@@ -307,7 +307,8 @@
         "header": "Propriétés d’espacement",
         "size": "Longueur de l’espacement",
         "spacer_export_notice": "Remarque : l’espacement deviendra invisible au moment du rendu.",
-        "hatched": "Tronçon hachuré (hors Île-de-France)"
+        "hatched": "Tronçon hachuré (hors Île-de-France)",
+        "grayed": "Fond gris (hors tarification Île-de-France)"
       },
       "stop_properties": {
         "accessible": {
@@ -350,7 +351,8 @@
         },
         "subtitle": "Sous-titre",
         "terminus": "Terminus",
-        "hatched": "Tronçon hachuré (hors Île-de-France)"
+        "hatched": "Tronçon hachuré (hors Île-de-France)",
+        "grayed": "Fond gris (hors tarification Île-de-France)"
       },
       "troubleshooting": {
         "github": "ouvrir un ticket sur GitHub",

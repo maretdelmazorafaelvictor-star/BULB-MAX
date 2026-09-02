@@ -9,7 +9,8 @@ const showPropertiesDialog = ref(false)
 </script>
 
 <template>
-  <div v-bind="$attrs" class="spacer-wrapper">
+  <div v-bind="$attrs" class="spacer-wrapper" :class="{ grayed: spacer.$spacer.grayed }">
+    <div v-if="spacer.$spacer.grayed" class="gray-overlay" />
     <div v-if="spacer.$spacer.hatched" class="hatch-overlay" />
     <div
       class="dynamic-part branch-element-handle spacer"
@@ -38,16 +39,30 @@ const showPropertiesDialog = ref(false)
   min-height: 5em;
   position: relative;
 
+  .gray-overlay {
+    position: absolute;
+    inset: -1em 0;
+    background: var(--hors-idf-gray);
+    pointer-events: none;
+    z-index: -1;
+  }
+
   .hatch-overlay {
+    --hatch-gap: white;
+
     position: absolute;
     top: 50%;
     left: 0;
     right: 0;
     height: calc(v-bind('lineContext.lineThickness.value') * 1em + 4px);
     transform: translateY(-50%);
-    background: repeating-linear-gradient(90deg, transparent 0 .21875em, white .21875em .4375em);
+    background: repeating-linear-gradient(90deg, transparent 0 .21875em, var(--hatch-gap) .21875em .4375em);
     pointer-events: none;
     z-index: 1;
+  }
+
+  &.grayed .hatch-overlay {
+    --hatch-gap: var(--hors-idf-gray);
   }
 }
 

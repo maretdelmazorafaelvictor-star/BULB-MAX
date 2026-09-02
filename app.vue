@@ -44,6 +44,7 @@ useHead({ bodyAttrs: { class: brandClass } })
   --sncf-anthracite: #26272B;
   --sncf-anthracite-secondary: rgba(38, 39, 43, 0.125);
   --sncf-red: #E30513;
+  --hors-idf-gray: #D9D9D9;
   --place-brown: #80551A;
   --gray: #414241;
   --background-color: #eaeaea;

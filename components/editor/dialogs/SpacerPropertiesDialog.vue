@@ -27,6 +27,10 @@ const spacer = defineModel<Spacer>({ required: true })
         <Checkbox v-model="spacer.$spacer.hatched" binary :input-id="`${spacer.id}_hatched`" />
         <label :for="`${spacer.id}_hatched`" class="ml-2">{{ $t('ui.dialogs.spacer_properties.hatched') }}</label>
       </div>
+      <div class="flex items-center gap-1">
+        <Checkbox v-model="spacer.$spacer.grayed" binary :input-id="`${spacer.id}_grayed`" />
+        <label :for="`${spacer.id}_grayed`" class="ml-2">{{ $t('ui.dialogs.spacer_properties.grayed') }}</label>
+      </div>
       <div class="opacity-50">
         {{ $t('ui.dialogs.spacer_properties.spacer_export_notice') }}
       </div>
