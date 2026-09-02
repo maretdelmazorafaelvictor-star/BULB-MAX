@@ -64,12 +64,9 @@ function elementPosition(index: number): BranchElementPosition {
  * branche, sur l'intervalle couvert par les éléments cochés, étendu à mi-chemin des
  * voisins (l'espace entre éléments n'appartient à aucun élément avec space-evenly).
  */
-interface OutsideZone { left: number, width: number, gray: boolean }
+interface OutsideZone { left: number, width: number, gray: boolean, top?: string, bottom?: string }
 const hatchZones = ref<OutsideZone[]>([])
 const grayZones = ref<OutsideZone[]>([])
-/* Débords verticaux de l'aplat gris, mesurés jusqu'aux bords haut et bas du plan */
-const grayTop = ref<string>('-4em')
-const grayBottom = ref<string>('-2em')
 
 function zoneFlag(e: BranchElement, key: 'hatched' | 'grayed'): boolean {
   return ('$stop' in e ? e.$stop[key] : e.$spacer[key]) ?? false
@@ -110,14 +107,36 @@ function measureZones() {
     return out
   }
   hatchZones.value = build('hatched')
-  grayZones.value = build('grayed')
+  const gz = build('grayed')
 
+  /*
+   * Étendue verticale de chaque aplat : jusqu'aux bords du plan, mais à mi-chemin
+   * d'une autre branche qui croise la même plage horizontale (rendu « en escalier »
+   * des plans multi-branches ; deux branches hors-IDF contiguës se rejoignent).
+   */
   const map = wrapper.closest('.content.bg-white') as HTMLElement | null
   if (map) {
     const mapRect = map.getBoundingClientRect()
-    grayTop.value = `${mapRect.top - base.top}px`
-    grayBottom.value = `${base.bottom - mapRect.bottom}px`
+    const others = [...map.querySelectorAll('.branch-wrapper')]
+      .filter(node => node !== wrapper && !node.contains(wrapper) && !wrapper.contains(node))
+      .map(node => node.getBoundingClientRect())
+    const centerY = (base.top + base.bottom) / 2
+    for (const zone of gz) {
+      const x1 = base.left + zone.left
+      const x2 = x1 + zone.width
+      let topLimit = mapRect.top
+      let bottomLimit = mapRect.bottom
+      for (const r of others) {
+        if (r.right <= x1 || r.left >= x2) continue
+        const otherCenter = (r.top + r.bottom) / 2
+        if (otherCenter < centerY) topLimit = Math.max(topLimit, (r.bottom + base.top) / 2)
+        else if (otherCenter > centerY) bottomLimit = Math.min(bottomLimit, (base.bottom + r.top) / 2)
+      }
+      zone.top = `${topLimit - base.top}px`
+      zone.bottom = `${base.bottom - bottomLimit}px`
+    }
   }
+  grayZones.value = gz
 }
 
 onMounted(() => nextTick(measureZones))
@@ -185,7 +204,7 @@ function moveOut(event: DraggableEvent<BranchElement>) {
     </div>
     <div
       v-for="(zone, i) in grayZones" :key="`gray-${i}`" class="zone-gray"
-      :style="{ left: `${zone.left}px`, width: `${zone.width}px`, top: grayTop, bottom: grayBottom }"
+      :style="{ left: `${zone.left}px`, width: `${zone.width}px`, top: zone.top, bottom: zone.bottom }"
     >
       <span class="zone-gray-label label-top">HORS TARIFICATION ÎLE-DE-FRANCE</span>
       <span class="zone-gray-label label-bottom">HORS TARIFICATION ÎLE-DE-FRANCE</span>
