@@ -57,7 +57,10 @@ export default function useLoadProject() {
     line.value.dotsColorPolicy = project.line.dotsColorPolicy
     line.value.fullyAccessible = project.line.fullyAccessible
     line.value.mapSize = project.line.mapSize
-    line.value.brandStyle = ['TUS', 'TCL'].includes(project.line.brandStyle as string) ? 'RATP' : project.line.brandStyle ?? 'RATP'
+    line.value.brandStyle = ['TUS', 'TCL'].includes(project.line.brandStyle as string)
+      ? 'RATP'
+      : (project.line.brandStyle as string) === 'SNCF_D' ? 'SNCF' : project.line.brandStyle ?? 'RATP'
+    line.value.terminusNamesLineColor = project.line.terminusNamesLineColor ?? false
     line.value.operator = project.line.operator ?? 'RATP'
     line.value.topology = project.line.topology
 

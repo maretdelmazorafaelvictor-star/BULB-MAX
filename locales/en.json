@@ -45,8 +45,7 @@
     "brand_style": {
       "idfm": "Île-de-France Mobilités",
       "ratp": "RATP (Paris)",
-      "sncf": "SNCF Voyageurs (T12)",
-      "sncf_d": "SNCF Voyageurs (RER D)"
+      "sncf": "SNCF Voyageurs"
     },
     "colors": {
       "custom": "Custom"
@@ -436,7 +435,8 @@
       "operator": "Operator",
       "size": "Frame size",
       "title": "Properties",
-      "use_preset": "Use a preset"
+      "use_preset": "Use a preset",
+      "terminus_line_color": "Termini in line color"
     },
     "toasts": {
       "adjacent_branches": {

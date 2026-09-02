@@ -290,7 +290,7 @@ declare global {
   type LineIndex = BuiltinLineIndex | CustomLineIndex
 
   type LineStyle = 'PLAIN' | 'STRIPED'
-  type BrandStyle = 'RATP' | 'IDFM' | 'SNCF' | 'SNCF_D'
+  type BrandStyle = 'RATP' | 'IDFM' | 'SNCF'
   type Operator = 'NONE' | 'RATP' | 'SNCF' | 'RATP_SNCF' | 'KEOLIS' | 'TRANSDEV'
   type DotsColorPolicy = 'INHERIT' | 'WHITE'
 
@@ -304,6 +304,7 @@ declare global {
     mapSize: number | null
     fullyAccessible: boolean
     frameTerminusNames: boolean
+    terminusNamesLineColor: boolean
     brandStyle: BrandStyle
     operator: Operator
     topology: LineSection[]
@@ -315,6 +316,7 @@ declare global {
     lineStyle: Ref<LineStyle>
     dotsColorPolicy: Ref<DotsColorPolicy>
     frameTerminusNames: Ref<boolean>
+    terminusNamesLineColor: Ref<boolean>
     brandStyle: Ref<BrandStyle>
   }
 

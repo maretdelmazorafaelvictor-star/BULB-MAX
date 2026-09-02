@@ -45,8 +45,7 @@
     "brand_style": {
       "idfm": "Île-de-France Mobilités",
       "ratp": "RATP（パリ）",
-      "sncf": "SNCF Voyageurs (T12)",
-      "sncf_d": "SNCF Voyageurs (RER D)"
+      "sncf": "SNCF Voyageurs"
     },
     "colors": {
       "custom": "特注の色"
@@ -436,7 +435,8 @@
       "operator": "運行事業者",
       "size": "路線図の額のサイズ",
       "title": "プロパティ",
-      "use_preset": "プリセット値の使用"
+      "use_preset": "プリセット値の使用",
+      "terminus_line_color": "終着駅を路線色で表示"
     },
     "toasts": {
       "adjacent_branches": {

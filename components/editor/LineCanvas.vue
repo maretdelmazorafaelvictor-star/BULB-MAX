@@ -17,7 +17,7 @@ const { line, outdated, presetBased } = storeToRefs(useProject())
 const brand = computed(() => findBrandStyleByValue(line.value.brandStyle) ?? findBrandStyleByValue('RATP')!)
 
 const idfm = computed(() => brand.value.value === 'IDFM')
-const sncf = computed(() => brand.value.value === 'SNCF' || brand.value.value === 'SNCF_D')
+const sncf = computed(() => brand.value.value === 'SNCF')
 const operator = computed(() => findOperatorByValue(line.value.operator))
 
 const now = useNow()

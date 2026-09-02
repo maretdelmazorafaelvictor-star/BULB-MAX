@@ -16,7 +16,7 @@ const {
 
 const lineContext = inject<LineContext>(LineContextKey)!
 const idfm = computed(() => lineContext.brandStyle.value === 'IDFM')
-const sncf = computed(() => lineContext.brandStyle.value === 'SNCF' || lineContext.brandStyle.value === 'SNCF_D')
+const sncf = computed(() => lineContext.brandStyle.value === 'SNCF')
 // En IDFM et SNCF le point central du terminus reste couleur de ligne, même en
 // politique de points blancs ; dotColor garde son sens d'origine ailleurs.
 const dotColor = computed(() => {

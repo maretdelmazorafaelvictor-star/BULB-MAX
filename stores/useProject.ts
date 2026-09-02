@@ -18,6 +18,7 @@ export const useProject = defineStore('project', () => {
     dotsColorPolicy: 'INHERIT',
     fullyAccessible: false,
     frameTerminusNames: true,
+    terminusNamesLineColor: false,
     brandStyle: 'RATP',
     operator: 'RATP',
     mapSize: 15,
@@ -41,6 +42,7 @@ export const useProject = defineStore('project', () => {
     line.dotsColorPolicy = 'INHERIT'
     line.fullyAccessible = false
     line.frameTerminusNames = true
+    line.terminusNamesLineColor = false
     line.brandStyle = 'RATP'
     line.operator = 'RATP'
     line.mapSize = 15
@@ -73,6 +75,13 @@ export const useProject = defineStore('project', () => {
         }
         if (object.line && (object.line.brandStyle === undefined || object.line.brandStyle === 'TUS' || object.line.brandStyle === 'TCL')) {
           object.line.brandStyle = 'RATP'
+        }
+        if (object.line && object.line.brandStyle === 'SNCF_D') {
+          object.line.brandStyle = 'SNCF'
+          object.line.frameTerminusNames = false
+        }
+        if (object.line && object.line.terminusNamesLineColor === undefined) {
+          object.line.terminusNamesLineColor = false
         }
         if (object.line && object.line.operator === undefined) {
           object.line.operator = 'RATP'

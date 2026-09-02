@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, inject, watch } from 'vue'
-import { StopContextKey } from '~/utils/symbols'
+import { LineContextKey, StopContextKey } from '~/utils/symbols'
 import { goesBelowLine } from '~/utils/text'
 
 const {
@@ -12,6 +12,7 @@ const {
   accessible = 'undefined',
   accessibleDirection = null,
   reverse = false,
+  terminus = false,
 } = defineProps<{
   value: string
   preventSubtitleOverlapping: boolean
@@ -22,9 +23,17 @@ const {
   interestPoint?: boolean
   interestPointColor?: string
   reverse?: boolean
+  terminus?: boolean
 }>()
 
 const stopContext = inject<StopContext>(StopContextKey)!
+const lineContext = inject<LineContext>(LineContextKey)!
+
+// SNCF : terminus non encadré en gras, noir ou couleur de ligne selon l'option
+const sncfTerminus = computed(() => terminus && lineContext.brandStyle.value === 'SNCF')
+const terminusStyle = computed(() => sncfTerminus.value
+  ? { fontWeight: 'bold', color: lineContext.terminusNamesLineColor.value ? lineContext.color.value : 'black' }
+  : undefined)
 
 const valueParts = computed(() => value.split('\n').filter(part => part.trim() !== ''))
 const shift = computed(() => {
@@ -49,7 +58,7 @@ watch([shift, () => interestPoint, () => subtitle], ([_shift, _interestPoint, _s
   <div class="regular-label" :class="{ reverse, 'opacity-50 export-hide': valueParts.length === 0 }">
     <div class="flex gap-1em">
       <TiltedText v-for="(part, index) in valueParts" :key="`${part}-${index}`" :reverse="reverse">
-        <div class="title-holder">
+        <div class="title-holder" :style="terminusStyle">
           <TitleLabel :value="part" />
           <Wheelchair
             v-if="index === valueParts.length - 1 && accessible !== 'undefined'"

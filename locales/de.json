@@ -45,8 +45,7 @@
     "brand_style": {
       "idfm": "Île-de-France Mobilités",
       "ratp": "RATP (Paris)",
-      "sncf": "SNCF Voyageurs (T12)",
-      "sncf_d": "SNCF Voyageurs (RER D)"
+      "sncf": "SNCF Voyageurs"
     },
     "colors": {
       "custom": "benutzerdefiniert"
@@ -436,7 +435,8 @@
       "operator": "Betreiber",
       "size": "Höhe des Linienbandes",
       "title": "Optionen",
-      "use_preset": "Vorlage verwenden"
+      "use_preset": "Vorlage verwenden",
+      "terminus_line_color": "Endstationen in Linienfarbe"
     },
     "toasts": {
       "adjacent_branches": {

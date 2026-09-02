@@ -72,6 +72,11 @@ function updateColor(newColor: string | null) {
           <Checkbox v-model="line.frameTerminusNames" input-id="property-frame-terminus-names" binary />
           <label for="property-frame-terminus-names">{{ $t('ui.properties.frame_terminus_names') }}</label>
         </div>
+
+        <div v-if="line.brandStyle === 'SNCF' && !line.frameTerminusNames" class="flex items-center gap-2">
+          <Checkbox v-model="line.terminusNamesLineColor" input-id="property-terminus-line-color" binary />
+          <label for="property-terminus-line-color">{{ $t('ui.properties.terminus_line_color') }}</label>
+        </div>
       </div>
 
       <div class="flex flex-col gap-1 flex-auto">

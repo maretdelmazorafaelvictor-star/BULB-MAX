@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, inject } from 'vue'
-import { LineContextKey } from '~/utils/symbols'
+import { computed } from 'vue'
 
 const {
   value,
@@ -10,16 +9,13 @@ const {
   placeName?: string | null
 }>()
 
-const lineContext = inject<LineContext>(LineContextKey)!
-// Variante RER D : terminus en gras noir, sans cartouche
-const rerD = computed(() => lineContext.brandStyle.value === 'SNCF_D')
 
 const valueParts = computed(() => value.split('\n').filter(part => part.trim() !== ''))
 const placeNameParts = computed(() => placeName?.split('\n').filter(part => part.trim() !== '') ?? [])
 </script>
 
 <template>
-  <div class="frame" :class="{ 'rer-d': rerD }">
+  <div class="frame">
     <div v-if="placeNameParts.length > 0" class="place-name-container">
       <Typography v-for="(part, index) in placeNameParts" :key="`${part}-${index}`" class="place-name">
         {{ part }}
@@ -41,15 +37,6 @@ const placeNameParts = computed(() => placeName?.split('\n').filter(part => part
   color: white;
   font-weight: bold;
   width: fit-content;
-
-  &.rer-d {
-    background-color: transparent;
-    color: black;
-
-    .place-name-container {
-      border-bottom-color: black;
-    }
-  }
 
   .place-name {
     font-size: .5em;

@@ -23,6 +23,7 @@ provide<LineContext>(LineContextKey, {
   lineStyle: computed(() => line.value.lineStyle ?? 'PLAIN'),
   dotsColorPolicy: computed(() => line.value.dotsColorPolicy ?? 'INHERIT'),
   frameTerminusNames: computed(() => line.value.frameTerminusNames),
+  terminusNamesLineColor: computed(() => line.value.terminusNamesLineColor),
 })
 
 definePageMeta({
