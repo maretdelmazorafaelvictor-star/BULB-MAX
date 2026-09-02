@@ -36,7 +36,7 @@ const mapArea = ref<HTMLElement | null>(null)
       <div v-if="idfm" class="band-idfm flex justify-center items-center bg-[var(--brand-color)] py-.625em px-.75em">
         <img :src="idfmLogo" alt="Île-de-France Mobilités" class="authority-logo">
       </div>
-      <div v-else-if="!sncf" class="w-full h-8 bg-[var(--brand-color)]" />
+      <div v-else class="w-full h-8" :class="sncf ? '' : 'bg-[var(--brand-color)]'" />
       <div v-if="idfm || sncf" class="flex-grow" />
       <div class="w-full flex flex-row gap-3 justify-center items-center text-4em">
         <Mode :mode="line.mode" />
