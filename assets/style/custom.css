@@ -132,6 +132,6 @@ body {
 
 .brand-sncf {
   --brand-color: var(--sncf-anthracite);
-  --brand-color-secondary: var(--sncf-red);
+  --brand-color-secondary: var(--sncf-anthracite-secondary);
   --brand-font: "Avenir", sans-serif;
 }

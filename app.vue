@@ -42,6 +42,7 @@ useHead({ bodyAttrs: { class: brandClass } })
   --idfm-anthracite-secondary: rgba(37, 48, 59, 0.125);
   --idfm-blue: #64B5F6;
   --sncf-anthracite: #26272B;
+  --sncf-anthracite-secondary: rgba(38, 39, 43, 0.125);
   --sncf-red: #E30513;
   --place-brown: #80551A;
   --gray: #414241;
