@@ -172,7 +172,7 @@ useMutationObserver(targetRef, schedule, {
       v-for="(b, i) in topBand.boundaries"
       :key="`boundary-${i}`"
       class="boundary"
-      :style="{ left: `${b.x}px`, height: `${b.to}px` }"
+      :style="{ left: `${b.x}px`, height: `calc(${b.to}px - 1.25em)` }"
     />
   </div>
   <div v-if="bottomBand.spans.length > 0" class="commune-band commune-band-bottom" :style="{ width: `${width}px` }">
@@ -197,7 +197,7 @@ useMutationObserver(targetRef, schedule, {
 <style scoped lang="scss">
 .commune-band {
   position: absolute;
-  top: 0;
+  top: .5em;
   height: 0;
   left: 0;
   /* Au-dessus des branches (z 2) pour rester visible sur l'aplat hors Île-de-France */
@@ -218,7 +218,7 @@ useMutationObserver(targetRef, schedule, {
 
 .label {
   position: absolute;
-  top: 0;
+  top: .25em;
   text-align: center;
   font-size: .4em;
   font-weight: 700;
@@ -239,6 +239,7 @@ useMutationObserver(targetRef, schedule, {
 
 .commune-band-bottom {
   top: auto;
+  margin-top: 0;
   bottom: 0;
   height: 1.5em;
 }
