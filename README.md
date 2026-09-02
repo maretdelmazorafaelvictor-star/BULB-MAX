@@ -6,7 +6,7 @@ BULB-MAX ajoute un **sélecteur de style graphique** et de nouveaux modes de tra
 
 - **RATP** (style d'origine)
 - **Île-de-France Mobilités** : plan de ligne embarqué, police IDF Voyageur, anthracite Mobilités, logo IDFM et mention « Opéré par »
-- **TCL** (Lyon) et **SNCF Voyageurs** : prévus, pas encore finalisés
+- **SNCF Voyageurs** : prévu, pas encore finalisé
 
 Application en ligne : <https://maretdelmazorafaelvictor-star.github.io/BULB-MAX/>
 
