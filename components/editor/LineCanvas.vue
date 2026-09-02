@@ -132,13 +132,13 @@ const mapArea = ref<HTMLElement | null>(null)
 }
 
 .transilien-logo {
-  width: 3.5em;
+  width: 6em;
   height: auto;
   object-fit: contain;
 }
 
 .brand-pour {
-  font-size: .35em;
+  font-size: .5em;
   font-weight: 500;
   color: var(--gray);
   align-self: flex-end;
@@ -146,7 +146,7 @@ const mapArea = ref<HTMLElement | null>(null)
 }
 
 .idfm-inline-logo {
-  width: 2.25em;
+  width: 3.75em;
   height: auto;
   object-fit: contain;
 }
