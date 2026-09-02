@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DraggableEvent, SortableEvent } from 'vue-draggable-plus'
-import { useCssVar, useElementSize } from '@vueuse/core'
-import { computed, inject, provide, reactive, ref } from 'vue'
+import { useCssVar, useElementSize, useResizeObserver } from '@vueuse/core'
+import { computed, inject, nextTick, onMounted, provide, reactive, ref, watch } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 import useElementGrabbing from '~/composables/useElementGrabbing'
 import { BranchContextKey, LineContextKey } from '~/utils/symbols'
@@ -58,6 +58,62 @@ function elementPosition(index: number): BranchElementPosition {
   if (index === elements.value.length - 1) return 'END'
   return null
 }
+
+/*
+ * Zones hors Île-de-France : la hachure et le fond gris se dessinent au niveau de la
+ * branche, sur l'intervalle couvert par les éléments cochés, étendu à mi-chemin des
+ * voisins (l'espace entre éléments n'appartient à aucun élément avec space-evenly).
+ */
+interface OutsideZone { left: number, width: number, gray: boolean }
+const hatchZones = ref<OutsideZone[]>([])
+const grayZones = ref<OutsideZone[]>([])
+
+function zoneFlag(e: BranchElement, key: 'hatched' | 'grayed'): boolean {
+  return ('$stop' in e ? e.$stop[key] : e.$spacer[key]) ?? false
+}
+
+function measureZones() {
+  const wrapper = el.value as HTMLElement | undefined
+  const container = wrapper?.querySelector('.branch-elements') as HTMLElement | null
+  if (!wrapper || !container) return
+  const base = wrapper.getBoundingClientRect()
+  const rects = elements.value.map((e) => {
+    const node = container.querySelector(`[data-id="${e.id}"]`) as HTMLElement | null
+    return node ? node.getBoundingClientRect() : null
+  })
+  function build(key: 'hatched' | 'grayed'): OutsideZone[] {
+    const out: OutsideZone[] = []
+    let i = 0
+    while (i < elements.value.length) {
+      if (!zoneFlag(elements.value[i], key) || !rects[i]) {
+        i++
+        continue
+      }
+      let j = i
+      while (j + 1 < elements.value.length && zoneFlag(elements.value[j + 1], key) && rects[j + 1]) j++
+      const left = i === 0 || !rects[i - 1]
+        ? rects[i]!.left - base.left
+        : (rects[i - 1]!.right + rects[i]!.left) / 2 - base.left
+      const right = j === elements.value.length - 1 || !rects[j + 1]
+        ? rects[j]!.right - base.left
+        : (rects[j]!.right + rects[j + 1]!.left) / 2 - base.left
+      let gray = true
+      for (let k = i; k <= j; k++) {
+        if (!zoneFlag(elements.value[k], 'grayed')) gray = false
+      }
+      out.push({ left, width: Math.max(0, right - left), gray })
+      i = j + 1
+    }
+    return out
+  }
+  hatchZones.value = build('hatched')
+  grayZones.value = build('grayed')
+}
+
+onMounted(() => nextTick(measureZones))
+useResizeObserver(el, () => measureZones())
+watch(elements, () => nextTick(measureZones), { deep: true })
+watch(branchLength, () => nextTick(measureZones))
 
 /* Simply because the lib is muffin broken */
 function moveOut(event: DraggableEvent<BranchElement>) {
@@ -117,6 +173,15 @@ function moveOut(event: DraggableEvent<BranchElement>) {
         </g>
       </svg>
     </div>
+    <div
+      v-for="(zone, i) in grayZones" :key="`gray-${i}`" class="zone-gray"
+      :style="{ left: `${zone.left}px`, width: `${zone.width}px` }"
+    />
+    <div
+      v-for="(zone, i) in hatchZones" :key="`hatch-${i}`" class="zone-hatch"
+      :class="{ 'on-gray': zone.gray }"
+      :style="{ left: `${zone.left}px`, width: `${zone.width}px` }"
+    />
   </div>
 </template>
 
@@ -248,5 +313,28 @@ function moveOut(event: DraggableEvent<BranchElement>) {
   width: auto;
   padding: 0 calc(v-bind(lineWidth) * .5em / v-bind(lineWidth));
   z-index: -1;
+}
+
+.zone-gray {
+  position: absolute;
+  top: -1em;
+  bottom: -1em;
+  background: var(--hors-idf-gray);
+  pointer-events: none;
+  z-index: -2;
+}
+
+.zone-hatch {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: calc(v-bind(lineWidth) * 1em + 4px);
+  background: repeating-linear-gradient(90deg, transparent 0 .21875em, white .21875em .4375em);
+  pointer-events: none;
+  z-index: 5;
+
+  &.on-gray {
+    background: repeating-linear-gradient(90deg, transparent 0 .21875em, var(--hors-idf-gray) .21875em .4375em);
+  }
 }
 </style>
