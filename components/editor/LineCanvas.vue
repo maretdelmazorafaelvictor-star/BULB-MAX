@@ -4,6 +4,7 @@ import { useDateFormat } from '@vueuse/shared'
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 import idfmLogo from '~/assets/svg/brands/idfm.svg'
+import transilienSncfLogo from '~/assets/svg/brands/transilien_sncf.png'
 import useVersion from '~/composables/useVersion'
 import { findBrandStyleByValue } from '~/data/brands'
 import { findOperatorByValue } from '~/data/operators'
@@ -15,6 +16,7 @@ const { line, outdated, presetBased } = storeToRefs(useProject())
 const brand = computed(() => findBrandStyleByValue(line.value.brandStyle) ?? findBrandStyleByValue('RATP')!)
 
 const idfm = computed(() => brand.value.value === 'IDFM')
+const sncf = computed(() => brand.value.value === 'SNCF')
 const operator = computed(() => findOperatorByValue(line.value.operator))
 
 const now = useNow()
@@ -33,8 +35,8 @@ const mapArea = ref<HTMLElement | null>(null)
       <div v-if="idfm" class="band-idfm flex justify-center items-center bg-[var(--brand-color)] py-.625em px-.75em">
         <img :src="idfmLogo" alt="Île-de-France Mobilités" class="authority-logo">
       </div>
-      <div v-else class="w-full h-8 bg-[var(--brand-color)]" />
-      <div v-if="idfm" class="flex-grow" />
+      <div v-else-if="!sncf" class="w-full h-8 bg-[var(--brand-color)]" />
+      <div v-if="idfm || sncf" class="flex-grow" />
       <div class="w-full flex flex-row gap-3 justify-center items-center text-4em">
         <Mode :mode="line.mode" />
         <LineIndex :mode="line.mode" :index="line.index" />
@@ -51,6 +53,14 @@ const mapArea = ref<HTMLElement | null>(null)
       <div v-if="idfm && operator && operator.logos.length" class="flex flex-col items-start gap-.25em mb-.75em px-.75em">
         <span class="operated-by">OPÉRÉ PAR</span>
         <img v-for="logo of operator.logos" :key="logo" :src="logo" :alt="operator.value" class="operator-logo">
+      </div>
+      <!-- SNCF: Transilien SNCF Voyageurs pour Île-de-France Mobilités -->
+      <div v-if="sncf" class="flex flex-row items-center gap-.375em mb-.75em px-.75em">
+        <img :src="transilienSncfLogo" alt="Transilien SNCF Voyageurs" class="transilien-logo">
+        <span class="brand-pour">pour</span>
+        <span class="idfm-chip bg-[var(--idfm-anthracite)]">
+          <img :src="idfmLogo" alt="Île-de-France Mobilités" class="idfm-inline-logo">
+        </span>
       </div>
       <div class="text-.25em flex flex-col line-height-1.75 text-[var(--brand-color)] mb-3">
         <div class="flex flex-row gap-.5">
@@ -119,6 +129,31 @@ const mapArea = ref<HTMLElement | null>(null)
   height: 1em;
   width: auto;
   max-width: 6em;
+  object-fit: contain;
+}
+
+.transilien-logo {
+  height: 1.125em;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-pour {
+  font-size: .5em;
+  font-weight: 500;
+  color: var(--gray);
+}
+
+.idfm-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: .175em .3em;
+  border-radius: .15em;
+}
+
+.idfm-inline-logo {
+  height: .875em;
+  width: auto;
   object-fit: contain;
 }
 
