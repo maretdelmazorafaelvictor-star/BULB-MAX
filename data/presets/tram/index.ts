@@ -8,7 +8,6 @@ import TRAM_7 from './tram_7.json'
 import TRAM_9 from './tram_9.json'
 import TRAM_10 from './tram_10.json'
 
-
 export {
   TRAM_1,
   TRAM_2,

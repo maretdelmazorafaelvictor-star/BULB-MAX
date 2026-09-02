@@ -9,7 +9,6 @@ const {
   placeName?: string | null
 }>()
 
-
 const valueParts = computed(() => value.split('\n').filter(part => part.trim() !== ''))
 const placeNameParts = computed(() => placeName?.split('\n').filter(part => part.trim() !== '') ?? [])
 </script>

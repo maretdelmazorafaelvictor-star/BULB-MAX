@@ -39,8 +39,10 @@ const picto = computed(() => {
       return LINE_9
     case '10':
       return LINE_10
-  return null
-}})
+    default:
+      return null
+  }
+})
 </script>
 
 <template>

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import funicular from '~/assets/svg/modes/funicular.svg'
 </script>
-
 
 <template>
   <div class="picto">

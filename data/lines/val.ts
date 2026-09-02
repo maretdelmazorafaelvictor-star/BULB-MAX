@@ -1,6 +1,6 @@
 import {
- ORANGE,
- BLEU_CLAIR,   
+  BLEU_CLAIR,
+  ORANGE,
 } from '~/data/colors'
 
 export const VAL_LINES: IndexChoice<BuiltinLineIndex>[] = [

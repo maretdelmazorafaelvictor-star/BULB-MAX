@@ -11,9 +11,9 @@ changelog:
         - Points d’arrêt IDFM (point blanc cerclé de la couleur de la ligne, noir pour les correspondances)
         - Socle du style SNCF Voyageurs (police Avenir, anthracite SNCF et rouge SNCF en couleurs de marque)
         - Bloc de marque « Transilien SNCF Voyageurs pour Île-de-France Mobilités » en bas de la colonne de gauche en style SNCF
-        - Terminus SNCF pilotés par options : cartouche anthracite (T12/ligne J), gras noir (RER D/E) ou gras couleur de ligne (RER C)
+        - Terminus SNCF pilotés par options: cartouche anthracite (T12/ligne J), gras noir (RER D/E) ou gras couleur de ligne (RER C)
         - Option « Terminus en couleur de ligne » dans les propriétés, visible en style SNCF sans cartouche
-        - Tronçons hachurés hors Île-de-France : case à cocher par arrêt et par espaceur, hachure du tracé sur la largeur de l'élément
+        - Tronçons hachurés hors Île-de-France: case à cocher par arrêt et par espaceur, hachure du tracé sur la largeur de l'élément
       CHANGED:
         - Le pictogramme fauteuil suit la couleur du style graphique
         - Le pied de plan indique le style utilisé (BULB-Paris, BULB-IDFM…)
@@ -45,7 +45,7 @@ changelog:
     entries:
       ADDED:
         - Ajout de la ligne "Montmartre" du funiculaire
-      CHANGED :
+      CHANGED:
         - Le funiculaire est désormais classé comme un mode de transport
   - version: 1.5.2-alpha
     date: '2025-11-09T00:00:00.000Z'

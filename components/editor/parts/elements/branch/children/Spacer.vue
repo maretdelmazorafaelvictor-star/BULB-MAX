@@ -2,7 +2,6 @@
 import { computed, inject, ref } from 'vue'
 import { LineContextKey } from '~/utils/symbols'
 
-
 const spacer = defineModel<Spacer>({ required: true })
 const lineContext = inject<LineContext>(LineContextKey)!
 const length = computed(() => `calc(${spacer.value.$spacer.size} * 1em)`)

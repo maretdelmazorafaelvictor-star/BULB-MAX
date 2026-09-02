@@ -1,7 +1,6 @@
 import {
   BLEU_FONCE,
   BLEU_OUTREMER,
-  JAUNE_OCRE,
   MAGENTA,
   MARON,
   OLIVE_FONCE,
