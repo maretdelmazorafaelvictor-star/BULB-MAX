@@ -3,7 +3,8 @@ import { storeToRefs } from 'pinia'
 import { useConfirm } from 'primevue/useconfirm'
 import { useI18n } from 'vue-i18n'
 import useVersion from '~/composables/useVersion'
-import { METRO_LINES, RER_LINES, TRAM_LINES, TRANSILIEN_LINES, TRAM_TRAIN_LINES } from '~/data/lines'
+import { METRO_LINES, RER_LINES, TRAM_LINES, TRAM_TRAIN_LINES, TRANSILIEN_LINES } from '~/data/lines'
+import { defaultOperatorFor } from '~/data/operators'
 import { getPreset } from '~/data/presets'
 import { useProject } from '~/stores/useProject'
 import {
@@ -52,6 +53,7 @@ function loadFullPreset(preset: Project) {
       line.value.dotsColorPolicy = preset.line.dotsColorPolicy
       line.value.fullyAccessible = preset.line.fullyAccessible
       line.value.mapSize = preset.line.mapSize
+      line.value.operator = preset.line.operator ?? defaultOperatorFor(preset.line.mode, preset.line.index)
       line.value.topology = preset.line.topology
       visible.value = false
     },
@@ -71,6 +73,7 @@ function loadPreset(_mode: Mode, _index: LineIndex, _color?: string) {
     line.value.lineStyle = modeToLineStyle(_mode)
     line.value.dotsColorPolicy = modeToDotsColorPolicy(_mode)
     line.value.frameTerminusNames = modeToTerminusFramePolicy(_mode)
+    line.value.operator = defaultOperatorFor(_mode, _index)
     visible.value = false
   }
 }
