@@ -116,9 +116,9 @@ const mapArea = ref<HTMLElement | null>(null)
 }
 
 .operator-logo {
-  width: 5em;
-  max-height: 3em;
-  height: auto;
+  height: 1.5em;
+  width: auto;
+  max-width: 6em;
   object-fit: contain;
 }
 
