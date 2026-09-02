@@ -14,7 +14,7 @@ changelog:
         - Terminus SNCF pilotés par options: cartouche anthracite (T12/ligne J), gras noir (RER D/E) ou gras couleur de ligne (RER C)
         - Option « Terminus en couleur de ligne » dans les propriétés, visible en style SNCF sans cartouche
         - Tronçons hachurés hors Île-de-France : case à cocher par arrêt et par espaceur, hachure du tracé sur la largeur de l'élément
-        - Fond gris « hors tarification Île-de-France » par arrêt et par espaceur ; les interstices de hachure s'adaptent au fond gris
+        - Fond gris « hors tarification Île-de-France » par arrêt et par espaceur, avec libellé dans l'aplat ; les interstices de hachure s'adaptent au fond gris
       CHANGED:
         - Le pictogramme fauteuil suit la couleur du style graphique
         - Le pied de plan indique le style utilisé (BULB-Paris, BULB-IDFM…)

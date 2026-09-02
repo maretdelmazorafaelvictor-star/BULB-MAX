@@ -176,7 +176,9 @@ function moveOut(event: DraggableEvent<BranchElement>) {
     <div
       v-for="(zone, i) in grayZones" :key="`gray-${i}`" class="zone-gray"
       :style="{ left: `${zone.left}px`, width: `${zone.width}px` }"
-    />
+    >
+      <span class="zone-gray-label">HORS TARIFICATION ÎLE-DE-FRANCE</span>
+    </div>
     <div
       v-for="(zone, i) in hatchZones" :key="`hatch-${i}`" class="zone-hatch"
       :class="{ 'on-gray': zone.gray }"
@@ -317,11 +319,25 @@ function moveOut(event: DraggableEvent<BranchElement>) {
 
 .zone-gray {
   position: absolute;
-  top: -1em;
-  bottom: -1em;
+  top: -2em;
+  bottom: -2em;
   background: var(--hors-idf-gray);
   pointer-events: none;
   z-index: -2;
+  display: flex;
+  justify-content: center;
+}
+
+.zone-gray-label {
+  position: absolute;
+  top: .5em;
+  font-size: .35em;
+  font-weight: bold;
+  letter-spacing: .08em;
+  color: #3A3A3A;
+  text-align: center;
+  max-width: 90%;
+  font-family: var(--brand-font);
 }
 
 .zone-hatch {
