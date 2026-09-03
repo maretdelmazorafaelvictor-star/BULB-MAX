@@ -22,7 +22,7 @@ const emit = defineEmits<{ hasBottomBand: [value: boolean] }>()
 
 interface Span { label: string, left: number, right: number, mid: number }
 interface Dot { center: number, y: number, top: number, bottom: number, height: number, label: string }
-interface Band { spans: Span[], boundaries: { x: number, from: number, to: number }[] }
+interface Band { spans: Span[], boundaries: { x: number, from: number, to: number }[], segments?: { left: number, right: number }[] }
 
 const topBand = ref<Band>({ spans: [], boundaries: [] })
 const bottomBand = ref<Band>({ spans: [], boundaries: [] })
@@ -120,9 +120,11 @@ function measure() {
   }
   const spans: Span[] = []
   const boundaries: { x: number, from: number, to: number }[] = []
+  const segments: { left: number, right: number }[] = []
   for (const cluster of clusters) {
     const left = Math.max(0, cluster[0].center - spacing)
     const right = Math.min(base.width, cluster[cluster.length - 1].center + spacing)
+    segments.push({ left, right })
     const result = makeSpans(cluster, base.width)
     for (const [i, span] of result.spans.entries()) {
       spans.push({
@@ -136,7 +138,7 @@ function measure() {
       boundaries.push({ x, from: Math.min(...cluster.map(dot => dot.top)), to: base.height })
     }
   }
-  bottomBand.value = { spans, boundaries }
+  bottomBand.value = { spans, boundaries, segments }
   emit('hasBottomBand', spans.length > 0)
 }
 
@@ -181,7 +183,12 @@ useMutationObserver(targetRef, schedule, {
     />
   </div>
   <div v-if="bottomBand.spans.length > 0" class="commune-band commune-band-bottom" :style="{ width: `${width}px` }">
-    <div class="rule rule-bottom" />
+    <div
+      v-for="(seg, i) in bottomBand.segments"
+      :key="`rule-${i}`"
+      class="rule rule-bottom"
+      :style="{ left: `${seg.left}px`, width: `${seg.right - seg.left}px` }"
+    />
     <div
       v-for="span in bottomBand.spans"
       :key="`${span.label}-${span.left}`"
