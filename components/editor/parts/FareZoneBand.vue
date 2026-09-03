@@ -119,14 +119,14 @@ useMutationObserver(targetRef, schedule, {
       v-for="cut in separators" :key="`sep-${cut}`"
       class="fare-sep" :style="{ left: `${cut}px` }"
     />
-    <template v-for="bracket in brackets" :key="`t-${bracket.label}-${bracket.left}`">
+    <template v-for="(bracket, i) in brackets" :key="`t-${bracket.label}-${bracket.left}`">
       <span
         class="fare-label fare-label-top"
-        :style="{ left: `${bracket.left}px`, width: `${bracket.right - bracket.left}px` }"
+        :style="{ left: `${(i === 0 ? bracket.left : separators[i - 1])}px` }"
       >Zone {{ bracket.label }}</span>
       <span
         class="fare-label fare-label-bottom"
-        :style="{ left: `${bracket.left}px`, width: `${bracket.right - bracket.left}px` }"
+        :style="{ left: `${(i === 0 ? bracket.left : separators[i - 1])}px` }"
       >Zone {{ bracket.label }}</span>
     </template>
   </div>
@@ -159,34 +159,36 @@ useMutationObserver(targetRef, schedule, {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  color: var(--brand-color);
+  color: #6B7075;
 }
 
 /* Séparateur pointillé aux frontières de zones, sur toute la hauteur du plan */
 .fare-sep {
   position: absolute;
-  top: .25em;
+  top: 1.5em;
   bottom: .25em;
-  border-left: calc(2em / 16) dotted currentColor;
-  opacity: .45;
+  border-left: calc(1.5em / 16) dotted currentColor;
+  opacity: .55;
 }
 
 .fare-label {
   position: absolute;
-  text-align: center;
-  font-size: .4em;
+  padding-left: .75em;
+  font-size: .35em;
   font-weight: 600;
+  letter-spacing: .04em;
   line-height: 1;
   white-space: nowrap;
-  opacity: .8;
+  opacity: .9;
 }
 
+/* En haut, sous la rangée du bandeau des communes pour ne pas la percuter */
 .fare-label-top {
-  top: .75em;
+  top: 4.5em;
 }
 
 .fare-label-bottom {
-  bottom: .75em;
+  bottom: 1.25em;
 }
 
 .zone-label {
