@@ -79,7 +79,7 @@ const mapArea = ref<HTMLElement | null>(null)
     </div>
     <div ref="mapArea" class="relative w-max-content flex items-center" :class="{ 'pb-2em': hasBottomCommunes, 'pb-fare': hasFareZones }">
       <CommuneBand :target="mapArea" :class="{ 'communes-above-fare': hasFareZones }" @has-bottom-band="hasBottomCommunes = $event" />
-      <FareZoneBand :target="mapArea" @has-fare-band="hasFareZones = $event" />
+      <FareZoneBand :target="mapArea" :variant="sncf ? 'transilien' : 'brackets'" @has-fare-band="hasFareZones = $event" />
       <SectionsGroup
         v-model="line.topology"
         class="w-max-content min-h-15em p-1em pt-20 pr-10em"

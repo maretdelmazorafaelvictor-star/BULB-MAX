@@ -11,8 +11,10 @@ import { nextTick, ref, watch } from 'vue'
  * à branches superposées, seule la rangée visible du bas fait foi.
  */
 
-const { target = null } = defineProps<{
+const { target = null, variant = 'brackets' } = defineProps<{
   target?: HTMLElement | null
+  /** brackets : accolades sous le plan ; transilien : libellés haut/bas + séparateurs pointillés */
+  variant?: 'brackets' | 'transilien'
 }>()
 
 const emit = defineEmits<{ hasFareBand: [value: boolean] }>()
@@ -21,6 +23,7 @@ interface Bracket { label: string, left: number, right: number }
 interface Dot { center: number, y: number, label: string }
 
 const brackets = ref<Bracket[]>([])
+const separators = ref<number[]>([])
 const width = ref(0)
 
 function measure() {
@@ -70,6 +73,7 @@ function measure() {
   }
 
   const cuts = runs.slice(1).map((run, i) => (runs[i].last + run.first) / 2)
+  separators.value = cuts
   brackets.value = runs.map((run, i) => ({
     label: run.label,
     left: (i === 0 ? Math.max(0, run.first - spacing / 2) : cuts[i - 1]) + 5,
@@ -100,7 +104,7 @@ useMutationObserver(targetRef, schedule, {
 </script>
 
 <template>
-  <div v-if="brackets.length > 0" class="fare-band" :style="{ width: `${width}px` }">
+  <div v-if="variant === 'brackets' && brackets.length > 0" class="fare-band" :style="{ width: `${width}px` }">
     <div
       v-for="bracket in brackets"
       :key="`${bracket.label}-${bracket.left}`"
@@ -109,6 +113,22 @@ useMutationObserver(targetRef, schedule, {
     >
       <span class="zone-label">ZONE {{ bracket.label }}</span>
     </div>
+  </div>
+  <div v-else-if="variant === 'transilien' && brackets.length > 0" class="fare-transilien">
+    <div
+      v-for="cut in separators" :key="`sep-${cut}`"
+      class="fare-sep" :style="{ left: `${cut}px` }"
+    />
+    <template v-for="bracket in brackets" :key="`t-${bracket.label}-${bracket.left}`">
+      <span
+        class="fare-label fare-label-top"
+        :style="{ left: `${bracket.left}px`, width: `${bracket.right - bracket.left}px` }"
+      >Zone {{ bracket.label }}</span>
+      <span
+        class="fare-label fare-label-bottom"
+        :style="{ left: `${bracket.left}px`, width: `${bracket.right - bracket.left}px` }"
+      >Zone {{ bracket.label }}</span>
+    </template>
   </div>
 </template>
 
@@ -132,6 +152,41 @@ useMutationObserver(targetRef, schedule, {
   border-left: calc(2em / 16) solid currentColor;
   border-right: calc(2em / 16) solid currentColor;
   opacity: .75;
+}
+
+.fare-transilien {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  color: var(--brand-color);
+}
+
+/* Séparateur pointillé aux frontières de zones, sur toute la hauteur du plan */
+.fare-sep {
+  position: absolute;
+  top: .25em;
+  bottom: .25em;
+  border-left: calc(2em / 16) dotted currentColor;
+  opacity: .45;
+}
+
+.fare-label {
+  position: absolute;
+  text-align: center;
+  font-size: .4em;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: .8;
+}
+
+.fare-label-top {
+  top: .75em;
+}
+
+.fare-label-bottom {
+  bottom: .75em;
 }
 
 .zone-label {
