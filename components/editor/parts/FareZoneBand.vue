@@ -72,8 +72,8 @@ function measure() {
   const cuts = runs.slice(1).map((run, i) => (runs[i].last + run.first) / 2)
   brackets.value = runs.map((run, i) => ({
     label: run.label,
-    left: (i === 0 ? Math.max(0, run.first - spacing / 2) : cuts[i - 1]) + 2,
-    right: (i === runs.length - 1 ? Math.min(base.width, run.last + spacing / 2) : cuts[i]) - 2,
+    left: (i === 0 ? Math.max(0, run.first - spacing / 2) : cuts[i - 1]) + 5,
+    right: (i === runs.length - 1 ? Math.min(base.width, run.last + spacing / 2) : cuts[i]) - 5,
   }))
   emit('hasFareBand', brackets.value.length > 0)
 }
@@ -117,7 +117,7 @@ useMutationObserver(targetRef, schedule, {
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 1.25em;
+  height: 1.4em;
   z-index: 0;
   pointer-events: none;
   color: var(--brand-color);
@@ -126,8 +126,8 @@ useMutationObserver(targetRef, schedule, {
 /* Accolade : trait horizontal avec retours vers le haut aux extrémités */
 .bracket {
   position: absolute;
-  top: .25em;
-  height: .25em;
+  top: .2em;
+  height: .3em;
   border-bottom: calc(2em / 16) solid currentColor;
   border-left: calc(2em / 16) solid currentColor;
   border-right: calc(2em / 16) solid currentColor;
@@ -136,12 +136,14 @@ useMutationObserver(targetRef, schedule, {
 
 .zone-label {
   position: absolute;
-  top: .3em;
+  top: 100%;
+  margin-top: .35em;
   left: 0;
   width: 100%;
   text-align: center;
   font-size: .4em;
   font-weight: 600;
+  letter-spacing: .08em;
   line-height: 1;
   white-space: nowrap;
 }
