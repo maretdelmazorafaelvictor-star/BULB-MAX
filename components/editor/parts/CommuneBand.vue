@@ -12,8 +12,10 @@ import { nextTick, ref, watch } from 'vue'
  * pointillés à mi-chemin entre deux arrêts de communes différentes.
  */
 
-const { target = null } = defineProps<{
+const { target = null, compactSeparators = false } = defineProps<{
   target?: HTMLElement | null
+  /** Quand les zones tarifaires portent déjà les séparateurs pleine hauteur */
+  compactSeparators?: boolean
 }>()
 
 const emit = defineEmits<{ hasBottomBand: [value: boolean] }>()
@@ -172,7 +174,7 @@ useMutationObserver(targetRef, schedule, {
       v-for="(b, i) in topBand.boundaries"
       :key="`boundary-${i}`"
       class="boundary"
-      :style="{ left: `${b.x}px`, height: `calc(${b.to}px - 1.25em)` }"
+      :style="{ left: `${b.x}px`, height: compactSeparators ? '.875em' : `calc(${b.to}px - 1.25em)` }"
     />
   </div>
   <div v-if="bottomBand.spans.length > 0" class="commune-band commune-band-bottom" :style="{ width: `${width}px` }">
@@ -189,7 +191,7 @@ useMutationObserver(targetRef, schedule, {
       v-for="(b, i) in bottomBand.boundaries"
       :key="`boundary-bottom-${i}`"
       class="boundary boundary-bottom"
-      :style="{ left: `${b.x}px`, bottom: `1.1em`, height: `${containerHeight - b.from}px` }"
+      :style="{ left: `${b.x}px`, bottom: `1.1em`, height: compactSeparators ? '.875em' : `${containerHeight - b.from}px` }"
     />
   </div>
 </template>

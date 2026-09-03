@@ -78,7 +78,7 @@ const mapArea = ref<HTMLElement | null>(null)
       </div>
     </div>
     <div ref="mapArea" class="relative w-max-content flex items-center" :class="{ 'pb-2em': hasBottomCommunes, 'pb-fare': hasFareZones }">
-      <CommuneBand :target="mapArea" :class="{ 'communes-above-fare': hasFareZones }" @has-bottom-band="hasBottomCommunes = $event" />
+      <CommuneBand :target="mapArea" :compact-separators="hasFareZones" :class="{ 'communes-above-fare': hasFareZones }" @has-bottom-band="hasBottomCommunes = $event" />
       <FareZoneBand :target="mapArea" variant="transilien" @has-fare-band="hasFareZones = $event" />
       <SectionsGroup
         v-model="line.topology"
