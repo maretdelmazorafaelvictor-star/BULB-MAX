@@ -14,7 +14,7 @@ changelog:
         - Terminus SNCF pilotés par options: cartouche anthracite (T12/ligne J), gras noir (RER D/E) ou gras couleur de ligne (RER C)
         - Option « Terminus en couleur de ligne » dans les propriétés, visible en style SNCF sans cartouche
         - Option « Hors Île-de-France » par arrêt et par espaceur : tronçon hachuré et fond gris avec libellé « Hors tarification Île-de-France »
-        - Preset Transilien K : gares hors Île-de-France marquées (Le Plessis-Belleville → Crépy-en-Valois)
+        - Presets Transilien K et N : gares hors Île-de-France marquées (Le Plessis-Belleville → Crépy-en-Valois ; Marchezais – Broué et Dreux)
       CHANGED:
         - Le pictogramme fauteuil suit la couleur du style graphique
         - Le pied de plan indique le style utilisé (BULB-Paris, BULB-IDFM…)

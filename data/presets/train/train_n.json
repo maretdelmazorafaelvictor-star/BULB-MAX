@@ -896,7 +896,9 @@
                                               "preventSubtitleOverlapping": true,
                                               "closed": false,
                                               "terminus": false,
-                                              "connections": []
+                                              "connections": [],
+                                              "hatched": true,
+                                              "grayed": true
                                             }
                                           },
                                           {
@@ -927,7 +929,9 @@
                                                     "walk": false
                                                   }
                                                 }
-                                              ]
+                                              ],
+                                              "hatched": true,
+                                              "grayed": true
                                             }
                                           }
                                         ],
