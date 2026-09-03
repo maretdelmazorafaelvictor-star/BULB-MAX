@@ -174,6 +174,7 @@ useMutationObserver(targetRef, schedule, {
       v-for="(b, i) in topBand.boundaries"
       :key="`boundary-${i}`"
       class="boundary"
+      :class="{ compact: compactSeparators }"
       :style="{ left: `${b.x}px`, height: compactSeparators ? '.875em' : `calc(${b.to}px - 1.25em)` }"
     />
   </div>
@@ -191,6 +192,7 @@ useMutationObserver(targetRef, schedule, {
       v-for="(b, i) in bottomBand.boundaries"
       :key="`boundary-bottom-${i}`"
       class="boundary boundary-bottom"
+      :class="{ compact: compactSeparators }"
       :style="{ left: `${b.x}px`, bottom: `1.1em`, height: compactSeparators ? '.875em' : `${containerHeight - b.from}px` }"
     />
   </div>
@@ -237,6 +239,12 @@ useMutationObserver(targetRef, schedule, {
   width: 0;
   border-left: calc(2em / 16) dotted currentColor;
   opacity: .6;
+
+  /* Frontière compacte (zones tarifaires actives) : trait solide court */
+  &.compact {
+    border-left-style: solid;
+    opacity: .85;
+  }
 }
 
 .commune-band-bottom {
