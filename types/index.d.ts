@@ -196,6 +196,7 @@ declare global {
       name: string
       subtitle: string | null
       commune?: string | null
+      fareZone?: number | null
       branch_color?: string | null
       placeName: string | null
       accessible: boolean | 'undefined'

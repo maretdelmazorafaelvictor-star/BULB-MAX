@@ -331,10 +331,12 @@
           "mode": "Modo de transporte",
           "title": "Prolongación de final de línea"
         },
+        "fare_zone": "Zona tarifaria",
         "header": "Propiedades de la parada",
         "interest_point": "Punto de interés",
         "interest_point_color": "Color del punto de interés",
         "inverted_elements": "Elementos invertidos",
+        "outside_idf": "Fuera de Île-de-France (rayado y fondo gris)",
         "preventOverlapping": "Impedir la colisión del nombre y el subtítulo",
         "reverse": "Invertido",
         "stop_name": "Nombre",
@@ -349,8 +351,7 @@
           "title": "Tipo de parada"
         },
         "subtitle": "Subtítulo",
-        "terminus": "Final de línea",
-        "outside_idf": "Fuera de Île-de-France (rayado y fondo gris)"
+        "terminus": "Final de línea"
       },
       "troubleshooting": {
         "github": "abrir un ticket en GitHub",

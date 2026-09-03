@@ -112,6 +112,7 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
         <div
           class="dot"
           :data-commune="stop.$stop.commune || null"
+          :data-fare-zone="stop.$stop.fareZone ?? null"
           :class="{
             'toward-start': endOfLineTowardStart,
             'has-end-of-line': showEndOfLineConnection,

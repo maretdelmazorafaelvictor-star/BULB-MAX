@@ -134,6 +134,14 @@ function openConnectionsEditor() {
           <InputText :id="`${stop.id}_commune`" v-model="stop.$stop.commune" :spellcheck="false" />
         </div>
 
+        <div class="flex flex-col gap-1">
+          <label :for="`${stop.id}_fareZone`">{{ $t('ui.dialogs.stop_properties.fare_zone') }}</label>
+          <InputNumber
+            :id="`${stop.id}_fareZone`" v-model="stop.$stop.fareZone" :min="1" :max="5"
+            show-buttons :allow-empty="true" :use-grouping="false"
+          />
+        </div>
+
         <div class="flex items-center gap-4 h-1em mt-2">
           <Checkbox v-model="stop.$stop.preventSubtitleOverlapping" binary :input-id="`${stop.id}_preventOverlapping`" />
           <label :for="`${stop.id}_preventOverlapping`">{{ $t('ui.dialogs.stop_properties.preventOverlapping') }}</label>

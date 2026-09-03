@@ -21,6 +21,7 @@ const sncf = computed(() => brand.value.value === 'SNCF')
 const operator = computed(() => findOperatorByValue(line.value.operator))
 
 const hasBottomCommunes = ref(false)
+const hasFareZones = ref(false)
 
 const now = useNow()
 const date = useDateFormat(now.value, 'DD.MM.YYYY')
@@ -76,8 +77,9 @@ const mapArea = ref<HTMLElement | null>(null)
         </div>
       </div>
     </div>
-    <div ref="mapArea" class="relative w-max-content flex items-center" :class="{ 'pb-2em': hasBottomCommunes }">
-      <CommuneBand :target="mapArea" @has-bottom-band="hasBottomCommunes = $event" />
+    <div ref="mapArea" class="relative w-max-content flex items-center" :class="{ 'pb-2em': hasBottomCommunes, 'pb-fare': hasFareZones }">
+      <CommuneBand :target="mapArea" :class="{ 'communes-above-fare': hasFareZones }" @has-bottom-band="hasBottomCommunes = $event" />
+      <FareZoneBand :target="mapArea" @has-fare-band="hasFareZones = $event" />
       <SectionsGroup
         v-model="line.topology"
         class="w-max-content min-h-15em p-1em pt-20 pr-10em"
@@ -160,6 +162,20 @@ const mapArea = ref<HTMLElement | null>(null)
   width: 3.75em;
   height: auto;
   object-fit: contain;
+}
+
+/* Réserve pour le bandeau des zones tarifaires ; s'ajoute au pb-2em des communes */
+.pb-fare {
+  padding-bottom: 1.5em;
+
+  &.pb-2em {
+    padding-bottom: 3.5em;
+  }
+}
+
+/* Quand les zones occupent le bas, le bandeau des communes du bas remonte d'autant */
+.communes-above-fare :deep(.commune-band-bottom) {
+  bottom: 1.5em;
 }
 
 .legal-notice {

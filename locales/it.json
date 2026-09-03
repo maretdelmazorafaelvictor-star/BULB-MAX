@@ -331,10 +331,12 @@
           "mode": "Modo di trasporto",
           "title": "Prolungamento di fine linea"
         },
+        "fare_zone": "Zona tariffaria",
         "header": "Proprietà fermata",
         "interest_point": "Punto d'interesse",
         "interest_point_color": "Colore del punto d'interesse",
         "inverted_elements": "Elementi invertiti",
+        "outside_idf": "Fuori dall'Île-de-France (tratteggio e sfondo grigio)",
         "preventOverlapping": "Impedisci sovrapposizioni tra nome e sottotitolo",
         "reverse": "Inverti etichetta",
         "stop_name": "Nome",
@@ -349,8 +351,7 @@
           "title": "Tipo di fermata"
         },
         "subtitle": "Sottotitolo",
-        "terminus": "Capolinea",
-        "outside_idf": "Fuori dall'Île-de-France (tratteggio e sfondo grigio)"
+        "terminus": "Capolinea"
       },
       "troubleshooting": {
         "github": "aprire un ticket su GitHub",

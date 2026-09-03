@@ -331,10 +331,12 @@
           "mode": "Verkehrsmittel",
           "title": "Anschluss am Streckenende"
         },
+        "fare_zone": "Tarifzone",
         "header": "Haltestelle: Optionen",
         "interest_point": "relevanter Ort",
         "interest_point_color": "Farbe des relevanten Ortes",
         "inverted_elements": "Invertierte Elemente",
+        "outside_idf": "Außerhalb der Île-de-France (Schraffur und grauer Hintergrund)",
         "preventOverlapping": "Vermeide Kolissionen zwischen dem Haltestellennamen und -zusatz.",
         "reverse": "Invertieren",
         "stop_name": "Name",
@@ -349,8 +351,7 @@
           "title": "Haltestellenart"
         },
         "subtitle": "Untertitel",
-        "terminus": "Endstation",
-        "outside_idf": "Außerhalb der Île-de-France (Schraffur und grauer Hintergrund)"
+        "terminus": "Endstation"
       },
       "troubleshooting": {
         "github": "erstellen Sie ein Issue auf GitHub",

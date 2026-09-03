@@ -331,10 +331,12 @@
           "mode": "Transport mode",
           "title": "End-of-line connection"
         },
+        "fare_zone": "Fare zone",
         "header": "Stop properties",
         "interest_point": "Interest point",
         "interest_point_color": "Interest point color",
         "inverted_elements": "Inverted elements",
+        "outside_idf": "Outside Île-de-France (hatching and gray background)",
         "preventOverlapping": "Prevent name and subtitle from coliding",
         "reverse": "Reversed",
         "stop_name": "Name",
@@ -349,8 +351,7 @@
           "title": "Stop type"
         },
         "subtitle": "Subtitle",
-        "terminus": "Terminus",
-        "outside_idf": "Outside Île-de-France (hatching and gray background)"
+        "terminus": "Terminus"
       },
       "troubleshooting": {
         "github": "open a GitHub issue",

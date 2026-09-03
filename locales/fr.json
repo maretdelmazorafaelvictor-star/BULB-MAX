@@ -331,10 +331,12 @@
           "mode": "Mode de transport",
           "title": "Prolongement de bout de ligne"
         },
+        "fare_zone": "Zone tarifaire",
         "header": "Propriétés d’arrêt",
         "interest_point": "Point d’intérêt",
         "interest_point_color": "Couleur du point d’intérêt",
         "inverted_elements": "Élements inversés",
+        "outside_idf": "Hors Île-de-France (hachures et fond gris)",
         "preventOverlapping": "Empêcher la colision du nom et du sous-titre",
         "reverse": "Inversé",
         "stop_name": "Nom",
@@ -349,8 +351,7 @@
           "title": "Type d’arrêt"
         },
         "subtitle": "Sous-titre",
-        "terminus": "Terminus",
-        "outside_idf": "Hors Île-de-France (hachures et fond gris)"
+        "terminus": "Terminus"
       },
       "troubleshooting": {
         "github": "ouvrir un ticket sur GitHub",

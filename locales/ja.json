@@ -331,10 +331,12 @@
           "mode": "交通機関",
           "title": "終点接続"
         },
+        "fare_zone": "運賃ゾーン",
         "header": "駅のプロパティ",
         "interest_point": "興味ポイント",
         "interest_point_color": "興味ポイントの色",
         "inverted_elements": "逆さまの要素",
+        "outside_idf": "イル・ド・フランス外（破線とグレー背景）",
         "preventOverlapping": "名前と副題が衝突しないようにする",
         "reverse": "逆さま",
         "stop_name": "名前",
@@ -349,8 +351,7 @@
           "title": "駅のタイプ"
         },
         "subtitle": "副題",
-        "terminus": "終着駅",
-        "outside_idf": "イル・ド・フランス外（破線とグレー背景）"
+        "terminus": "終着駅"
       },
       "troubleshooting": {
         "github": "GitHubの課題を開く",
