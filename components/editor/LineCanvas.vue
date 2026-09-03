@@ -30,9 +30,10 @@ const mapArea = ref<HTMLElement | null>(null)
 
 <template>
   <div
-    v-bind="$attrs" class="relative content bg-white flex gap-10 flex-row" :class="`brand-${brand.value.toLowerCase()}`"
+    v-bind="$attrs" class="relative isolate content bg-white flex gap-10 flex-row" :class="`brand-${brand.value.toLowerCase()}`"
     :style="{ minHeight: `${line.mapSize}em` }"
   >
+    <div class="hors-idf-layer" />
     <div class="flex flex-col min-w-fit gap-3" :class="idfm ? 'side-column-idfm' : 'ml-3'">
       <!-- IDFM: authority logo on an anthracite band -->
       <div v-if="idfm" class="band-idfm flex justify-center items-center bg-[var(--brand-color)] py-.625em px-.75em">
@@ -93,6 +94,14 @@ const mapArea = ref<HTMLElement | null>(null)
 </template>
 
 <style scoped lang="scss">
+/* Aplats hors Île-de-France : au-dessus du fond du plan, sous tout le contenu */
+.hors-idf-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
 .content {
   font-size: var(--font-size);
   font-family: var(--brand-font);

@@ -64,9 +64,11 @@ function elementPosition(index: number): BranchElementPosition {
  * branche, sur l'intervalle couvert par les éléments cochés, étendu à mi-chemin des
  * voisins (l'espace entre éléments n'appartient à aucun élément avec space-evenly).
  */
-interface OutsideZone { left: number, width: number, gray: boolean, top?: string, bottom?: string, atStart?: boolean, atEnd?: boolean }
+interface OutsideZone { left: number, width: number, gray: boolean, atStart?: boolean, atEnd?: boolean }
+interface GrayRect { left: number, top: number, width: number, height: number }
 const hatchZones = ref<OutsideZone[]>([])
-const grayZones = ref<OutsideZone[]>([])
+const grayZones = ref<GrayRect[]>([])
+const layerReady = ref(false)
 
 function zoneFlag(e: BranchElement, key: 'hatched' | 'grayed'): boolean {
   return ('$stop' in e ? e.$stop[key] : e.$spacer[key]) ?? false
@@ -107,7 +109,7 @@ function measureZones() {
     return out
   }
   hatchZones.value = build('hatched')
-  const gz = build('grayed')
+  const gz = build('grayed') as OutsideZone[]
 
   /*
    * Étendue verticale de chaque aplat : jusqu'aux bords du plan, mais à mi-chemin
@@ -115,6 +117,7 @@ function measureZones() {
    * des plans multi-branches ; deux branches hors-IDF contiguës se rejoignent).
    */
   const map = wrapper.closest('.content.bg-white') as HTMLElement | null
+  const grayRects: GrayRect[] = []
   if (map) {
     const mapRect = map.getBoundingClientRect()
     const others = [...map.querySelectorAll('.branch-wrapper')]
@@ -145,11 +148,11 @@ function measureZones() {
         if (otherCenter < centerY) topLimit = Math.max(topLimit, (r.bottom + base.top) / 2)
         else if (otherCenter > centerY) bottomLimit = Math.min(bottomLimit, (base.bottom + r.top) / 2)
       }
-      zone.top = `${topLimit - base.top}px`
-      zone.bottom = `${base.bottom - bottomLimit}px`
+      grayRects.push({ left: x1 - mapRect.left, top: topLimit - mapRect.top, width: zone.width, height: bottomLimit - topLimit })
     }
   }
-  grayZones.value = gz
+  grayZones.value = grayRects
+  layerReady.value = !!map?.querySelector('.hors-idf-layer')
 }
 
 onMounted(() => nextTick(measureZones))
@@ -215,12 +218,14 @@ function moveOut(event: DraggableEvent<BranchElement>) {
         </g>
       </svg>
     </div>
-    <div
-      v-for="(zone, i) in grayZones" :key="`gray-${i}`" class="zone-gray"
-      :style="{ left: `${zone.left}px`, width: `${zone.width}px`, top: zone.top, bottom: zone.bottom }"
-    >
-      <span class="zone-gray-label label-bottom">HORS TARIFICATION ÎLE-DE-FRANCE</span>
-    </div>
+    <Teleport v-if="layerReady" to=".hors-idf-layer">
+      <div
+        v-for="(zone, i) in grayZones" :key="`gray-${i}`" class="zone-gray"
+        :style="{ left: `${zone.left}px`, top: `${zone.top}px`, width: `${zone.width}px`, height: `${zone.height}px` }"
+      >
+        <span class="zone-gray-label label-bottom">HORS TARIFICATION ÎLE-DE-FRANCE</span>
+      </div>
+    </Teleport>
     <div
       v-for="(zone, i) in hatchZones" :key="`hatch-${i}`" class="zone-hatch"
       :class="{ 'on-gray': zone.gray }"
@@ -363,7 +368,6 @@ function moveOut(event: DraggableEvent<BranchElement>) {
   position: absolute;
   background: var(--hors-idf-gray);
   pointer-events: none;
-  z-index: -2;
   display: flex;
   justify-content: center;
 }
