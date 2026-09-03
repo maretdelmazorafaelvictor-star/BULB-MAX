@@ -20,7 +20,7 @@ const { target = null, compactSeparators = false } = defineProps<{
 
 const emit = defineEmits<{ hasBottomBand: [value: boolean] }>()
 
-interface Span { label: string, left: number, right: number }
+interface Span { label: string, left: number, right: number, mid: number }
 interface Dot { center: number, y: number, top: number, bottom: number, height: number, label: string }
 interface Band { spans: Span[], boundaries: { x: number, from: number, to: number }[] }
 
@@ -42,6 +42,7 @@ function makeSpans(dots: Dot[], totalWidth: number): { spans: Span[], cuts: numb
     label: run.label,
     left: i === 0 ? 0 : cuts[i - 1],
     right: i === runs.length - 1 ? totalWidth : cuts[i],
+    mid: (run.first + run.last) / 2,
   }))
   return { spans, cuts }
 }
@@ -128,6 +129,7 @@ function measure() {
         label: span.label,
         left: i === 0 ? left : span.left,
         right: i === result.spans.length - 1 ? right : span.right,
+        mid: span.mid,
       })
     }
     for (const x of result.cuts) {
@@ -166,7 +168,7 @@ useMutationObserver(targetRef, schedule, {
       v-for="span in topBand.spans"
       :key="`${span.label}-${span.left}`"
       class="label"
-      :style="{ left: `${span.left}px`, width: `${span.right - span.left}px` }"
+      :style="{ left: `${Math.min(Math.max(span.mid, span.left + 40), span.right - 40)}px` }"
     >
       {{ span.label }}
     </div>
@@ -184,7 +186,7 @@ useMutationObserver(targetRef, schedule, {
       v-for="span in bottomBand.spans"
       :key="`${span.label}-${span.left}`"
       class="label label-bottom"
-      :style="{ left: `${span.left}px`, width: `${span.right - span.left}px` }"
+      :style="{ left: `${Math.min(Math.max(span.mid, span.left + 40), span.right - 40)}px` }"
     >
       {{ span.label }}
     </div>
@@ -223,6 +225,7 @@ useMutationObserver(targetRef, schedule, {
 .label {
   position: absolute;
   top: .25em;
+  transform: translateX(-50%);
   text-align: center;
   font-size: .4em;
   font-weight: 700;
