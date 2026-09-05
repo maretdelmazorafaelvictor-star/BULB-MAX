@@ -435,7 +435,8 @@
       "save": "Sauvegarder",
       "title": "Menu principal",
       "troubleshooting": "Dépannage",
-      "lumiplan_export": "Exporter vers Lumiplan"
+      "lumiplan_export": "Exporter vers Lumiplan",
+      "lumiplan_import": "Importer depuis Lumiplan"
     },
     "nag": "<b>RAPPEL</b> : Application en phase de développement. Certaines fonctionnalités ne sont pas encore disponibles ou sont incomplètes.",
     "properties": {

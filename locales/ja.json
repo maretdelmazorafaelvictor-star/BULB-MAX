@@ -435,7 +435,8 @@
       "save": "保存",
       "title": "メインメニュー",
       "troubleshooting": "トラブルシューティング",
-      "lumiplan_export": "Lumiplanへエクスポート"
+      "lumiplan_export": "Lumiplanへエクスポート",
+      "lumiplan_import": "Lumiplanからインポート"
     },
     "nag": "<b>注意</b> : このアプリケーションは現在開発中です。一部の機能はまだ利用できないか、不完全です。",
     "properties": {

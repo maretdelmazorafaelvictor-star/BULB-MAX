@@ -435,7 +435,8 @@
       "save": "Salva",
       "title": "Menù principale",
       "troubleshooting": "Assistenza",
-      "lumiplan_export": "Esporta verso Lumiplan"
+      "lumiplan_export": "Esporta verso Lumiplan",
+      "lumiplan_import": "Importa da Lumiplan"
     },
     "nag": "<b>ATTENZIONE</b>: Applicazione è in fase di sviluppo. Alcune funzioni non sono ancora disponibili, o sono incomplete.",
     "properties": {

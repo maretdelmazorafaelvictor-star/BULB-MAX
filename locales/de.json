@@ -435,7 +435,8 @@
       "save": "Speichern",
       "title": "Hauptmenü",
       "troubleshooting": "Problembehandlung",
-      "lumiplan_export": "Nach Lumiplan exportieren"
+      "lumiplan_export": "Nach Lumiplan exportieren",
+      "lumiplan_import": "Aus Lumiplan importieren"
     },
     "nag": "<b>ACHTUNG</b>: BULB ist im Entwicklungsstadium. Einige Funktionen sind noch nicht vollständig oder gänzlich nicht verfügbar.",
     "properties": {

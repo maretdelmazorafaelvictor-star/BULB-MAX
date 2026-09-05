@@ -17,6 +17,7 @@ const showLumiplanExportDialog = ref(false)
 const showTroubleshootingDialog = ref(false)
 
 const importProject = useLoadProject()
+const importLumiplan = useImportLumiplan()
 
 const confirm = useConfirm()
 const { t } = useI18n()
@@ -89,6 +90,14 @@ function newProject() {
       icon="i-tabler-device-tv"
       text
       @click="showLumiplanExportDialog = true"
+    />
+    <Button
+      pt:root:class="important-justify-start"
+      :label="$t('ui.menu.lumiplan_import')"
+      severity="secondary"
+      icon="i-tabler-file-import"
+      text
+      @click="importLumiplan()"
     />
     <Divider />
     <Button
