@@ -2,12 +2,6 @@ import { defineStore } from 'pinia'
 import { v4 as uuidv4 } from 'uuid'
 import { computed, ref, toRaw } from 'vue'
 
-/*
- * Presse-papiers des correspondances, interne à l’application et vidé avec la session.
- * Il conserve le bloc complet d’un arrêt, et en rend une copie indépendante à chaque
- * collage : identifiants régénérés de fond en comble, sans quoi deux arrêts
- * partageraient les mêmes clés de rendu.
- */
 export const useConnectionsClipboard = defineStore('connectionsClipboard', () => {
   const connections = ref<Connection[] | null>(null)
 

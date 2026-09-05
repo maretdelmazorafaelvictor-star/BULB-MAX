@@ -10,11 +10,6 @@ import { useProject } from '~/stores/useProject'
 useVersionTracking()
 useLocale()
 
-/*
- * La charte est portée par le body, et pas seulement par le cadre du plan : les menus
- * de PrimeVue sont téléportés hors de ce cadre, et leurs pictogrammes y perdraient
- * la couleur de marque.
- */
 const { line } = storeToRefs(useProject())
 const brandClass = computed(() => {
   const brand = findBrandStyleByValue(line.value.brandStyle) ?? findBrandStyleByValue('RATP')!
@@ -35,7 +30,6 @@ useHead({ bodyAttrs: { class: brandClass } })
 
 <style lang="scss">
 :root {
-  /* Brand tokens, see assets/style/custom.css for the per-brand mapping */
   --ratp-blue: #1F3C90;
   --ratp-blue-secondary: rgba(31, 59, 143, 0.125);
   --idfm-anthracite: #25303B;
@@ -49,11 +43,6 @@ useHead({ bodyAttrs: { class: brandClass } })
   --gray: #414241;
   --background-color: #eaeaea;
 
-  /*
-   * Repli de charte. Les classes .brand-* (custom.css) surchargent ces valeurs, mais
-   * un pictogramme rendu hors de leur portée — un menu PrimeVue est téléporté dans le
-   * body — doit rester visible plutôt que de virer au transparent.
-   */
   --brand-color: var(--ratp-blue);
   --brand-color-secondary: var(--ratp-blue-secondary);
   --brand-font: "Parisine Ptf", sans-serif;

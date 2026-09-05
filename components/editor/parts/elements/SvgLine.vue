@@ -16,13 +16,6 @@ const {
   dashed?: boolean
 }>()
 
-/*
- * Tirets de longueur fixe, indépendante de l’épaisseur du tracé : un prolongement
- * garde le même rythme quel que soit le mode prolongé. Ils suivent la taille du plan,
- * puisqu’ils sont exprimés en em.
- * Les extrémités sont forcées à plat : les bouts arrondis débordent d’une demi-épaisseur
- * de chaque côté et referment les intervalles.
- */
 const dashArray = computed(() => dashed ? '.75em .3em' : undefined)
 const dashStyle = computed(() => dashed ? { strokeLinecap: 'butt' } : undefined)
 

@@ -17,7 +17,6 @@ const {
   service: Service | null
 }>()
 
-// SVG bruts (couleur de marque via currentColor) ; les autres restent des URL d'images
 const isUrl = computed(() => ['AIRPORT', 'ROISSY_BUS', 'ORLY_BUS', 'CDG_EXPRESS'].includes(service ?? ''))
 
 const icon = computed(() => {
@@ -58,7 +57,6 @@ const icon = computed(() => {
   height: 1em;
 }
 
-/* Pictos monochromes : suivent la couleur de marque */
 .inline-svg {
   color: var(--brand-color);
 

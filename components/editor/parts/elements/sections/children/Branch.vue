@@ -34,11 +34,6 @@ const elementSpacing = computed(() => `${branch.value.$branch.elementSpacing}em`
 const leftMargin = computed(() => `${branch.value.$branch.marginLeft || 0}em`)
 const rightMargin = computed(() => `${branch.value.$branch.marginRight || 0}em`)
 
-/*
- * Place réservée aux prolongements de bout de ligne, qui débordent du cadre de leur
- * arrêt. C’est du rembourrage, pas de la marge : le tracé de la branche est positionné
- * sur la boîte de rembourrage, il démarre donc après et ne ressort pas sous les tirets.
- */
 const branchOverflow = reactive({ start: 0, end: 0 })
 provide<BranchContext>(BranchContextKey, { overflow: branchOverflow })
 
@@ -49,21 +44,12 @@ const color = computed(() => lineContext?.color.value ?? '#000000')
 const lineWidth = computed(() => lineContext.lineThickness.value)
 const lineOffset = computed(() => sizeFactor.value * lineWidth.value * 16 / 2)
 
-/*
- * Position d’un élément dans la branche : le premier est en tête, le dernier en queue.
- * Sert à déduire de quel côté part le prolongement de bout de ligne d’un terminus.
- */
 function elementPosition(index: number): BranchElementPosition {
   if (index === 0) return 'START'
   if (index === elements.value.length - 1) return 'END'
   return null
 }
 
-/*
- * Zones hors Île-de-France : la hachure et le fond gris se dessinent au niveau de la
- * branche, sur l'intervalle couvert par les éléments cochés, étendu à mi-chemin des
- * voisins (l'espace entre éléments n'appartient à aucun élément avec space-evenly).
- */
 interface OutsideZone { left: number, width: number, gray: boolean, atStart?: boolean, atEnd?: boolean }
 interface GrayRect { left: number, top: number, width: number, height: number }
 const hatchZones = ref<OutsideZone[]>([])
@@ -111,11 +97,6 @@ function measureZones() {
   hatchZones.value = build('hatched')
   const gz = build('grayed') as OutsideZone[]
 
-  /*
-   * Étendue verticale de chaque aplat : jusqu'aux bords du plan, mais à mi-chemin
-   * d'une autre branche qui croise la même plage horizontale (rendu « en escalier »
-   * des plans multi-branches ; deux branches hors-IDF contiguës se rejoignent).
-   */
   const map = wrapper.closest('.content.bg-white') as HTMLElement | null
   const grayRects: GrayRect[] = []
   if (map) {
@@ -124,12 +105,10 @@ function measureZones() {
       .filter(node => node !== wrapper && !node.contains(wrapper) && !wrapper.contains(node))
       .map(node => node.getBoundingClientRect())
     const centerY = (base.top + base.bottom) / 2
-    /* Bornes horizontales : les branches de même rangée limitent l'extension aux bords */
     const sameRow = others.filter(r => r.bottom > base.top && r.top < base.bottom)
     const leftBound = Math.max(mapRect.left, ...sameRow.filter(r => r.right <= base.left + 1).map(r => r.right))
     const rightBound = Math.min(mapRect.right, ...sameRow.filter(r => r.left >= base.right - 1).map(r => r.left))
     for (const zone of gz) {
-      /* Au bout de la branche, l'aplat court jusqu'au bord du plan (rendu ligne K) */
       if (zone.atStart) {
         const extension = Math.max(0, (base.left + zone.left) - leftBound)
         zone.left -= extension
@@ -350,11 +329,6 @@ function moveOut(event: DraggableEvent<BranchElement>) {
 .line {
   position: absolute;
 
-  /*
-   * Bornée par la place réservée aux prolongements : un élément positionné se cale sur
-   * la boîte de rembourrage, le padding de la branche ne suffirait donc pas à décaler
-   * le tracé, et il ressortirait sous les tirets.
-   */
   left: v-bind(overflowStart);
   right: v-bind(overflowEnd);
   top: 50%;

@@ -8,7 +8,6 @@ const { value, backgroundColor = '#80551A' } = defineProps<{
 
 const valueParts = computed(() => value.split('\n').filter(part => part.trim() !== ''))
 
-// Calculate luminance to determine text color
 const textColor = computed(() => {
   const hex = backgroundColor.replace('#', '')
   const r = Number.parseInt(hex.substring(0, 2), 16)

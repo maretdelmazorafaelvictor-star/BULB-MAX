@@ -1,19 +1,5 @@
-/*
- * Export vers Lumiplan (SaveFile v2).
- *
- * Deux briques :
- *  - enumerateLinePaths() : parcourt la topologie BULB-MAX (branches,
- *    branches parallèles, boucles) et énumère tous les chemins linéaires
- *    possibles, pour que l'utilisateur choisisse sa branche à l'export.
- *  - buildLumiplanSaveFile() : convertit un chemin choisi en fichier
- *    SaveFile v2 chargeable dans l'éditeur Lumiplan (lignes, desserte,
- *    horaires fictifs réglables, pictos personnalisés).
- */
-
 import { BUILTIN_LINES } from '../data/lines'
 import { textContrast } from './colors'
-
-/* ///////////////////////// Contrat Lumiplan ///////////////////////// */
 
 export type LumiplanMode =
   | 'RER'
@@ -85,14 +71,11 @@ export interface LumiplanSaveFile {
 
 export const LUMIPLAN_SAVE_FILE_VERSION = '2.0.0'
 
-/* //////////////////// Énumération des chemins //////////////////// */
-
 export interface LinePath {
   label: string
   stops: Stop[]
 }
 
-/** Les noms BULB-MAX contiennent des retours à la ligne de mise en page. */
 function cleanText(value: string): string {
   return value.replace(/\s*\n\s*/g, ' ').trim()
 }
@@ -105,11 +88,6 @@ function branchStops(branch: Branch): Stop[] {
   return branch.$branch.elements.filter(isStop)
 }
 
-/**
- * Énumère les suites d'arrêts possibles d'une liste de sections.
- * Chaque ParallelBranches double les chemins (haut / bas) ; les Fork
- * sont purement visuels ; une Loop apporte son arrêt éventuel.
- */
 function enumerateSections(sections: LineSection[]): Stop[][] {
   let paths: Stop[][] = [[]]
 
@@ -118,8 +96,7 @@ function enumerateSections(sections: LineSection[]): Stop[][] {
       if ('$branch' in element) {
         const stops = branchStops(element)
         paths = paths.map(p => [...p, ...stops])
-      }
-      else if ('$parallelBranches' in element) {
+      } else if ('$parallelBranches' in element) {
         const [top, bottom] = element.$parallelBranches.sections
         const topPaths = enumerateSections([top])
         const bottomPaths = enumerateSections([bottom])
@@ -129,12 +106,10 @@ function enumerateSections(sections: LineSection[]): Stop[][] {
           for (const b of bottomPaths) next.push([...p, ...b])
         }
         paths = next
-      }
-      else if ('$loop' in element && element.$loop.stop) {
+      } else if ('$loop' in element && element.$loop.stop) {
         const stop = element.$loop.stop
         paths = paths.map(p => [...p, stop])
       }
-      // Fork : élément purement visuel, aucun arrêt.
     }
   }
 
@@ -157,8 +132,6 @@ export function enumerateLinePaths(topology: LineSection[]): LinePath[] {
     return { label: `${first} → ${last} (${stops.length} arrêts)`, stops }
   })
 }
-
-/* /////////////////////// Conversion des modes /////////////////////// */
 
 const MODE_MAP: Record<Mode, LumiplanMode | null> = {
   BOAT: 'BOAT',
@@ -185,8 +158,6 @@ export function toLumiplanMode(mode: Mode | null): LumiplanMode | null {
   return MODE_MAP[mode] ?? null
 }
 
-/* //////////////////// Conversion des indices //////////////////// */
-
 function textColorFor(color: string): string {
   return textContrast(color) ? '#ffffff' : '#231f20'
 }
@@ -203,11 +174,6 @@ function findBuiltinColor(mode: Mode, index: string): string | null {
   return found?.color ?? null
 }
 
-/**
- * Convertit un LineIndex BULB-MAX (intégré ou personnalisé) en ligne
- * Lumiplan. Les indices personnalisés emportent leur picto complet
- * (customIndex) ; les intégrés s'appuient sur le rendu standard.
- */
 export function lineIndexToLumiplanLine(
   lineIndex: LineIndex,
   customIndices: CustomLineIndexDescription[],
@@ -280,16 +246,10 @@ export function stopToLumiplanStop(
   }
 }
 
-/* //////////////////////// Construction du fichier //////////////////////// */
-
 export interface LumiplanExportOptions {
-  /** Chemin (branche) choisi par l'utilisateur. */
   path: LinePath
-  /** Heure de départ du premier arrêt. */
   departure: Date
-  /** Minutes entre deux arrêts. */
   intervalMinutes: number
-  /** Nom de la course/du fichier. */
   name: string
 }
 

@@ -13,7 +13,6 @@ function copyConnections() {
   clipboard.copy(stop.value.$stop.connections)
 }
 
-/* Le collage remplace : les correspondances de l’arrêt cible sont écrasées. */
 function pasteConnections() {
   const pasted = clipboard.paste()
   if (pasted === null) return

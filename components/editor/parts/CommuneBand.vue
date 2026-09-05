@@ -2,19 +2,8 @@
 import { useElementSize, useMutationObserver } from '@vueuse/core'
 import { nextTick, ref, watch } from 'vue'
 
-/*
- * Bandeau des communes, dessiné au-dessus du plan entier.
- *
- * Les arrêts sont posés en flex : personne ne connaît leur abscisse avant le rendu.
- * On mesure donc la position réelle de chaque pastille portant une commune, on trie
- * de gauche à droite — ce tri traverse naturellement les fourches et les branches
- * parallèles, puisqu’il ne regarde que des pixels — puis on pose une limite en
- * pointillés à mi-chemin entre deux arrêts de communes différentes.
- */
-
 const { target = null, compactSeparators = false } = defineProps<{
   target?: HTMLElement | null
-  /** Quand les zones tarifaires portent déjà les séparateurs pleine hauteur */
   compactSeparators?: boolean
 }>()
 
@@ -29,7 +18,6 @@ const bottomBand = ref<Band>({ spans: [], boundaries: [] })
 const containerHeight = ref(0)
 const width = ref(0)
 
-/* Regroupement des arrêts voisins portant le même libellé, limites à mi-chemin. */
 function makeSpans(dots: Dot[], totalWidth: number): { spans: Span[], cuts: number[] } {
   const runs: { label: string, first: number, last: number }[] = []
   for (const dot of dots) {
@@ -80,14 +68,6 @@ function measure() {
     return
   }
 
-  /*
-   * Le bandeau du haut suit, à chaque abscisse, l’arrêt le plus haut : sur un
-   * tronçon à branche unique (tronc commun), c’est lui qui parle. Le bandeau
-   * du bas n’existe que là où deux rangées coexistent, et il est découpé en
-   * segments indépendants (une ligne peut avoir des branches aux deux bouts,
-   * comme le RER B) pour ne pas tirer de libellés ni de limites à travers le
-   * tronc commun.
-   */
   const heightTol = 1.5 * Math.max(...dots.map(dot => dot.height))
   const gaps = dots.slice(1).map((dot, i) => dot.center - dots[i].center).filter(g => g > 1).sort((a, b) => a - b)
   const spacing = gaps.length ? gaps[Math.floor(gaps.length / 2)] : 1
@@ -111,7 +91,6 @@ function measure() {
     })),
   }
 
-  /* Segments du bas : coupure dès qu’un trou de plus de 3 interstations apparaît. */
   const clusters: Dot[][] = []
   for (const dot of bottomDots) {
     const current = clusters[clusters.length - 1]
@@ -213,7 +192,6 @@ useMutationObserver(targetRef, schedule, {
   top: .5em;
   height: 0;
   left: 0;
-  /* Au-dessus des branches (z 2) pour rester visible sur l'aplat hors Île-de-France */
   z-index: 5;
   pointer-events: none;
   color: var(--brand-color);
@@ -250,7 +228,6 @@ useMutationObserver(targetRef, schedule, {
   border-left: calc(2em / 16) dotted currentColor;
   opacity: .6;
 
-  /* Frontière compacte (zones tarifaires actives) : trait solide court */
   &.compact {
     border-left-style: solid;
     opacity: .85;

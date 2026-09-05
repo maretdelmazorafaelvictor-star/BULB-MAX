@@ -7,7 +7,6 @@ import { isCustom } from '~/utils/types'
 export interface OperatorChoice {
   value: Operator
   label: string
-  /** Logo asset URLs, empty when no logo is displayed */
   logos: string[]
 }
 
@@ -24,10 +23,6 @@ const SNCF_RER = ['C', 'D', 'E']
 const KEOLIS_TRAMS = ['9']
 const SNCF_TRAMS = ['4']
 
-/**
- * Exploitant réel de la ligne (Île-de-France), utilisé au chargement d'un preset.
- * L'utilisateur peut toujours le modifier dans les propriétés du plan.
- */
 export function defaultOperatorFor(mode: Mode | null, index: LineIndex | null): Operator {
   const builtin = index && !isCustom(index) ? index.$builtinLineIndex.index : null
   switch (mode) {

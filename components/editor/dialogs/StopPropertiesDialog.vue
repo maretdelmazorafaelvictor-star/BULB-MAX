@@ -12,7 +12,6 @@ const emit = defineEmits<{
 const visible = defineModel<boolean>('visible', { required: true })
 const stop = defineModel<Stop>({ required: true })
 
-// Hors Île-de-France : une seule case pour les hachures et le fond gris
 const outsideIdf = computed({
   get: () => (stop.value.$stop.hatched ?? false) || (stop.value.$stop.grayed ?? false),
   set: (val: boolean) => {
@@ -41,7 +40,6 @@ const accessibleDirectionOptions = [
   { label: 'ui.dialogs.stop_properties.accessible_direction.left', value: 'left' },
   { label: 'ui.dialogs.stop_properties.accessible_direction.right', value: 'right' },
 ]
-/* Le brun par défaut du point d’intérêt : --place-brown, défini dans app.vue. */
 const POI_DEFAUT = '#80551A'
 
 const poiColor = computed({
@@ -66,10 +64,6 @@ watch(() => stop.value.$stop.interestPoint, (newVal) => {
   }
 })
 
-/*
- * Prolongement de bout de ligne : uniquement proposé sur un terminus.
- * Décocher la case efface le prolongement, cocher le crée vide.
- */
 const endOfLineEnabled = computed({
   get: () => !!stop.value.$stop.endOfLineConnection,
   set: (enabled) => {

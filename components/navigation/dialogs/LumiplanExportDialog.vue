@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { LinePath } from '~/utils/lumiplan'
 import { storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
 import { useCustomLineIndices } from '~/stores/useCustomLineIndices'
@@ -6,7 +7,7 @@ import { useProject } from '~/stores/useProject'
 import {
   buildLumiplanSaveFile,
   enumerateLinePaths,
-  type LinePath,
+
 } from '~/utils/lumiplan'
 
 const visible = defineModel<boolean>('visible', { required: true })
@@ -20,7 +21,6 @@ const departure = ref('')
 const intervalMinutes = ref(2)
 const name = ref('lumiplan')
 
-/** Intervalle par défaut selon le mode de la ligne. */
 const DEFAULT_INTERVALS: Partial<Record<Mode, number>> = {
   METRO: 1.5,
   TRAM: 2,

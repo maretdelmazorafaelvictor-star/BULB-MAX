@@ -1,14 +1,3 @@
-/*
- * Import depuis Lumiplan : convertit un SaveFile v2 (éditeur Lumiplan)
- * en ligne BULB-MAX éditable.
- *
- * Limites structurelles assumées :
- *  - une desserte Lumiplan est linéaire : la ligne importée n'a qu'une
- *    branche (enrichissable ensuite dans l'éditeur) ;
- *  - les horaires ne sont pas repris (BULB-MAX n'en stocke pas).
- */
-
-import { BUILTIN_LINES } from '../data/lines'
 import type {
   LumiplanCustomIndex,
   LumiplanLine,
@@ -16,8 +5,7 @@ import type {
   LumiplanSaveFile,
   LumiplanStopWithTime,
 } from './lumiplan'
-
-/* /////////////////////// Modes Lumiplan -> BULB /////////////////////// */
+import { BUILTIN_LINES } from '../data/lines'
 
 const REVERSE_MODE_MAP: Record<LumiplanMode, Mode> = {
   RER: 'RER',
@@ -42,10 +30,6 @@ export function fromLumiplanMode(mode: LumiplanMode): Mode {
   return REVERSE_MODE_MAP[mode] ?? 'BUS'
 }
 
-/* //////////////////////// Indices de ligne //////////////////////// */
-
-/** Retrouve l'indice intégré correspondant à une ligne Lumiplan (mode +
- *  nom affiché, en tenant compte du préfixe T des trams). */
 function findBuiltinIndex(mode: Mode, name: string): string | null {
   const normalized = name.trim().toUpperCase()
   const candidate = (mode === 'TRAM' || mode === 'TRAM_TRAIN')
@@ -59,9 +43,6 @@ function findBuiltinIndex(mode: Mode, name: string): string | null {
   return found?.value.$builtinLineIndex.index ?? null
 }
 
-/** Id stable pour un indice personnalisé importé : on retrouve l'id
- *  d'origine des exports BULB-MAX (aller-retour sans doublon), sinon
- *  on en génère un. */
 function customIndexId(line: LumiplanLine): string {
   const match = /^bulbmax:custom:(.+)$/.exec(line.id)
   return match ? match[1] : crypto.randomUUID()
@@ -88,12 +69,6 @@ export interface ImportedIndex {
   customIndex: CustomLineIndexDescription | null
 }
 
-/**
- * Convertit une ligne Lumiplan en indice BULB-MAX :
- *  - picto personnalisé -> indice personnalisé fidèle ;
- *  - sinon indice intégré si mode + nom correspondent ;
- *  - sinon indice personnalisé rond de repli (nom + couleur conservés).
- */
 export function lumiplanLineToIndex(line: LumiplanLine): ImportedIndex {
   const mode = fromLumiplanMode(line.mode)
 
@@ -127,8 +102,6 @@ export function lumiplanLineToIndex(line: LumiplanLine): ImportedIndex {
     customIndex: fallback,
   }
 }
-
-/* /////////////////////////// Conversion /////////////////////////// */
 
 function stopFromLumiplan(
   entry: LumiplanStopWithTime,
@@ -181,11 +154,6 @@ export interface LumiplanImportResult {
   customIndices: CustomLineIndexDescription[]
 }
 
-/**
- * Convertit un SaveFile v2 Lumiplan en ligne BULB-MAX à une branche.
- * brandStyle et operator ne sont pas décidés ici : le chargeur conserve
- * ceux du projet courant.
- */
 export function lumiplanSaveFileToLine(saveFile: LumiplanSaveFile): LumiplanImportResult {
   const stops = saveFile.journey?.desserte?.stops
   if (!Array.isArray(stops) || stops.length < 2) {

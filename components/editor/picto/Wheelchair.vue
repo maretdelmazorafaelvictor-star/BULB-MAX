@@ -13,7 +13,6 @@ const {
   direction?: 'left' | 'right' | null
 }>()
 
-// SVGs use `currentColor` for the brand colour, so the picto follows --brand-color
 const svg = computed(() => {
   if (off && direction === 'left') return wheelchairOffLeft
   if (off && direction === 'right') return wheelchairOffRight

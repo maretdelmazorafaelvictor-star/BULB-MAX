@@ -45,7 +45,6 @@ const showEndOfLineConnection = computed(() =>
   && endOfLineConnection.value !== null
   && endOfLineConnection.value.lineIndex !== null,
 )
-/* Terminus en tête de branche : le prolongement part vers la gauche, sinon vers la droite. */
 const endOfLineTowardStart = computed(() => position === 'START')
 
 const endOfLine = ref()
@@ -54,11 +53,6 @@ const endOfLineOffset = computed(() =>
   showEndOfLineConnection.value && endOfLineTowardStart.value ? `${endOfLineWidth.value}px` : '0px',
 )
 
-/*
- * Le prolongement sort du cadre de l’arrêt, du côté du terminus. On signale ce
- * débordement à la branche, qui s’élargit d’autant : sans cela il empiète sur ce qui
- * borde le plan, le pictogramme d’accessibilité du cadre par exemple.
- */
 const branchContext = inject<BranchContext | undefined>(BranchContextKey, undefined)
 
 watch([showEndOfLineConnection, endOfLineTowardStart, endOfLineWidth, () => position], () => {
@@ -205,12 +199,6 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
       margin-right: 0;
     }
 
-    /*
-     * Reste à 1em même avec un prolongement : le tracé de la branche est dessiné sur
-     * toute la largeur du conteneur, l’élargir le ferait passer sous les tirets et
-     * reboucher les intervalles. Le prolongement déborde donc à droite, comme il
-     * déborde à gauche en tête de branche.
-     */
     .dot-connections {
       width: 1em;
     }
@@ -264,10 +252,6 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
   flex-direction: row;
   align-items: center;
 
-  /*
-   * En queue de branche cette rangée est contrainte à 1em : sans cela la pastille
-   * se comprime et la barre de liaison vient chevaucher la pastille colorée.
-   */
   > * {
     flex: none;
   }
@@ -278,21 +262,12 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
   }
 
   &.has-end-of-line {
-    /*
-     * La rangée couvre aussi les tirets et le picto : sans cela, les survoler
-     * éclairerait le symbole. Seules les pastilles et la barre restent sensibles,
-     * elles se réactivent dans EndOfLineConnection.vue.
-     */
     pointer-events: none;
 
     > :deep(.branch-element-handle) {
       pointer-events: auto;
     }
 
-    /*
-     * Le terminus et la pastille du prolongement forment un seul symbole : les deux
-     * pastilles et leur barre de liaison s’éclairent ensemble, pas chacune de son côté.
-     */
     &:hover {
       :deep(.dot),
       :deep(.link) {
@@ -308,10 +283,6 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
   top: v-bind(connectionsMargin);
   height: 0;
 
-  /*
-   * En tête de branche, le prolongement pousse la colonne vers la gauche.
-   * On rattrape ici pour que les correspondances restent sous la pastille.
-   */
   left: v-bind(endOfLineOffset);
 
   .reverse & {

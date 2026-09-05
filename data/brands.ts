@@ -1,7 +1,6 @@
 export interface BrandStyleChoice {
   value: BrandStyle
   label: string
-  /** Suffix shown in the map footer, e.g. "BULB-Paris" */
   footer: string
 }
 

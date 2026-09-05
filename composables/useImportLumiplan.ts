@@ -1,17 +1,11 @@
+import type { LumiplanSaveFile } from '~/utils/lumiplan'
 import { useFileDialog } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { useToast } from 'primevue/usetoast'
 import { useCustomLineIndices } from '~/stores/useCustomLineIndices'
 import { useProject } from '~/stores/useProject'
-import type { LumiplanSaveFile } from '~/utils/lumiplan'
 import { lumiplanSaveFileToLine } from '~/utils/lumiplanImport'
 
-/**
- * Ouvre un SaveFile v2 de l'éditeur Lumiplan et le charge comme ligne
- * BULB-MAX (une branche). Les pictos personnalisés du fichier sont
- * recréés dans la bibliothèque d'indices s'ils n'y sont pas déjà.
- * brandStyle et operator du projet courant sont conservés.
- */
 export default function useImportLumiplan() {
   const toast = useToast()
   const { open, onChange } = useFileDialog({

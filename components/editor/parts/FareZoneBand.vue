@@ -2,18 +2,8 @@
 import { useElementSize, useMutationObserver } from '@vueuse/core'
 import { nextTick, ref, watch } from 'vue'
 
-/*
- * Bandeau des zones tarifaires, dessiné sous le plan entier (accolades du T9).
- *
- * Même mécanique de mesure que le bandeau des communes : on lit la position
- * réelle des pastilles portant une zone, on regroupe les arrêts contigus de
- * même zone, et chaque groupe reçoit une accolade « ZONE n ». Sur les tronçons
- * à branches superposées, seule la rangée visible du bas fait foi.
- */
-
 const { target = null, variant = 'brackets' } = defineProps<{
   target?: HTMLElement | null
-  /** brackets : accolades sous le plan ; transilien : libellés haut/bas + séparateurs pointillés */
   variant?: 'brackets' | 'transilien'
 }>()
 
@@ -61,7 +51,6 @@ function measure() {
   const spacing = gaps.length ? gaps[Math.floor(gaps.length / 2)] : 1
   const windowX = 2 * spacing
 
-  /* Rangée visible du bas : personne en dessous dans le voisinage. */
   const visible = dots.filter(dot => !dots.some(other => other !== dot
     && other.y - dot.y > heightTol && Math.abs(other.center - dot.center) <= windowX))
 
@@ -143,7 +132,6 @@ useMutationObserver(targetRef, schedule, {
   color: var(--brand-color);
 }
 
-/* Accolade : trait horizontal avec retours vers le haut aux extrémités */
 .bracket {
   position: absolute;
   top: .2em;
@@ -162,7 +150,6 @@ useMutationObserver(targetRef, schedule, {
   color: #6B7075;
 }
 
-/* Séparateur pointillé aux frontières de zones, sur toute la hauteur du plan */
 .fare-sep {
   position: absolute;
   top: 1.5em;
@@ -182,7 +169,6 @@ useMutationObserver(targetRef, schedule, {
   opacity: .9;
 }
 
-/* En haut, sous la rangée du bandeau des communes pour ne pas la percuter */
 .fare-label-top {
   top: 4.5em;
 }

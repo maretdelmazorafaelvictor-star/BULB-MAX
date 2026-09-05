@@ -4,7 +4,6 @@ import { computed } from 'vue'
 const visible = defineModel<boolean>('visible', { required: true })
 const spacer = defineModel<Spacer>({ required: true })
 
-// Hors Île-de-France : une seule case pour les hachures et le fond gris
 const outsideIdf = computed({
   get: () => (spacer.value.$spacer.hatched ?? false) || (spacer.value.$spacer.grayed ?? false),
   set: (val: boolean) => {

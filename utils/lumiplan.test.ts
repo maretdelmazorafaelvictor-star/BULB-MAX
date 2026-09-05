@@ -154,7 +154,6 @@ describe('buildLumiplanSaveFile', () => {
       color: '#82c8e6',
     })
 
-    // Les lignes de correspondance figurent aussi dans la liste globale
     expect(file.lines.map(l => l.id)).toContain('bulbmax:custom:ci-1')
   })
 })

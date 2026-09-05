@@ -29,7 +29,6 @@ const {
 const stopContext = inject<StopContext>(StopContextKey)!
 const lineContext = inject<LineContext>(LineContextKey)!
 
-// SNCF : terminus non encadré en gras, noir ou couleur de ligne selon l'option
 const sncfTerminus = computed(() => terminus && lineContext.brandStyle.value === 'SNCF')
 const terminusStyle = computed(() => sncfTerminus.value
   ? { fontWeight: 'bold', color: lineContext.terminusNamesLineColor.value ? lineContext.color.value : 'black' }

@@ -36,7 +36,6 @@ const mapArea = ref<HTMLElement | null>(null)
   >
     <div class="hors-idf-layer" />
     <div class="flex flex-col min-w-fit gap-3" :class="idfm ? 'side-column-idfm' : 'ml-3'">
-      <!-- IDFM: authority logo on an anthracite band -->
       <div v-if="idfm" class="band-idfm flex justify-center items-center bg-[var(--brand-color)] py-.625em px-.75em">
         <img :src="idfmLogo" alt="Île-de-France Mobilités" class="authority-logo">
       </div>
@@ -54,12 +53,10 @@ const mapArea = ref<HTMLElement | null>(null)
         <Wheelchair />
       </div>
       <div class="flex-grow" />
-      <!-- IDFM: operator -->
       <div v-if="idfm && operator && operator.logos.length" class="flex flex-col items-start gap-.25em mb-.75em px-.75em">
         <span class="operated-by">OPÉRÉ PAR</span>
         <img v-for="logo of operator.logos" :key="logo" :src="logo" :alt="operator.value" class="operator-logo">
       </div>
-      <!-- SNCF: Transilien SNCF Voyageurs pour Île-de-France Mobilités -->
       <div v-if="sncf" class="flex flex-row items-end gap-.25em mb-.75em px-.75em">
         <img :src="transilienSncfLogo" alt="Transilien SNCF Voyageurs" class="transilien-logo">
         <span class="brand-pour">pour</span>
@@ -96,7 +93,6 @@ const mapArea = ref<HTMLElement | null>(null)
 </template>
 
 <style scoped lang="scss">
-/* Aplats hors Île-de-France : au-dessus du fond du plan, sous tout le contenu */
 .hors-idf-layer {
   position: absolute;
   inset: 0;
@@ -164,7 +160,6 @@ const mapArea = ref<HTMLElement | null>(null)
   object-fit: contain;
 }
 
-/* Réserve pour le bandeau des zones tarifaires ; s'ajoute au pb-2em des communes */
 .pb-fare {
   padding-bottom: 1.5em;
 
@@ -173,7 +168,6 @@ const mapArea = ref<HTMLElement | null>(null)
   }
 }
 
-/* Quand les zones occupent le bas, le bandeau des communes du bas remonte d'autant */
 .communes-above-fare :deep(.commune-band-bottom) {
   bottom: 1.5em;
 }

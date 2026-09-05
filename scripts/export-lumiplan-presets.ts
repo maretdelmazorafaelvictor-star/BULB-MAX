@@ -1,14 +1,3 @@
-/*
- * Génère le paquet de lignes préconfigurées pour Lumiplan.
- *
- * Parcourt tous les presets de ~/data/presets, énumère les branches de
- * chaque ligne et convertit les arrêts (correspondances comprises) au
- * format Lumiplan. Le résultat est écrit dans lumiplan-presets.json,
- * à copier dans le repo Lumiplan (src/data/bulbmaxPresets.json).
- *
- * Usage : pnpm export:lumiplan-presets [chemin/de/sortie.json]
- */
-
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import {

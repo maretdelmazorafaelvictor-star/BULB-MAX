@@ -16,8 +16,6 @@ const {
 
 const lineContext = inject<LineContext>(LineContextKey)!
 const idfm = computed(() => lineContext.brandStyle.value === 'IDFM')
-// Le point central du terminus reste couleur de ligne dans tous les styles, même en
-// politique de points blancs ; dotColor garde son sens d'origine ailleurs.
 const dotColor = computed(() => {
   if (lineContext.dotsColorPolicy.value === 'WHITE') {
     return 'white'
@@ -53,7 +51,6 @@ const dotColor = computed(() => {
     border: calc(2em / 16) solid black;
   }
 
-  /* IDFM : point blanc cerclé de la couleur de la ligne, anneau noir en correspondance */
   &.idfm:not(.terminus) {
     background-color: white;
     border: calc(2em / 16) solid v-bind(color);

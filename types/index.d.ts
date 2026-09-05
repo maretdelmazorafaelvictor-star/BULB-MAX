@@ -325,10 +325,6 @@ declare global {
     brandStyle: Ref<BrandStyle>
   }
 
-  /*
-   * Débordements demandés par les extrémités de la branche, en pixels. Un prolongement
-   * de bout de ligne sort du cadre de son arrêt ; la branche s’élargit d’autant.
-   */
   export interface BranchContext {
     overflow: {
       start: number
