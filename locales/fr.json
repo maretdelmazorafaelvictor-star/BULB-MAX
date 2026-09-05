@@ -392,6 +392,17 @@
         "stops_list": "Liste des arrêts",
         "stops_list_empty": "Aucun arrêt",
         "subtitle": "Sous-titre"
+      },
+      "lumiplan_export": {
+        "header": "Exporter vers Lumiplan",
+        "description": "Génère un fichier chargeable dans l'éditeur Lumiplan (écran embarqué de bus) : arrêts, correspondances et pictogrammes personnalisés de la branche choisie.",
+        "no_path": "Cette ligne n'a pas encore assez d'arrêts pour être exportée.",
+        "branch": "Branche à exporter",
+        "departure": "Départ du premier arrêt",
+        "interval": "Minutes entre deux arrêts",
+        "file_name": "Nom du fichier",
+        "cancel": "Annuler",
+        "accept": "Exporter"
       }
     },
     "map_editor": {
@@ -423,7 +434,8 @@
       "open": "Ouvrir",
       "save": "Sauvegarder",
       "title": "Menu principal",
-      "troubleshooting": "Dépannage"
+      "troubleshooting": "Dépannage",
+      "lumiplan_export": "Exporter vers Lumiplan"
     },
     "nag": "<b>RAPPEL</b> : Application en phase de développement. Certaines fonctionnalités ne sont pas encore disponibles ou sont incomplètes.",
     "properties": {

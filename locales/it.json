@@ -392,6 +392,17 @@
         "stops_list": "Lista fermate",
         "stops_list_empty": "Non sono presenti fermate",
         "subtitle": "Sottotitolo"
+      },
+      "lumiplan_export": {
+        "header": "Esporta verso Lumiplan",
+        "description": "Genera un file caricabile nell'editor Lumiplan (schermo di bordo del bus): fermate, coincidenze e pittogrammi personalizzati del ramo scelto.",
+        "no_path": "Questa linea non ha ancora abbastanza fermate per essere esportata.",
+        "branch": "Ramo da esportare",
+        "departure": "Partenza della prima fermata",
+        "interval": "Minuti tra due fermate",
+        "file_name": "Nome del file",
+        "cancel": "Annulla",
+        "accept": "Esporta"
       }
     },
     "map_editor": {
@@ -423,7 +434,8 @@
       "open": "Apri",
       "save": "Salva",
       "title": "Menù principale",
-      "troubleshooting": "Assistenza"
+      "troubleshooting": "Assistenza",
+      "lumiplan_export": "Esporta verso Lumiplan"
     },
     "nag": "<b>ATTENZIONE</b>: Applicazione è in fase di sviluppo. Alcune funzioni non sono ancora disponibili, o sono incomplete.",
     "properties": {

@@ -392,6 +392,17 @@
         "stops_list": "Stops list",
         "stops_list_empty": "No stop",
         "subtitle": "Subtitle"
+      },
+      "lumiplan_export": {
+        "header": "Export to Lumiplan",
+        "description": "Generates a file loadable in the Lumiplan editor (on-board bus screen): stops, connections and custom pictograms of the chosen branch.",
+        "no_path": "This line does not have enough stops to be exported yet.",
+        "branch": "Branch to export",
+        "departure": "Departure of the first stop",
+        "interval": "Minutes between two stops",
+        "file_name": "File name",
+        "cancel": "Cancel",
+        "accept": "Export"
       }
     },
     "map_editor": {
@@ -423,7 +434,8 @@
       "open": "Open",
       "save": "Save",
       "title": "Main menu",
-      "troubleshooting": "Troubleshooting"
+      "troubleshooting": "Troubleshooting",
+      "lumiplan_export": "Export to Lumiplan"
     },
     "nag": "<b>DISCLAIMER</b>: This application is under development. Some features are not yet available or are incomplete.",
     "properties": {

@@ -13,6 +13,7 @@ const { line } = storeToRefs(projectStore)
 
 const showLineIndexDirectory = ref(false)
 const showSaveDialog = ref(false)
+const showLumiplanExportDialog = ref(false)
 const showTroubleshootingDialog = ref(false)
 
 const importProject = useLoadProject()
@@ -81,6 +82,14 @@ function newProject() {
     />
     <ExportPngButton />
     <ExportPdfButton />
+    <Button
+      pt:root:class="important-justify-start"
+      :label="$t('ui.menu.lumiplan_export')"
+      severity="secondary"
+      icon="i-tabler-device-tv"
+      text
+      @click="showLumiplanExportDialog = true"
+    />
     <Divider />
     <Button
       pt:root:class="important-justify-start"
@@ -95,4 +104,5 @@ function newProject() {
   <CustomLineIndexDirectoryDialog v-model:visible="showLineIndexDirectory" />
   <TroubleshootingDialog v-model:visible="showTroubleshootingDialog" />
   <SaveDialog v-model:visible="showSaveDialog" />
+  <LumiplanExportDialog v-model:visible="showLumiplanExportDialog" />
 </template>

@@ -392,6 +392,17 @@
         "stops_list": "Lista de paradas",
         "stops_list_empty": "Ninguna parada",
         "subtitle": "Subtítulo"
+      },
+      "lumiplan_export": {
+        "header": "Exportar a Lumiplan",
+        "description": "Genera un archivo cargable en el editor Lumiplan (pantalla de a bordo del autobús): paradas, conexiones y pictogramas personalizados del ramal elegido.",
+        "no_path": "Esta línea aún no tiene suficientes paradas para ser exportada.",
+        "branch": "Ramal a exportar",
+        "departure": "Salida de la primera parada",
+        "interval": "Minutos entre dos paradas",
+        "file_name": "Nombre del archivo",
+        "cancel": "Cancelar",
+        "accept": "Exportar"
       }
     },
     "map_editor": {
@@ -423,7 +434,8 @@
       "open": "Abrir",
       "save": "Guardar",
       "title": "Menú principal",
-      "troubleshooting": "Solución de problemas"
+      "troubleshooting": "Solución de problemas",
+      "lumiplan_export": "Exportar a Lumiplan"
     },
     "nag": "<b>ATENCIÓN</b>: Aplicación en fase de desarrollo. Algunas funcionalidades no están disponibles o están incompletas.",
     "properties": {

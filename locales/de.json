@@ -392,6 +392,17 @@
         "stops_list": "Liste der Haltestellen",
         "stops_list_empty": "keine Haltestelle",
         "subtitle": "Haltestellenzusatz"
+      },
+      "lumiplan_export": {
+        "header": "Nach Lumiplan exportieren",
+        "description": "Erzeugt eine Datei für den Lumiplan-Editor (Bus-Bordbildschirm): Haltestellen, Umsteigeverbindungen und eigene Piktogramme des gewählten Astes.",
+        "no_path": "Diese Linie hat noch nicht genug Haltestellen für einen Export.",
+        "branch": "Zu exportierender Ast",
+        "departure": "Abfahrt der ersten Haltestelle",
+        "interval": "Minuten zwischen zwei Haltestellen",
+        "file_name": "Dateiname",
+        "cancel": "Abbrechen",
+        "accept": "Exportieren"
       }
     },
     "map_editor": {
@@ -423,7 +434,8 @@
       "open": "Öffnen",
       "save": "Speichern",
       "title": "Hauptmenü",
-      "troubleshooting": "Problembehandlung"
+      "troubleshooting": "Problembehandlung",
+      "lumiplan_export": "Nach Lumiplan exportieren"
     },
     "nag": "<b>ACHTUNG</b>: BULB ist im Entwicklungsstadium. Einige Funktionen sind noch nicht vollständig oder gänzlich nicht verfügbar.",
     "properties": {

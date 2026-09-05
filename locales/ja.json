@@ -392,6 +392,17 @@
         "stops_list": "駅一覧",
         "stops_list_empty": "駅がありません",
         "subtitle": "副題"
+      },
+      "lumiplan_export": {
+        "header": "Lumiplanへエクスポート",
+        "description": "Lumiplanエディタ(バス車内画面)で読み込めるファイルを生成します。選択した支線の停留所、乗換、カスタムピクトグラムが含まれます。",
+        "no_path": "この路線はまだ停留所が足りないためエクスポートできません。",
+        "branch": "エクスポートする支線",
+        "departure": "最初の停留所の出発時刻",
+        "interval": "停留所間の分数",
+        "file_name": "ファイル名",
+        "cancel": "キャンセル",
+        "accept": "エクスポート"
       }
     },
     "map_editor": {
@@ -423,7 +434,8 @@
       "open": "開く",
       "save": "保存",
       "title": "メインメニュー",
-      "troubleshooting": "トラブルシューティング"
+      "troubleshooting": "トラブルシューティング",
+      "lumiplan_export": "Lumiplanへエクスポート"
     },
     "nag": "<b>注意</b> : このアプリケーションは現在開発中です。一部の機能はまだ利用できないか、不完全です。",
     "properties": {
