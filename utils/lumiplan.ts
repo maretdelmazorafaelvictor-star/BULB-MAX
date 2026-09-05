@@ -92,6 +92,11 @@ export interface LinePath {
   stops: Stop[]
 }
 
+/** Les noms BULB-MAX contiennent des retours à la ligne de mise en page. */
+function cleanText(value: string): string {
+  return value.replace(/\s*\n\s*/g, ' ').trim()
+}
+
 function isStop(element: BranchElement): element is Stop {
   return '$stop' in element
 }
@@ -147,8 +152,8 @@ export function enumerateLinePaths(topology: LineSection[]): LinePath[] {
   }
 
   return Array.from(unique.values()).map((stops) => {
-    const first = stops[0].$stop.name
-    const last = stops[stops.length - 1].$stop.name
+    const first = cleanText(stops[0].$stop.name)
+    const last = cleanText(stops[stops.length - 1].$stop.name)
     return { label: `${first} → ${last} (${stops.length} arrêts)`, stops }
   })
 }
@@ -244,7 +249,7 @@ export function lineIndexToLumiplanLine(
   }
 }
 
-function stopConnectedLines(
+export function stopConnectedLines(
   stop: Stop,
   customIndices: CustomLineIndexDescription[],
 ): LumiplanLine[] {
@@ -259,6 +264,20 @@ function stopConnectedLines(
     }
   }
   return lines
+}
+
+export function stopToLumiplanStop(
+  stop: Stop,
+  customIndices: CustomLineIndexDescription[],
+): LumiplanStop {
+  return {
+    id: `bulbmax:stop:${stop.id}`,
+    name: cleanText(stop.$stop.name),
+    subtitle: stop.$stop.subtitle ? cleanText(stop.$stop.subtitle) : undefined,
+    isAccessible: stop.$stop.accessible === true,
+    hasGapWhenSteppingOff: false,
+    connectedLines: stopConnectedLines(stop, customIndices),
+  }
 }
 
 /* //////////////////////// Construction du fichier //////////////////////// */
@@ -298,18 +317,11 @@ export function buildLumiplanSaveFile(
       options.departure.getTime() + i * options.intervalMinutes * 60_000,
     )
     const departureTime = new Date(arrival.getTime() + 30_000)
-    const connectedLines = stopConnectedLines(stop, customIndices)
-    connectedLines.forEach(l => allLines.set(l.id, l))
+    const lumiplanStop = stopToLumiplanStop(stop, customIndices)
+    lumiplanStop.connectedLines.forEach(l => allLines.set(l.id, l))
 
     return {
-      stop: {
-        id: `bulbmax:stop:${stop.id}`,
-        name: stop.$stop.name,
-        subtitle: stop.$stop.subtitle ?? undefined,
-        isAccessible: stop.$stop.accessible === true,
-        hasGapWhenSteppingOff: false,
-        connectedLines,
-      },
+      stop: lumiplanStop,
       timeOfArrival: arrival.toISOString(),
       timeOfDeparture: departureTime.toISOString(),
       isTerminus: i === lastIndex,
@@ -318,7 +330,7 @@ export function buildLumiplanSaveFile(
     }
   })
 
-  const direction = stops[lastIndex].$stop.name
+  const direction = cleanText(stops[lastIndex].$stop.name)
 
   return {
     header: {
