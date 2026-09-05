@@ -2,11 +2,11 @@
 
 Fork de [SlamaFR/BULB](https://github.com/SlamaFR/BULB) (*Beautiful Urban Line Builder*), un éditeur de plans de ligne de transports en commun.
 
-BULB-MAX ajoute un **sélecteur de style graphique** et de nouveaux modes de transport :
+BULB-MAX ajoute un **sélecteur de style graphique**, de nouveaux modes de transport et de nouvelles fonction expliquées dans la section « Fonctionnement » sur le site Github Pages :
 
 - **RATP** (style d'origine)
 - **Île-de-France Mobilités** : plan de ligne embarqué, police IDF Voyageur, anthracite Mobilités, logo IDFM et mention « Opéré par »
-- **SNCF Voyageurs** : prévu, pas encore finalisé
+- **SNCF Voyageurs** : plan de ligne embarqué, police Achemine et logo SNCF Voyageurs
 
 Application en ligne : <https://maretdelmazorafaelvictor-star.github.io/BULB-MAX/>
 
