@@ -4,6 +4,7 @@ import { useConfirm } from 'primevue/useconfirm'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import OpenPresetButton from '~/components/navigation/menu/OpenPresetButton.vue'
+import useImportLumiplan from '~/composables/useImportLumiplan'
 import useLoadProject from '~/composables/useLoadProject'
 import { useProject } from '~/stores/useProject'
 
