@@ -98,10 +98,12 @@ declare global {
     value: IndexShape
     label: string
   }
+
   interface IndexLibrary {
     id: string
-    name: string  
+    name: string
   }
+
   interface CustomLineIndexDescription {
     id: string
     index: string
@@ -191,7 +193,8 @@ declare global {
   interface EndOfLineConnection {
     mode: Mode | null
     lineIndex: LineIndex | null
-    color: string | null
+    color: string
+    libraryId?: string | null
   }
 
   interface Stop {
@@ -306,7 +309,8 @@ declare global {
   interface Line {
     mode: Mode | null
     index: LineIndex | null
-    color: string | null
+    color: string
+    libraryId?: string | null
     lineThickness: string | null
     lineStyle: LineStyle | null
     dotsColorPolicy: DotsColorPolicy | null

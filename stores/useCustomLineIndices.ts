@@ -38,30 +38,41 @@ export const useCustomLineIndices = defineStore('customLineIndices', () => {
   }
 
   function createLibrary(name: string): IndexLibrary {
-  const newLibrary: IndexLibrary = {
-  id: uuidv4(),
-  name,
-  }
-  libraries.value.push(newLibrary)
-  return newLibrary
-  }
-    function renameLibrary(id: string, name: string): void {
-    const library = libraries.value.find(l => l.id === id)
-    if (library) { library.name = name }
-  }
-  function deleteLibrary(id: string): void {
-    for (const index of indices.value) {
-      if (index.libraryId === id) {
-        index.libraryId = undefined
-      }
+    const newLibrary: IndexLibrary = {
+      id: uuidv4(),
+      name,
     }
+    libraries.value.push(newLibrary)
+
+    return newLibrary
+  }
+
+  function renameLibrary(id: string, name: string): void {
+    const library = libraries.value.find(l => l.id === id)
+    if (library) {
+      library.name = name
+    }
+  }
+
+  function deleteLibrary(id: string): void {
+    indices.value = indices.value.filter(index => index.libraryId !== id)
 
     const library = libraries.value.find(l => l.id === id)
     if (library) {
       libraries.value.splice(libraries.value.indexOf(library), 1)
-    }                                            // ← ferme le if
-  }                                              // ← ferme la fonction
-  
+    }
+  }
+
+  function migrateUnclassified(): void {
+    const orphans = indices.value.filter(index => index.libraryId == null)
+    if (orphans.length === 0) {
+      return
+    }
+    const home = libraries.value[0] ?? createLibrary('Mes pictogrammes')
+    for (const index of orphans) {
+      index.libraryId = home.id
+    }
+  }
 
   return {
     indices,
@@ -73,6 +84,7 @@ export const useCustomLineIndices = defineStore('customLineIndices', () => {
     createLibrary,
     renameLibrary,
     deleteLibrary,
+    migrateUnclassified,
   }
 }, {
   persist: {

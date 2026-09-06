@@ -1,59 +1,82 @@
 <script setup lang="ts">
 import * as htmlToImage from 'html-to-image'
 import { storeToRefs } from 'pinia'
+import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
-import { nextTick, ref } from 'vue'
+import { nextTick, ref, watch } from 'vue'
 import { MODES } from '~/data/modes'
 import { useCustomLineIndices } from '~/stores/useCustomLineIndices'
-import { useConfirm } from 'primevue/useconfirm'
 
 const visible = defineModel<boolean>('visible')
 const customLineIndices = useCustomLineIndices()
 const { indices, libraries } = storeToRefs(customLineIndices)
-const { getModeIndices, createNewIndex, deleteById, createLibrary, deleteLibrary } = customLineIndices
+const {
+  getModeIndices,
+  createNewIndex,
+  deleteById,
+  createLibrary,
+  deleteLibrary,
+  migrateUnclassified,
+} = customLineIndices
 const toast = useToast()
 const confirm = useConfirm()
+
 const showEditor = ref(false)
 const newLibraryName = ref('')
 const selectedLibraryId = ref<string | undefined>(undefined)
 const selectedIndex = ref<CustomLineIndexDescription | null>(null)
 const exportTargets = ref<Record<string, HTMLElement | null>>({})
 
-function confirmDeleteLibrary() {
-  const library = libraries.value.find(l => l.id === selectedLibraryId.value)
-  if (!library) {
-    return
+watch(visible, (isOpen) => {
+  if (isOpen) {
+    migrateUnclassified()
+    if (selectedLibraryId.value == null) {
+      selectedLibraryId.value = libraries.value[0]?.id
+    }
   }
-  confirm.require({
-    header: 'Supprimer la bibliothèque',
-    message: `Supprimer « ${library.name} » ? Les pictogrammes qu'elle contient ne seront pas supprimés, ils redeviendront non classés.`,
-    acceptProps: { label: 'Supprimer', severity: 'danger' },
-    rejectProps: { label: 'Annuler', severity: 'secondary', text: true },
-    accept: () => {
-      deleteLibrary(library.id)
-      selectedLibraryId.value = undefined
-    },
-  })
-}
+}, { immediate: true })
+
 function filteredModeIndices(mode: Mode) {
-  const all = getModeIndices(mode)
   if (selectedLibraryId.value == null) {
-    return all
+    return []
   }
-  return all.filter(index => index.libraryId === selectedLibraryId.value)
+  return getModeIndices(mode)
+    .filter(index => index.libraryId === selectedLibraryId.value)
 }
 
 function addLibrary() {
   const name = newLibraryName.value.trim()
   if (name !== '') {
-    createLibrary(name)
+    const library = createLibrary(name)
+    selectedLibraryId.value = library.id
     newLibraryName.value = ''
   }
 }
 
+function confirmDeleteLibrary() {
+  const library = libraries.value.find(l => l.id === selectedLibraryId.value)
+  if (!library) {
+    return
+  }
+  const count = indices.value.filter(index => index.libraryId === library.id).length
+  confirm.require({
+    header: 'Supprimer la bibliothèque',
+    message: `Supprimer « ${library.name} » ? Les ${count} pictogramme(s) qu'elle contient seront définitivement supprimés.`,
+    acceptProps: { label: 'Supprimer', severity: 'danger' },
+    rejectProps: { label: 'Annuler', severity: 'secondary', text: true },
+    accept: () => {
+      deleteLibrary(library.id)
+      selectedLibraryId.value = libraries.value[0]?.id
+    },
+  })
+}
+
 function create(mode: Mode) {
+  if (selectedLibraryId.value == null) {
+    return
+  }
   selectedIndex.value = createNewIndex(mode)
-  selectedIndex.value.libraryId = selectedLibraryId.value ?? undefined
+  selectedIndex.value.libraryId = selectedLibraryId.value
   showEditor.value = true
 }
 
@@ -199,22 +222,30 @@ function exportSingleIndex(index: CustomLineIndexDescription) {
           :options="libraries"
           option-label="name"
           option-value="id"
-          placeholder="Toutes"
-          show-clear
+          placeholder="Bibliothèque"
           size="small"
         />
-                <Button
+        <Button
           icon="i-tabler-trash"
           size="small"
           severity="danger"
           text
-          :disabled="selectedLibraryId === undefined"
+          :disabled="selectedLibraryId == null"
           @click="confirmDeleteLibrary()"
         />
       </div>
     </template>
 
-    <Fieldset v-for="mode in MODES" :key="mode.label" :legend="mode.label">
+    <p v-if="libraries.length === 0">
+      Créez votre première bibliothèque pour commencer à ranger vos pictogrammes.
+    </p>
+
+    <template v-else>
+      <Fieldset
+        v-for="mode in MODES"
+        :key="mode.label"
+        :legend="mode.label"
+      >
       <template #legend>
         <div class="flex items-center gap-2">
           <Mode class="text-xl" :mode="mode.value" />
@@ -257,11 +288,13 @@ function exportSingleIndex(index: CustomLineIndexDescription) {
           text
           severity="secondary"
           icon="i-tabler-plus"
+          :disabled="selectedLibraryId == null"
           :pt="{ root: { class: 'important-p-1 important-text-2xl important-w-3.625rem important-h-3.625rem' } }"
           @click="create(mode.value)"
         />
       </div>
     </Fieldset>
+    </template>
   </Dialog>
 
   <LineIndexEditorDialog
