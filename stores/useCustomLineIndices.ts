@@ -5,6 +5,7 @@ import { modeToShape } from '~/data/modes'
 
 export const useCustomLineIndices = defineStore('customLineIndices', () => {
   const indices = ref<CustomLineIndexDescription[]>([])
+  const libraries = ref<IndexLibrary[]>([])
 
   function getModeIndices(mode: Mode | null): CustomLineIndexDescription[] {
     return indices.value.filter(index => index.mode === mode)
@@ -36,12 +37,42 @@ export const useCustomLineIndices = defineStore('customLineIndices', () => {
     return newIndex
   }
 
+  function createLibrary(name: string): IndexLibrary {
+  const newLibrary: IndexLibrary = {
+  id: uuidv4(),
+  name,
+  }
+  libraries.value.push(newLibrary)
+  return newLibrary
+  }
+    function renameLibrary(id: string, name: string): void {
+    const library = libraries.value.find(l => l.id === id)
+    if (library) { library.name = name }
+  }
+  function deleteLibrary(id: string): void {
+    for (const index of indices.value) {
+      if (index.libraryId === id) {
+        index.libraryId = undefined
+      }
+    }
+
+    const library = libraries.value.find(l => l.id === id)
+    if (library) {
+      libraries.value.splice(libraries.value.indexOf(library), 1)
+    }                                            // ← ferme le if
+  }                                              // ← ferme la fonction
+  
+
   return {
     indices,
     getModeIndices,
     findIndexById,
     deleteById,
     createNewIndex,
+    libraries,
+    createLibrary,
+    renameLibrary,
+    deleteLibrary,
   }
 }, {
   persist: {

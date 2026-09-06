@@ -5,19 +5,55 @@ import { useToast } from 'primevue/usetoast'
 import { nextTick, ref } from 'vue'
 import { MODES } from '~/data/modes'
 import { useCustomLineIndices } from '~/stores/useCustomLineIndices'
+import { useConfirm } from 'primevue/useconfirm'
 
 const visible = defineModel<boolean>('visible')
 const customLineIndices = useCustomLineIndices()
-const { indices } = storeToRefs(customLineIndices)
-const { getModeIndices, createNewIndex, deleteById } = customLineIndices
+const { indices, libraries } = storeToRefs(customLineIndices)
+const { getModeIndices, createNewIndex, deleteById, createLibrary, deleteLibrary } = customLineIndices
 const toast = useToast()
-
+const confirm = useConfirm()
 const showEditor = ref(false)
+const newLibraryName = ref('')
+const selectedLibraryId = ref<string | undefined>(undefined)
 const selectedIndex = ref<CustomLineIndexDescription | null>(null)
 const exportTargets = ref<Record<string, HTMLElement | null>>({})
 
+function confirmDeleteLibrary() {
+  const library = libraries.value.find(l => l.id === selectedLibraryId.value)
+  if (!library) {
+    return
+  }
+  confirm.require({
+    header: 'Supprimer la bibliothèque',
+    message: `Supprimer « ${library.name} » ? Les pictogrammes qu'elle contient ne seront pas supprimés, ils redeviendront non classés.`,
+    acceptProps: { label: 'Supprimer', severity: 'danger' },
+    rejectProps: { label: 'Annuler', severity: 'secondary', text: true },
+    accept: () => {
+      deleteLibrary(library.id)
+      selectedLibraryId.value = undefined
+    },
+  })
+}
+function filteredModeIndices(mode: Mode) {
+  const all = getModeIndices(mode)
+  if (selectedLibraryId.value == null) {
+    return all
+  }
+  return all.filter(index => index.libraryId === selectedLibraryId.value)
+}
+
+function addLibrary() {
+  const name = newLibraryName.value.trim()
+  if (name !== '') {
+    createLibrary(name)
+    newLibraryName.value = ''
+  }
+}
+
 function create(mode: Mode) {
   selectedIndex.value = createNewIndex(mode)
+  selectedIndex.value.libraryId = selectedLibraryId.value ?? undefined
   showEditor.value = true
 }
 
@@ -146,8 +182,38 @@ function exportSingleIndex(index: CustomLineIndexDescription) {
           :disabled="indices.length === 0"
           @click="exportAll()"
         />
+        <InputText
+          v-model="newLibraryName"
+          placeholder="Nouvelle bibliothèque"
+          size="small"
+          @keyup.enter="addLibrary()"
+        />
+        <Button
+          icon="i-tabler-plus"
+          size="small"
+          severity="secondary"
+          @click="addLibrary()"
+        />
+        <Select
+          v-model="selectedLibraryId"
+          :options="libraries"
+          option-label="name"
+          option-value="id"
+          placeholder="Toutes"
+          show-clear
+          size="small"
+        />
+                <Button
+          icon="i-tabler-trash"
+          size="small"
+          severity="danger"
+          text
+          :disabled="selectedLibraryId === undefined"
+          @click="confirmDeleteLibrary()"
+        />
       </div>
     </template>
+
     <Fieldset v-for="mode in MODES" :key="mode.label" :legend="mode.label">
       <template #legend>
         <div class="flex items-center gap-2">
@@ -157,7 +223,7 @@ function exportSingleIndex(index: CustomLineIndexDescription) {
       </template>
       <div class="btn-group">
         <div
-          v-for="index in getModeIndices(mode.value)"
+          v-for="index in filteredModeIndices(mode.value)"
           :key="index.id"
           class="index-item"
         >
@@ -209,7 +275,7 @@ function exportSingleIndex(index: CustomLineIndexDescription) {
     <div
       v-for="index in indices"
       :key="`export-${index.id}`"
-      :ref="element => setExportTarget(index.id, element)"
+      :ref="(element: Element | null) => setExportTarget(index.id, element)"
       class="export-source"
     >
       <CustomLineIndex

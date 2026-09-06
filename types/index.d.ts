@@ -98,7 +98,10 @@ declare global {
     value: IndexShape
     label: string
   }
-
+  interface IndexLibrary {
+    id: string
+    name: string  
+  }
   interface CustomLineIndexDescription {
     id: string
     index: string
@@ -107,6 +110,7 @@ declare global {
     shape: IndexShape
     mode: Mode
     color: string
+    libraryId?: string
   }
 
   interface Project {
