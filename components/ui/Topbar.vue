@@ -19,8 +19,8 @@ function toggleSnow() {
     <template #start>
       <div class="flex flex-row gap-2 items-start mr-4">
         <h1 class="text-3xl">
-          <strong class="text-nowrap hidden 2xl:block">Beautiful Urban Line Builder</strong>
-          <strong class="text-nowrap 2xl:hidden visible">BULB</strong>
+          <strong class="text-nowrap hidden 2xl:block">BULB-MAX</strong>
+          <strong class="text-nowrap 2xl:hidden visible">BULB-MAX</strong>
         </h1>
         <small class="text-gray text-nowrap"><span>v</span>{{ applicationVersion }}</small>
       </div>

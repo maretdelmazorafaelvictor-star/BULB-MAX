@@ -6,6 +6,7 @@ import { useToast } from 'primevue/usetoast'
 import { nextTick, ref, watch } from 'vue'
 import { MODES } from '~/data/modes'
 import { useCustomLineIndices } from '~/stores/useCustomLineIndices'
+import { useI18n } from 'vue-i18n'
 
 const visible = defineModel<boolean>('visible')
 const customLineIndices = useCustomLineIndices()
@@ -20,7 +21,7 @@ const {
 } = customLineIndices
 const toast = useToast()
 const confirm = useConfirm()
-
+const { t } = useI18n()
 const showEditor = ref(false)
 const newLibraryName = ref('')
 const selectedLibraryId = ref<string | undefined>(undefined)
@@ -60,10 +61,10 @@ function confirmDeleteLibrary() {
   }
   const count = indices.value.filter(index => index.libraryId === library.id).length
   confirm.require({
-    header: 'Supprimer la bibliothèque',
-    message: `Supprimer « ${library.name} » ? Les ${count} pictogramme(s) qu'elle contient seront définitivement supprimés.`,
-    acceptProps: { label: 'Supprimer', severity: 'danger' },
-    rejectProps: { label: 'Annuler', severity: 'secondary', text: true },
+    header: t('ui.dialogs.custom_indices.delete_library'),
+    message: t('ui.dialogs.custom_indices.delete_library_confirmation', { libraryName: library.name, count }),
+    acceptProps: { label: t('ui.dialogs.custom_indices.delete_library_accept'), severity: 'danger' },
+    rejectProps: { label: t('ui.dialogs.custom_indices.delete_library_reject'), severity: 'secondary', text: true },
     accept: () => {
       deleteLibrary(library.id)
       selectedLibraryId.value = libraries.value[0]?.id
@@ -207,7 +208,7 @@ function exportSingleIndex(index: CustomLineIndexDescription) {
         />
         <InputText
           v-model="newLibraryName"
-          placeholder="Nouvelle bibliothèque"
+          :placeholder="$t('ui.dialogs.custom_indices.new_library_placeholder')"
           size="small"
           @keyup.enter="addLibrary()"
         />
@@ -222,7 +223,7 @@ function exportSingleIndex(index: CustomLineIndexDescription) {
           :options="libraries"
           option-label="name"
           option-value="id"
-          placeholder="Bibliothèque"
+          ::placeholder="$t('ui.dialogs.custom_indices.library_placeholder')"
           size="small"
         />
         <Button
@@ -236,8 +237,8 @@ function exportSingleIndex(index: CustomLineIndexDescription) {
       </div>
     </template>
 
-    <p v-if="libraries.length === 0">
-      Créez votre première bibliothèque pour commencer à ranger vos pictogrammes.
+        <p v-if="libraries.length === 0">
+      {{ $t('ui.dialogs.custom_indices.empty_state') }}
     </p>
 
     <template v-else>

@@ -189,7 +189,14 @@
       "custom_indices": {
         "export_all": "ピクトグラムをエクスポート",
         "export_one": "ピクトグラムをエクスポート",
-        "header": "特注の路線記号帳"
+        "header": "特注の路線記号帳",
+         "delete_library": "ライブラリを削除",
+        "delete_library_accept": "削除",
+        "delete_library_confirmation": "「{name}」を削除しますか？含まれている{count}個のピクトグラムは完全に削除されます。",
+        "delete_library_reject": "キャンセル",
+        "empty_state": "最初のライブラリを作成して、ピクトグラムの整理を始めましょう。",
+        "library_placeholder": "ライブラリ",
+        "new_library_placeholder": "新しいライブラリ"
       },
       "custom_line_thickness": {
         "accept": "確定",

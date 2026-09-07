@@ -189,7 +189,14 @@
       "custom_indices": {
         "export_all": "Exporter les pictogrammes",
         "export_one": "Exporter le pictogramme",
-        "header": "Répertoire d’indices personnalisés"
+        "header": "Répertoire d’indices personnalisés",
+         "new_library_placeholder": "Nouvelle bibliothèque",
+         "delete_library": "Supprimer la bibliothèque",
+         "delete_library_accept": "Supprimer",
+         "delete_library_reject": "Annuler",
+          "empty_state": "Créez votre première bibliothèque pour commencer à ranger vos pictogrammes.",
+          "library_placeholder": "Bibliothèque",
+          "delete_library_confirmation": "Supprimer « {libraryName} » ? Les {count} pictogramme(s) qu'elle contient seront définitivement supprimés."
       },
       "custom_line_thickness": {
         "accept": "Terminé",

@@ -189,7 +189,14 @@
       "custom_indices": {
         "export_all": "Esporta pittogrammi",
         "export_one": "Esporta pittogramma",
-        "header": "Elenco indici personalizzati"
+        "header": "Elenco indici personalizzati",
+        "delete_library": "Elimina libreria",
+        "delete_library_accept": "Elimina",
+        "delete_library_confirmation": "Eliminare «{name}»? I {count} pittogrammi che contiene saranno eliminati definitivamente.",
+        "delete_library_reject": "Annulla",
+        "empty_state": "Crea la tua prima libreria per iniziare a organizzare i tuoi pittogrammi.",
+        "library_placeholder": "Libreria",
+        "new_library_placeholder": "Nuova libreria"
       },
       "custom_line_thickness": {
         "accept": "OK",

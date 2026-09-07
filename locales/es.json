@@ -15,7 +15,7 @@
       "official_indices": "Índices oficiales",
       "placeholder": "Seleccionar un índice",
       "unknown_index": "Desconocido"
-    },
+      },
     "line_style_select": {
       "placeholder": "Seleccionar un estilo"
     },
@@ -189,7 +189,14 @@
       "custom_indices": {
         "export_all": "Exportar pictogramas",
         "export_one": "Exportar pictograma",
-        "header": "Directorio de índices personalizados"
+        "header": "Directorio de índices personalizados",
+        "new_library_placeholder": "Nueva biblioteca",
+        "delete_library": "Eliminar biblioteca",
+        "delete_library_accept": "Eliminar",
+        "delete_library_reject": "Cancelar",
+        "empty_state": "Cree su primera biblioteca para empezar a organizar sus pictogramas.",
+        "library_placeholder": "Biblioteca",
+        "delete_library_confirmation": "¿Eliminar « {libraryName} » ? Los {count} pictograma(s) que contiene serán eliminados permanentemente."
       },
       "custom_line_thickness": {
         "accept": "Listo",
