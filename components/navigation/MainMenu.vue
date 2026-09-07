@@ -16,6 +16,7 @@ const showLineIndexDirectory = ref(false)
 const showSaveDialog = ref(false)
 const showLumiplanExportDialog = ref(false)
 const showTroubleshootingDialog = ref(false)
+const showGuideDialog = ref(false)
 
 const importProject = useLoadProject()
 const importLumiplan = useImportLumiplan()
@@ -109,10 +110,19 @@ function newProject() {
       text
       @click="showTroubleshootingDialog = true"
     />
+    <Button
+      pt:root:class="important-justify-start"
+      :label="$t('ui.menu.guide')"
+      severity="secondary"
+      icon="i-tabler-book"
+      text
+      @click="showGuideDialog = true"
+    />
   </div>
 
   <CustomLineIndexDirectoryDialog v-model:visible="showLineIndexDirectory" />
   <TroubleshootingDialog v-model:visible="showTroubleshootingDialog" />
+  <GuideDialog v-model:visible="showGuideDialog" />
   <SaveDialog v-model:visible="showSaveDialog" />
   <LumiplanExportDialog v-model:visible="showLumiplanExportDialog" />
 </template>

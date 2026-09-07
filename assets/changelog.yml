@@ -1,5 +1,17 @@
 ---
 changelog:
+  - version: 1.7.0-alpha
+    date: '2026-09-07T00:00:00.000Z'
+    entries:
+      ADDED:
+        - Bibliothèques d'indices personnalisés : créez, sélectionnez et supprimez des bibliothèques pour organiser vos pictogrammes
+        - Guide d'utilisation intégré, accessible depuis le menu principal
+      CHANGED:
+        - Le répertoire d'indices personnalisés s'organise désormais par bibliothèque
+        - Les pictogrammes existants sont automatiquement rangés dans une bibliothèque « Mes pictogrammes »
+        - Un nouveau pictogramme est créé directement dans la bibliothèque affichée
+      FIXED:
+        - La suppression d'une bibliothèque supprime proprement son contenu, sans laisser d'éléments orphelins
   - version: 1.6.0-alpha
     date: '2026-09-01T00:00:00.000Z'
     entries:
