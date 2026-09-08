@@ -355,6 +355,7 @@ function exportSingleIndex(index: CustomLineIndexDescription) {
   left: -10000px;
   top: 0;
   pointer-events: none;
+  clip-path: inset(100%);
 }
 
 .export-source {
