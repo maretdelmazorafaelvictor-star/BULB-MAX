@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useElementSize, useMutationObserver } from '@vueuse/core'
-import { nextTick, ref, watch } from 'vue'
+import { computed, inject, nextTick, ref, watch } from 'vue'
+import { LineContextKey } from '~/utils/symbols'
 
 const { target = null, compactSeparators = false } = defineProps<{
   target?: HTMLElement | null
@@ -8,6 +9,9 @@ const { target = null, compactSeparators = false } = defineProps<{
 }>()
 
 const emit = defineEmits<{ hasBottomBand: [value: boolean] }>()
+
+const lineContext = inject<LineContext>(LineContextKey)!
+const capitalized = computed(() => lineContext.brandStyle.value !== 'RATP')
 
 interface Span { label: string, left: number, right: number, mid: number }
 interface Dot { center: number, y: number, top: number, bottom: number, height: number, label: string }
@@ -143,7 +147,7 @@ useMutationObserver(targetRef, schedule, {
 </script>
 
 <template>
-  <div v-if="topBand.spans.length > 0" class="commune-band" :style="{ width: `${width}px` }">
+  <div v-if="topBand.spans.length > 0" :class="['commune-band', { caps: capitalized }]" :style="{ width: `${width}px` }">
     <div class="rule" />
     <div
       v-for="span in topBand.spans"
@@ -161,7 +165,7 @@ useMutationObserver(targetRef, schedule, {
       :style="{ left: `${b.x}px`, height: compactSeparators ? '.875em' : `calc(${b.to}px - 1.25em)` }"
     />
   </div>
-  <div v-if="bottomBand.spans.length > 0" class="commune-band commune-band-bottom" :style="{ width: `${width}px` }">
+  <div v-if="bottomBand.spans.length > 0" :class="['commune-band', 'commune-band-bottom', { caps: capitalized }]" :style="{ width: `${width}px` }">
     <div
       v-for="(seg, i) in bottomBand.segments"
       :key="`rule-${i}`"
@@ -213,6 +217,11 @@ useMutationObserver(targetRef, schedule, {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.caps .label {
+  text-transform: uppercase;
+  letter-spacing: .06em;
 }
 
 .boundary {

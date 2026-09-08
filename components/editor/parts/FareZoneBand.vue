@@ -108,15 +108,11 @@ useMutationObserver(targetRef, schedule, {
       v-for="cut in separators" :key="`sep-${cut}`"
       class="fare-sep" :style="{ left: `${cut}px` }"
     />
-    <template v-for="(bracket, i) in brackets" :key="`t-${bracket.label}-${bracket.left}`">
-      <span
-        class="fare-label fare-label-top"
-        :style="{ left: `${(i === 0 ? bracket.left : separators[i - 1])}px` }"
-      >Zone {{ bracket.label }}</span>
+    <template v-for="bracket in brackets" :key="`t-${bracket.label}-${bracket.left}`">
       <span
         class="fare-label fare-label-bottom"
-        :style="{ left: `${(i === 0 ? bracket.left : separators[i - 1])}px` }"
-      >Zone {{ bracket.label }}</span>
+        :style="{ left: `${(bracket.left + bracket.right) / 2}px` }"
+      >ZONE {{ bracket.label }}</span>
     </template>
   </div>
 </template>
@@ -147,30 +143,27 @@ useMutationObserver(targetRef, schedule, {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  color: #6B7075;
+  color: #8a8f98;
 }
 
 .fare-sep {
   position: absolute;
-  top: 1.5em;
-  bottom: .25em;
+  top: auto;
+  bottom: .2em;
+  height: 1em;
   border-left: calc(1.5em / 16) dotted currentColor;
   opacity: .55;
 }
 
 .fare-label {
   position: absolute;
-  padding-left: .75em;
+  transform: translateX(-50%);
   font-size: .35em;
   font-weight: 600;
   letter-spacing: .04em;
   line-height: 1;
   white-space: nowrap;
   opacity: .9;
-}
-
-.fare-label-top {
-  top: 4.5em;
 }
 
 .fare-label-bottom {
