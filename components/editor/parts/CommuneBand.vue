@@ -194,17 +194,11 @@ useMutationObserver(targetRef, schedule, {
   left: 0;
   z-index: 5;
   pointer-events: none;
-  color: var(--brand-color);
+    color: #8a8f98;;
 }
 
 .rule {
-  position: absolute;
-  top: .75em;
-  left: 0;
-  width: 100%;
-  height: calc(2em / 16);
-  background: currentColor;
-  opacity: .6;
+  display: none;
 }
 
 .label {
@@ -242,8 +236,7 @@ useMutationObserver(targetRef, schedule, {
 }
 
 .rule-bottom {
-  top: auto;
-  bottom: 1.1em;
+  display: none
 }
 
 .label-bottom {
