@@ -108,6 +108,11 @@ useMutationObserver(targetRef, schedule, {
       v-for="cut in separators" :key="`sep-${cut}`"
       class="fare-sep" :style="{ left: `${cut}px` }"
     />
+    <div
+      v-for="bracket in brackets" :key="`rule-${bracket.label}-${bracket.left}`"
+      class="fare-rule"
+      :style="{ left: `${bracket.left}px`, width: `${bracket.right - bracket.left}px` }"
+    />
     <template v-for="bracket in brackets" :key="`t-${bracket.label}-${bracket.left}`">
       <span
         class="fare-label fare-label-bottom"
@@ -155,9 +160,19 @@ useMutationObserver(targetRef, schedule, {
   opacity: .55;
 }
 
+.fare-rule {
+  position: absolute;
+  bottom: .55em;
+  height: 0;
+  border-top: calc(1.5em / 16) solid currentColor;
+  opacity: .55;
+}
+
 .fare-label {
   position: absolute;
   transform: translateX(-50%);
+  background: white;
+  padding: 0 .6em;
   font-size: .35em;
   font-weight: 600;
   letter-spacing: .04em;
