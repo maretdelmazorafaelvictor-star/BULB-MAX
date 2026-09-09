@@ -449,6 +449,8 @@ export function toNetworkData(network: ImportedNetwork, layout: LayoutResult, op
     group: l.group,
     groupName: l.groupName,
     mode: l.mode,
+    kind: l.kind,
+    index: l.index,
     color: l.color,
     start: l.start,
     end: l.end,

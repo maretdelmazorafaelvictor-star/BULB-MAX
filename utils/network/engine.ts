@@ -185,6 +185,18 @@ export function smoothPath(pts: Point[], subdiv: number, closed: boolean): Point
   return out
 }
 
+/** Tracé rectiligne subdivisé (même nombre d'échantillons par tronçon que le lissage). */
+export function subdividePath(pts: Point[], subdiv: number): Point[] {
+  const out: Point[] = [[pts[0][0], pts[0][1]]]
+  for (let i = 1; i < pts.length; i++) {
+    for (let j = 1; j <= subdiv; j++) {
+      const t = j / subdiv
+      out.push([pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * t, pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * t])
+    }
+  }
+  return out
+}
+
 /* ---------- profil de vitesse trapézoïdal ---------- */
 export function trapezoid(u: number, p: number): number {
   if (u <= 0) return 0
@@ -198,7 +210,7 @@ export function trapezoid(u: number, p: number): number {
 }
 
 /* ---------- construction ---------- */
-function buildLine(raw: NetworkLine, proj: Projection, index: number): Line {
+function buildLine(raw: NetworkLine, proj: Projection, index: number, straight = false): Line {
   if (!raw || !Array.isArray(raw.stops)) throw new Error(`Ligne sans liste d'arrêts (index ${index})`)
   const id = String(raw.id ?? raw.name ?? index + 1)
   const mode: NetworkMode = MODE_DEFAULTS[raw.mode] ? raw.mode : 'bus'
@@ -218,7 +230,8 @@ function buildLine(raw: NetworkLine, proj: Projection, index: number): Line {
   if (!ctrl[0].stop || (!loop && !ctrl[ctrl.length - 1].stop)) throw new Error(`Ligne ${id} : le tracé doit commencer et finir par un arrêt`)
 
   const ctrlPath = loop ? ctrl.concat([ctrl[0]]) : ctrl
-  const samples = smoothPath(ctrlPath.map(c => [c.x, c.y] as Point), SUBDIV, loop)
+  const ctrlPts = ctrlPath.map(c => [c.x, c.y] as Point)
+  const samples = straight ? subdividePath(ctrlPts, SUBDIV) : smoothPath(ctrlPts, SUBDIV, loop)
   const cum = [0]
   for (let i = 1; i < samples.length; i++) cum.push(cum[i - 1] + Math.hypot(samples[i][0] - samples[i - 1][0], samples[i][1] - samples[i - 1][1]))
   const total = cum[cum.length - 1]
@@ -329,7 +342,7 @@ export function positionAlong(line: Line, along: number): { x: number, y: number
   return { x: a[0] + (b[0] - a[0]) * w, y: a[1] + (b[1] - a[1]) * w, seg: lo }
 }
 
-export function build(data: NetworkData): Network {
+export function build(data: NetworkData, options?: { straight?: boolean }): Network {
   if (!data || !Array.isArray(data.lines) || data.lines.length === 0) throw new Error('La base doit contenir un tableau « lines » non vide')
   let center = data.meta?.center
   if (!center) {
@@ -346,7 +359,8 @@ export function build(data: NetworkData): Network {
     center = { lat: lat / (n || 1), lon: lon / (n || 1) }
   }
   const proj = makeProjection(center)
-  const lines = data.lines.map((l, i) => buildLine(l, proj, i))
+  const straight = options?.straight ?? !!data.meta?.straight
+  const lines = data.lines.map((l, i) => buildLine(l, proj, i, straight))
 
   const byName = new Map<string, Station>()
   lines.forEach(line => line.stops.forEach((s, k) => {

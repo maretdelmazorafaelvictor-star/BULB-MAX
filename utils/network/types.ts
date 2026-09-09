@@ -21,6 +21,10 @@ export interface NetworkLine {
   group?: string
   groupName?: string
   mode: NetworkMode
+  /** Mode BULB d'origine (METRO, RER, TRAIN, TRAM…), pour les pictos et la légende. */
+  kind?: string
+  /** Indice de la ligne (1, A, 3a…). */
+  index?: string
   color: string
   /** Premier départ (HH:MM). */
   start: string
@@ -40,6 +44,8 @@ export interface NetworkMeta {
   center?: { lat: number, lon: number }
   source?: string
   layout?: string
+  /** tracés rectilignes entre stations (plan schématique) */
+  straight?: boolean
   [key: string]: unknown
 }
 

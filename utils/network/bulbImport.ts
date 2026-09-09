@@ -75,6 +75,8 @@ export interface ImportedLine {
   group: string
   groupName: string
   mode: NetworkMode
+  kind: string
+  index: string
   color: string
   start: string
   end: string
@@ -195,6 +197,8 @@ export function buildNetwork(parsed: ParsedProject[], opts?: { service?: Partial
         group: p.id,
         groupName: p.name,
         mode: p.mode,
+        kind: p.bulbMode,
+        index: p.index,
         color: p.color,
         start: base.start,
         end: base.end,
