@@ -540,6 +540,18 @@
         "title": "Líneas",
         "toggle": "Mostrar u ocultar"
       },
+      "settings": {
+        "title": "Plano",
+        "view_schematic": "Esquema",
+        "view_geo": "Geografía",
+        "dilation": "Dilatación del centro",
+        "auto": "auto",
+        "spacing": "Espaciado",
+        "octo": "Ángulos de 45°",
+        "apply": "Recalcular",
+        "reset": "Restablecer",
+        "score": "Tramos alineados a 45°: {value} %"
+      },
       "summary": {
         "lines": "{count} líneas",
         "stations": "{count} estaciones",

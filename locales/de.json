@@ -541,6 +541,18 @@
         "title": "Linien",
         "toggle": "Ein- oder ausblenden"
       },
+      "settings": {
+        "title": "Plan",
+        "view_schematic": "Schema",
+        "view_geo": "Geografie",
+        "dilation": "Dehnung der Mitte",
+        "auto": "auto",
+        "spacing": "Abstand",
+        "octo": "45°-Winkel",
+        "apply": "Neu berechnen",
+        "reset": "Zurücksetzen",
+        "score": "Auf 45° ausgerichtete Abschnitte: {value} %"
+      },
       "summary": {
         "lines": "{count} Linien",
         "stations": "{count} Stationen",

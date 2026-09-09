@@ -45,9 +45,8 @@ const textColor = computed(() => {
   white-space: nowrap;
 
   &.metro {
-    border-radius: 50%;
-    width: 1.9em;
-    padding: 0;
+    border-radius: 1em;
+    padding: 0 .3em;
   }
 
   &.train {

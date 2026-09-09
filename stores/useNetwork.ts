@@ -7,6 +7,18 @@ import { buildNetwork, normalizeName, parseProject } from '~/utils/network/bulbI
 import { build } from '~/utils/network/engine'
 import { matchStations, parseReference } from '~/utils/network/geoMatch'
 import { layoutNetwork, toNetworkData } from '~/utils/network/layout'
+import { octolinearity, schematize, toSchematicData } from '~/utils/network/schematic'
+
+export interface SchematicSettings {
+  /** dilatation du centre : 0 = automatique, sinon 0..1 */
+  dilation: number
+  /** espacement des stations (0.5..2) */
+  spacing: number
+  /** force de l'alignement à 45° (0..1) */
+  octo: number
+}
+
+export const DEFAULT_SCHEMATIC: SchematicSettings = { dilation: 0, spacing: 1, octo: 1 }
 
 export interface ImportReport {
   projects: number
@@ -29,12 +41,44 @@ export const useNetwork = defineStore('network', () => {
   const hiddenGroups = ref<string[]>([])
   const report = ref<ImportReport | null>(null)
   const computing = ref(false)
+  /** vue : plan schématique (angles à 45°) ou géographie */
+  const view = ref<'schematic' | 'geo'>('schematic')
+  const schematicSettings = ref<SchematicSettings>({ ...DEFAULT_SCHEMATIC })
+  /** fichier réseau schématisé (positions à 45°), dérivé de `data` */
+  const schematicData = ref<NetworkData | null>(null)
+  const schematicScore = ref<number | null>(null)
 
   // le réseau construit (tracés, stations, horaires) est dérivé du fichier réseau
-  const network = shallowRef(data.value ? build(data.value) : null)
+  const geoNetwork = shallowRef(data.value ? build(data.value) : null)
   watch(data, (d) => {
-    network.value = d ? build(d) : null
-  }, { deep: true })
+    geoNetwork.value = d ? build(d) : null
+  }, { deep: true, flush: 'sync' })
+
+  const schematicNetwork = shallowRef(schematicData.value ? build(schematicData.value) : null)
+  watch(schematicData, (d) => {
+    schematicNetwork.value = d ? build(d) : null
+  }, { deep: true, flush: 'sync' })
+
+  const network = computed(() => (view.value === 'schematic' && schematicNetwork.value) ? schematicNetwork.value : geoNetwork.value)
+
+  /** Recalcule le plan schématique à partir du réseau géographique. */
+  function reschematize() {
+    const base = geoNetwork.value
+    if (!base || !data.value) {
+      schematicData.value = null
+      schematicScore.value = null
+      return
+    }
+    computing.value = true
+    try {
+      const s = schematicSettings.value
+      const result = schematize(base, { dilation: s.dilation > 0 ? s.dilation : undefined, spacing: s.spacing, octo: s.octo })
+      schematicData.value = toSchematicData(data.value, base, result)
+      schematicScore.value = octolinearity(base, result.positions)
+    } finally {
+      computing.value = false
+    }
+  }
 
   const lineGroups = computed(() => {
     const groups = new Map<string, NonNullable<typeof network.value>['lines']>()
@@ -84,6 +128,7 @@ export const useNetwork = defineStore('network', () => {
       const layout = layoutNetwork(imported, useAnchors ? { anchors } : {})
       const city = data.value?.meta?.city
       data.value = toNetworkData(imported, layout, city ? { city } : {})
+      reschematize()
       report.value = {
         projects: projects.value.length,
         stations: imported.stations.length,
@@ -139,11 +184,19 @@ export const useNetwork = defineStore('network', () => {
     data.value = d
     report.value = null
     hiddenGroups.value = []
+    if (d.meta?.layout === 'schematic') {
+      schematicData.value = d
+      schematicScore.value = null
+    } else {
+      reschematize()
+    }
   }
 
   function clear() {
     projects.value = []
     data.value = null
+    schematicData.value = null
+    schematicScore.value = null
     report.value = null
     hiddenGroups.value = []
   }
@@ -162,10 +215,16 @@ export const useNetwork = defineStore('network', () => {
     hiddenGroups,
     report,
     computing,
+    view,
+    schematicSettings,
+    schematicData,
+    schematicScore,
     network,
+    geoNetwork,
     lineGroups,
     hiddenLineIds,
     recompute,
+    reschematize,
     addProjects,
     removeProject,
     addReference,
@@ -177,6 +236,6 @@ export const useNetwork = defineStore('network', () => {
 }, {
   persist: {
     storage: localStorage,
-    pick: ['projects', 'reference', 'referenceFiles', 'data', 'hiddenGroups', 'report'],
+    pick: ['projects', 'reference', 'referenceFiles', 'data', 'hiddenGroups', 'report', 'view', 'schematicSettings', 'schematicData'],
   },
 })

@@ -540,6 +540,18 @@
         "title": "Lines",
         "toggle": "Show or hide"
       },
+      "settings": {
+        "title": "Map",
+        "view_schematic": "Diagram",
+        "view_geo": "Geography",
+        "dilation": "Centre dilation",
+        "auto": "auto",
+        "spacing": "Spacing",
+        "octo": "45° angles",
+        "apply": "Recompute",
+        "reset": "Reset",
+        "score": "Segments aligned at 45°: {value}%"
+      },
       "summary": {
         "lines": "{count} lines",
         "stations": "{count} stations",

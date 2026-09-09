@@ -9,7 +9,7 @@ definePageMeta({
 })
 
 const store = useNetwork()
-const { network, hiddenGroups, hiddenLineIds } = storeToRefs(store)
+const { network, hiddenGroups, hiddenLineIds, lineGroups } = storeToRefs(store)
 
 const selectedStation = ref<string | null>(null)
 const selectedGroup = ref<string | null>(null)
@@ -40,7 +40,7 @@ function clearSelection() {
       :header="$t('ui.network.title')"
       pt:root:class="flex flex-col min-h-0 max-h-full"
       pt:content-container:class="flex-grow min-h-0"
-      pt:content:class="h-full important-p-0"
+      pt:content:class="h-full important-p-0 flex flex-col"
     >
       <NetworkMap
         :network="network"
@@ -57,9 +57,21 @@ function clearSelection() {
           </div>
         </template>
       </NetworkMap>
+      <div v-if="lineGroups.length" class="legend-bar">
+        <NetworkLegend
+          :groups="lineGroups"
+          :hidden-groups="hiddenGroups"
+          :selected-group="selectedGroup"
+          @select="selectGroup"
+          @toggle="store.toggleGroup"
+        />
+      </div>
     </Panel>
 
     <div class="side">
+      <Panel :header="$t('ui.network.settings.title')" toggleable>
+        <NetworkSettings />
+      </Panel>
       <Panel :header="$t('ui.network.panel.title')">
         <NetworkPanel
           :network="network"
@@ -95,6 +107,15 @@ function clearSelection() {
 
 .menus {
   min-width: 20em;
+}
+
+.legend-bar {
+  flex: none;
+  max-height: 11em;
+  overflow-y: auto;
+  padding: .5rem .75rem;
+  border-top: 1px solid var(--p-panel-border-color);
+  background: #fff;
 }
 
 @media (max-width: 1024px) {
