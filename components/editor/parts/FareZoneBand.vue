@@ -162,7 +162,7 @@ useMutationObserver(targetRef, schedule, {
 
 .fare-rule {
   position: absolute;
-  bottom: 1.0em;
+  top: .35em;
   height: 0;
   border-top: calc(1.5em / 16) solid currentColor;
   opacity: .55;
