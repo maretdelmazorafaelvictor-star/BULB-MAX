@@ -207,7 +207,7 @@ useMutationObserver(targetRef, schedule, {
 
 .label {
   position: absolute;
-  top: .25em;
+  top: 1.0em;
   transform: translateX(-50%);
   text-align: center;
   font-size: .4em;
@@ -226,7 +226,7 @@ useMutationObserver(targetRef, schedule, {
 
 .boundary {
   position: absolute;
-  top: .75em;
+  top: .95em;
   width: 0;
   border-left: calc(2em / 16) dotted currentColor;
   opacity: .6;

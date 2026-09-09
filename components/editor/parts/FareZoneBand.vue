@@ -162,7 +162,7 @@ useMutationObserver(targetRef, schedule, {
 
 .fare-rule {
   position: absolute;
-  bottom: .55em;
+  bottom: 1.0em;
   height: 0;
   border-top: calc(1.5em / 16) solid currentColor;
   opacity: .55;
@@ -182,7 +182,7 @@ useMutationObserver(targetRef, schedule, {
 }
 
 .fare-label-bottom {
-  bottom: 1.25em;
+  top: .50em;
 }
 
 .zone-label {
