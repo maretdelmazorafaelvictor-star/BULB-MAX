@@ -1,0 +1,741 @@
+{
+  "meta": {
+    "city": "Valmont-sur-Aure",
+    "description": "Réseau de transport urbain fictif — données inventées pour le prototype de simulation.",
+    "center": {
+      "lat": 46.0,
+      "lon": 4.0
+    },
+    "schema": {
+      "line": "id, name, mode (metro|tram|train|bus), color (#hex), start (HH:MM), end (HH:MM, dernier départ ; peut être après minuit), frequency_min, loop (optionnel), speed_kmh (optionnel), dwell_s (optionnel), stops[]",
+      "stop": "name, lat, lon, label (optionnel : l|r|t|b) — ou waypoint:true pour un point de passage sans arrêt"
+    }
+  },
+  "lines": [
+    {
+      "id": "M1",
+      "name": "Métro 1",
+      "mode": "metro",
+      "color": "#E2231A",
+      "start": "05:30",
+      "end": "00:45",
+      "frequency_min": 4,
+      "stops": [
+        {
+          "name": "Port-Ouest",
+          "lat": 46.01347,
+          "lon": 3.91206,
+          "label": "b"
+        },
+        {
+          "name": "Les Moulins",
+          "lat": 46.01258,
+          "lon": 3.93146,
+          "label": "b"
+        },
+        {
+          "name": "Saint-Loup",
+          "lat": 46.01168,
+          "lon": 3.95086,
+          "label": "b"
+        },
+        {
+          "name": "Marché-Vieux",
+          "lat": 46.00988,
+          "lon": 3.97026,
+          "label": "b"
+        },
+        {
+          "name": "Hôtel de Ville",
+          "lat": 46.00808,
+          "lon": 3.98836,
+          "label": "b"
+        },
+        {
+          "name": "Gare Centrale",
+          "lat": 46.00898,
+          "lon": 4.00776,
+          "label": "t"
+        },
+        {
+          "name": "Place des Arts",
+          "lat": 46.00719,
+          "lon": 4.02716,
+          "label": "b"
+        },
+        {
+          "name": "Parc des Tilleuls",
+          "lat": 46.01168,
+          "lon": 4.04655,
+          "label": "t"
+        },
+        {
+          "name": "Belair",
+          "lat": 46.01527,
+          "lon": 4.06595,
+          "label": "r"
+        },
+        {
+          "name": "Fontaine-Est",
+          "lat": 46.01797,
+          "lon": 4.08664,
+          "label": "r"
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "name": "Métro 2",
+      "mode": "metro",
+      "color": "#1F5FBF",
+      "start": "05:30",
+      "end": "00:45",
+      "frequency_min": 5,
+      "stops": [
+        {
+          "name": "Plateau-Nord",
+          "lat": 46.0539,
+          "lon": 4.01293,
+          "label": "r"
+        },
+        {
+          "name": "Cité des Sciences",
+          "lat": 46.04222,
+          "lon": 4.01164,
+          "label": "l"
+        },
+        {
+          "name": "Hôpital Sainte-Claire",
+          "lat": 46.03144,
+          "lon": 4.01035,
+          "label": "l"
+        },
+        {
+          "name": "Boulevard Nord",
+          "lat": 46.02066,
+          "lon": 4.00905,
+          "label": "l"
+        },
+        {
+          "name": "Gare Centrale",
+          "lat": 46.00898,
+          "lon": 4.00776,
+          "label": "t"
+        },
+        {
+          "name": "Pont-Neuf",
+          "lat": 45.99192,
+          "lon": 4.00517,
+          "label": "r"
+        },
+        {
+          "name": "Université",
+          "lat": 45.98024,
+          "lon": 4.00129,
+          "label": "r"
+        },
+        {
+          "name": "Stade Municipal",
+          "lat": 45.96856,
+          "lon": 3.99741,
+          "label": "r"
+        },
+        {
+          "name": "Les Vignes",
+          "lat": 45.95688,
+          "lon": 3.99353,
+          "label": "r"
+        }
+      ]
+    },
+    {
+      "id": "T1",
+      "name": "Tram 1",
+      "mode": "tram",
+      "color": "#2E9E4F",
+      "start": "05:00",
+      "end": "00:30",
+      "frequency_min": 8,
+      "stops": [
+        {
+          "name": "Campus-Ouest",
+          "lat": 45.97664,
+          "lon": 3.94051,
+          "label": "b"
+        },
+        {
+          "name": "Bibliothèque",
+          "lat": 45.98293,
+          "lon": 3.95733,
+          "label": "b"
+        },
+        {
+          "name": "Quai des Peupliers",
+          "lat": 45.98922,
+          "lon": 3.97543,
+          "label": "b"
+        },
+        {
+          "waypoint": true,
+          "lat": 45.99102,
+          "lon": 3.99224
+        },
+        {
+          "name": "Pont-Neuf",
+          "lat": 45.99192,
+          "lon": 4.00517,
+          "label": "r"
+        },
+        {
+          "name": "Halles du Sud",
+          "lat": 45.98563,
+          "lon": 4.02328,
+          "label": "r"
+        },
+        {
+          "name": "Meridia",
+          "lat": 45.97844,
+          "lon": 4.04138,
+          "label": "b"
+        },
+        {
+          "name": "Tour Horizon",
+          "lat": 45.98473,
+          "lon": 4.05819,
+          "label": "r"
+        },
+        {
+          "name": "Bassin des Docks",
+          "lat": 45.99281,
+          "lon": 4.07242,
+          "label": "r"
+        },
+        {
+          "waypoint": true,
+          "lat": 46.00539,
+          "lon": 4.0763
+        },
+        {
+          "name": "Belair",
+          "lat": 46.01527,
+          "lon": 4.06595,
+          "label": "r"
+        }
+      ]
+    },
+    {
+      "id": "R",
+      "name": "Train R",
+      "mode": "train",
+      "color": "#7B3FA0",
+      "start": "05:00",
+      "end": "23:30",
+      "frequency_min": 15,
+      "stops": [
+        {
+          "name": "Valmont-Nord",
+          "lat": 46.06648,
+          "lon": 3.97155,
+          "label": "r"
+        },
+        {
+          "waypoint": true,
+          "lat": 46.053,
+          "lon": 3.99224
+        },
+        {
+          "name": "Cité des Sciences",
+          "lat": 46.04222,
+          "lon": 4.01164,
+          "label": "l"
+        },
+        {
+          "waypoint": true,
+          "lat": 46.03234,
+          "lon": 4.02069
+        },
+        {
+          "waypoint": true,
+          "lat": 46.01976,
+          "lon": 4.0181
+        },
+        {
+          "name": "Gare Centrale",
+          "lat": 46.00898,
+          "lon": 4.00776,
+          "label": "t"
+        },
+        {
+          "waypoint": true,
+          "lat": 45.9982,
+          "lon": 4.00647
+        },
+        {
+          "waypoint": true,
+          "lat": 45.98653,
+          "lon": 4.0181
+        },
+        {
+          "name": "Meridia",
+          "lat": 45.97844,
+          "lon": 4.04138,
+          "label": "b"
+        },
+        {
+          "name": "Rives-Est",
+          "lat": 45.97305,
+          "lon": 4.08535,
+          "label": "b"
+        },
+        {
+          "name": "Aéroport",
+          "lat": 45.96766,
+          "lon": 4.11897,
+          "label": "t"
+        }
+      ]
+    },
+    {
+      "id": "B12",
+      "name": "Bus 12",
+      "mode": "bus",
+      "color": "#F28C28",
+      "start": "06:00",
+      "end": "22:00",
+      "frequency_min": 12,
+      "stops": [
+        {
+          "name": "Port-Ouest",
+          "lat": 46.01347,
+          "lon": 3.91206,
+          "label": "b"
+        },
+        {
+          "name": "Les Moulins",
+          "lat": 46.01258,
+          "lon": 3.93146,
+          "label": "b"
+        },
+        {
+          "waypoint": true,
+          "lat": 46.01976,
+          "lon": 3.93663
+        },
+        {
+          "name": "Colline",
+          "lat": 46.02785,
+          "lon": 3.94827,
+          "label": "l"
+        },
+        {
+          "name": "Belvédère",
+          "lat": 46.03593,
+          "lon": 3.96638,
+          "label": "t"
+        },
+        {
+          "waypoint": true,
+          "lat": 46.03773,
+          "lon": 3.98707
+        },
+        {
+          "name": "Hôpital Sainte-Claire",
+          "lat": 46.03144,
+          "lon": 4.01035,
+          "label": "l"
+        },
+        {
+          "name": "Jardin Botanique",
+          "lat": 46.02605,
+          "lon": 4.03233,
+          "label": "r"
+        },
+        {
+          "name": "Parc des Tilleuls",
+          "lat": 46.01168,
+          "lon": 4.04655,
+          "label": "t"
+        },
+        {
+          "name": "Belair",
+          "lat": 46.01527,
+          "lon": 4.06595,
+          "label": "r"
+        }
+      ]
+    },
+    {
+      "id": "B27",
+      "name": "Bus 27",
+      "mode": "bus",
+      "color": "#00A3A3",
+      "start": "06:30",
+      "end": "21:30",
+      "frequency_min": 10,
+      "loop": true,
+      "stops": [
+        {
+          "name": "Hôtel de Ville",
+          "lat": 46.00808,
+          "lon": 3.98836,
+          "label": "b"
+        },
+        {
+          "name": "Marché-Vieux",
+          "lat": 46.00988,
+          "lon": 3.97026,
+          "label": "b"
+        },
+        {
+          "waypoint": true,
+          "lat": 45.9982,
+          "lon": 3.96638
+        },
+        {
+          "name": "Quai des Peupliers",
+          "lat": 45.98922,
+          "lon": 3.97543,
+          "label": "b"
+        },
+        {
+          "name": "Université",
+          "lat": 45.98024,
+          "lon": 4.00129,
+          "label": "r"
+        },
+        {
+          "name": "Halles du Sud",
+          "lat": 45.98563,
+          "lon": 4.02328,
+          "label": "r"
+        },
+        {
+          "name": "Meridia",
+          "lat": 45.97844,
+          "lon": 4.04138,
+          "label": "b"
+        },
+        {
+          "waypoint": true,
+          "lat": 45.99461,
+          "lon": 4.04655
+        },
+        {
+          "name": "Place des Arts",
+          "lat": 46.00719,
+          "lon": 4.02716,
+          "label": "b"
+        },
+        {
+          "name": "Boulevard Nord",
+          "lat": 46.02066,
+          "lon": 4.00905,
+          "label": "l"
+        },
+        {
+          "waypoint": true,
+          "lat": 46.01886,
+          "lon": 3.99095
+        }
+      ]
+    }
+  ],
+  "decor": {
+    "river": {
+      "name": "L'Aure",
+      "width_m": 220,
+      "points": [
+        [
+          46.01168,
+          3.87715
+        ],
+        [
+          46.00853,
+          3.90301
+        ],
+        [
+          46.00494,
+          3.92888
+        ],
+        [
+          46.00135,
+          3.95474
+        ],
+        [
+          45.99775,
+          3.9806
+        ],
+        [
+          45.99596,
+          4.00647
+        ],
+        [
+          45.99551,
+          4.03233
+        ],
+        [
+          45.99731,
+          4.05819
+        ],
+        [
+          46.00135,
+          4.08406
+        ],
+        [
+          46.00629,
+          4.10992
+        ],
+        [
+          46.01078,
+          4.13578
+        ]
+      ]
+    },
+    "parks": [
+      {
+        "name": "Parc des Tilleuls",
+        "points": [
+          [
+            46.01347,
+            4.0375
+          ],
+          [
+            46.02156,
+            4.04138
+          ],
+          [
+            46.02425,
+            4.05302
+          ],
+          [
+            46.01797,
+            4.06078
+          ],
+          [
+            46.01078,
+            4.05561
+          ],
+          [
+            46.00943,
+            4.04397
+          ]
+        ]
+      },
+      {
+        "name": "Jardin Botanique",
+        "points": [
+          [
+            46.02695,
+            4.02586
+          ],
+          [
+            46.03324,
+            4.02974
+          ],
+          [
+            46.03324,
+            4.0388
+          ],
+          [
+            46.02785,
+            4.04138
+          ],
+          [
+            46.02336,
+            4.03492
+          ]
+        ]
+      },
+      {
+        "name": "Campus",
+        "points": [
+          [
+            45.97934,
+            3.93017
+          ],
+          [
+            45.96766,
+            3.93922
+          ],
+          [
+            45.96856,
+            3.95345
+          ],
+          [
+            45.97754,
+            3.95862
+          ],
+          [
+            45.98293,
+            3.94957
+          ]
+        ]
+      },
+      {
+        "name": "Bois des Vignes",
+        "points": [
+          [
+            45.95958,
+            3.97543
+          ],
+          [
+            45.947,
+            3.98319
+          ],
+          [
+            45.9461,
+            4.00776
+          ],
+          [
+            45.95508,
+            4.01293
+          ],
+          [
+            45.96137,
+            4.00129
+          ]
+        ]
+      }
+    ],
+    "lake": {
+      "name": "Lac de Belair",
+      "center": [
+        46.02695,
+        4.08147
+      ],
+      "rx_km": 0.75,
+      "ry_km": 0.45
+    },
+    "hill": {
+      "name": "Colline Saint-Loup",
+      "center": [
+        46.03054,
+        3.95345
+      ],
+      "rings_km": [
+        [
+          1.7,
+          1.15
+        ],
+        [
+          1.15,
+          0.78
+        ],
+        [
+          0.6,
+          0.4
+        ]
+      ]
+    },
+    "districts": [
+      {
+        "name": "Quartier Meridia",
+        "points": [
+          [
+            45.98293,
+            4.03233
+          ],
+          [
+            45.98832,
+            4.05043
+          ],
+          [
+            45.97934,
+            4.06466
+          ],
+          [
+            45.97125,
+            4.04914
+          ],
+          [
+            45.97395,
+            4.03104
+          ]
+        ]
+      },
+      {
+        "name": "Zone aéroportuaire",
+        "points": [
+          [
+            45.96047,
+            4.10216
+          ],
+          [
+            45.97305,
+            4.10604
+          ],
+          [
+            45.97575,
+            4.13708
+          ],
+          [
+            45.96407,
+            4.14096
+          ]
+        ]
+      }
+    ],
+    "runway": [
+      [
+        45.96317,
+        4.10604
+      ],
+      [
+        45.97215,
+        4.13578
+      ]
+    ],
+    "labels": [
+      {
+        "text": "VIEILLE VILLE",
+        "at": [
+          46.00269,
+          3.95991
+        ]
+      },
+      {
+        "text": "LE PLATEAU",
+        "at": [
+          46.04671,
+          3.99224
+        ]
+      },
+      {
+        "text": "CAMPUS",
+        "at": [
+          45.96901,
+          3.94181
+        ]
+      },
+      {
+        "text": "MERIDIA",
+        "at": [
+          45.97036,
+          4.05561
+        ]
+      },
+      {
+        "text": "LES DOCKS",
+        "at": [
+          45.98653,
+          4.08018
+        ]
+      },
+      {
+        "text": "COLLINE SAINT-LOUP",
+        "at": [
+          46.03908,
+          3.93922
+        ]
+      },
+      {
+        "text": "L'Aure",
+        "at": [
+          46.00314,
+          3.91724
+        ],
+        "italic": true
+      }
+    ]
+  }
+}
