@@ -505,7 +505,67 @@
       "editor": "路線図エディター",
       "faq": "FAQ",
       "changelog": "変更履歴",
-      "catch_phrase": "いいですね？ フランス製 🇫🇷"
+      "catch_phrase": "いいですね？ フランス製 🇫🇷",
+      "network": "路線網図"
+    },
+    "network": {
+      "title": "路線網図",
+      "empty": "BULBプロジェクト（1路線につき1ファイル）または路線網ファイルを読み込むと地図が表示されます。",
+      "search": "駅を検索…",
+      "menu": {
+        "title": "路線網",
+        "import_projects": "BULBプロジェクトを読み込む",
+        "add_current": "編集中の路線を追加",
+        "reference": "停留所のGPS座標（GeoJSONまたはCSV）",
+        "open": "路線網を開く",
+        "save": "路線網を保存",
+        "clear": "路線網を消去",
+        "current_line": "編集中の路線",
+        "projects": "読み込み済みプロジェクト：{count}件",
+        "remove": "削除"
+      },
+      "panel": {
+        "title": "駅と路線"
+      },
+      "station": {
+        "interchange": "乗換駅 · {count}路線",
+        "lines": "{count}路線",
+        "next_departures": "次の発車",
+        "no_departure": "発車のない終点、または運行終了。"
+      },
+      "line": {
+        "stations": "{count}駅"
+      },
+      "lines": {
+        "title": "路線",
+        "toggle": "表示／非表示"
+      },
+      "summary": {
+        "lines": "{count}路線",
+        "stations": "{count}駅",
+        "interchanges": "乗換駅{count}",
+        "empty": "路線網が読み込まれていません。",
+        "reference": "参照データ：{count}停留所（{files}ファイル）",
+        "geolocated": "{total}駅中{count}駅をGPS座標に配置",
+        "unmatched": "座標のない駅（{count}）",
+        "fuzzy": "近似一致（{count}）"
+      },
+      "dialogs": {
+        "clear": {
+          "header": "路線網を消去",
+          "message": "読み込んだすべての路線が路線網図から削除されます。GPS参照データは保持されます。",
+          "accept": "消去",
+          "reject": "キャンセル"
+        }
+      },
+      "toasts": {
+        "success_title": "路線網",
+        "error_title": "エラー",
+        "invalid_json": "{name}：無効なJSON",
+        "projects_added": "{count}路線を路線網に追加しました",
+        "reference_added": "参照データを読み込みました：{count}停留所",
+        "network_loaded": "路線網を読み込みました"
+      }
     }
   }
 }

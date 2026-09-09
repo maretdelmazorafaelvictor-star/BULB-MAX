@@ -505,7 +505,67 @@
       "editor": "Éditeur de plan",
       "faq": "FAQ",
       "changelog": "Journal des modifications",
-      "catch_phrase": "Pas mal non ? C’est français 🇫🇷"
+      "catch_phrase": "Pas mal non ? C’est français 🇫🇷",
+      "network": "Plan de réseau"
+    },
+    "network": {
+      "title": "Plan de réseau",
+      "empty": "Importez des projets BULB (un fichier par ligne) ou un fichier réseau pour afficher la carte.",
+      "search": "Rechercher une station…",
+      "menu": {
+        "title": "Réseau",
+        "import_projects": "Importer des projets BULB",
+        "add_current": "Ajouter la ligne en cours",
+        "reference": "Coordonnées GPS des arrêts (GeoJSON ou CSV)",
+        "open": "Ouvrir un réseau",
+        "save": "Enregistrer le réseau",
+        "clear": "Vider le réseau",
+        "current_line": "Ligne en cours",
+        "projects": "{count} projet(s) importé(s)",
+        "remove": "Retirer"
+      },
+      "panel": {
+        "title": "Stations et lignes"
+      },
+      "station": {
+        "interchange": "correspondance · {count} lignes",
+        "lines": "{count} ligne(s)",
+        "next_departures": "Prochains passages",
+        "no_departure": "Terminus sans départ, ou service terminé."
+      },
+      "line": {
+        "stations": "{count} stations"
+      },
+      "lines": {
+        "title": "Lignes",
+        "toggle": "Afficher ou masquer"
+      },
+      "summary": {
+        "lines": "{count} lignes",
+        "stations": "{count} stations",
+        "interchanges": "{count} correspondances",
+        "empty": "Aucun réseau chargé.",
+        "reference": "Référentiel : {count} arrêts géolocalisés ({files} fichier(s))",
+        "geolocated": "{count} stations sur {total} placées à leurs coordonnées GPS",
+        "unmatched": "Stations sans coordonnées ({count})",
+        "fuzzy": "Rapprochements approchés ({count})"
+      },
+      "dialogs": {
+        "clear": {
+          "header": "Vider le réseau",
+          "message": "Toutes les lignes importées seront retirées du plan de réseau. Le référentiel GPS est conservé.",
+          "accept": "Vider",
+          "reject": "Annuler"
+        }
+      },
+      "toasts": {
+        "success_title": "Réseau",
+        "error_title": "Erreur",
+        "invalid_json": "{name} : JSON invalide",
+        "projects_added": "{count} ligne(s) ajoutée(s) au réseau",
+        "reference_added": "Référentiel chargé : {count} arrêts géolocalisés",
+        "network_loaded": "Réseau chargé"
+      }
     }
   }
 }

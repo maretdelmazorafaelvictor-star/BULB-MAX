@@ -506,7 +506,67 @@
       "editor": "Linien-Editor",
       "faq": "FAQ",
       "changelog": "Changelog",
-      "catch_phrase": "Nicht schlecht, was? Made in France 🇫🇷"
+      "catch_phrase": "Nicht schlecht, was? Made in France 🇫🇷",
+      "network": "Netzplan"
+    },
+    "network": {
+      "title": "Netzplan",
+      "empty": "Importieren Sie BULB-Projekte (eine Datei pro Linie) oder eine Netzdatei, um die Karte anzuzeigen.",
+      "search": "Station suchen…",
+      "menu": {
+        "title": "Netz",
+        "import_projects": "BULB-Projekte importieren",
+        "add_current": "Aktuelle Linie hinzufügen",
+        "reference": "GPS-Koordinaten der Haltestellen (GeoJSON oder CSV)",
+        "open": "Netz öffnen",
+        "save": "Netz speichern",
+        "clear": "Netz leeren",
+        "current_line": "Aktuelle Linie",
+        "projects": "{count} importierte(s) Projekt(e)",
+        "remove": "Entfernen"
+      },
+      "panel": {
+        "title": "Stationen und Linien"
+      },
+      "station": {
+        "interchange": "Umsteigebahnhof · {count} Linien",
+        "lines": "{count} Linie(n)",
+        "next_departures": "Nächste Abfahrten",
+        "no_departure": "Endstation ohne Abfahrt oder Betrieb beendet."
+      },
+      "line": {
+        "stations": "{count} Stationen"
+      },
+      "lines": {
+        "title": "Linien",
+        "toggle": "Ein- oder ausblenden"
+      },
+      "summary": {
+        "lines": "{count} Linien",
+        "stations": "{count} Stationen",
+        "interchanges": "{count} Umsteigebahnhöfe",
+        "empty": "Kein Netz geladen.",
+        "reference": "Referenz: {count} geolokalisierte Haltestellen ({files} Datei(en))",
+        "geolocated": "{count} von {total} Stationen an ihren GPS-Koordinaten platziert",
+        "unmatched": "Stationen ohne Koordinaten ({count})",
+        "fuzzy": "Ungefähre Zuordnungen ({count})"
+      },
+      "dialogs": {
+        "clear": {
+          "header": "Netz leeren",
+          "message": "Alle importierten Linien werden aus dem Netzplan entfernt. Die GPS-Referenz bleibt erhalten.",
+          "accept": "Leeren",
+          "reject": "Abbrechen"
+        }
+      },
+      "toasts": {
+        "success_title": "Netz",
+        "error_title": "Fehler",
+        "invalid_json": "{name}: ungültiges JSON",
+        "projects_added": "{count} Linie(n) zum Netz hinzugefügt",
+        "reference_added": "Referenz geladen: {count} geolokalisierte Haltestellen",
+        "network_loaded": "Netz geladen"
+      }
     }
   }
 }
