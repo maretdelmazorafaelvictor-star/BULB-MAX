@@ -151,20 +151,14 @@ useMutationObserver(targetRef, schedule, {
   color: #8a8f98;
 }
 
-.fare-sep {
-  position: absolute;
-  top: auto;
-  bottom: .2em;
-  height: 1em;
-  border-left: calc(1.5em / 16) dotted currentColor;
-  opacity: .55;
-}
 
 .fare-rule {
   position: absolute;
   top: .35em;
-  height: 0;
+  height: .25em;
   border-top: calc(1.5em / 16) solid currentColor;
+  border-left: calc(1.5em / 16) solid currentColor;
+  border-right: calc(1.5em / 16) solid currentColor;
   opacity: .55;
 }
 

@@ -31,6 +31,11 @@ function toggleSnow() {
           to="/editor"
         />
         <TopbarPageButton
+          :label="$t('ui.topbar.network')"
+          icon="i-tabler-map-2"
+          to="/reseau"
+        />
+        <TopbarPageButton
           :label="$t('ui.topbar.changelog')"
           icon="i-tabler-checklist"
           to="/changelog"
@@ -82,6 +87,13 @@ function toggleSnow() {
         :label="$t('ui.topbar.editor')"
         icon="i-tabler-map"
         to="/editor"
+        size="large"
+        @click="showMenu = false"
+      />
+      <TopbarPageButton
+        :label="$t('ui.topbar.network')"
+        icon="i-tabler-map-2"
+        to="/reseau"
         size="large"
         @click="showMenu = false"
       />

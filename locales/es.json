@@ -505,7 +505,79 @@
       "editor": "Editor de planos",
       "faq": "FAQ",
       "changelog": "Registro de cambios",
-      "catch_phrase": "No está mal, ¿verdad? ¡Es francés 🇫🇷!"
+      "catch_phrase": "No está mal, ¿verdad? ¡Es francés 🇫🇷!",
+      "network": "Plano de red"
+    },
+    "network": {
+      "title": "Plano de red",
+      "empty": "Importe proyectos BULB (un archivo por línea) o un archivo de red para mostrar el mapa.",
+      "search": "Buscar una estación…",
+      "menu": {
+        "title": "Red",
+        "import_projects": "Importar proyectos BULB",
+        "add_current": "Añadir la línea actual",
+        "reference": "Coordenadas GPS de las paradas (GeoJSON o CSV)",
+        "open": "Abrir una red",
+        "save": "Guardar la red",
+        "clear": "Vaciar la red",
+        "current_line": "Línea actual",
+        "projects": "{count} proyecto(s) importado(s)",
+        "remove": "Quitar"
+      },
+      "panel": {
+        "title": "Estaciones y líneas"
+      },
+      "station": {
+        "interchange": "correspondencia · {count} líneas",
+        "lines": "{count} línea(s)",
+        "next_departures": "Próximas salidas",
+        "no_departure": "Terminal sin salida, o servicio finalizado."
+      },
+      "line": {
+        "stations": "{count} estaciones"
+      },
+      "lines": {
+        "title": "Líneas",
+        "toggle": "Mostrar u ocultar"
+      },
+      "settings": {
+        "title": "Plano",
+        "view_schematic": "Esquema",
+        "view_geo": "Geografía",
+        "dilation": "Dilatación del centro",
+        "auto": "auto",
+        "spacing": "Espaciado",
+        "octo": "Ángulos de 45°",
+        "apply": "Recalcular",
+        "reset": "Restablecer",
+        "score": "Tramos alineados a 45°: {value} %"
+      },
+      "summary": {
+        "lines": "{count} líneas",
+        "stations": "{count} estaciones",
+        "interchanges": "{count} correspondencias",
+        "empty": "Ninguna red cargada.",
+        "reference": "Referencia: {count} paradas geolocalizadas ({files} archivo(s))",
+        "geolocated": "{count} de {total} estaciones situadas en sus coordenadas GPS",
+        "unmatched": "Estaciones sin coordenadas ({count})",
+        "fuzzy": "Coincidencias aproximadas ({count})"
+      },
+      "dialogs": {
+        "clear": {
+          "header": "Vaciar la red",
+          "message": "Todas las líneas importadas se retirarán del plano de red. La referencia GPS se conserva.",
+          "accept": "Vaciar",
+          "reject": "Cancelar"
+        }
+      },
+      "toasts": {
+        "success_title": "Red",
+        "error_title": "Error",
+        "invalid_json": "{name}: JSON no válido",
+        "projects_added": "{count} línea(s) añadida(s) a la red",
+        "reference_added": "Referencia cargada: {count} paradas geolocalizadas",
+        "network_loaded": "Red cargada"
+      }
     }
   }
 }

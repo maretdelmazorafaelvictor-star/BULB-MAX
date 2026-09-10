@@ -162,7 +162,7 @@ useMutationObserver(targetRef, schedule, {
       :key="`boundary-${i}`"
       class="boundary"
       :class="{ compact: compactSeparators }"
-      :style="{ left: `${b.x}px`, height: `calc(${b.to}px - 1.25em)` }"
+      :style="{ left: `${b.x}px`, height: `${containerHeight * 0.40}px` }"
     />
   </div>
   <div v-if="bottomBand.spans.length > 0" :class="['commune-band', 'commune-band-bottom', { caps: capitalized }]" :style="{ width: `${width}px` }">
@@ -226,23 +226,16 @@ useMutationObserver(targetRef, schedule, {
 
 .boundary {
   position: absolute;
-  top: .95em;
-  width: calc(1.5em / 16);
-  background-image: repeating-linear-gradient(
-    to bottom,
-    currentColor 0,
-    currentColor calc(1.5em / 16),
-    transparent calc(1.5em / 16),
-    transparent calc(4.5em / 16)
-  );
+  top: 0.90em;
+  width: calc(2em / 16);
+  background-image: radial-gradient(circle at center, currentColor calc(1em / 16), transparent calc(1em / 16));
+  background-size: calc(2em / 16) calc(5em / 16);
+  background-repeat: repeat-y;
   opacity: .7;
 }
 
 .commune-band-bottom {
-  top: auto;
-  margin-top: 0;
-  bottom: 0;
-  height: 1.5em;
+  display: none;
 }
 
 .rule-bottom {

@@ -505,7 +505,79 @@
       "editor": "Map editor",
       "faq": "FAQ",
       "changelog": "Changelog",
-      "catch_phrase": "Not bad, is it? That’s French 🇫🇷"
+      "catch_phrase": "Not bad, is it? That’s French 🇫🇷",
+      "network": "Network map"
+    },
+    "network": {
+      "title": "Network map",
+      "empty": "Import BULB projects (one file per line) or a network file to display the map.",
+      "search": "Search a station…",
+      "menu": {
+        "title": "Network",
+        "import_projects": "Import BULB projects",
+        "add_current": "Add the current line",
+        "reference": "Stop GPS coordinates (GeoJSON or CSV)",
+        "open": "Open a network",
+        "save": "Save the network",
+        "clear": "Clear the network",
+        "current_line": "Current line",
+        "projects": "{count} imported project(s)",
+        "remove": "Remove"
+      },
+      "panel": {
+        "title": "Stations and lines"
+      },
+      "station": {
+        "interchange": "interchange · {count} lines",
+        "lines": "{count} line(s)",
+        "next_departures": "Next departures",
+        "no_departure": "Terminus without departure, or service ended."
+      },
+      "line": {
+        "stations": "{count} stations"
+      },
+      "lines": {
+        "title": "Lines",
+        "toggle": "Show or hide"
+      },
+      "settings": {
+        "title": "Map",
+        "view_schematic": "Diagram",
+        "view_geo": "Geography",
+        "dilation": "Centre dilation",
+        "auto": "auto",
+        "spacing": "Spacing",
+        "octo": "45° angles",
+        "apply": "Recompute",
+        "reset": "Reset",
+        "score": "Segments aligned at 45°: {value}%"
+      },
+      "summary": {
+        "lines": "{count} lines",
+        "stations": "{count} stations",
+        "interchanges": "{count} interchanges",
+        "empty": "No network loaded.",
+        "reference": "Reference: {count} geolocated stops ({files} file(s))",
+        "geolocated": "{count} of {total} stations placed at their GPS coordinates",
+        "unmatched": "Stations without coordinates ({count})",
+        "fuzzy": "Approximate matches ({count})"
+      },
+      "dialogs": {
+        "clear": {
+          "header": "Clear the network",
+          "message": "All imported lines will be removed from the network map. The GPS reference is kept.",
+          "accept": "Clear",
+          "reject": "Cancel"
+        }
+      },
+      "toasts": {
+        "success_title": "Network",
+        "error_title": "Error",
+        "invalid_json": "{name}: invalid JSON",
+        "projects_added": "{count} line(s) added to the network",
+        "reference_added": "Reference loaded: {count} geolocated stops",
+        "network_loaded": "Network loaded"
+      }
     }
   }
 }

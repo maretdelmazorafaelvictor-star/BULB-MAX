@@ -505,7 +505,79 @@
       "editor": "Editor di mappe",
       "faq": "FAQ",
       "changelog": "Registro delle modifiche",
-      "catch_phrase": "Bello eh? È made in France 🇫🇷"
+      "catch_phrase": "Bello eh? È made in France 🇫🇷",
+      "network": "Mappa della rete"
+    },
+    "network": {
+      "title": "Mappa della rete",
+      "empty": "Importa progetti BULB (un file per linea) o un file di rete per visualizzare la mappa.",
+      "search": "Cerca una stazione…",
+      "menu": {
+        "title": "Rete",
+        "import_projects": "Importa progetti BULB",
+        "add_current": "Aggiungi la linea corrente",
+        "reference": "Coordinate GPS delle fermate (GeoJSON o CSV)",
+        "open": "Apri una rete",
+        "save": "Salva la rete",
+        "clear": "Svuota la rete",
+        "current_line": "Linea corrente",
+        "projects": "{count} progetto/i importato/i",
+        "remove": "Rimuovi"
+      },
+      "panel": {
+        "title": "Stazioni e linee"
+      },
+      "station": {
+        "interchange": "interscambio · {count} linee",
+        "lines": "{count} linea/e",
+        "next_departures": "Prossime partenze",
+        "no_departure": "Capolinea senza partenza, o servizio terminato."
+      },
+      "line": {
+        "stations": "{count} stazioni"
+      },
+      "lines": {
+        "title": "Linee",
+        "toggle": "Mostra o nascondi"
+      },
+      "settings": {
+        "title": "Mappa",
+        "view_schematic": "Schema",
+        "view_geo": "Geografia",
+        "dilation": "Dilatazione del centro",
+        "auto": "auto",
+        "spacing": "Spaziatura",
+        "octo": "Angoli a 45°",
+        "apply": "Ricalcola",
+        "reset": "Ripristina",
+        "score": "Tratte allineate a 45°: {value} %"
+      },
+      "summary": {
+        "lines": "{count} linee",
+        "stations": "{count} stazioni",
+        "interchanges": "{count} interscambi",
+        "empty": "Nessuna rete caricata.",
+        "reference": "Riferimento: {count} fermate geolocalizzate ({files} file)",
+        "geolocated": "{count} stazioni su {total} posizionate alle loro coordinate GPS",
+        "unmatched": "Stazioni senza coordinate ({count})",
+        "fuzzy": "Corrispondenze approssimative ({count})"
+      },
+      "dialogs": {
+        "clear": {
+          "header": "Svuota la rete",
+          "message": "Tutte le linee importate saranno rimosse dalla mappa della rete. Il riferimento GPS viene conservato.",
+          "accept": "Svuota",
+          "reject": "Annulla"
+        }
+      },
+      "toasts": {
+        "success_title": "Rete",
+        "error_title": "Errore",
+        "invalid_json": "{name}: JSON non valido",
+        "projects_added": "{count} linea/e aggiunta/e alla rete",
+        "reference_added": "Riferimento caricato: {count} fermate geolocalizzate",
+        "network_loaded": "Rete caricata"
+      }
     }
   }
 }
