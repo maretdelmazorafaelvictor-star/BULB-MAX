@@ -185,7 +185,7 @@ useMutationObserver(targetRef, schedule, {
       :key="`boundary-bottom-${i}`"
       class="boundary boundary-bottom"
       :class="{ compact: compactSeparators }"
-      :style="{ left: `${b.x}px`, bottom: `1.1em`, height: `${containerHeight - b.from}px` }"
+      :style="{ left: `${b.x}px`, bottom: `1.1em`, height: `${containerHeight * 0.40}px` }"
     />
   </div>
 </template>
@@ -196,7 +196,7 @@ useMutationObserver(targetRef, schedule, {
   top: .5em;
   height: 0;
   left: 0;
-  z-index: 5;
+  z-index: 0;
   pointer-events: none;
     color: #8a8f98;;
 }
@@ -235,11 +235,12 @@ useMutationObserver(targetRef, schedule, {
 }
 
 .commune-band-bottom {
-  display: none;
+  top: auto;
+  bottom: 0;
 }
 
 .rule-bottom {
-  display: none
+  top: auto;
 }
 
 .label-bottom {
