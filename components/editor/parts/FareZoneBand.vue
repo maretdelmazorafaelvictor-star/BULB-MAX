@@ -7,7 +7,7 @@ const { target = null, variant = 'brackets' } = defineProps<{
   variant?: 'brackets' | 'transilien'
 }>()
 
-const emit = defineEmits<{ hasFareBand: [value: boolean] }>()
+const emit = defineEmits<{ hasFareBand: [value: boolean], singleZone: [value: string | null] }>()
 
 interface Bracket { label: string, left: number, right: number }
 interface Dot { center: number, y: number, label: string }
@@ -40,6 +40,7 @@ function measure() {
 
   if (dots.length === 0) {
     brackets.value = []
+    emit('singleZone', null)
     emit('hasFareBand', false)
     return
   }
@@ -63,12 +64,14 @@ function measure() {
 
   const cuts = runs.slice(1).map((run, i) => (runs[i].last + run.first) / 2)
   separators.value = cuts
-  brackets.value = runs.map((run, i) => ({
+  brackets.value = runs.length === 1 ? [] : runs.map((run, i) => ({
     label: run.label,
     left: (i === 0 ? Math.max(0, run.first - spacing / 2) : cuts[i - 1]) + 5,
     right: (i === runs.length - 1 ? Math.min(base.width, run.last + spacing / 2) : cuts[i]) - 5,
   }))
-  emit('hasFareBand', brackets.value.length > 0)
+  const unique = runs.length === 1 ? runs[0].label : null
+  emit('singleZone', unique)
+  emit('hasFareBand', unique === null && brackets.value.length > 0)
 }
 
 function schedule() {

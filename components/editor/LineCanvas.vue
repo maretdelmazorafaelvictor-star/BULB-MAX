@@ -22,6 +22,7 @@ const operator = computed(() => findOperatorByValue(line.value.operator))
 
 const hasBottomCommunes = ref(false)
 const hasFareZones = ref(false)
+const singleFareZone = ref<string | null>(null)
 
 const now = useNow()
 const date = useDateFormat(now.value, 'DD.MM.YYYY')
@@ -52,6 +53,9 @@ const mapArea = ref<HTMLElement | null>(null)
       >
         <Wheelchair />
       </div>
+      <div v-if="singleFareZone" class="single-fare-zone w-full flex justify-center items-center mt-.5em py-.35em">
+        <span>ZONE TARIFAIRE {{ singleFareZone }}</span>
+      </div>
       <div class="flex-grow" />
       <div v-if="idfm && operator && operator.logos.length" class="flex flex-col items-start gap-.25em mb-.75em px-.75em">
         <span class="operated-by">OPÉRÉ PAR</span>
@@ -76,7 +80,7 @@ const mapArea = ref<HTMLElement | null>(null)
     </div>
     <div ref="mapArea" class="relative w-max-content flex items-center" :class="{ 'pb-2em': hasBottomCommunes, 'pb-fare': hasFareZones }">
       <CommuneBand :target="mapArea" :compact-separators="hasFareZones" :class="{ 'communes-above-fare': hasFareZones }" @has-bottom-band="hasBottomCommunes = $event" />
-      <FareZoneBand :target="mapArea" variant="transilien" @has-fare-band="hasFareZones = $event" />
+      <FareZoneBand :target="mapArea" variant="transilien" @has-fare-band="hasFareZones = $event" @single-zone="singleFareZone = $event" />
       <SectionsGroup
         v-model="line.topology"
         class="w-max-content min-h-15em p-1em pt-20 pr-10em"
@@ -93,6 +97,19 @@ const mapArea = ref<HTMLElement | null>(null)
 </template>
 
 <style scoped lang="scss">
+.single-fare-zone {
+  background: var(--brand-color-secondary, #e8e8ec);
+  opacity: .85;
+
+  span {
+    font-size: .5em;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: #4a4f58;
+    white-space: nowrap;
+  }
+}
+
 .hors-idf-layer {
   position: absolute;
   inset: 0;
