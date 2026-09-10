@@ -239,10 +239,7 @@ useMutationObserver(targetRef, schedule, {
 }
 
 .commune-band-bottom {
-  top: auto;
-  margin-top: 0;
-  bottom: 0;
-  height: 1.5em;
+  display: none;
 }
 
 .rule-bottom {
