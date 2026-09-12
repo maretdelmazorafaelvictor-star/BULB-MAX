@@ -2,7 +2,8 @@
 import type { AutoCompleteCompleteEvent } from 'primevue/autocomplete'
 import type { Line, Network, Station } from '~/utils/network/engine'
 import { useNow } from '@vueuse/core'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { useNetwork } from '~/stores/useNetwork'
 import { nextDepartures } from '~/utils/network/engine'
 
 const {
@@ -22,6 +23,8 @@ const emit = defineEmits<{
   selectGroup: [group: string | null]
   toggleGroup: [group: string]
 }>()
+
+const store = useNetwork()
 
 /* ---------- recherche ---------- */
 const query = ref('')
@@ -51,6 +54,43 @@ const lineGroups = computed(() => {
 
 function groupOf(st: Station, group: string): Line {
   return st.lines.find(l => l.group === group)!
+}
+
+/* ---------- retouches de la station ---------- */
+const editing = ref(false)
+const label = ref('')
+const mergeQuery = ref('')
+const mergeSuggestions = ref<string[]>([])
+
+watch(() => selectedStation, (name) => {
+  editing.value = false
+  label.value = name ?? ''
+  mergeQuery.value = ''
+})
+
+const attached = computed(() => selectedStation ? store.mergedInto(selectedStation) : [])
+const hiddenStation = computed(() => !!selectedStation && store.isStationHidden(selectedStation))
+
+function searchMerge(e: AutoCompleteCompleteEvent) {
+  const q = e.query.trim().toLowerCase()
+  mergeSuggestions.value = (network?.stations ?? [])
+    .map(s => s.name)
+    .filter(n => n !== selectedStation && (!q || n.toLowerCase().includes(q)))
+    .sort((a, b) => a.localeCompare(b))
+    .slice(0, 12)
+}
+
+function applyRename() {
+  if (!selectedStation || label.value.trim() === selectedStation) return
+  const next = label.value.trim()
+  store.renameStation(selectedStation, next)
+  emit('selectStation', next || null)
+}
+
+function applyMerge(other: string) {
+  if (!selectedStation) return
+  store.mergeStations(other, selectedStation)
+  mergeQuery.value = ''
 }
 
 interface DepartureRow { line: Line, destination: string, minutes: number[] }
@@ -96,7 +136,44 @@ const groupStations = computed(() => {
     <div v-if="station" class="card">
       <div class="card-head">
         <h3>{{ station.name }}</h3>
+        <Button
+          icon="i-tabler-pencil" text rounded size="small"
+          :severity="editing ? 'primary' : 'secondary'"
+          :title="$t('ui.network.station.edit')"
+          @click="editing = !editing"
+        />
         <Button icon="i-tabler-x" text rounded size="small" severity="secondary" @click="emit('selectStation', null)" />
+      </div>
+
+      <div v-if="editing" class="edit">
+        <label class="edit-label">{{ $t('ui.network.station.rename') }}</label>
+        <div class="flex gap-2">
+          <InputText v-model="label" fluid :spellcheck="false" @keyup.enter="applyRename" />
+          <Button icon="i-tabler-check" size="small" :disabled="label.trim() === station.name" @click="applyRename" />
+        </div>
+
+        <label class="edit-label">{{ $t('ui.network.station.merge') }}</label>
+        <AutoComplete
+          v-model="mergeQuery"
+          :suggestions="mergeSuggestions"
+          :placeholder="$t('ui.network.station.merge_placeholder')"
+          fluid
+          @complete="searchMerge"
+          @option-select="applyMerge($event.value)"
+        />
+        <div v-if="attached.length" class="attached">
+          {{ $t('ui.network.station.attached', { list: attached.join(' · ') }) }}
+          <Button :label="$t('ui.network.station.split')" size="small" text severity="secondary" @click="store.splitStation(station.name)" />
+        </div>
+
+        <div class="flex items-center gap-2">
+          <Button
+            :label="hiddenStation ? $t('ui.network.station.show') : $t('ui.network.station.hide')"
+            :icon="hiddenStation ? 'i-tabler-eye' : 'i-tabler-eye-off'"
+            size="small" severity="secondary" text
+            @click="store.toggleStationHidden(station.name)"
+          />
+        </div>
       </div>
       <div class="meta">
         <span v-if="station.commune">{{ station.commune }} · </span>
@@ -171,6 +248,30 @@ const groupStations = computed(() => {
 </template>
 
 <style scoped lang="scss">
+.edit {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  padding: .6rem;
+  margin: .2rem 0 .4rem;
+  border: 1px dashed var(--p-panel-border-color);
+  border-radius: .4rem;
+}
+
+.edit-label {
+  font-size: .8em;
+  opacity: .75;
+}
+
+.attached {
+  font-size: .85em;
+  opacity: .8;
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  flex-wrap: wrap;
+}
+
 .panel {
   display: flex;
   flex-direction: column;

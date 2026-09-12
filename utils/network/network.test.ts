@@ -139,3 +139,48 @@ describe('positions portées par les projets', () => {
     expect(laDefense.lon).toBeCloseTo(2.237, 2)
   })
 })
+
+describe('retouches du réseau', () => {
+  const projects = [parseProject(metro1 as Project, 'metro_1.json'), parseProject(metro7 as Project, 'metro_7.json')]
+
+  it('rattache une station à une autre', () => {
+    const plain = buildNetwork(projects)
+    const merged = buildNetwork(projects, { edits: { merge: { [normalizeName('Louvre – Rivoli')]: normalizeName('Palais-Royal – Musée du Louvre') } } })
+    expect(merged.stations.length).toBe(plain.stations.length - 1)
+    expect(merged.stations.some(s => normalizeName(s.name) === normalizeName('Louvre – Rivoli'))).toBe(false)
+    const host = merged.stations.find(s => normalizeName(s.name) === normalizeName('Palais-Royal – Musée du Louvre'))!
+    expect(host.lines.length).toBeGreaterThanOrEqual(1)
+  })
+
+  it('renomme une station et masque un arrêt', () => {
+    const key = normalizeName('Châtelet')
+    const net = buildNetwork(projects, { edits: { rename: { [key]: 'Châtelet – Les Halles' }, hide: [normalizeName('Louvre – Rivoli')] } })
+    expect(net.stations.some(s => s.name === 'Châtelet – Les Halles')).toBe(true)
+    expect(net.lines.flatMap(l => l.stops).some(s => s.name === 'Châtelet – Les Halles')).toBe(true)
+    const stop = net.lines.flatMap(l => l.stops).find(s => s.key === normalizeName('Louvre – Rivoli'))!
+    expect(stop.waypoint).toBe(true)
+  })
+
+  it('ne crée pas de doublon quand deux stations voisines sont rattachées', () => {
+    const line1 = parseProject(metro1 as Project, 'metro_1.json')
+    const a = line1.services[0][0].key
+    const b = line1.services[0][1].key
+    const net = buildNetwork([line1], { edits: { merge: { [b]: a } } })
+    const stops = net.lines[0].stops
+    expect(stops.filter((s, i) => i > 0 && s.key === stops[i - 1].key).length).toBe(0)
+  })
+})
+
+describe('nom des arrêts après retouche', () => {
+  it('les arrêts des lignes portent le nom définitif de la station', () => {
+    const ps = [parseProject(metro1 as Project, 'a.json'), parseProject(metro7 as Project, 'b.json')]
+    const key = normalizeName('Palais-Royal – Musée du Louvre')
+    const net = buildNetwork(ps, { edits: { merge: { [normalizeName('Louvre – Rivoli')]: key }, rename: { [key]: 'Louvre' } } })
+    const names = new Set(net.lines.flatMap(l => l.stops.map(s => s.name)))
+    expect(names.has('Louvre')).toBe(true)
+    expect(names.has('Louvre – Rivoli')).toBe(false)
+    expect(names.has('Palais-Royal – Musée du Louvre')).toBe(false)
+    // le moteur regroupe par nom : une seule station doit en résulter
+    expect(new Set(net.lines.flatMap(l => l.stops.map(s => s.key))).size).toBe(names.size)
+  })
+})

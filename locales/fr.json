@@ -553,6 +553,14 @@
         "title": "Stations et lignes"
       },
       "station": {
+        "edit": "Retoucher la station",
+        "rename": "Nom affiché",
+        "merge": "Rattacher une station (correspondance)",
+        "merge_placeholder": "Chercher une station…",
+        "attached": "Rattachées : {list}",
+        "split": "Détacher",
+        "hide": "Masquer l'arrêt",
+        "show": "Afficher l'arrêt",
         "interchange": "correspondance · {count} lignes",
         "lines": "{count} ligne(s)",
         "next_departures": "Prochains passages",

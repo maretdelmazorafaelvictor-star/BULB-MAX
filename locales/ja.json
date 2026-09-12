@@ -553,6 +553,14 @@
         "title": "駅と路線"
       },
       "station": {
+        "edit": "駅を編集",
+        "rename": "表示名",
+        "merge": "駅を結合（乗換）",
+        "merge_placeholder": "駅を検索…",
+        "attached": "結合済み：{list}",
+        "split": "分離",
+        "hide": "停車を隠す",
+        "show": "停車を表示",
         "interchange": "乗換駅 · {count}路線",
         "lines": "{count}路線",
         "next_departures": "次の発車",

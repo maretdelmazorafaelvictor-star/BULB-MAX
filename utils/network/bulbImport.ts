@@ -83,7 +83,7 @@ export interface ImportedLine {
   start: string
   end: string
   frequency_min: number
-  stops: { name: string, key: string }[]
+  stops: { name: string, key: string, waypoint?: boolean }[]
 }
 export interface ImportedStation { key: string, name: string, lines: string[] }
 export interface ImportedNetwork { lines: ImportedLine[], stations: ImportedStation[] }
@@ -174,15 +174,43 @@ export function parseProject(project: Project, fileName?: string): ParsedProject
   }
 }
 
+/** Retouches apportées au réseau par l'utilisateur, rejouées à chaque import. */
+export interface NetworkEdits {
+  /** clé d'une station → clé de la station à laquelle elle est rattachée (correspondance) */
+  merge?: Record<string, string>
+  /** clé d'une station → nom affiché */
+  rename?: Record<string, string>
+  /** stations réduites à un point de passage (la ligne passe, sans arrêt) */
+  hide?: string[]
+}
+
+/** Clé d'une station après fusion : on suit la chaîne des rattachements, sans boucler. */
+export function mergedKey(edits: NetworkEdits | undefined, key: string): string {
+  let cur = key
+  for (let i = 0; i < 8; i++) {
+    const next = edits?.merge?.[cur]
+    if (!next || next === cur) break
+    cur = next
+  }
+  return cur
+}
+
 /** Assemble plusieurs projets en un réseau (sans coordonnées) : stations fusionnées par nom. */
-export function buildNetwork(parsed: ParsedProject[], opts?: { service?: Partial<Record<NetworkMode, Partial<{ start: string, end: string, frequency_min: number }>>> }): ImportedNetwork {
+export function buildNetwork(parsed: ParsedProject[], opts?: { service?: Partial<Record<NetworkMode, Partial<{ start: string, end: string, frequency_min: number }>>>, edits?: NetworkEdits }): ImportedNetwork {
+  const edits = opts?.edits ?? {}
+  const hidden = new Set(edits.hide ?? [])
   const stations = new Map<string, { key: string, name: string, lines: Set<string> }>()
   const station = (s: ServiceStop) => {
-    let st = stations.get(s.key)
+    const key = mergedKey(edits, s.key)
+    let st = stations.get(key)
     if (!st) {
-      st = { key: s.key, name: s.name, lines: new Set() }
-      stations.set(s.key, st)
+      st = { key, name: s.name, lines: new Set() }
+      stations.set(key, st)
     }
+    // le nom de la station d'accueil fait foi sur celui des stations rattachées
+    if (key === s.key) st.name = s.name
+    const renamed = edits.rename?.[key]
+    if (renamed) st.name = renamed
     return st
   }
   const usedIds = new Set<string>()
@@ -214,13 +242,20 @@ export function buildNetwork(parsed: ParsedProject[], opts?: { service?: Partial
         start: base.start,
         end: base.end,
         frequency_min: base.frequency_min * nServ,
-        stops: path.map((s) => {
-          const st = station(s)
-          st.lines.add(p.id)
-          return { name: st.name, key: st.key }
-        }),
+        stops: path
+          .map((s) => {
+            const st = station(s)
+            st.lines.add(p.id)
+            return { name: st.name, key: st.key, ...(hidden.has(st.key) ? { waypoint: true } : {}) }
+          })
+          // deux stations fusionnées qui se suivaient sur la même ligne n'en font plus qu'une
+          .filter((s, i, a) => i === 0 || s.key !== a[i - 1].key),
       })
     })
+  }
+  // le nom définitif d'une station n'est connu qu'à la fin (fusions, renommages) : on le reporte
+  for (const line of lines) {
+    for (const stop of line.stops) stop.name = stations.get(stop.key)?.name ?? stop.name
   }
   return { lines, stations: [...stations.values()].map(s => ({ key: s.key, name: s.name, lines: [...s.lines] })) }
 }

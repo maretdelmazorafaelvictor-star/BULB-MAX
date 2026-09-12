@@ -1,9 +1,9 @@
-import type { ImportedNetwork, ParsedProject } from '~/utils/network/bulbImport'
+import type { ImportedNetwork, NetworkEdits, ParsedProject } from '~/utils/network/bulbImport'
 import type { GeoStop } from '~/utils/network/geoMatch'
 import type { NetworkData } from '~/utils/network/types'
 import { defineStore } from 'pinia'
 import { computed, ref, shallowRef, watch } from 'vue'
-import { buildNetwork, normalizeName, parseProject } from '~/utils/network/bulbImport'
+import { buildNetwork, mergedKey, normalizeName, parseProject } from '~/utils/network/bulbImport'
 import { build } from '~/utils/network/engine'
 import { matchStations, parseReference } from '~/utils/network/geoMatch'
 import { layoutNetwork, toNetworkData } from '~/utils/network/layout'
@@ -43,6 +43,8 @@ export const useNetwork = defineStore('network', () => {
   const referenceFiles = ref<string[]>([])
   const data = ref<NetworkData | null>(null)
   const hiddenGroups = ref<string[]>([])
+  /** retouches de l'utilisateur (fusions, renommages, masquages), rejouées après chaque import */
+  const edits = ref<NetworkEdits>({ merge: {}, rename: {}, hide: [] })
   const report = ref<ImportReport | null>(null)
   const computing = ref(false)
   /** vue : plan schématique (angles à 45°) ou géographie */
@@ -114,12 +116,12 @@ export const useNetwork = defineStore('network', () => {
     }
     computing.value = true
     try {
-      const imported: ImportedNetwork = buildNetwork(projects.value)
+      const imported: ImportedNetwork = buildNetwork(projects.value, { edits: edits.value })
       const anchors = new Map<string, { lat: number, lon: number, commune?: string | null }>()
       // positions déjà connues (calcul précédent) : conservées pour les stations non géolocalisées
       for (const line of data.value?.lines ?? []) {
         for (const s of line.stops) {
-          if (!s.waypoint) anchors.set(normalizeName(s.name), { lat: s.lat, lon: s.lon, commune: s.commune })
+          if (!s.waypoint) anchors.set(mergedKey(edits.value, normalizeName(s.name)), { lat: s.lat, lon: s.lon, commune: s.commune })
         }
       }
       let geolocated = 0
@@ -136,7 +138,8 @@ export const useNetwork = defineStore('network', () => {
       const known = new Set(imported.stations.map(s => s.key))
       const placed = new Set<string>()
       for (const p of projects.value) {
-        for (const [key, pos] of Object.entries(p.positions ?? {})) {
+        for (const [rawKey, pos] of Object.entries(p.positions ?? {})) {
+          const key = mergedKey(edits.value, rawKey)
           if (!known.has(key)) continue
           anchors.set(key, { ...pos, commune: anchors.get(key)?.commune ?? null })
           placed.add(key)
@@ -221,6 +224,88 @@ export const useNetwork = defineStore('network', () => {
     hiddenGroups.value = []
   }
 
+  /* ---------- retouches ---------- */
+
+  /** Nom d'origine de chaque station, par clé (les retouches se raisonnent sur les clés). */
+  const nameByKey = computed(() => {
+    const m: Record<string, string> = {}
+    for (const p of projects.value) {
+      for (const stop of p.services.flat()) {
+        if (!m[stop.key]) m[stop.key] = stop.name
+      }
+    }
+    return m
+  })
+
+  /** Clé de la station portant ce nom sur le plan (le nom affiché peut avoir été changé). */
+  const keyByName = computed(() => {
+    const m: Record<string, string> = {}
+    if (projects.value.length) {
+      for (const st of buildNetwork(projects.value, { edits: edits.value }).stations) m[st.name] = st.key
+    }
+    return m
+  })
+
+  const keyOf = (name: string) => keyByName.value[name] ?? mergedKey(edits.value, normalizeName(name))
+
+  /** Rattache une station à une autre : les deux n'en font plus qu'une (correspondance). */
+  function mergeStations(fromName: string, intoName: string) {
+    const from = keyOf(fromName)
+    const into = keyOf(intoName)
+    if (from === into) return
+    edits.value.merge = { ...edits.value.merge, [from]: into }
+    recompute()
+  }
+
+  /** Détache les stations rattachées à celle-ci. */
+  function splitStation(name: string) {
+    const key = keyOf(name)
+    const merge = { ...edits.value.merge }
+    for (const [from, into] of Object.entries(merge)) {
+      if (into === key || from === key) delete merge[from]
+    }
+    edits.value.merge = merge
+    recompute()
+  }
+
+  /** Stations rattachées à celle-ci (noms d'origine). */
+  function mergedInto(name: string): string[] {
+    const key = keyOf(name)
+    return Object.entries(edits.value.merge ?? {})
+      .filter(([, into]) => mergedKey(edits.value, into) === key)
+      .map(([from]) => nameByKey.value[from] ?? from)
+  }
+
+  /** Nom affiché d'une station sur le plan. Chaîne vide : on revient au nom d'origine. */
+  function renameStation(name: string, label: string) {
+    const key = keyOf(name)
+    const rename = { ...edits.value.rename }
+    if (label.trim()) rename[key] = label.trim()
+    else delete rename[key]
+    edits.value.rename = rename
+    recompute()
+  }
+
+  /** Masque une station : la ligne continue de passer, sans arrêt marqué. */
+  function toggleStationHidden(name: string) {
+    const key = keyOf(name)
+    const hide = edits.value.hide ?? []
+    edits.value.hide = hide.includes(key) ? hide.filter(k => k !== key) : [...hide, key]
+    recompute()
+  }
+
+  function isStationHidden(name: string): boolean {
+    return (edits.value.hide ?? []).includes(keyOf(name))
+  }
+
+  /** Annule toutes les retouches. */
+  function clearEdits() {
+    edits.value = { merge: {}, rename: {}, hide: [] }
+    recompute()
+  }
+
+  const editCount = computed(() => Object.keys(edits.value.merge ?? {}).length + Object.keys(edits.value.rename ?? {}).length + (edits.value.hide ?? []).length)
+
   function toggleGroup(group: string) {
     const i = hiddenGroups.value.indexOf(group)
     if (i >= 0) hiddenGroups.value.splice(i, 1)
@@ -233,6 +318,7 @@ export const useNetwork = defineStore('network', () => {
     referenceFiles,
     data,
     hiddenGroups,
+    edits,
     report,
     computing,
     view,
@@ -252,10 +338,20 @@ export const useNetwork = defineStore('network', () => {
     loadData,
     clear,
     toggleGroup,
+    edits,
+    editCount,
+    nameByKey,
+    mergeStations,
+    splitStation,
+    mergedInto,
+    renameStation,
+    toggleStationHidden,
+    isStationHidden,
+    clearEdits,
   }
 }, {
   persist: {
     storage: localStorage,
-    pick: ['projects', 'reference', 'referenceFiles', 'data', 'hiddenGroups', 'report', 'view', 'schematicSettings', 'schematicData'],
+    pick: ['projects', 'reference', 'referenceFiles', 'data', 'hiddenGroups', 'edits', 'report', 'view', 'schematicSettings', 'schematicData'],
   },
 })

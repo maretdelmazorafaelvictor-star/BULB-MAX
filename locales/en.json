@@ -547,6 +547,14 @@
         "title": "Stations and lines"
       },
       "station": {
+        "edit": "Edit station",
+        "rename": "Displayed name",
+        "merge": "Attach a station (interchange)",
+        "merge_placeholder": "Search a station…",
+        "attached": "Attached: {list}",
+        "split": "Detach",
+        "hide": "Hide the stop",
+        "show": "Show the stop",
         "interchange": "interchange · {count} lines",
         "lines": "{count} line(s)",
         "next_departures": "Next departures",

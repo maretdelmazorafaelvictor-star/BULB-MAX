@@ -553,6 +553,14 @@
         "title": "Stazioni e linee"
       },
       "station": {
+        "edit": "Modifica la stazione",
+        "rename": "Nome visualizzato",
+        "merge": "Collega una stazione (corrispondenza)",
+        "merge_placeholder": "Cerca una stazione…",
+        "attached": "Collegate: {list}",
+        "split": "Scollega",
+        "hide": "Nascondi la fermata",
+        "show": "Mostra la fermata",
         "interchange": "interscambio · {count} linee",
         "lines": "{count} linea/e",
         "next_departures": "Prossime partenze",

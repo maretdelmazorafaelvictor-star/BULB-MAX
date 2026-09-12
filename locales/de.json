@@ -553,6 +553,14 @@
         "title": "Stationen und Linien"
       },
       "station": {
+        "edit": "Station bearbeiten",
+        "rename": "Angezeigter Name",
+        "merge": "Station anbinden (Umstieg)",
+        "merge_placeholder": "Station suchen…",
+        "attached": "Angebunden: {list}",
+        "split": "Trennen",
+        "hide": "Halt ausblenden",
+        "show": "Halt anzeigen",
         "interchange": "Umsteigebahnhof · {count} Linien",
         "lines": "{count} Linie(n)",
         "next_departures": "Nächste Abfahrten",

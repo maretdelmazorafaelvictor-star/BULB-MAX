@@ -458,7 +458,7 @@ export function toNetworkData(network: ImportedNetwork, layout: LayoutResult, op
     stops: l.stops.map((s) => {
       const p = layout.positions.get(s.key)!
       const a = layout.anchorsInfo?.get(s.key)
-      return { name: s.name, ...gps(p.x, p.y), ...(a?.commune ? { commune: a.commune } : {}) }
+      return { name: s.name, ...gps(p.x, p.y), ...(s.waypoint ? { waypoint: true } : {}), ...(a?.commune ? { commune: a.commune } : {}) }
     }),
   }))
   return {
