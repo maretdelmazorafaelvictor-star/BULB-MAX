@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Line, LineStop, Network, Station } from '~/utils/network/engine'
+import type { Line, Network, Station } from '~/utils/network/engine'
 import { useResizeObserver } from '@vueuse/core'
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
@@ -173,23 +173,78 @@ function offsetPolylines(): Map<string, Offsets> {
   if (offsetCache && offsetCache.network === network && offsetCache.scale === view.scale) return offsetCache.map
   const map = new Map<string, Offsets>()
   if (!network) return map
-  const key = (a: LineStop, b: LineStop) => a.name < b.name ? `${a.name}|${b.name}` : `${b.name}|${a.name}`
-  const edgeGroups = new Map<string, string[]>()
+
+  /* Couloirs : deux tronçons de lignes différentes qui suivent le même axe et se recouvrent se
+   * superposeraient à l'écran. On les regroupe par axe (direction et position de la droite qui
+   * les porte), puis par recouvrement, et on écarte les lignes du groupe côte à côte. Le cas
+   * le plus courant reste deux lignes qui partagent le même tronçon, mais des lignes qui longent
+   * simplement le même axe sans desservir les mêmes stations sont traitées de la même façon. */
   const order = new Map<string, number>()
   for (const line of network.lines) {
     if (!order.has(line.group)) order.set(line.group, line.rank * 1000 + order.size)
+  }
+  interface Seg { group: string, mode: string, key: string, t0: number, t1: number }
+  const corridors = new Map<string, Seg[]>()
+  const segKey = (line: Line, i: number) => `${line.id}#${i}`
+  const tol = 0.35 // fraction de l'écartement typique : deux axes plus proches sont confondus
+  const width = (mode: string) => SWIDTH[mode] ?? 4
+  const spacing = (() => {
+    const lengths: number[] = []
+    for (const line of network.lines) {
+      for (let i = 1; i < line.stops.length; i++) lengths.push(Math.hypot(line.stops[i].x - line.stops[i - 1].x, line.stops[i].y - line.stops[i - 1].y))
+    }
+    lengths.sort((a, b) => a - b)
+    return lengths.length ? lengths[Math.floor(lengths.length / 2)] || 1 : 1
+  })()
+  for (const line of network.lines) {
     for (let i = 1; i < line.stops.length; i++) {
-      const k = key(line.stops[i - 1], line.stops[i])
-      const g = edgeGroups.get(k) ?? []
-      if (!g.includes(line.group)) g.push(line.group)
-      edgeGroups.set(k, g)
+      const a = line.stops[i - 1]
+      const b = line.stops[i]
+      const dx = b.x - a.x
+      const dy = b.y - a.y
+      const len = Math.hypot(dx, dy)
+      if (len < 1e-9) continue
+      // axe non orienté : angle ramené à [0, π)
+      let ang = Math.atan2(dy, dx)
+      if (ang < 0) ang += Math.PI
+      const oct = Math.round(ang / (Math.PI / 4)) % 4
+      const theta = oct * Math.PI / 4
+      const cos = Math.cos(theta)
+      const sin = Math.sin(theta)
+      const perp = Math.round((-sin * a.x + cos * a.y) / (tol * spacing))
+      const t0 = cos * a.x + sin * a.y
+      const t1 = cos * b.x + sin * b.y
+      const k = `${oct}:${perp}`
+      const list = corridors.get(k) ?? []
+      list.push({ group: line.group, mode: line.mode, key: segKey(line, i), t0: Math.min(t0, t1), t1: Math.max(t0, t1) })
+      corridors.set(k, list)
     }
   }
-  for (const g of edgeGroups.values()) g.sort((a, b) => order.get(a)! - order.get(b)!)
+  /** Décalage retenu pour chaque tronçon, et écart utilisé. */
+  const offsets = new Map<string, { index: number, count: number, gap: number }>()
+  for (const segs of corridors.values()) {
+    segs.sort((a, b) => a.t0 - b.t0)
+    let cluster: Seg[] = []
+    let end = -Infinity
+    const flush = () => {
+      if (!cluster.length) return
+      const groups = [...new Set(cluster.map(s => s.group))].sort((a, b) => order.get(a)! - order.get(b)!)
+      const gap = (Math.max(...cluster.map(s => width(s.mode))) + 1.4) / view.scale
+      for (const s of cluster) offsets.set(s.key, { index: groups.indexOf(s.group), count: groups.length, gap })
+      cluster = []
+    }
+    for (const s of segs) {
+      // recouvrement réel : on laisse un peu de marge pour les tronçons qui se touchent
+      if (cluster.length && s.t0 > end - 0.15 * spacing) flush()
+      cluster.push(s)
+      end = Math.max(end, s.t1)
+    }
+    flush()
+  }
+
   for (const line of network.lines) {
     const S = line.stops
     const n = S.length
-    const gap = ((SWIDTH[line.mode] ?? 4) + 1.4) / view.scale
     const off: number[] = []
     const nrm: [number, number][] = []
     const dir: [number, number][] = []
@@ -199,11 +254,12 @@ function offsetPolylines(): Map<string, Offsets> {
       const dx = b.x - a.x
       const dy = b.y - a.y
       const d = Math.hypot(dx, dy) || 1
-      const sign = a.name < b.name ? 1 : -1
+      // l'orientation de la normale ne doit pas dépendre du sens de parcours de la ligne
+      const sign = (dx !== 0 ? dx : dy) > 0 ? 1 : -1
       dir.push([dx / d, dy / d])
       nrm.push([-dy / d * sign, dx / d * sign])
-      const groups = edgeGroups.get(key(a, b))!
-      off.push((groups.indexOf(line.group) - (groups.length - 1) / 2) * gap)
+      const o = offsets.get(segKey(line, i))
+      off.push(o ? (o.index - (o.count - 1) / 2) * o.gap : 0)
     }
     const pts: [number, number][] = []
     const tangents: [number, number][] = []
