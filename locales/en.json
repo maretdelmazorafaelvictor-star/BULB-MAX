@@ -566,6 +566,7 @@
         "dilation": "Centre dilation",
         "auto": "auto",
         "spacing": "Spacing",
+        "fidelity": "Faithfulness to geography",
         "octo": "45° angles",
         "apply": "Recompute",
         "reset": "Reset",

@@ -22,12 +22,12 @@ export interface SchematicOptions {
   spacing: number
   /** force de l'attraction vers les 45° (0 à 1) */
   octo: number
-  /** fidélité à la géographie (0 à 1) */
+  /** fidélité à la géographie : 0 = libre, 1 = forte, au-delà = très proche du terrain */
   fidelity: number
   iterations: number
 }
 
-export const SCHEMATIC_DEFAULTS: SchematicOptions = { dilation: null, spacing: 1, octo: 1, fidelity: 0.3, iterations: 500 }
+export const SCHEMATIC_DEFAULTS: SchematicOptions = { dilation: null, spacing: 1, octo: 1, fidelity: 0.5, iterations: 500 }
 
 export interface SchematicResult {
   positions: Map<string, { x: number, y: number }>
@@ -373,7 +373,7 @@ export function schematize(network: Network, options?: Partial<SchematicOptions>
   for (let it = 0; it < iterations; it++) {
     if (it % 40 === 0) assignTargets(L * (1.4 - 0.6 * it / iterations))
     const t = it / iterations
-    relaxStep(0.4 - 0.32 * t, o.octo * (t < 0.3 ? 0 : Math.min(1, (t - 0.3) / 0.5)) * 0.9, o.fidelity * 0.08 * (1 - t))
+    relaxStep(0.4 - 0.32 * t, o.octo * (t < 0.3 ? 0 : Math.min(1, (t - 0.3) / 0.5)) * 0.9, o.fidelity * 0.10 * (1 - 0.5 * t))
   }
 
   /* ---------- 3. projection octolinéaire finale (entrecoupée d'une relaxation pour garder l'espacement) ---------- */
@@ -396,8 +396,13 @@ export function schematize(network: Network, options?: Partial<SchematicOptions>
         cnt[b]++
       }
       const w = o.octo * (0.6 + 0.6 * it / passes)
+      const kGeo = o.fidelity * 0.05
       for (let i = 0; i < N; i++) {
         if (!cnt[i]) continue
+        if (kGeo > 0) {
+          X[i][0] += kGeo * (Q0[i][0] - X[i][0])
+          X[i][1] += kGeo * (Q0[i][1] - X[i][1])
+        }
         X[i][0] += w * (acc[i][0] / cnt[i] - X[i][0])
         X[i][1] += w * (acc[i][1] / cnt[i] - X[i][1])
       }

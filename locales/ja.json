@@ -572,6 +572,7 @@
         "dilation": "中心の拡大",
         "auto": "自動",
         "spacing": "間隔",
+        "fidelity": "地理への忠実さ",
         "octo": "45°の角度",
         "apply": "再計算",
         "reset": "リセット",

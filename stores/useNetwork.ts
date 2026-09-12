@@ -16,9 +16,11 @@ export interface SchematicSettings {
   spacing: number
   /** force de l'alignement à 45° (0..1) */
   octo: number
+  /** fidélité à la géographie (0..2) */
+  fidelity: number
 }
 
-export const DEFAULT_SCHEMATIC: SchematicSettings = { dilation: 0, spacing: 1, octo: 1 }
+export const DEFAULT_SCHEMATIC: SchematicSettings = { dilation: 0, spacing: 1, octo: 1, fidelity: 0.5 }
 
 export interface ImportReport {
   projects: number
@@ -46,6 +48,10 @@ export const useNetwork = defineStore('network', () => {
   /** vue : plan schématique (angles à 45°) ou géographie */
   const view = ref<'schematic' | 'geo'>('schematic')
   const schematicSettings = ref<SchematicSettings>({ ...DEFAULT_SCHEMATIC })
+  // réglages enregistrés par une version antérieure : on complète les champs manquants
+  watch(schematicSettings, (v) => {
+    if (v && typeof v.fidelity !== 'number') v.fidelity = DEFAULT_SCHEMATIC.fidelity
+  }, { immediate: true, deep: true })
   /** fichier réseau schématisé (positions à 45°), dérivé de `data` */
   const schematicData = ref<NetworkData | null>(null)
   const schematicScore = ref<number | null>(null)
@@ -74,7 +80,7 @@ export const useNetwork = defineStore('network', () => {
     computing.value = true
     try {
       const s = schematicSettings.value
-      const result = schematize(base, { dilation: s.dilation > 0 ? s.dilation : undefined, spacing: s.spacing, octo: s.octo })
+      const result = schematize(base, { dilation: s.dilation > 0 ? s.dilation : undefined, spacing: s.spacing, octo: s.octo, fidelity: s.fidelity })
       schematicData.value = toSchematicData(data.value, base, result)
       schematicScore.value = octolinearity(base, result.positions)
     } finally {

@@ -25,6 +25,11 @@ const octo = computed({
   set: v => schematicSettings.value.octo = v / 100,
 })
 
+const fidelity = computed({
+  get: () => Math.round((schematicSettings.value.fidelity ?? 0.5) * 100),
+  set: v => schematicSettings.value.fidelity = v / 100,
+})
+
 const isDefault = computed(() => JSON.stringify(schematicSettings.value) === JSON.stringify(DEFAULT_SCHEMATIC))
 
 function reset() {
@@ -57,6 +62,13 @@ function reset() {
         <div class="flex items-center gap-3">
           <Slider v-model="spacing" class="flex-grow" :min="50" :max="200" :step="5" :disabled="!data" />
           <span class="value">{{ spacing }} %</span>
+        </div>
+      </div>
+      <div class="setting">
+        <label>{{ $t('ui.network.settings.fidelity') }}</label>
+        <div class="flex items-center gap-3">
+          <Slider v-model="fidelity" class="flex-grow" :min="0" :max="200" :step="5" :disabled="!data" />
+          <span class="value">{{ fidelity }} %</span>
         </div>
       </div>
       <div class="setting">

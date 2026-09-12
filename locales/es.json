@@ -572,6 +572,7 @@
         "dilation": "Dilatación del centro",
         "auto": "auto",
         "spacing": "Espaciado",
+        "fidelity": "Fidelidad a la geografía",
         "octo": "Ángulos de 45°",
         "apply": "Recalcular",
         "reset": "Restablecer",

@@ -572,6 +572,7 @@
         "dilation": "Dehnung der Mitte",
         "auto": "auto",
         "spacing": "Abstand",
+        "fidelity": "Treue zur Geografie",
         "octo": "45°-Winkel",
         "apply": "Neu berechnen",
         "reset": "Zurücksetzen",
