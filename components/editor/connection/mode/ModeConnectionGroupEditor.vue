@@ -42,6 +42,20 @@ function deleteLine(index: number) {
       </div>
     </div>
 
+    <div v-if="connection.$modeConnection.walk" class="flex items-center gap-2">
+      <label class="text-nowrap text-sm">{{ $t('ui.dialogs.connections_editor.group.walk_duration') }}</label>
+      <InputNumber
+        v-model="connection.$modeConnection.walkDuration"
+        class="w-6em"
+        :min="1"
+        :max="10"
+        show-buttons
+        :allow-empty="true"
+        :use-grouping="false"
+        suffix=" min"
+      />
+    </div>
+
     <div>
       <Divider align="left">
         <b>{{ $t('ui.dialogs.connections_editor.group.mode.lines.header') }}</b>

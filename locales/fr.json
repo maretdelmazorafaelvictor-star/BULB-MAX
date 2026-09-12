@@ -172,6 +172,7 @@
           },
           "ornament": "Décoration",
           "pedestrian_connection": "Correspondance piétonne",
+          "walk_duration": "Durée à pied",
           "service": {
             "services": {
               "add": "Ajouter un service",

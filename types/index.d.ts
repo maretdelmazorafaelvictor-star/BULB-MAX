@@ -177,6 +177,7 @@ declare global {
       mode: Mode | null
       elements: ModeConnectionElement[]
       walk: boolean
+      walkDuration?: number | null
     }
   }
 

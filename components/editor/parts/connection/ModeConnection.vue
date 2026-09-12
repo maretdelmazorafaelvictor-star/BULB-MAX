@@ -34,6 +34,9 @@ function position(index: number) {
   <div class="connection-group-mode">
     <div class="mode-wrapper flex flex-row gap-.125em items-start" :class="{ pedestrian: connection.$modeConnection.walk }">
       <Pedestrian v-if="connection.$modeConnection.walk" />
+      <span v-if="connection.$modeConnection.walk && connection.$modeConnection.walkDuration" class="walk-duration">
+        {{ connection.$modeConnection.walkDuration }} min
+      </span>
       <Mode :mode="connection.$modeConnection.mode" />
     </div>
     <VerticalLine inner />
@@ -99,4 +102,14 @@ function position(index: number) {
 .mode-wrapper.pedestrian {
   margin-left: -1.125em;
 }
+
+.walk-duration {
+  font-size: .35em;
+  font-weight: 600;
+  color: var(--brand-color);
+  line-height: 1;
+  white-space: nowrap;
+  align-self: center;
+}
+
 </style>
