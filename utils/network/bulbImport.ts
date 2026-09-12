@@ -243,10 +243,13 @@ export function buildNetwork(parsed: ParsedProject[], opts?: { service?: Partial
         end: base.end,
         frequency_min: base.frequency_min * nServ,
         stops: path
-          .map((s) => {
+          .map((s, i) => {
             const st = station(s)
             st.lines.add(p.id)
-            return { name: st.name, key: st.key, ...(hidden.has(st.key) ? { waypoint: true } : {}) }
+            // un terminus n'est jamais réduit à un point de passage : la ligne doit commencer et
+            // finir par un arrêt
+            const end = i === 0 || i === path.length - 1
+            return { name: st.name, key: st.key, ...(!end && hidden.has(st.key) ? { waypoint: true } : {}) }
           })
           // deux stations fusionnées qui se suivaient sur la même ligne n'en font plus qu'une
           .filter((s, i, a) => i === 0 || s.key !== a[i - 1].key),

@@ -184,3 +184,16 @@ describe('nom des arrêts après retouche', () => {
     expect(new Set(net.lines.flatMap(l => l.stops.map(s => s.key))).size).toBe(names.size)
   })
 })
+
+describe('arrêt masqué', () => {
+  it('ne masque pas un terminus et laisse le réseau constructible', () => {
+    const p = parseProject(metro1 as Project, 'metro_1.json')
+    const first = p.services[0][0].key
+    const middle = p.services[0][3].key
+    const net = buildNetwork([p], { edits: { hide: [first, middle] } })
+    const stops = net.lines[0].stops
+    expect(stops[0].waypoint).toBeUndefined()
+    expect(stops[stops.length - 1].waypoint).toBeUndefined()
+    expect(stops.find(s => s.key === middle)?.waypoint).toBe(true)
+  })
+})

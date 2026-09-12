@@ -227,6 +227,12 @@ function buildLine(raw: NetworkLine, proj: Projection, index: number, straight =
     return { x: p.x, y: p.y, stop: !s.waypoint, name: s.name || `Arrêt ${i + 1}`, label: s.label ?? null, commune: s.commune ?? null }
   })
   if (ctrl.filter(c => c.stop).length < 2) throw new Error(`Ligne ${id} : il faut au moins deux arrêts`)
+  // un point de passage en tête ou en queue (arrêt masqué, par exemple) : le tracé s'arrête au
+  // premier et au dernier arrêt réels plutôt que d'être refusé
+  while (ctrl.length > 2 && !ctrl[0].stop) ctrl.shift()
+  if (!loop) {
+    while (ctrl.length > 2 && !ctrl[ctrl.length - 1].stop) ctrl.pop()
+  }
   if (!ctrl[0].stop || (!loop && !ctrl[ctrl.length - 1].stop)) throw new Error(`Ligne ${id} : le tracé doit commencer et finir par un arrêt`)
 
   const ctrlPath = loop ? ctrl.concat([ctrl[0]]) : ctrl
