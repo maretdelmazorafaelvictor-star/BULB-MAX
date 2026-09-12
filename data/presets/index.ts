@@ -103,6 +103,8 @@ export function getPreset(mode: Mode, index: LineIndex): Project | null {
       }
     case 'TRAM_TRAIN':
       switch (index.$builtinLineIndex.index) {
+        case '4':
+          return TramTrains.TRAM_TRAIN_4 as unknown as Project
         case '11':
           return TramTrains.TRAM_TRAIN_11 as unknown as Project
         case '12':
