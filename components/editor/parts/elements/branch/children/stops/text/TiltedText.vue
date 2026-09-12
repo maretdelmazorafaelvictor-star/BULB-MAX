@@ -10,10 +10,11 @@ const {
 }>()
 
 const angleInDeg = computed(() => `${angle}deg`)
+const flat = computed(() => angle === 0)
 </script>
 
 <template>
-  <div v-bind="$attrs" class="tilted-text" :class="{ reverse }">
+  <div v-bind="$attrs" class="tilted-text" :class="{ reverse, flat }">
     <slot />
   </div>
 </template>
@@ -39,6 +40,22 @@ const angleInDeg = computed(() => `${angle}deg`)
     right: 50%;
     top: 0;
     transform-origin: top right;
+  }
+
+  &.flat {
+    width: max-content;
+    height: auto;
+    display: flex;
+    align-items: flex-end;
+
+    & > * {
+      position: relative;
+      left: auto;
+      right: auto;
+      top: auto;
+      bottom: auto;
+      transform: none;
+    }
   }
 }
 </style>

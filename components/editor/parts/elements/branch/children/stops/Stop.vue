@@ -31,9 +31,15 @@ const margins = reactive({
 
 const leftMargin = computed(() => `max(${margins.leftMargin.name}, ${margins.leftMargin.connections})`)
 const rightMargin = computed(() => `max(${margins.rightMargin.name}, ${margins.rightMargin.subtitle}, ${margins.rightMargin.connections})`)
-const namesMargin = computed(() => `min(-.125em, -${Math.max(0, lineContext.lineThickness.value - 0.375) / 2}em)`)
-const connectionsMargin = computed(() => `max(.125em, ${Math.max(0, lineContext.lineThickness.value - 0.825) / 2}em)`)
 const inverted = computed(() => !!stop.value.$stop.reverse !== reverse)
+const flatNames = computed(() => lineContext.stopNameAngle.value === 0)
+const namesMargin = computed(() => {
+  const overflow = Math.max(0, lineContext.lineThickness.value - 0.375) / 2
+  // noms horizontaux d'un arrêt inversé : les repousser sous le tracé au lieu de les tirer dessus
+  if (flatNames.value && inverted.value) return `calc(-.35em - ${lineContext.lineThickness.value / 2}em)`
+  return `min(-.125em, -${overflow}em)`
+})
+const connectionsMargin = computed(() => `max(.125em, ${Math.max(0, lineContext.lineThickness.value - 0.825) / 2}em)`)
 
 const names = ref()
 const { width } = useElementSize(names)

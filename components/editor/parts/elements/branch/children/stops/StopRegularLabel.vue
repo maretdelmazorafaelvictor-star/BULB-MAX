@@ -29,6 +29,7 @@ const {
 const stopContext = inject<StopContext>(StopContextKey)!
 const lineContext = inject<LineContext>(LineContextKey)!
 
+const flat = computed(() => lineContext.stopNameAngle.value === 0)
 const sncfTerminus = computed(() => terminus && lineContext.brandStyle.value === 'SNCF')
 const terminusStyle = computed(() => sncfTerminus.value
   ? { fontWeight: 'bold', color: lineContext.terminusNamesLineColor.value ? lineContext.color.value : 'black' }
@@ -54,8 +55,8 @@ watch([shift, () => interestPoint, () => subtitle], ([_shift, _interestPoint, _s
 </script>
 
 <template>
-  <div class="regular-label" :class="{ reverse, 'opacity-50 export-hide': valueParts.length === 0 }">
-    <div class="flex gap-1em">
+  <div class="regular-label" :class="{ reverse, flat, 'opacity-50 export-hide': valueParts.length === 0 }">
+    <div class="flex gap-1em" :class="{ 'name-parts-flat': flat }">
       <TiltedText v-for="(part, index) in valueParts" :key="`${part}-${index}`" :reverse="reverse" :angle="lineContext.stopNameAngle.value">
         <div class="title-holder" :style="terminusStyle">
           <TitleLabel :value="part" />
@@ -75,6 +76,7 @@ watch([shift, () => interestPoint, () => subtitle], ([_shift, _interestPoint, _s
       :class="{
         'interest-point': interestPoint,
         shift,
+        'subtitle-flat': flat,
       }"
     >
       <TiltedText :reverse="reverse" :angle="lineContext.stopNameAngle.value">        <StopSubtitle :interest-point="interestPoint" :interest-point-color="interestPointColor" :value="subtitle" />
@@ -91,6 +93,31 @@ watch([shift, () => interestPoint, () => subtitle], ([_shift, _interestPoint, _s
   justify-content: center;
   min-width: 1em;
   height: 0;
+}
+
+.regular-label.flat {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .1em;
+}
+
+.regular-label.flat.reverse {
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.name-parts-flat {
+  flex-direction: column;
+  align-items: center;
+  gap: 0 !important;
+  line-height: 1.05;
+}
+
+.subtitle-flat {
+  transform: none !important;
+  width: auto !important;
+  text-align: center;
 }
 
 .title-holder {
