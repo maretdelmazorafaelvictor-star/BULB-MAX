@@ -436,6 +436,12 @@
         "accept": "エクスポート"
       },
       "mode_pictos": {
+        "create_mode": "作成",
+        "custom_modes": "カスタム交通手段",
+        "custom_modes_empty": "交通手段を作成すると、選択肢に追加されます。",
+        "delete_mode": "交通手段を削除",
+        "delete_mode_accept": "削除",
+        "delete_mode_confirmation": "「{name}」を削除しますか？これを使用する路線や乗り換えは交通手段を失います。",
         "header": "交通手段のピクトグラム",
         "import": "インポート",
         "import_failure": {
@@ -443,6 +449,7 @@
           "too_large": "リサイズ後も画像が大きすぎます。",
           "unreadable": "画像を読み込めませんでした。"
         },
+        "new_mode_placeholder": "新しい交通手段の名前",
         "notice": "交通手段のピクトグラムを独自の画像に置き換えます。",
         "reset_all": "すべて元に戻す",
         "reset_all_accept": "元に戻す",

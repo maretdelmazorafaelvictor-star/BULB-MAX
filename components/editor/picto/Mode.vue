@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { isCustomMode, useCustomModes } from '~/stores/useCustomModes'
 import { useModePictos } from '~/stores/useModePictos'
 
 const {
@@ -9,9 +10,11 @@ const {
 }>()
 
 const modePictos = useModePictos()
-const customPicto = computed(() => modePictos.pictoOf(mode))
-const circle = computed(() => ['METRO', 'VAL'].includes(mode ?? ''))
-const roundRectangle = computed(() => ['RER', 'TER', 'TRAIN', 'TRAIN_RER'].includes(mode ?? ''))
+const customModes = useCustomModes()
+const custom = computed(() => isCustomMode(mode) ? customModes.findById(mode as string) : null)
+const customPicto = computed(() => custom.value ? custom.value.picto ?? null : modePictos.pictoOf(mode))
+const circle = computed(() => custom.value ? custom.value.shape === 'CIRCLE' : ['METRO', 'VAL'].includes(mode ?? ''))
+const roundRectangle = computed(() => custom.value ? custom.value.shape === 'ROUNDED_SQUARE' : ['RER', 'TER', 'TRAIN', 'TRAIN_RER'].includes(mode ?? ''))
 const square = computed(() => ['AERIAL_TRAMWAY', 'BOAT', 'BUS', 'BRT', 'CHAIRLIFT', 'FUNICULAR', 'GONDOLA', 'NOCTILIEN', 'SKI_LIFT', 'TRAM', 'TRAM_TRAIN', 'VELO'].includes(mode ?? ''))
 </script>
 

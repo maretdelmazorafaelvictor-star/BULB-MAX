@@ -20,6 +20,8 @@ declare global {
     | 'FUNICULAR'
     | 'VAL'
     | 'VELO'
+    // Modes personnalisés : identifiants « CUSTOM:<uuid> »
+    | (string & {})
   type Service =
     'MAIN_STATION'
     | 'BULLET_TRAIN'
@@ -115,12 +117,20 @@ declare global {
     libraryId?: string
   }
 
+  interface CustomModeDescription {
+    id: string
+    name: string
+    shape: IndexShape
+    picto?: string | null
+  }
+
   interface Project {
     version: string
     presetBased: boolean
     line: Line
     customIndices: CustomLineIndexDescription[]
     modePictos?: Partial<Record<Mode, string>>
+    customModes?: CustomModeDescription[]
   }
 
   /* ///////////// LINE ///////////// */

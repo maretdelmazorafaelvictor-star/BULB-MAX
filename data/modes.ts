@@ -45,5 +45,7 @@ export function modeToShape(mode: Mode): IndexShape {
       return 'RECTANGLE'
     case 'NOCTILIEN':
       return 'CUT_RECTANGLE'
+    default:
+      return 'ROUNDED_SQUARE'
   }
 }

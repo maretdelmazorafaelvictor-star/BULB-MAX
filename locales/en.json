@@ -430,6 +430,12 @@
         "accept": "Export"
       },
       "mode_pictos": {
+        "create_mode": "Create",
+        "custom_modes": "Custom modes",
+        "custom_modes_empty": "Create a transport mode to add it to the available modes.",
+        "delete_mode": "Delete mode",
+        "delete_mode_accept": "Delete",
+        "delete_mode_confirmation": "Delete “{name}”? Lines and connections using it will lose their mode.",
         "header": "Transport mode pictograms",
         "import": "Import",
         "import_failure": {
@@ -437,6 +443,7 @@
           "too_large": "The image is too heavy, even after resizing.",
           "unreadable": "The image could not be read."
         },
+        "new_mode_placeholder": "New mode name",
         "notice": "Replace a mode's pictogram with your own image.",
         "reset_all": "Reset all",
         "reset_all_accept": "Reset",

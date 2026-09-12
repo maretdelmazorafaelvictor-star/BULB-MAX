@@ -437,6 +437,12 @@
         "accept": "Exporter"
       },
       "mode_pictos": {
+        "create_mode": "Créer",
+        "custom_modes": "Modes personnalisés",
+        "custom_modes_empty": "Créez un mode de transport pour l'ajouter aux modes proposés.",
+        "delete_mode": "Supprimer le mode",
+        "delete_mode_accept": "Supprimer",
+        "delete_mode_confirmation": "Supprimer « {name} » ? Les lignes et correspondances qui l'utilisent perdront leur mode.",
         "header": "Pictogrammes des modes de transport",
         "import": "Importer",
         "import_failure": {
@@ -444,6 +450,7 @@
           "too_large": "L'image est trop lourde, même après redimensionnement.",
           "unreadable": "L'image n'a pas pu être lue."
         },
+        "new_mode_placeholder": "Nom du nouveau mode",
         "notice": "Remplacez le pictogramme d'un mode par votre propre image.",
         "reset_all": "Tout rétablir",
         "reset_all_accept": "Rétablir",
