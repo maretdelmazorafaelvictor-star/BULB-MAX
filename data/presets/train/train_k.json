@@ -240,6 +240,7 @@
                   {
                     "id": "95c182a8-bc41-4989-92db-b2d41c95a323",
                     "$stop": {
+                      "position": { "lat": 48.932151, "lon": 2.495597 },
                       "name": "Aulnay-sous-Bois",
                       "placeName": "",
                       "subtitle": "",
@@ -285,6 +286,7 @@
                   {
                     "id": "ac1e84f4-7a6b-4725-bef5-531684e08daf",
                     "$stop": {
+                      "position": { "lat": 48.975748, "lon": 2.642234 },
                       "name": "Mitry – Claye",
                       "placeName": "",
                       "subtitle": "",
@@ -330,6 +332,7 @@
                   {
                     "id": "df52d281-b8b0-427f-bb32-37c2fc98b4e0",
                     "$stop": {
+                      "position": { "lat": 48.99133, "lon": 2.66496 },
                       "name": "Compans",
                       "placeName": "",
                       "subtitle": "",
@@ -346,6 +349,7 @@
                   {
                     "id": "bbb3dfd8-2577-4ebc-be91-c0282ad4379d",
                     "$stop": {
+                      "position": { "lat": 49.008136, "lon": 2.680254 },
                       "name": "Thieux – Nantouillet",
                       "placeName": "",
                       "subtitle": "",
@@ -362,6 +366,7 @@
                   {
                     "id": "873b07f6-d88a-4bf7-80f0-d4a9bec543d1",
                     "$stop": {
+                      "position": { "lat": 49.032152, "lon": 2.699047 },
                       "name": "Dammartin – Juilly\nSaint-Mard",
                       "placeName": "",
                       "subtitle": "",
@@ -394,6 +399,7 @@
                   {
                     "id": "3f152241-b5bd-45a2-be3e-e9bd8d91ae93",
                     "$stop": {
+                      "position": { "lat": 49.096325, "lon": 2.745037 },
                       "name": "Le Plessis-Belleville",
                       "placeName": "",
                       "subtitle": "",
@@ -412,6 +418,7 @@
                   {
                     "id": "ff863338-0e78-486f-98a5-0d5ebca5bf9b",
                     "$stop": {
+                      "position": { "lat": 49.142511, "lon": 2.794165 },
                       "name": "Nanteuil-le-Haudouin",
                       "placeName": "",
                       "subtitle": "",
@@ -448,6 +455,7 @@
                   {
                     "id": "a57b19eb-1c5c-48e7-a6c0-4cb1f838ba1b",
                     "$stop": {
+                      "position": { "lat": 49.231083, "lon": 2.8881 },
                       "name": "Crépy-en-Valois",
                       "placeName": "",
                       "subtitle": "",

@@ -123,6 +123,7 @@
                   {
                     "id": "2c42aabc-7d3c-44c0-9508-171302dcd03d",
                     "$stop": {
+                      "position": { "lat": 48.818289, "lon": 2.291974 },
                       "name": "Vanves – Malakoff",
                       "placeName": "",
                       "subtitle": "",
@@ -138,6 +139,7 @@
                   {
                     "id": "96540555-010a-49ba-96b7-a7e2e0b166d3",
                     "$stop": {
+                      "position": { "lat": 48.814226, "lon": 2.274244 },
                       "name": "Clamart",
                       "placeName": "",
                       "subtitle": "",
@@ -153,6 +155,7 @@
                   {
                     "id": "d5b7363e-dec9-4ac0-9cd1-4a26fba65a00",
                     "$stop": {
+                      "position": { "lat": 48.814364, "lon": 2.242879 },
                       "name": "Meudon",
                       "placeName": "",
                       "subtitle": "",
@@ -168,6 +171,7 @@
                   {
                     "id": "d2b18ed4-5be8-4368-a873-fabc23bc61e8",
                     "$stop": {
+                      "position": { "lat": 48.818873, "lon": 2.229956 },
                       "name": "Bellevue",
                       "placeName": "",
                       "subtitle": "",
@@ -183,6 +187,7 @@
                   {
                     "id": "fa50c846-6db8-410c-9223-980bc341e593",
                     "$stop": {
+                      "position": { "lat": 48.821214, "lon": 2.21508 },
                       "name": "Sèvres – Rive Gauche",
                       "placeName": "",
                       "subtitle": "",
@@ -198,6 +203,7 @@
                   {
                     "id": "97bbd29a-b04a-42d8-8746-e8fa9a86bca1",
                     "$stop": {
+                      "position": { "lat": 48.80519, "lon": 2.189426 },
                       "name": "Chaville – Rive Gauche",
                       "placeName": "",
                       "subtitle": "",
@@ -213,6 +219,7 @@
                   {
                     "id": "4ba9746a-8930-4340-bcaf-6edb7fcb6591",
                     "$stop": {
+                      "position": { "lat": 48.800666, "lon": 2.171583 },
                       "name": "Viroflay – Rive Gauche",
                       "placeName": "",
                       "subtitle": "",
@@ -273,6 +280,7 @@
                   {
                     "id": "d06e99cf-3b73-4b44-b59c-d98c7fde11a3",
                     "$stop": {
+                      "position": { "lat": 48.79526, "lon": 2.134908 },
                       "name": "Versailles – Chantiers",
                       "placeName": "",
                       "subtitle": "",
@@ -361,6 +369,7 @@
                   {
                     "id": "909e24fc-168b-4268-b78a-352c5cb45b91",
                     "$stop": {
+                      "position": { "lat": 48.798775, "lon": 2.072712 },
                       "name": "Saint-Cyr",
                       "placeName": "",
                       "subtitle": "",
@@ -473,6 +482,7 @@
                               {
                                 "id": "f58bb0a9-ca4c-4166-9e73-7bb72cb707f1",
                                 "$stop": {
+                                  "position": { "lat": 48.787485, "lon": 2.044616 },
                                   "name": "Saint-Quentin-en-Yvelines",
                                   "placeName": "",
                                   "subtitle": "",
@@ -533,6 +543,7 @@
                               {
                                 "id": "14bb898c-28a6-43b1-b839-0b36afb621e4",
                                 "$stop": {
+                                  "position": { "lat": 48.774785, "lon": 2.00659 },
                                   "name": "Trappes",
                                   "placeName": "",
                                   "subtitle": "",
@@ -609,6 +620,7 @@
                               {
                                 "id": "b57e89ad-41d0-46d8-bc23-af10cca3b017",
                                 "$stop": {
+                                  "position": { "lat": 48.743748, "lon": 1.921418 },
                                   "name": "Coignières",
                                   "placeName": "",
                                   "subtitle": "",
@@ -624,6 +636,7 @@
                               {
                                 "id": "dc060e7c-40a9-475c-8730-3ae4c9a5f362",
                                 "$stop": {
+                                  "position": { "lat": 48.721693, "lon": 1.889661 },
                                   "name": "Les Essarts – Le Roi",
                                   "placeName": "",
                                   "subtitle": "",
@@ -639,6 +652,7 @@
                               {
                                 "id": "a50cb724-0522-4a15-b142-de3e51749743",
                                 "$stop": {
+                                  "position": { "lat": 48.693361, "lon": 1.856653 },
                                   "name": "Le Perray",
                                   "placeName": "",
                                   "subtitle": "",
@@ -654,6 +668,7 @@
                               {
                                 "id": "f827181c-da14-48b8-a730-1d561570af5c",
                                 "$stop": {
+                                  "position": { "lat": 48.643846, "lon": 1.832208 },
                                   "name": "Rambouillet",
                                   "placeName": "",
                                   "subtitle": "",
@@ -704,6 +719,7 @@
                               {
                                 "id": "bed4f891-6235-461f-95c2-d11b66eff3b1",
                                 "$stop": {
+                                  "position": { "lat": 48.807273, "lon": 2.040705 },
                                   "name": "Fontenay-le-Fleury",
                                   "placeName": "",
                                   "subtitle": "",
@@ -719,6 +735,7 @@
                               {
                                 "id": "45bdfaac-82b4-4802-9bec-3102a036f4a7",
                                 "$stop": {
+                                  "position": { "lat": 48.823668, "lon": 1.992799 },
                                   "name": "Villepreux – Les Clayes",
                                   "placeName": "",
                                   "subtitle": "",
@@ -734,6 +751,7 @@
                               {
                                 "id": "ac1031c1-ba04-40ec-85f3-79b6ffde8345",
                                 "$stop": {
+                                  "position": { "lat": 48.830839, "lon": 1.960091 },
                                   "name": "Plaisir – Les Clayes",
                                   "placeName": "",
                                   "subtitle": "",
@@ -749,6 +767,7 @@
                               {
                                 "id": "de971aa2-d164-4548-96f1-f7221213ae51",
                                 "$stop": {
+                                  "position": { "lat": 48.831926, "lon": 1.943538 },
                                   "name": "Plaisir – Grignon",
                                   "placeName": "",
                                   "subtitle": "",
@@ -797,6 +816,7 @@
                                           {
                                             "id": "e6c15f01-e927-4b04-80b6-bc8ee1449016",
                                             "$stop": {
+                                              "position": { "lat": 48.815323, "lon": 1.877536 },
                                               "name": "Villiers Neauphle – Pontchartrain",
                                               "placeName": "",
                                               "subtitle": "",
@@ -812,6 +832,7 @@
                                           {
                                             "id": "e8c78ac2-311a-4a8e-abb9-c302953678dc",
                                             "$stop": {
+                                              "position": { "lat": 48.802662, "lon": 1.815835 },
                                               "name": "Montfort-l’Aumaury – Méré",
                                               "placeName": "",
                                               "subtitle": "",
@@ -827,6 +848,7 @@
                                           {
                                             "id": "195c9166-ab3b-4d3f-bcb1-542412c5bbb5",
                                             "$stop": {
+                                              "position": { "lat": 48.810464, "lon": 1.764579 },
                                               "name": "Garancières – La Queue",
                                               "placeName": "",
                                               "subtitle": "",
@@ -842,6 +864,7 @@
                                           {
                                             "id": "33b14c61-3dc8-471e-b77b-bca237f4e270",
                                             "$stop": {
+                                              "position": { "lat": 48.826627, "lon": 1.70303 },
                                               "name": "Orgerus – Béhoust",
                                               "placeName": "",
                                               "subtitle": "",
@@ -857,6 +880,7 @@
                                           {
                                             "id": "76d8b1fc-2dc4-4aa0-bd6f-625be11b4c5c",
                                             "$stop": {
+                                              "position": { "lat": 48.82932, "lon": 1.668662 },
                                               "name": "Tacoignières – Richebourg",
                                               "placeName": "",
                                               "subtitle": "",
@@ -872,6 +896,7 @@
                                           {
                                             "id": "dbe2205d-c753-40d4-922b-a08fafcf322a",
                                             "$stop": {
+                                              "position": { "lat": 48.796026, "lon": 1.602134 },
                                               "name": "Houdan",
                                               "placeName": "",
                                               "subtitle": "",
@@ -887,6 +912,7 @@
                                           {
                                             "id": "7dcaf25e-8944-4ce5-9d6e-0a66789dad0a",
                                             "$stop": {
+                                              "position": { "lat": 48.768391, "lon": 1.513572 },
                                               "name": "Marchezais – Broué",
                                               "placeName": "",
                                               "subtitle": "",
@@ -904,6 +930,7 @@
                                           {
                                             "id": "96d47ecd-7656-48a5-a727-73e0d09c55b1",
                                             "$stop": {
+                                              "position": { "lat": 48.731106, "lon": 1.370431 },
                                               "name": "Dreux",
                                               "placeName": "",
                                               "subtitle": "",
@@ -956,6 +983,7 @@
                                           {
                                             "id": "0830cefd-67af-420f-9b3d-e05e590e2c18",
                                             "$stop": {
+                                              "position": { "lat": 48.860057, "lon": 1.875596 },
                                               "name": "Beynes",
                                               "placeName": "",
                                               "subtitle": "",
@@ -971,6 +999,7 @@
                                           {
                                             "id": "dfecc4ba-61b5-4aaf-a43e-0399ff102b30",
                                             "$stop": {
+                                              "position": { "lat": 48.89302, "lon": 1.871849 },
                                               "name": "Mareil-sur-Mauldre",
                                               "placeName": "",
                                               "subtitle": "",
@@ -986,6 +1015,7 @@
                                           {
                                             "id": "990b7258-7b03-45ca-8d51-2b1f1d5cb5fa",
                                             "$stop": {
+                                              "position": { "lat": 48.909328, "lon": 1.856897 },
                                               "name": "Maule",
                                               "placeName": "",
                                               "subtitle": "",
@@ -1001,6 +1031,7 @@
                                           {
                                             "id": "c3e128ba-954c-4c5d-8dbe-744f2c24be0f",
                                             "$stop": {
+                                              "position": { "lat": 48.938829, "lon": 1.840415 },
                                               "name": "Nézel – Aulnay",
                                               "placeName": "",
                                               "subtitle": "",
@@ -1016,6 +1047,7 @@
                                           {
                                             "id": "fffc89d9-37ad-458b-a9c3-5271e028e486",
                                             "$stop": {
+                                              "position": { "lat": 48.963405, "lon": 1.809133 },
                                               "name": "Épône – Mézières",
                                               "placeName": "",
                                               "subtitle": "",
@@ -1054,6 +1086,7 @@
                                           {
                                             "id": "3d0e66c8-d6bc-4c4d-8cdd-60926a42b061",
                                             "$stop": {
+                                              "position": { "lat": 48.989295, "lon": 1.703837 },
                                               "name": "Mantes-la-Jolie",
                                               "placeName": "",
                                               "subtitle": "",

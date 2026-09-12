@@ -48,6 +48,7 @@
                                           {
                                             "id": "debe237c-8909-42c9-9663-b35d985dd4a0",
                                             "$stop": {
+                                              "position": { "lat": 49.048233, "lon": 2.011579 },
                                               "name": "Cergy – Le Haut",
                                               "placeName": "",
                                               "subtitle": "",
@@ -84,6 +85,7 @@
                                           {
                                             "id": "dd9c5124-9e3a-4869-bdd3-cfc505526fc9",
                                             "$stop": {
+                                              "position": { "lat": 49.049642, "lon": 2.034522 },
                                               "name": "Cergy – St-Christophe",
                                               "placeName": "",
                                               "subtitle": "",
@@ -120,6 +122,7 @@
                                           {
                                             "id": "107377e3-f71a-4741-bcd0-0ac4db540ea8",
                                             "$stop": {
+                                              "position": { "lat": 49.036307, "lon": 2.079781 },
                                               "name": "Cergy – Préfecture",
                                               "placeName": "",
                                               "subtitle": "",
@@ -156,6 +159,7 @@
                                           {
                                             "id": "ba0037bd-3443-4894-9a45-e62c4ae3984b",
                                             "$stop": {
+                                              "position": { "lat": 49.013743, "lon": 2.078349 },
                                               "name": "Neuville – Université",
                                               "placeName": "",
                                               "subtitle": "",
@@ -192,6 +196,7 @@
                                           {
                                             "id": "87e19d5e-aea9-4ae3-95b7-9e8dde44ad9a",
                                             "$stop": {
+                                              "position": { "lat": 48.991156, "lon": 2.07465 },
                                               "name": "Conflans – Fin d’Oise",
                                               "placeName": "",
                                               "subtitle": "",
@@ -241,6 +246,7 @@
                                           {
                                             "id": "df331da9-791e-41c5-a63f-57f007e3e9e8",
                                             "$stop": {
+                                              "position": { "lat": 48.970644, "lon": 2.077727 },
                                               "name": "Achères – Ville",
                                               "placeName": "",
                                               "subtitle": "",
@@ -295,6 +301,7 @@
                                           {
                                             "id": "7902c86a-e928-49c8-8c61-19f60b867fd6",
                                             "$stop": {
+                                              "position": { "lat": 48.93325, "lon": 2.040804 },
                                               "name": "Poissy",
                                               "subtitle": "",
                                               "placeName": "",
@@ -332,6 +339,7 @@
                                           {
                                             "id": "265c2594-da4d-4dba-bc5a-0188caaa2302",
                                             "$stop": {
+                                              "position": { "lat": 48.955411, "lon": 2.093653 },
                                               "name": "Achères\nGrand Cormier",
                                               "subtitle": "",
                                               "placeName": "",
@@ -374,6 +382,7 @@
                               {
                                 "id": "14e99a1e-4415-44aa-94aa-4f5c749781c9",
                                 "$stop": {
+                                  "position": { "lat": 48.945741, "lon": 2.144672 },
                                   "name": "Maisons-Laffitte",
                                   "placeName": "",
                                   "subtitle": "",
@@ -410,6 +419,7 @@
                               {
                                 "id": "b5b502f2-abfa-45d1-b78c-289497e1111c",
                                 "$stop": {
+                                  "position": { "lat": 48.937695, "lon": 2.15722 },
                                   "name": "Sartrouville",
                                   "placeName": "",
                                   "subtitle": "",
@@ -446,6 +456,7 @@
                               {
                                 "id": "5afa8574-d11f-4ddf-a984-71972de3260b",
                                 "$stop": {
+                                  "position": { "lat": 48.920348, "lon": 2.185176 },
                                   "name": "Houilles\nCarrières-sur-Seine",
                                   "placeName": "",
                                   "subtitle": "",
@@ -514,6 +525,7 @@
                               {
                                 "id": "0c9618f2-8a4b-4fd6-8d54-2f0b31df19ef",
                                 "$stop": {
+                                  "position": { "lat": 48.898745, "lon": 2.095042 },
                                   "name": "Saint-Germain-en-Laye",
                                   "placeName": "",
                                   "subtitle": "",
@@ -550,6 +562,7 @@
                               {
                                 "id": "df5c5625-4c33-4fed-9230-d093d71d84b8",
                                 "$stop": {
+                                  "position": { "lat": 48.89795, "lon": 2.122132 },
                                   "name": "Le Vésinet – Le Pecq",
                                   "placeName": "",
                                   "subtitle": "",
@@ -563,6 +576,7 @@
                               {
                                 "id": "f138faea-57ef-4041-90ad-5c7329b0f728",
                                 "$stop": {
+                                  "position": { "lat": 48.890138, "lon": 2.134334 },
                                   "name": "Le Vésinet – Centre",
                                   "placeName": "",
                                   "subtitle": "",
@@ -576,6 +590,7 @@
                               {
                                 "id": "8fa7395c-7a2e-4768-bb28-b90f1a52cf58",
                                 "$stop": {
+                                  "position": { "lat": 48.885197, "lon": 2.155938 },
                                   "name": "Chatou – Croissy",
                                   "placeName": "",
                                   "subtitle": "",
@@ -589,6 +604,7 @@
                               {
                                 "id": "8af20fe0-9bfa-4bec-9d29-de228dd58f50",
                                 "$stop": {
+                                  "position": { "lat": 48.887673, "lon": 2.172366 },
                                   "name": "Rueil-Malmaison",
                                   "placeName": "",
                                   "subtitle": "",
@@ -602,6 +618,7 @@
                               {
                                 "id": "ab45eeb5-4e8b-4485-9173-799c1414923d",
                                 "$stop": {
+                                  "position": { "lat": 48.89502, "lon": 2.195118 },
                                   "name": "Nanterre – Ville",
                                   "placeName": "",
                                   "subtitle": "",
@@ -615,6 +632,7 @@
                               {
                                 "id": "84524163-7cb8-47f7-aed6-e8664ec48419",
                                 "$stop": {
+                                  "position": { "lat": 48.90113, "lon": 2.213536 },
                                   "name": "Nanterre\nUniversité",
                                   "placeName": "",
                                   "subtitle": "",
@@ -682,6 +700,7 @@
                   {
                     "id": "c9e2dbbd-67aa-49d1-a2c2-af82da9eceda",
                     "$stop": {
+                      "position": { "lat": 48.895887, "lon": 2.222986 },
                       "name": "Nanterre – Préfecture",
                       "placeName": "",
                       "subtitle": "",
@@ -718,6 +737,7 @@
                   {
                     "id": "5453b2ae-a22c-4895-835c-3937d76652a4",
                     "$stop": {
+                      "position": { "lat": 48.89223, "lon": 2.238419 },
                       "name": "La Défense",
                       "subtitle": "Grande Arche",
                       "placeName": "",
@@ -840,6 +860,7 @@
                   {
                     "id": "4120d0eb-c518-47ab-853c-d265b993aedd",
                     "$stop": {
+                      "position": { "lat": 48.874173, "lon": 2.295231 },
                       "name": "Charles de Gaulle – Étoile",
                       "placeName": "",
                       "subtitle": "",
@@ -902,6 +923,7 @@
                   {
                     "id": "639acbe3-2196-45c2-8d94-e72c01fdef60",
                     "$stop": {
+                      "position": { "lat": 48.872349, "lon": 2.329659 },
                       "name": "Auber",
                       "placeName": "",
                       "subtitle": "",
@@ -1014,6 +1036,7 @@
                   {
                     "id": "a3bbc92b-0cda-4035-8376-75e8d463a1e1",
                     "$stop": {
+                      "position": { "lat": 48.861745, "lon": 2.346977 },
                       "name": "Châtelet – Les Halles",
                       "placeName": "",
                       "subtitle": "Secteur Forum",
@@ -1150,6 +1173,7 @@
                   {
                     "id": "295079cd-dec8-45b5-996d-db0ae24a2602",
                     "$stop": {
+                      "position": { "lat": 48.843402, "lon": 2.376366 },
                       "name": "Gare de Lyon",
                       "placeName": "",
                       "subtitle": "",
@@ -1264,6 +1288,7 @@
                   {
                     "id": "097f72c5-3b26-4dbe-8f28-7b1d9c43bfb2",
                     "$stop": {
+                      "position": { "lat": 48.848233, "lon": 2.395944 },
                       "name": "Nation",
                       "placeName": "",
                       "subtitle": "",
@@ -1339,6 +1364,7 @@
                   {
                     "id": "65db90c5-ace1-4f2d-92b6-0f807088ae2e",
                     "$stop": {
+                      "position": { "lat": 48.847347, "lon": 2.432584 },
                       "name": "Vincennes",
                       "placeName": "",
                       "subtitle": "",
@@ -1383,6 +1409,7 @@
                               {
                                 "id": "e2be6edb-28ee-4494-b48c-d765424c48b8",
                                 "$stop": {
+                                  "position": { "lat": 48.854247, "lon": 2.489054 },
                                   "name": "Val de Fontenay",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1419,6 +1446,7 @@
                               {
                                 "id": "3f2be997-fd13-4475-aeac-cdf491118faf",
                                 "$stop": {
+                                  "position": { "lat": 48.852525, "lon": 2.51459 },
                                   "name": "Neuilly-Plaisance",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1432,6 +1460,7 @@
                               {
                                 "id": "35fd408c-f889-4f7c-98dd-a3892133029a",
                                 "$stop": {
+                                  "position": { "lat": 48.845137, "lon": 2.525671 },
                                   "name": "Bry-sur-Marne",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1445,6 +1474,7 @@
                               {
                                 "id": "b6b33f7e-669a-4147-9f96-cfa78e748d80",
                                 "$stop": {
+                                  "position": { "lat": 48.840885, "lon": 2.548807 },
                                   "name": "Noisy-le-Grand\nMont d’Est",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1458,6 +1488,7 @@
                               {
                                 "id": "3661251c-f5a6-44df-829a-286118f4c1e0",
                                 "$stop": {
+                                  "position": { "lat": 48.842896, "lon": 2.580103 },
                                   "name": "Noisy – Champs",
                                   "placeName": "",
                                   "subtitle": "Champy-Nesles",
@@ -1471,6 +1502,7 @@
                               {
                                 "id": "2ca025f1-0f05-4b55-9bcc-6fc03049671d",
                                 "$stop": {
+                                  "position": { "lat": 48.843514, "lon": 2.616661 },
                                   "name": "Noisiel",
                                   "placeName": "",
                                   "subtitle": "Le Luzard",
@@ -1484,6 +1516,7 @@
                               {
                                 "id": "c55dd100-7b0d-4c5d-9d33-807db7b0ac1b",
                                 "$stop": {
+                                  "position": { "lat": 48.839255, "lon": 2.633027 },
                                   "name": "Lognes",
                                   "placeName": "",
                                   "subtitle": "Le Mandinet",
@@ -1497,6 +1530,7 @@
                               {
                                 "id": "dead4a14-614d-4467-a68d-1be784a79318",
                                 "$stop": {
+                                  "position": { "lat": 48.83971, "lon": 2.655169 },
                                   "name": "Torcy",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1510,6 +1544,7 @@
                               {
                                 "id": "44a23721-fcbb-4dd3-9bed-b85cdca75608",
                                 "$stop": {
+                                  "position": { "lat": 48.836713, "lon": 2.710383 },
                                   "name": "Bussy-Saint-Georges",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1523,6 +1558,7 @@
                               {
                                 "id": "a8e420f7-465b-4f84-be17-d92420a413da",
                                 "$stop": {
+                                  "position": { "lat": 48.854846, "lon": 2.772427 },
                                   "name": "Val d’Europe",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1536,6 +1572,7 @@
                               {
                                 "id": "6c0c2a85-c767-4df6-8a94-5225fdc1afbf",
                                 "$stop": {
+                                  "position": { "lat": 48.869795, "lon": 2.782483 },
                                   "name": "Marne-la-Vallée\nChessy",
                                   "subtitle": "Parcs Disneyland",
                                   "placeName": "",
@@ -1584,6 +1621,7 @@
                               {
                                 "id": "2a23005c-40e7-446f-8d33-71d61802a7b6",
                                 "$stop": {
+                                  "position": { "lat": 48.843789, "lon": 2.463538 },
                                   "name": "Fontenay-sous-Bois",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1597,6 +1635,7 @@
                               {
                                 "id": "e48e70db-6e0d-4bf5-a17a-2f4a3ed7df2c",
                                 "$stop": {
+                                  "position": { "lat": 48.834307, "lon": 2.471684 },
                                   "name": "Nogent-sur-Marne",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1610,6 +1649,7 @@
                               {
                                 "id": "8ef042db-37c4-4b31-a811-9a1479ec91a7",
                                 "$stop": {
+                                  "position": { "lat": 48.821197, "lon": 2.463874 },
                                   "name": "Joinville-le-Pont",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1623,6 +1663,7 @@
                               {
                                 "id": "cfea1de6-4d50-4e5f-9bec-1b7513b8aee8",
                                 "$stop": {
+                                  "position": { "lat": 48.806196, "lon": 2.472909 },
                                   "name": "Saint-Maur – Créteil",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1659,6 +1700,7 @@
                               {
                                 "id": "dfc04d61-faed-47c3-afb5-69875e4f8850",
                                 "$stop": {
+                                  "position": { "lat": 48.80541, "lon": 2.486624 },
                                   "name": "Le Parc de Saint-Maur",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1672,6 +1714,7 @@
                               {
                                 "id": "018ac2d6-4bac-4152-87a6-630ede2925be",
                                 "$stop": {
+                                  "position": { "lat": 48.806823, "lon": 2.510538 },
                                   "name": "Champigny",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1685,6 +1728,7 @@
                               {
                                 "id": "3addf0b2-152b-4784-8355-8f2fd96dc509",
                                 "$stop": {
+                                  "position": { "lat": 48.795327, "lon": 2.513232 },
                                   "name": "La Varenne\nChennevières",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1698,6 +1742,7 @@
                               {
                                 "id": "65e50756-e1da-417a-bef1-a840fc0772c7",
                                 "$stop": {
+                                  "position": { "lat": 48.772064, "lon": 2.507499 },
                                   "name": "Sucy – Bonneuil",
                                   "placeName": "",
                                   "subtitle": "",
@@ -1734,6 +1779,7 @@
                               {
                                 "id": "a637d017-754f-480a-a3a4-3450024c2dd1",
                                 "$stop": {
+                                  "position": { "lat": 48.752267, "lon": 2.504498 },
                                   "name": "Boissy-Saint-Léger",
                                   "placeName": "",
                                   "subtitle": "",
