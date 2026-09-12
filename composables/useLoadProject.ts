@@ -6,6 +6,7 @@ import { useI18n } from 'vue-i18n'
 import { useProjectVersionCheck } from '~/composables/useProjectVersionCheck'
 import useVersion from '~/composables/useVersion'
 import { useCustomLineIndices } from '~/stores/useCustomLineIndices'
+import { useModePictos } from '~/stores/useModePictos'
 import { useProject } from '~/stores/useProject'
 
 export default function useLoadProject() {
@@ -24,9 +25,12 @@ export default function useLoadProject() {
   const lineStore = useProject()
   const { version, line, presetBased } = storeToRefs(lineStore)
   const indicesStore = storeToRefs(useCustomLineIndices())
+  const modePictos = useModePictos()
 
   function preload(project: Project) {
-    if (project.customIndices.length > 0) {
+    const hasExtras = project.customIndices.length > 0
+      || Object.keys(project.modePictos ?? {}).length > 0
+    if (hasExtras) {
       confirm.require({
         header: t('ui.dialogs.loading_custom_indices_prompt.header'),
         message: t('ui.dialogs.loading_custom_indices_prompt.message'),
@@ -62,6 +66,7 @@ export default function useLoadProject() {
       : (project.line.brandStyle as string) === 'SNCF_D' ? 'SNCF' : project.line.brandStyle ?? 'RATP'
     line.value.terminusNamesLineColor = project.line.terminusNamesLineColor ?? false
     line.value.operator = project.line.operator ?? 'RATP'
+    line.value.stopNameAngle = project.line.stopNameAngle
     line.value.topology = project.line.topology
 
     if (loadCustomIndices) {
@@ -69,6 +74,12 @@ export default function useLoadProject() {
       const newIndices = project.customIndices.filter(it => !existingIndicesIds.includes(it.id))
 
       indicesStore.indices.value.push(...newIndices)
+
+      for (const [mode, picto] of Object.entries(project.modePictos ?? {})) {
+        if (!modePictos.isCustomized(mode as Mode)) {
+          modePictos.pictos = { ...modePictos.pictos, [mode]: picto }
+        }
+      }
     }
 
     toast.add({

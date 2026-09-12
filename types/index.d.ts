@@ -120,6 +120,7 @@ declare global {
     presetBased: boolean
     line: Line
     customIndices: CustomLineIndexDescription[]
+    modePictos?: Partial<Record<Mode, string>>
   }
 
   /* ///////////// LINE ///////////// */
