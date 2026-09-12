@@ -121,11 +121,51 @@ function drawTrack(g: CanvasRenderingContext2D, line: Line, f: number) {
 }
 
 /* ---------- géométrie du plan schématique ---------- */
-interface Offsets { pts: [number, number][], tangents: [number, number][] }
+interface Offsets { pts: [number, number][], tangents: [number, number][], path: [number, number][] }
 let offsetCache: { network: Network, scale: number, map: Map<string, Offsets> } | null = null
 
 function isSchematic(): boolean {
   return !!network?.meta?.straight
+}
+
+const OCT = Math.PI / 4
+
+/**
+ * Rend un tracé strictement octolinéaire : chaque segment devient une portion droite et une
+ * portion à 45°, reliées par un coude. Les stations ne bougent pas ; seul le chemin entre elles
+ * est redressé. Un segment déjà sur une des huit directions est laissé tel quel.
+ */
+function octolinearPath(pts: [number, number][]): [number, number][] {
+  if (pts.length < 2) return pts.slice()
+  const out: [number, number][] = [pts[0]]
+  let prev: [number, number] | null = null
+  for (let i = 1; i < pts.length; i++) {
+    const [x1, y1] = out[out.length - 1]
+    const [x2, y2] = pts[i]
+    const dx = x2 - x1
+    const dy = y2 - y1
+    if (Math.abs(dx) < 1e-9 && Math.abs(dy) < 1e-9) continue
+    const dev = Math.abs(Math.atan2(dy, dx) - Math.round(Math.atan2(dy, dx) / OCT) * OCT)
+    if (dev < 0.005) { // déjà sur une des huit directions
+      out.push([x2, y2])
+      prev = [Math.sign(dx), Math.sign(dy)]
+      continue
+    }
+    const sx = Math.sign(dx) || 1
+    const sy = Math.sign(dy) || 1
+    const ax = Math.abs(dx)
+    const ay = Math.abs(dy)
+    // partie droite (horizontale ou verticale) et partie à 45°, dans un ordre ou dans l'autre
+    const axisFirst: [number, number] = ax > ay ? [x1 + sx * (ax - ay), y1] : [x1, y1 + sy * (ay - ax)]
+    const diagFirst: [number, number] = ax > ay ? [x1 + sx * ay, y2] : [x2, y1 + sy * ax]
+    const dirOf = (from: [number, number], to: [number, number]): [number, number] => [Math.sign(to[0] - from[0]), Math.sign(to[1] - from[1])]
+    const same = (a: [number, number], b: [number, number] | null) => !!b && a[0] === b[0] && a[1] === b[1]
+    // on prolonge la direction précédente quand c'est possible : moins de coudes visibles
+    const elbow = same(dirOf([x1, y1], diagFirst), prev) ? diagFirst : axisFirst
+    out.push(elbow, [x2, y2])
+    prev = dirOf(elbow, [x2, y2])
+  }
+  return out
 }
 
 /** Positions (monde) de chaque ligne une fois les lignes qui partagent un tronçon écartées côte à côte. */
@@ -196,7 +236,7 @@ function offsetPolylines(): Map<string, Offsets> {
       pts.push([S[j].x + v[0], S[j].y + v[1]])
       tangents.push(t)
     }
-    map.set(line.id, { pts, tangents })
+    map.set(line.id, { pts, tangents, path: octolinearPath(pts) })
   }
   offsetCache = { network, scale: view.scale, map }
   return map
@@ -225,8 +265,8 @@ function roundedPath(g: CanvasRenderingContext2D, pts: [number, number][], radiu
 
 function drawTrackSchematic(g: CanvasRenderingContext2D, line: Line, f: number, offsets: Map<string, Offsets>) {
   const o = offsets.get(line.id)
-  if (!o || o.pts.length < 2) return
-  const pts = o.pts.map(p => toScreen(p[0], p[1]))
+  if (!o || o.path.length < 2) return
+  const pts = o.path.map(p => toScreen(p[0], p[1]))
   const w = (SWIDTH[line.mode] ?? 4) * f
   g.lineJoin = 'round'
   g.lineCap = 'round'

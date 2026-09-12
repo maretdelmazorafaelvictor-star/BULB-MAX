@@ -24,10 +24,12 @@ export interface SchematicOptions {
   octo: number
   /** fidélité à la géographie : 0 = libre, 1 = forte, au-delà = très proche du terrain */
   fidelity: number
+  /** pas de la grille d'accrochage, en multiple de l'espacement médian (0 = pas de grille) */
+  grid: number
   iterations: number
 }
 
-export const SCHEMATIC_DEFAULTS: SchematicOptions = { dilation: null, spacing: 1, octo: 1, fidelity: 0.5, iterations: 500 }
+export const SCHEMATIC_DEFAULTS: SchematicOptions = { dilation: null, spacing: 1, octo: 1, fidelity: 0.5, grid: 1, iterations: 500 }
 
 export interface SchematicResult {
   positions: Map<string, { x: number, y: number }>
@@ -413,6 +415,97 @@ export function schematize(network: Network, options?: Partial<SchematicOptions>
     project(100)
     for (let it = 0; it < 60; it++) relaxStep(0.12, 1.4, 0)
     project(150)
+  }
+
+  /* ---------- 4. grille et lissage ----------
+   * Les stations sont posées sur une grille au pas de l'espacement : la plupart des tronçons
+   * tombent alors exactement sur une des huit directions. Puis chaque portion rectiligne d'une
+   * ligne est redressée sur une direction unique, les stations intermédiaires réparties le long
+   * de cette droite. Les correspondances servent d'ancrage et ne bougent pas au redressement :
+   * sans cela les lignes se contredisent et le gain est perdu. */
+  if (o.grid > 0 && N > 2) {
+    const step = o.grid * L
+    const degree: number[] = Array.from({ length: N }, () => 0)
+    for (const [a, b] of edges) {
+      degree[a]++
+      degree[b]++
+    }
+    const order = stations.map((_, i) => i).sort((a, b) => degree[b] - degree[a])
+    const taken = new Set<string>()
+    for (const i of order) {
+      const gx = Math.round(X[i][0] / step)
+      const gy = Math.round(X[i][1] / step)
+      let cell: [number, number] = [gx, gy]
+      let bestD = Infinity
+      for (let ring = 0; ring <= 3; ring++) {
+        let found = false
+        for (let dx = -ring; dx <= ring; dx++) {
+          for (let dy = -ring; dy <= ring; dy++) {
+            if (Math.max(Math.abs(dx), Math.abs(dy)) !== ring) continue
+            if (taken.has(`${gx + dx},${gy + dy}`)) continue
+            const d = Math.hypot((gx + dx) * step - X[i][0], (gy + dy) * step - X[i][1])
+            if (d < bestD) {
+              bestD = d
+              cell = [gx + dx, gy + dy]
+              found = true
+            }
+          }
+        }
+        if (found) break
+      }
+      taken.add(`${cell[0]},${cell[1]}`)
+      X[i][0] = cell[0] * step
+      X[i][1] = cell[1] * step
+    }
+    // redressement : trois passes suffisent à stabiliser
+    const anchored = stations.map(st => st.interchange)
+    for (let pass = 0; pass < 3; pass++) {
+      const acc: P2[] = Array.from({ length: N }, () => [0, 0])
+      const cnt: number[] = Array.from({ length: N }, () => 0)
+      for (const p of paths) {
+        const breaks = simplify(p, 0.45 * step)
+        for (let r = 1; r < breaks.length; r++) {
+          const i0 = breaks[r - 1]
+          const i1 = breaks[r]
+          const A = X[p[i0]]
+          const B = X[p[i1]]
+          const ang = Math.round(Math.atan2(B[1] - A[1], B[0] - A[0]) / OCTANT) * OCTANT
+          const dx = Math.cos(ang)
+          const dy = Math.sin(ang)
+          const len = (B[0] - A[0]) * dx + (B[1] - A[1]) * dy
+          for (let i = i0; i <= i1; i++) {
+            const node = p[i]
+            if (anchored[node]) continue
+            const t = (i - i0) / (i1 - i0)
+            acc[node][0] += A[0] + dx * len * t
+            acc[node][1] += A[1] + dy * len * t
+            cnt[node]++
+          }
+        }
+      }
+      for (let i = 0; i < N; i++) {
+        if (!cnt[i]) continue
+        X[i][0] = acc[i][0] / cnt[i]
+        X[i][1] = acc[i][1] / cnt[i]
+      }
+    }
+    // le redressement peut amener deux stations au même point : on les décolle
+    const bucket = new Map<string, number>()
+    for (let i = 0; i < N; i++) {
+      const k = `${Math.round(X[i][0] / (0.2 * step))},${Math.round(X[i][1] / (0.2 * step))}`
+      const first = bucket.get(k)
+      if (first === undefined) {
+        bucket.set(k, i)
+        continue
+      }
+      const move = degree[i] <= degree[first] ? i : first
+      const nb = [...nbrs[move]][0]
+      const dx = nb === undefined ? 1 : X[move][0] - X[nb][0]
+      const dy = nb === undefined ? 0 : X[move][1] - X[nb][1]
+      const d = Math.hypot(dx, dy) || 1
+      X[move][0] += (dx / d) * 0.35 * step
+      X[move][1] += (dy / d) * 0.35 * step
+    }
   }
 
   const positions = new Map<string, { x: number, y: number }>()

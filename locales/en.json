@@ -569,16 +569,16 @@
       },
       "settings": {
         "title": "Map",
-        "view_schematic": "Diagram",
-        "view_geo": "Geography",
         "dilation": "Centre dilation",
         "auto": "auto",
         "spacing": "Spacing",
         "fidelity": "Faithfulness to geography",
+        "grid": "Snap grid",
+        "off": "off",
         "octo": "45° angles",
         "apply": "Recompute",
         "reset": "Reset",
-        "score": "Segments aligned at 45°: {value}%"
+        "score": "Straight segments, no elbow: {value}%"
       },
       "summary": {
         "lines": "{count} lines",

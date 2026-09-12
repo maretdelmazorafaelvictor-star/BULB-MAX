@@ -575,16 +575,16 @@
       },
       "settings": {
         "title": "路線図",
-        "view_schematic": "略図",
-        "view_geo": "地理",
         "dilation": "中心の拡大",
         "auto": "自動",
         "spacing": "間隔",
         "fidelity": "地理への忠実さ",
+        "grid": "スナップグリッド",
+        "off": "なし",
         "octo": "45°の角度",
         "apply": "再計算",
         "reset": "リセット",
-        "score": "45°に揃った区間：{value} %"
+        "score": "折れのない直線区間：{value} %"
       },
       "summary": {
         "lines": "{count}路線",

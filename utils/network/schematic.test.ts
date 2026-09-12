@@ -18,8 +18,21 @@ describe('schématisation', () => {
     expect(octolinearity(network, r.positions, 8)).toBeGreaterThan(octolinearity(network, new Map(network.stations.map(s => [s.name, { x: s.x, y: s.y }])), 8))
   })
 
+  it('la grille aligne la plupart des tronçons et ne superpose pas les stations', () => {
+    const r = schematize(network, { grid: 1 })
+    const sansGrille = schematize(network, { grid: 0 })
+    expect(octolinearity(network, r.positions, 0.6)).toBeGreaterThan(octolinearity(network, sansGrille.positions, 0.6))
+    expect(octolinearity(network, r.positions, 0.6)).toBeGreaterThan(0.55)
+    const seen = new Set<string>()
+    for (const p of r.positions.values()) {
+      const k = `${p.x.toFixed(3)},${p.y.toFixed(3)}`
+      expect(seen.has(k)).toBe(false)
+      seen.add(k)
+    }
+  })
+
   it('sans attraction octolinéaire, la géographie dilatée est conservée', () => {
-    const r = schematize(network, { octo: 0, iterations: 50 })
+    const r = schematize(network, { octo: 0, grid: 0, iterations: 50 })
     expect(octolinearity(network, r.positions, 8)).toBeLessThan(0.9)
     expect(r.spacing).toBeGreaterThan(0)
   })

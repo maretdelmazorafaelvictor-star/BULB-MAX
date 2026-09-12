@@ -575,16 +575,16 @@
       },
       "settings": {
         "title": "Plan",
-        "view_schematic": "Schéma",
-        "view_geo": "Géographie",
         "dilation": "Dilatation du centre",
         "auto": "auto",
         "spacing": "Espacement",
         "fidelity": "Fidélité à la géographie",
+        "grid": "Grille d'accrochage",
+        "off": "sans",
         "octo": "Angles à 45°",
         "apply": "Recalculer",
         "reset": "Réinitialiser",
-        "score": "Tronçons alignés à 45° : {value} %"
+        "score": "Tronçons droits, sans coude : {value} %"
       },
       "summary": {
         "lines": "{count} lignes",

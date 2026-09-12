@@ -575,16 +575,16 @@
       },
       "settings": {
         "title": "Plano",
-        "view_schematic": "Esquema",
-        "view_geo": "Geografía",
         "dilation": "Dilatación del centro",
         "auto": "auto",
         "spacing": "Espaciado",
         "fidelity": "Fidelidad a la geografía",
+        "grid": "Rejilla de ajuste",
+        "off": "sin",
         "octo": "Ángulos de 45°",
         "apply": "Recalcular",
         "reset": "Restablecer",
-        "score": "Tramos alineados a 45°: {value} %"
+        "score": "Tramos rectos, sin codo: {value} %"
       },
       "summary": {
         "lines": "{count} líneas",

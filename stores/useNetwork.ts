@@ -18,9 +18,11 @@ export interface SchematicSettings {
   octo: number
   /** fidélité à la géographie (0..2) */
   fidelity: number
+  /** pas de la grille d'accrochage (0 = pas de grille) */
+  grid: number
 }
 
-export const DEFAULT_SCHEMATIC: SchematicSettings = { dilation: 0, spacing: 1, octo: 1, fidelity: 0.5 }
+export const DEFAULT_SCHEMATIC: SchematicSettings = { dilation: 0, spacing: 1, octo: 1, fidelity: 0.5, grid: 1 }
 
 export interface ImportReport {
   projects: number
@@ -47,12 +49,11 @@ export const useNetwork = defineStore('network', () => {
   const edits = ref<NetworkEdits>({ merge: {}, rename: {}, hide: [] })
   const report = ref<ImportReport | null>(null)
   const computing = ref(false)
-  /** vue : plan schématique (angles à 45°) ou géographie */
-  const view = ref<'schematic' | 'geo'>('schematic')
   const schematicSettings = ref<SchematicSettings>({ ...DEFAULT_SCHEMATIC })
   // réglages enregistrés par une version antérieure : on complète les champs manquants
   watch(schematicSettings, (v) => {
     if (v && typeof v.fidelity !== 'number') v.fidelity = DEFAULT_SCHEMATIC.fidelity
+    if (v && typeof v.grid !== 'number') v.grid = DEFAULT_SCHEMATIC.grid
   }, { immediate: true, deep: true })
   /** fichier réseau schématisé (positions à 45°), dérivé de `data` */
   const schematicData = ref<NetworkData | null>(null)
@@ -69,7 +70,8 @@ export const useNetwork = defineStore('network', () => {
     schematicNetwork.value = d ? build(d) : null
   }, { deep: true, flush: 'sync' })
 
-  const network = computed(() => (view.value === 'schematic' && schematicNetwork.value) ? schematicNetwork.value : geoNetwork.value)
+  // le plan affiché est toujours le plan schématique ; la géographie n'en est que la matière première
+  const network = computed(() => schematicNetwork.value ?? geoNetwork.value)
 
   /** Recalcule le plan schématique à partir du réseau géographique. */
   function reschematize() {
@@ -82,7 +84,7 @@ export const useNetwork = defineStore('network', () => {
     computing.value = true
     try {
       const s = schematicSettings.value
-      const result = schematize(base, { dilation: s.dilation > 0 ? s.dilation : undefined, spacing: s.spacing, octo: s.octo, fidelity: s.fidelity })
+      const result = schematize(base, { dilation: s.dilation > 0 ? s.dilation : undefined, spacing: s.spacing, octo: s.octo, fidelity: s.fidelity, grid: s.grid })
       schematicData.value = toSchematicData(data.value, base, result)
       schematicScore.value = octolinearity(base, result.positions)
     } finally {
@@ -321,7 +323,6 @@ export const useNetwork = defineStore('network', () => {
     edits,
     report,
     computing,
-    view,
     schematicSettings,
     schematicData,
     schematicScore,
@@ -352,6 +353,6 @@ export const useNetwork = defineStore('network', () => {
 }, {
   persist: {
     storage: localStorage,
-    pick: ['projects', 'reference', 'referenceFiles', 'data', 'hiddenGroups', 'edits', 'report', 'view', 'schematicSettings', 'schematicData'],
+    pick: ['projects', 'reference', 'referenceFiles', 'data', 'hiddenGroups', 'edits', 'report', 'schematicSettings', 'schematicData'],
   },
 })

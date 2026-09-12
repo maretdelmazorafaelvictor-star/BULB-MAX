@@ -5,12 +5,7 @@ import { DEFAULT_SCHEMATIC, useNetwork } from '~/stores/useNetwork'
 
 /** Réglages du plan : vue schématique ou géographique, dilatation, espacement, angles. */
 const store = useNetwork()
-const { view, schematicSettings, schematicScore, computing, data } = storeToRefs(store)
-
-const viewOptions = [
-  { value: 'schematic', label: 'ui.network.settings.view_schematic' },
-  { value: 'geo', label: 'ui.network.settings.view_geo' },
-]
+const { schematicSettings, schematicScore, computing, data } = storeToRefs(store)
 
 const dilation = computed({
   get: () => Math.round(schematicSettings.value.dilation * 100),
@@ -30,6 +25,11 @@ const fidelity = computed({
   set: v => schematicSettings.value.fidelity = v / 100,
 })
 
+const grid = computed({
+  get: () => Math.round((schematicSettings.value.grid ?? 1) * 100),
+  set: v => schematicSettings.value.grid = v / 100,
+})
+
 const isDefault = computed(() => JSON.stringify(schematicSettings.value) === JSON.stringify(DEFAULT_SCHEMATIC))
 
 function reset() {
@@ -40,66 +40,62 @@ function reset() {
 
 <template>
   <div class="flex flex-col gap-3">
-    <SelectButton
-      v-model="view"
-      pt:pc-toggle-button:root:class="flex-grow"
-      :options="viewOptions"
-      :option-label="option => $t(option.label)"
-      option-value="value"
-      :allow-empty="false"
-    />
-
-    <template v-if="view === 'schematic'">
-      <div class="setting">
-        <label>{{ $t('ui.network.settings.dilation') }}</label>
-        <div class="flex items-center gap-3">
-          <Slider v-model="dilation" class="flex-grow" :min="0" :max="100" :step="5" :disabled="!data" />
-          <span class="value">{{ dilation ? `${dilation} %` : $t('ui.network.settings.auto') }}</span>
-        </div>
+    <div class="setting">
+      <label>{{ $t('ui.network.settings.dilation') }}</label>
+      <div class="flex items-center gap-3">
+        <Slider v-model="dilation" class="flex-grow" :min="0" :max="100" :step="5" :disabled="!data" />
+        <span class="value">{{ dilation ? `${dilation} %` : $t('ui.network.settings.auto') }}</span>
       </div>
-      <div class="setting">
-        <label>{{ $t('ui.network.settings.spacing') }}</label>
-        <div class="flex items-center gap-3">
-          <Slider v-model="spacing" class="flex-grow" :min="50" :max="200" :step="5" :disabled="!data" />
-          <span class="value">{{ spacing }} %</span>
-        </div>
+    </div>
+    <div class="setting">
+      <label>{{ $t('ui.network.settings.spacing') }}</label>
+      <div class="flex items-center gap-3">
+        <Slider v-model="spacing" class="flex-grow" :min="50" :max="200" :step="5" :disabled="!data" />
+        <span class="value">{{ spacing }} %</span>
       </div>
-      <div class="setting">
-        <label>{{ $t('ui.network.settings.fidelity') }}</label>
-        <div class="flex items-center gap-3">
-          <Slider v-model="fidelity" class="flex-grow" :min="0" :max="200" :step="5" :disabled="!data" />
-          <span class="value">{{ fidelity }} %</span>
-        </div>
+    </div>
+    <div class="setting">
+      <label>{{ $t('ui.network.settings.fidelity') }}</label>
+      <div class="flex items-center gap-3">
+        <Slider v-model="fidelity" class="flex-grow" :min="0" :max="200" :step="5" :disabled="!data" />
+        <span class="value">{{ fidelity }} %</span>
       </div>
-      <div class="setting">
-        <label>{{ $t('ui.network.settings.octo') }}</label>
-        <div class="flex items-center gap-3">
-          <Slider v-model="octo" class="flex-grow" :min="0" :max="100" :step="5" :disabled="!data" />
-          <span class="value">{{ octo }} %</span>
-        </div>
+    </div>
+    <div class="setting">
+      <label>{{ $t('ui.network.settings.grid') }}</label>
+      <div class="flex items-center gap-3">
+        <Slider v-model="grid" class="flex-grow" :min="0" :max="150" :step="5" :disabled="!data" />
+        <span class="value">{{ grid ? `${grid} %` : $t('ui.network.settings.off') }}</span>
       </div>
-      <div class="flex items-center gap-2">
-        <Button
-          :label="$t('ui.network.settings.apply')"
-          icon="i-tabler-refresh"
-          size="small"
-          :loading="computing"
-          :disabled="!data"
-          @click="store.reschematize()"
-        />
-        <Button
-          :label="$t('ui.network.settings.reset')"
-          severity="secondary"
-          size="small"
-          text
-          :disabled="isDefault"
-          @click="reset()"
-        />
+    </div>
+    <div class="setting">
+      <label>{{ $t('ui.network.settings.octo') }}</label>
+      <div class="flex items-center gap-3">
+        <Slider v-model="octo" class="flex-grow" :min="0" :max="100" :step="5" :disabled="!data" />
+        <span class="value">{{ octo }} %</span>
       </div>
-      <p v-if="schematicScore !== null" class="text-sm op-70 m-0">
-        {{ $t('ui.network.settings.score', { value: Math.round(schematicScore * 100) }) }}
-      </p>
-    </template>
+    </div>
+    <div class="flex items-center gap-2">
+      <Button
+        :label="$t('ui.network.settings.apply')"
+        icon="i-tabler-refresh"
+        size="small"
+        :loading="computing"
+        :disabled="!data"
+        @click="store.reschematize()"
+      />
+      <Button
+        :label="$t('ui.network.settings.reset')"
+        severity="secondary"
+        size="small"
+        text
+        :disabled="isDefault"
+        @click="reset()"
+      />
+    </div>
+    <p v-if="schematicScore !== null" class="text-sm op-70 m-0">
+      {{ $t('ui.network.settings.score', { value: Math.round(schematicScore * 100) }) }}
+    </p>
   </div>
 </template>
 

@@ -575,16 +575,16 @@
       },
       "settings": {
         "title": "Plan",
-        "view_schematic": "Schema",
-        "view_geo": "Geografie",
         "dilation": "Dehnung der Mitte",
         "auto": "auto",
         "spacing": "Abstand",
         "fidelity": "Treue zur Geografie",
+        "grid": "Raster",
+        "off": "aus",
         "octo": "45°-Winkel",
         "apply": "Neu berechnen",
         "reset": "Zurücksetzen",
-        "score": "Auf 45° ausgerichtete Abschnitte: {value} %"
+        "score": "Gerade Abschnitte, ohne Knick: {value} %"
       },
       "summary": {
         "lines": "{count} Linien",
