@@ -24,6 +24,28 @@ export interface SchematicSettings {
 
 export const DEFAULT_SCHEMATIC: SchematicSettings = { dilation: 0, spacing: 1, octo: 1, fidelity: 0.5, grid: 1 }
 
+/** Horloge de simulation : heure affichée, marche/arrêt, accéléré, véhicules. */
+export interface ClockState {
+  /** heure simulée, en secondes depuis minuit */
+  time: number
+  playing: boolean
+  /** secondes simulées par seconde réelle */
+  rate: number
+  /** l'horloge suit l'heure de l'ordinateur */
+  real: boolean
+  /** afficher les véhicules en circulation */
+  vehicles: boolean
+}
+
+const DAY = 86400
+
+export const CLOCK_RATES = [1, 30, 60, 300]
+
+function clockNow(): number {
+  const d = new Date()
+  return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds()
+}
+
 export interface ImportReport {
   projects: number
   stations: number
@@ -317,6 +339,66 @@ export const useNetwork = defineStore('network', () => {
 
   const editCount = computed(() => Object.keys(edits.value.merge ?? {}).length + Object.keys(edits.value.rename ?? {}).length + (edits.value.hide ?? []).length)
 
+  /* ---------- horloge de simulation ---------- */
+
+  const clock = ref<ClockState>({ time: clockNow(), playing: true, rate: 1, real: true, vehicles: true })
+  let raf = 0
+  let last = 0
+  let watchers = 0
+
+  /** Fait avancer l'horloge. Plusieurs vues peuvent la demander : elle s'arrête à la dernière. */
+  function startClock() {
+    watchers++
+    if (raf) return
+    last = performance.now()
+    const step = (t: number) => {
+      const dt = (t - last) / 1000
+      last = t
+      const c = clock.value
+      if (c.real) c.time = clockNow()
+      else if (c.playing) c.time = (c.time + dt * c.rate) % DAY
+      raf = requestAnimationFrame(step)
+    }
+    raf = requestAnimationFrame(step)
+  }
+
+  function stopClock() {
+    watchers = Math.max(0, watchers - 1)
+    if (!watchers && raf) {
+      cancelAnimationFrame(raf)
+      raf = 0
+    }
+  }
+
+  /** Règle l'heure à la main : on quitte l'heure réelle. */
+  function setClockTime(t: number) {
+    clock.value.real = false
+    clock.value.time = ((t % DAY) + DAY) % DAY
+  }
+
+  function setClockRate(rate: number) {
+    clock.value.real = false
+    clock.value.rate = rate
+    clock.value.playing = true
+  }
+
+  function toggleClockPlaying() {
+    if (clock.value.real) clock.value.real = false
+    clock.value.playing = !clock.value.playing
+  }
+
+  /** Revient à l'heure de l'ordinateur. */
+  function useRealTime() {
+    clock.value.real = true
+    clock.value.rate = 1
+    clock.value.playing = true
+    clock.value.time = clockNow()
+  }
+
+  function toggleVehicles() {
+    clock.value.vehicles = !clock.value.vehicles
+  }
+
   function toggleGroup(group: string) {
     const i = hiddenGroups.value.indexOf(group)
     if (i >= 0) hiddenGroups.value.splice(i, 1)
@@ -360,6 +442,14 @@ export const useNetwork = defineStore('network', () => {
     hiddenStations,
     unhideStation,
     clearEdits,
+    clock,
+    startClock,
+    stopClock,
+    setClockTime,
+    setClockRate,
+    toggleClockPlaying,
+    useRealTime,
+    toggleVehicles,
   }
 }, {
   persist: {

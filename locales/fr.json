@@ -559,6 +559,16 @@
       "network": "Plan de réseau"
     },
     "network": {
+      "clock": {
+        "pause": "Mettre l'horloge en pause",
+        "play": "Relancer l'horloge",
+        "real": "heure réelle",
+        "vehicles": "Véhicules"
+      },
+      "vehicle": {
+        "at_stop": "à quai à {station}",
+        "next_stop": "prochain arrêt : {station}"
+      },
       "title": "Plan de réseau",
       "empty": "Importez des projets BULB (un fichier par ligne) ou un fichier réseau pour afficher la carte.",
       "search": "Rechercher une station…",

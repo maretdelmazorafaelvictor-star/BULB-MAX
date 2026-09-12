@@ -558,6 +558,16 @@
       "network": "Mappa della rete"
     },
     "network": {
+      "clock": {
+        "pause": "Metti in pausa l'orologio",
+        "play": "Riavvia l'orologio",
+        "real": "ora reale",
+        "vehicles": "Veicoli"
+      },
+      "vehicle": {
+        "at_stop": "fermo a {station}",
+        "next_stop": "prossima fermata: {station}"
+      },
       "title": "Mappa della rete",
       "empty": "Importa progetti BULB (un file per linea) o un file di rete per visualizzare la mappa.",
       "search": "Cerca una stazione…",

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { AutoCompleteCompleteEvent } from 'primevue/autocomplete'
 import type { Line, Network, Station } from '~/utils/network/engine'
-import { useNow } from '@vueuse/core'
+import { storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
 import { useNetwork } from '~/stores/useNetwork'
 import { nextDepartures } from '~/utils/network/engine'
@@ -40,7 +40,7 @@ function pick(name: string) {
 }
 
 /* ---------- fiche station ---------- */
-const now = useNow({ interval: 1000 })
+const { clock, geoNetwork } = storeToRefs(store)
 const station = computed<Station | null>(() => network?.stations.find(s => s.name === selectedStation) ?? null)
 
 const lineGroups = computed(() => {
@@ -96,10 +96,14 @@ function applyMerge(other: string) {
 interface DepartureRow { line: Line, destination: string, minutes: number[] }
 const departures = computed<DepartureRow[]>(() => {
   if (!network || !station.value) return []
-  const d = now.value
-  const t = d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds()
+  // les horaires se lisent sur le réseau géographique : ses distances sont les vraies
+  const net = geoNetwork.value ?? network
+  const st = net.stations.find(s => s.name === station.value!.name)
+  if (!st) return []
+  // l'heure affichée avance par minute : la fiche ne se recalcule pas à chaque image
+  const t = Math.floor(clock.value.time / 60) * 60
   const merged = new Map<string, DepartureRow & { times: number[] }>()
-  for (const dep of nextDepartures(network, station.value, t, 4)) {
+  for (const dep of nextDepartures(net, st, t, 4)) {
     const key = `${dep.line.group}|${dep.destination.name}`
     if (!merged.has(key)) merged.set(key, { line: dep.line, destination: dep.destination.name, minutes: [], times: [] })
     merged.get(key)!.times.push(...dep.times)

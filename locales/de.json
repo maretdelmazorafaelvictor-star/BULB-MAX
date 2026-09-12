@@ -558,6 +558,16 @@
       "network": "Netzplan"
     },
     "network": {
+      "clock": {
+        "pause": "Uhr anhalten",
+        "play": "Uhr fortsetzen",
+        "real": "Echtzeit",
+        "vehicles": "Fahrzeuge"
+      },
+      "vehicle": {
+        "at_stop": "hält in {station}",
+        "next_stop": "nächster Halt: {station}"
+      },
       "title": "Netzplan",
       "empty": "Importieren Sie BULB-Projekte (eine Datei pro Linie) oder eine Netzdatei, um die Karte anzuzeigen.",
       "search": "Station suchen…",

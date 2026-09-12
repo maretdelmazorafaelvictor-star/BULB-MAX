@@ -558,6 +558,16 @@
       "network": "Plano de red"
     },
     "network": {
+      "clock": {
+        "pause": "Pausar el reloj",
+        "play": "Reanudar el reloj",
+        "real": "hora real",
+        "vehicles": "Vehículos"
+      },
+      "vehicle": {
+        "at_stop": "parado en {station}",
+        "next_stop": "próxima parada: {station}"
+      },
       "title": "Plano de red",
       "empty": "Importe proyectos BULB (un archivo por línea) o un archivo de red para mostrar el mapa.",
       "search": "Buscar una estación…",

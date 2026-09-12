@@ -1,18 +1,28 @@
 <script setup lang="ts">
-import type { Line, Network, Station } from '~/utils/network/engine'
+import type { Line, Network, Station, Vehicle } from '~/utils/network/engine'
 import { useResizeObserver } from '@vueuse/core'
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { vehiclesAt } from '~/utils/network/engine'
 
 const {
   network,
   hiddenLineIds,
   selectedStation = null,
   selectedGroup = null,
+  timeNetwork = null,
+  simTime = null,
+  showVehicles = false,
 } = defineProps<{
   network: Network | null
   hiddenLineIds: Set<string>
   selectedStation?: string | null
   selectedGroup?: string | null
+  /** réseau géographique : ses distances donnent les horaires réels des véhicules */
+  timeNetwork?: Network | null
+  /** heure simulée, en secondes depuis minuit */
+  simTime?: number | null
+  showVehicles?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -20,6 +30,8 @@ const emit = defineEmits<{
   selectGroup: [group: string]
   clear: []
 }>()
+
+const { t } = useI18n()
 
 /* ---------- style « plan » ---------- */
 const COL = { ground: '#F3F2EE', ink: '#1F2933', halo: 'rgba(243,242,238,0.92)', casing: 'rgba(255,255,255,0.9)' }
@@ -121,7 +133,13 @@ function drawTrack(g: CanvasRenderingContext2D, line: Line, f: number) {
 }
 
 /* ---------- géométrie du plan schématique ---------- */
-interface Offsets { pts: [number, number][], tangents: [number, number][], path: [number, number][] }
+interface Offsets {
+  pts: [number, number][]
+  tangents: [number, number][]
+  path: [number, number][]
+  /** pour chaque arrêt, sa place dans `path` (le tracé octolinéaire ajoute des coudes) */
+  idx: number[]
+}
 let offsetCache: { network: Network, scale: number, map: Map<string, Offsets> } | null = null
 
 function isSchematic(): boolean {
@@ -135,19 +153,24 @@ const OCT = Math.PI / 4
  * portion à 45°, reliées par un coude. Les stations ne bougent pas ; seul le chemin entre elles
  * est redressé. Un segment déjà sur une des huit directions est laissé tel quel.
  */
-function octolinearPath(pts: [number, number][]): [number, number][] {
-  if (pts.length < 2) return pts.slice()
+function octolinearPath(pts: [number, number][]): { path: [number, number][], idx: number[] } {
+  if (pts.length < 2) return { path: pts.slice(), idx: pts.map((_, i) => i) }
   const out: [number, number][] = [pts[0]]
+  const idx: number[] = [0]
   let prev: [number, number] | null = null
   for (let i = 1; i < pts.length; i++) {
     const [x1, y1] = out[out.length - 1]
     const [x2, y2] = pts[i]
     const dx = x2 - x1
     const dy = y2 - y1
-    if (Math.abs(dx) < 1e-9 && Math.abs(dy) < 1e-9) continue
+    if (Math.abs(dx) < 1e-9 && Math.abs(dy) < 1e-9) {
+      idx.push(out.length - 1)
+      continue
+    }
     const dev = Math.abs(Math.atan2(dy, dx) - Math.round(Math.atan2(dy, dx) / OCT) * OCT)
     if (dev < 0.005) { // déjà sur une des huit directions
       out.push([x2, y2])
+      idx.push(out.length - 1)
       prev = [Math.sign(dx), Math.sign(dy)]
       continue
     }
@@ -163,9 +186,10 @@ function octolinearPath(pts: [number, number][]): [number, number][] {
     // on prolonge la direction précédente quand c'est possible : moins de coudes visibles
     const elbow = same(dirOf([x1, y1], diagFirst), prev) ? diagFirst : axisFirst
     out.push(elbow, [x2, y2])
+    idx.push(out.length - 1)
     prev = dirOf(elbow, [x2, y2])
   }
-  return out
+  return { path: out, idx }
 }
 
 /** Positions (monde) de chaque ligne une fois les lignes qui partagent un tronçon écartées côte à côte. */
@@ -292,7 +316,7 @@ function offsetPolylines(): Map<string, Offsets> {
       pts.push([S[j].x + v[0], S[j].y + v[1]])
       tangents.push(t)
     }
-    map.set(line.id, { pts, tangents, path: octolinearPath(pts) })
+    map.set(line.id, { pts, tangents, ...octolinearPath(pts) })
   }
   offsetCache = { network, scale: view.scale, map }
   return map
@@ -453,6 +477,123 @@ function drawRoundel(g: CanvasRenderingContext2D, x: number, y: number, line: Li
   g.fillText(txt, x, y + 0.5)
 }
 
+/* ---------- véhicules ---------- */
+const VSIZE: Record<string, number> = { metro: 4.2, train: 4.8, tram: 3.6, bus: 3.2 }
+
+/** Arrêt précédent et fraction parcourue vers le suivant, à partir de la distance parcourue. */
+function alongToStop(line: Line, along: number): { i: number, frac: number } {
+  const S = line.stops
+  const n = S.length
+  if (n < 2) return { i: 0, frac: 0 }
+  if (along <= S[0].dist) return { i: 0, frac: 0 }
+  if (along >= S[n - 1].dist) return { i: n - 2, frac: 1 }
+  let lo = 0
+  let hi = n - 1
+  while (lo < hi - 1) {
+    const mid = (lo + hi) >> 1
+    if (S[mid].dist <= along) lo = mid
+    else hi = mid
+  }
+  return { i: lo, frac: (along - S[lo].dist) / ((S[lo + 1].dist - S[lo].dist) || 1) }
+}
+
+/**
+ * Position (monde) d'un véhicule sur le plan. Les horaires viennent des distances réelles ;
+ * l'entre-deux-arrêts est reporté en proportion sur le tracé dessiné, qui lui est schématique.
+ */
+function vehicleWorld(v: Vehicle, offsets: Map<string, Offsets> | null): { x: number, y: number, bearing: number } | null {
+  if (!offsets) return { x: v.x, y: v.y, bearing: v.bearing }
+  const o = offsets.get(v.line.id)
+  if (!o) return null
+  const { i, frac } = alongToStop(v.line, v.along)
+  const a = o.idx[i]
+  const b = o.idx[i + 1]
+  if (a === undefined || b === undefined) return null
+  const seg = o.path.slice(a, b + 1)
+  if (seg.length < 2) {
+    const p = o.path[a] ?? o.path[0]
+    return p ? { x: p[0], y: p[1], bearing: 0 } : null
+  }
+  const lens: number[] = []
+  let total = 0
+  for (let k = 1; k < seg.length; k++) {
+    const l = Math.hypot(seg[k][0] - seg[k - 1][0], seg[k][1] - seg[k - 1][1])
+    lens.push(l)
+    total += l
+  }
+  let d = frac * total
+  for (let k = 0; k < lens.length; k++) {
+    if (d <= lens[k] || k === lens.length - 1) {
+      const u = lens[k] ? Math.max(0, Math.min(1, d / lens[k])) : 0
+      const p = seg[k]
+      const q = seg[k + 1]
+      return { x: p[0] + (q[0] - p[0]) * u, y: p[1] + (q[1] - p[1]) * u, bearing: Math.atan2(q[1] - p[1], q[0] - p[0]) }
+    }
+    d -= lens[k]
+  }
+  return null
+}
+
+/** Véhicules en circulation à l'heure simulée, replacés sur le plan. */
+function currentVehicles(): Vehicle[] {
+  const src = timeNetwork ?? network
+  if (!showVehicles || simTime == null || !src) return []
+  return vehiclesAt(src, simTime, { hidden: hiddenLineIds })
+}
+
+/** Position à l'écran des véhicules dessinés, pour le survol. */
+let vehicleHits: { v: Vehicle, x: number, y: number, r: number }[] = []
+
+function drawVehicles(g: CanvasRenderingContext2D, veh: Vehicle[], f: number, offsets: Map<string, Offsets> | null) {
+  vehicleHits = []
+  const focus = selectedGroup
+  const lit = (v: Vehicle) => !focus || v.line.group === focus
+  const sorted = veh.slice().sort((a, b) => (Number(lit(a)) - Number(lit(b))) || (a.line.rank - b.line.rank))
+  const s = Math.min(Math.max(f, 0.7), 1.7)
+  g.shadowColor = 'rgba(0,0,0,0.3)'
+  g.shadowBlur = 4 * s
+  g.shadowOffsetY = 1.5
+  for (const v of sorted) {
+    const p = vehicleWorld(v, offsets)
+    if (!p) continue
+    const [x, y] = toScreen(p.x, p.y)
+    if (x < -20 || y < -20 || x > W + 20 || y > H + 20) continue
+    g.globalAlpha = lit(v) ? 1 : 0.18
+    const r = (VSIZE[v.line.mode] ?? 3.5) * s
+    vehicleHits.push({ v, x, y, r })
+    g.fillStyle = v.line.color
+    if (v.line.mode === 'train') {
+      g.save()
+      g.translate(x, y)
+      g.rotate(-p.bearing)
+      g.beginPath()
+      g.roundRect(-r * 1.45, -r * 0.8, r * 2.9, r * 1.6, r * 0.6)
+      g.strokeStyle = SCHEMA.ink
+      g.lineWidth = 3.6
+      g.stroke()
+      g.strokeStyle = '#fff'
+      g.lineWidth = 2.2
+      g.stroke()
+      g.fill()
+      g.restore()
+    } else {
+      g.beginPath()
+      g.arc(x, y, r, 0, Math.PI * 2)
+      g.strokeStyle = SCHEMA.ink
+      g.lineWidth = 3.6
+      g.stroke()
+      g.strokeStyle = '#fff'
+      g.lineWidth = 2.2
+      g.stroke()
+      g.fill()
+    }
+  }
+  g.globalAlpha = 1
+  g.shadowColor = 'transparent'
+  g.shadowBlur = 0
+  g.shadowOffsetY = 0
+}
+
 interface Box { x0: number, y0: number, x1: number, y1: number }
 function labelBox(g: CanvasRenderingContext2D, text: string, x: number, y: number, r: number, hint: string | null, f: number, draw: boolean, bold = false): Box {
   const size = Math.round(11.5 * Math.min(Math.max(f, 0.9), 1.35))
@@ -553,6 +694,8 @@ function draw() {
     }
   }
   g.globalAlpha = 1
+
+  drawVehicles(g, currentVehicles(), f, offsets)
 
   // libellés : correspondances d'abord, sans chevauchement
   const placed: Box[] = []
@@ -676,6 +819,20 @@ function pickLine(sx: number, sy: number): Line | null {
   return best
 }
 
+/** Véhicule sous le pointeur, d'après le dernier dessin. */
+function pickVehicle(sx: number, sy: number): Vehicle | null {
+  let best: Vehicle | null = null
+  let bd = Infinity
+  for (const h of vehicleHits) {
+    const d = Math.hypot(h.x - sx, h.y - sy)
+    if (d < h.r + 4 && d < bd) {
+      bd = d
+      best = h.v
+    }
+  }
+  return best
+}
+
 function localPos(e: PointerEvent | WheelEvent): [number, number] {
   const r = wrapper.value!.getBoundingClientRect()
   return [e.clientX - r.left, e.clientY - r.top]
@@ -698,6 +855,16 @@ function onPointerMove(e: PointerEvent) {
       view.oy = drag.oy + dy
       dirty = true
     }
+    return
+  }
+  const veh = pickVehicle(sx, sy)
+  if (veh) {
+    const where = veh.atStop
+      ? t('ui.network.vehicle.at_stop', { station: veh.atStop.name })
+      : veh.nextStop
+        ? t('ui.network.vehicle.next_stop', { station: veh.nextStop.name })
+        : ''
+    tooltip.value = { x: sx, y: sy, text: `${roundelText(veh.line)} → ${veh.destination.name}${where ? `\n${where}` : ''}` }
     return
   }
   const st = pickStation(sx, sy, 12)
@@ -745,6 +912,9 @@ watch(() => network, () => {
 watch(() => [hiddenLineIds, selectedGroup, selectedStation], () => {
   dirty = true
 }, { deep: true })
+watch(() => [simTime, showVehicles], () => {
+  dirty = true
+})
 watch(() => selectedStation, (name) => {
   const st = network?.stations.find(s => s.name === name)
   if (st) centerOn(st)
@@ -804,7 +974,8 @@ defineExpose({ fit, zoomIn: () => zoomAt(1.4, W / 2, H / 2), zoomOut: () => zoom
   padding: .3em .6em;
   border-radius: .3em;
   font-size: .85rem;
-  white-space: nowrap;
+  white-space: pre-line;
+  line-height: 1.35;
 }
 
 .hud {

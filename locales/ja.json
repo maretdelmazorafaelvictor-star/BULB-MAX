@@ -558,6 +558,16 @@
       "network": "路線網図"
     },
     "network": {
+      "clock": {
+        "pause": "時計を一時停止",
+        "play": "時計を再開",
+        "real": "実時間",
+        "vehicles": "車両"
+      },
+      "vehicle": {
+        "at_stop": "{station} に停車中",
+        "next_stop": "次の停車駅：{station}"
+      },
       "title": "路線網図",
       "empty": "BULBプロジェクト（1路線につき1ファイル）または路線網ファイルを読み込むと地図が表示されます。",
       "search": "駅を検索…",

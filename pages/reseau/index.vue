@@ -9,7 +9,7 @@ definePageMeta({
 })
 
 const store = useNetwork()
-const { network, hiddenGroups, hiddenLineIds, lineGroups } = storeToRefs(store)
+const { network, geoNetwork, hiddenGroups, hiddenLineIds, lineGroups, clock } = storeToRefs(store)
 
 const selectedStation = ref<string | null>(null)
 const selectedGroup = ref<string | null>(null)
@@ -47,6 +47,9 @@ function clearSelection() {
         :hidden-line-ids="hiddenLineIds"
         :selected-station="selectedStation"
         :selected-group="selectedGroup"
+        :time-network="geoNetwork"
+        :sim-time="clock.time"
+        :show-vehicles="clock.vehicles"
         @select-station="selectStation"
         @select-group="selectGroup"
         @clear="clearSelection"
@@ -57,6 +60,7 @@ function clearSelection() {
           </div>
         </template>
       </NetworkMap>
+      <NetworkClock />
       <div v-if="lineGroups.length" class="legend-bar">
         <NetworkLegend
           :groups="lineGroups"

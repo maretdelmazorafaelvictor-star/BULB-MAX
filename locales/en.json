@@ -552,6 +552,16 @@
       "network": "Network map"
     },
     "network": {
+      "clock": {
+        "pause": "Pause the clock",
+        "play": "Resume the clock",
+        "real": "real time",
+        "vehicles": "Vehicles"
+      },
+      "vehicle": {
+        "at_stop": "at {station}",
+        "next_stop": "next stop: {station}"
+      },
       "title": "Network map",
       "empty": "Import BULB projects (one file per line) or a network file to display the map.",
       "search": "Search a station…",
