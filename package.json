@@ -12,7 +12,8 @@
     "nuxi": "nuxi",
     "taze": "taze major -I",
     "icons": "node ./scripts/export-icons.cjs",
-    "export:lumiplan-presets": "tsx scripts/export-lumiplan-presets.ts"
+    "export:lumiplan-presets": "tsx scripts/export-lumiplan-presets.ts",
+    "fill:preset-positions": "tsx scripts/fill-preset-positions.ts"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.13.0",
