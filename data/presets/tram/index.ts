@@ -5,6 +5,7 @@ import TRAM_3B from './tram_3b.json'
 import TRAM_5 from './tram_5.json'
 import TRAM_6 from './tram_6.json'
 import TRAM_7 from './tram_7.json'
+import TRAM_8 from './tram_8.json'
 import TRAM_9 from './tram_9.json'
 import TRAM_10 from './tram_10.json'
 
@@ -16,6 +17,7 @@ export {
   TRAM_5,
   TRAM_6,
   TRAM_7,
+  TRAM_8,
   TRAM_9,
   TRAM_10,
 }

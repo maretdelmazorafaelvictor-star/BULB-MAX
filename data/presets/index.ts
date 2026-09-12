@@ -92,6 +92,8 @@ export function getPreset(mode: Mode, index: LineIndex): Project | null {
           return Trams.TRAM_6 as unknown as Project
         case '7':
           return Trams.TRAM_7 as unknown as Project
+        case '8':
+          return Trams.TRAM_8 as unknown as Project
         case '9':
           return Trams.TRAM_9 as unknown as Project
         case '10':
