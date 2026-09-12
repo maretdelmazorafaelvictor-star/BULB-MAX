@@ -434,6 +434,22 @@
         "file_name": "Nome del file",
         "cancel": "Annulla",
         "accept": "Esporta"
+      },
+      "mode_pictos": {
+        "header": "Pittogrammi dei modi di trasporto",
+        "import": "Importa",
+        "import_failure": {
+          "title": "Importazione non riuscita",
+          "too_large": "L'immagine è troppo pesante, anche dopo il ridimensionamento.",
+          "unreadable": "Impossibile leggere l'immagine."
+        },
+        "notice": "Sostituisci il pittogramma di un modo con una tua immagine.",
+        "reset_all": "Ripristina tutto",
+        "reset_all_accept": "Ripristina",
+        "reset_all_confirmation": "Ripristinare tutti i pittogrammi predefiniti? Le immagini importate saranno eliminate.",
+        "reset_all_reject": "Annulla",
+        "state_custom": "Personalizzato",
+        "state_default": "Predefinito"
       }
     },
     "map_editor": {
@@ -468,7 +484,8 @@
       "troubleshooting": "Assistenza",
       "guide": "Guida all'uso",
       "lumiplan_export": "Esporta verso Lumiplan",
-      "lumiplan_import": "Importa da Lumiplan"
+      "lumiplan_import": "Importa da Lumiplan",
+      "mode_pictos": "Pittogrammi dei modi"
     },
     "nag": "<b>ATTENZIONE</b>: Applicazione è in fase di sviluppo. Alcune funzioni non sono ancora disponibili, o sono incomplete.",
     "properties": {

@@ -13,6 +13,7 @@ const { reset } = projectStore
 const { line } = storeToRefs(projectStore)
 
 const showLineIndexDirectory = ref(false)
+const showModePictos = ref(false)
 const showSaveDialog = ref(false)
 const showLumiplanExportDialog = ref(false)
 const showTroubleshootingDialog = ref(false)
@@ -56,6 +57,14 @@ function newProject() {
       icon="i-tabler-palette"
       text
       @click="showLineIndexDirectory = true"
+    />
+    <Button
+      pt:root:class="important-justify-start"
+      :label="$t('ui.menu.mode_pictos')"
+      severity="secondary"
+      icon="i-tabler-photo"
+      text
+      @click="showModePictos = true"
     />
     <Divider />
     <Button
@@ -121,6 +130,7 @@ function newProject() {
   </div>
 
   <CustomLineIndexDirectoryDialog v-model:visible="showLineIndexDirectory" />
+  <ModePictosDialog v-model:visible="showModePictos" />
   <TroubleshootingDialog v-model:visible="showTroubleshootingDialog" />
   <GuideDialog v-model:visible="showGuideDialog" />
   <SaveDialog v-model:visible="showSaveDialog" />

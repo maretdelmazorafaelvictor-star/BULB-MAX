@@ -434,6 +434,22 @@
         "file_name": "ファイル名",
         "cancel": "キャンセル",
         "accept": "エクスポート"
+      },
+      "mode_pictos": {
+        "header": "交通手段のピクトグラム",
+        "import": "インポート",
+        "import_failure": {
+          "title": "インポートに失敗しました",
+          "too_large": "リサイズ後も画像が大きすぎます。",
+          "unreadable": "画像を読み込めませんでした。"
+        },
+        "notice": "交通手段のピクトグラムを独自の画像に置き換えます。",
+        "reset_all": "すべて元に戻す",
+        "reset_all_accept": "元に戻す",
+        "reset_all_confirmation": "すべてのピクトグラムを標準に戻しますか？インポートした画像は削除されます。",
+        "reset_all_reject": "キャンセル",
+        "state_custom": "カスタム",
+        "state_default": "標準"
       }
     },
     "map_editor": {
@@ -468,7 +484,8 @@
       "troubleshooting": "トラブルシューティング",
       "guide": "使い方ガイド",
       "lumiplan_export": "Lumiplanへエクスポート",
-      "lumiplan_import": "Lumiplanからインポート"
+      "lumiplan_import": "Lumiplanからインポート",
+      "mode_pictos": "交通手段のピクトグラム"
     },
     "nag": "<b>注意</b> : このアプリケーションは現在開発中です。一部の機能はまだ利用できないか、不完全です。",
     "properties": {

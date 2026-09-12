@@ -362,10 +362,10 @@
         "interest_point_color": "Color del punto de interés",
         "inverted_elements": "Elementos invertidos",
         "name_weight": {
-            "bold": "Negrita",
-            "medium": "Media",
-            "normal": "Normal",
-            "title": "Grosor del nombre"
+          "bold": "Negrita",
+          "medium": "Media",
+          "normal": "Normal",
+          "title": "Grosor del nombre"
         },
         "outside_idf": "Fuera de Île-de-France (rayado y fondo gris)",
         "preventOverlapping": "Impedir la colisión del nombre y el subtítulo",
@@ -434,6 +434,22 @@
         "file_name": "Nombre del archivo",
         "cancel": "Cancelar",
         "accept": "Exportar"
+      },
+      "mode_pictos": {
+        "header": "Pictogramas de los modos de transporte",
+        "import": "Importar",
+        "import_failure": {
+          "title": "Error de importación",
+          "too_large": "La imagen es demasiado pesada, incluso tras redimensionarla.",
+          "unreadable": "No se ha podido leer la imagen."
+        },
+        "notice": "Sustituya el pictograma de un modo por su propia imagen.",
+        "reset_all": "Restablecer todo",
+        "reset_all_accept": "Restablecer",
+        "reset_all_confirmation": "¿Restablecer todos los pictogramas por defecto? Sus imágenes importadas se eliminarán.",
+        "reset_all_reject": "Cancelar",
+        "state_custom": "Personalizado",
+        "state_default": "Por defecto"
       }
     },
     "map_editor": {
@@ -468,7 +484,8 @@
       "troubleshooting": "Solución de problemas",
       "guide": "Guía de uso",
       "lumiplan_export": "Exportar a Lumiplan",
-      "lumiplan_import": "Importar desde Lumiplan"
+      "lumiplan_import": "Importar desde Lumiplan",
+      "mode_pictos": "Pictogramas de los modos"
     },
     "nag": "<b>ATENCIÓN</b>: Aplicación en fase de desarrollo. Algunas funcionalidades no están disponibles o están incompletas.",
     "properties": {

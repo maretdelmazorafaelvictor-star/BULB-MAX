@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useModePictos } from '~/stores/useModePictos'
 
 const {
   mode,
@@ -7,6 +8,8 @@ const {
   mode: Mode | null
 }>()
 
+const modePictos = useModePictos()
+const customPicto = computed(() => modePictos.pictoOf(mode))
 const circle = computed(() => ['METRO', 'VAL'].includes(mode ?? ''))
 const roundRectangle = computed(() => ['RER', 'TER', 'TRAIN', 'TRAIN_RER'].includes(mode ?? ''))
 const square = computed(() => ['AERIAL_TRAMWAY', 'BOAT', 'BUS', 'BRT', 'CHAIRLIFT', 'FUNICULAR', 'GONDOLA', 'NOCTILIEN', 'SKI_LIFT', 'TRAM', 'TRAM_TRAIN', 'VELO'].includes(mode ?? ''))
@@ -14,7 +17,9 @@ const square = computed(() => ['AERIAL_TRAMWAY', 'BOAT', 'BUS', 'BRT', 'CHAIRLIF
 
 <template>
   <div class="relative picto-wrapper">
-    <div class="absolute" :class="{ circle, 'round-rectangle': roundRectangle, square }" />
+    <img v-if="customPicto" class="custom-picto" :src="customPicto" alt="">
+    <template v-else>
+      <div class="absolute" :class="{ circle, 'round-rectangle': roundRectangle, square }" />
     <MBoat v-if="mode === 'BOAT'" />
     <MAerialTramway v-if="mode === 'AERIAL_TRAMWAY'" />
     <MBRT v-if="mode === 'BRT'" />
@@ -30,7 +35,8 @@ const square = computed(() => ['AERIAL_TRAMWAY', 'BOAT', 'BUS', 'BRT', 'CHAIRLIF
     <MFunicular v-if="mode === 'FUNICULAR'" />
     <MTransilien v-if="mode === 'TRAIN'" />
     <MVelo v-if="mode === 'VELO'" />
-    <MVal v-if="mode === 'VAL'" />
+      <MVal v-if="mode === 'VAL'" />
+    </template>
   </div>
 </template>
 
@@ -38,6 +44,13 @@ const square = computed(() => ['AERIAL_TRAMWAY', 'BOAT', 'BUS', 'BRT', 'CHAIRLIF
 .picto-wrapper {
   min-width: 1em;
   min-height: 1em;
+}
+
+.custom-picto {
+  display: block;
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
 }
 
 .circle {

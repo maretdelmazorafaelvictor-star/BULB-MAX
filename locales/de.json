@@ -362,10 +362,10 @@
         "interest_point_color": "Farbe des relevanten Ortes",
         "inverted_elements": "Invertierte Elemente",
         "name_weight": {
-            "bold": "Fett",
-            "medium": "Mittel",
-            "normal": "Normal",
-            "title": "Schriftstärke des Namens"
+          "bold": "Fett",
+          "medium": "Mittel",
+          "normal": "Normal",
+          "title": "Schriftstärke des Namens"
         },
         "outside_idf": "Außerhalb der Île-de-France (Schraffur und grauer Hintergrund)",
         "preventOverlapping": "Vermeide Kolissionen zwischen dem Haltestellennamen und -zusatz.",
@@ -434,6 +434,22 @@
         "file_name": "Dateiname",
         "cancel": "Abbrechen",
         "accept": "Exportieren"
+      },
+      "mode_pictos": {
+        "header": "Piktogramme der Verkehrsmittel",
+        "import": "Importieren",
+        "import_failure": {
+          "title": "Import fehlgeschlagen",
+          "too_large": "Das Bild ist auch nach der Verkleinerung zu groß.",
+          "unreadable": "Das Bild konnte nicht gelesen werden."
+        },
+        "notice": "Ersetzen Sie das Piktogramm eines Verkehrsmittels durch ein eigenes Bild.",
+        "reset_all": "Alle zurücksetzen",
+        "reset_all_accept": "Zurücksetzen",
+        "reset_all_confirmation": "Alle Piktogramme auf den Standard zurücksetzen? Ihre importierten Bilder werden gelöscht.",
+        "reset_all_reject": "Abbrechen",
+        "state_custom": "Benutzerdefiniert",
+        "state_default": "Standard"
       }
     },
     "map_editor": {
@@ -468,7 +484,8 @@
       "troubleshooting": "Problembehandlung",
       "guide": "Benutzerhandbuch",
       "lumiplan_export": "Nach Lumiplan exportieren",
-      "lumiplan_import": "Aus Lumiplan importieren"
+      "lumiplan_import": "Aus Lumiplan importieren",
+      "mode_pictos": "Verkehrsmittel-Piktogramme"
     },
     "nag": "<b>ACHTUNG</b>: BULB ist im Entwicklungsstadium. Einige Funktionen sind noch nicht vollständig oder gänzlich nicht verfügbar.",
     "properties": {

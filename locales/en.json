@@ -428,6 +428,22 @@
         "file_name": "File name",
         "cancel": "Cancel",
         "accept": "Export"
+      },
+      "mode_pictos": {
+        "header": "Transport mode pictograms",
+        "import": "Import",
+        "import_failure": {
+          "title": "Import failed",
+          "too_large": "The image is too heavy, even after resizing.",
+          "unreadable": "The image could not be read."
+        },
+        "notice": "Replace a mode's pictogram with your own image.",
+        "reset_all": "Reset all",
+        "reset_all_accept": "Reset",
+        "reset_all_confirmation": "Reset every pictogram to its default? Your imported images will be deleted.",
+        "reset_all_reject": "Cancel",
+        "state_custom": "Custom",
+        "state_default": "Default"
       }
     },
     "map_editor": {
@@ -462,7 +478,8 @@
       "troubleshooting": "Troubleshooting",
       "guide": "User guide",
       "lumiplan_export": "Export to Lumiplan",
-      "lumiplan_import": "Import from Lumiplan"
+      "lumiplan_import": "Import from Lumiplan",
+      "mode_pictos": "Mode pictograms"
     },
     "nag": "<b>DISCLAIMER</b>: This application is under development. Some features are not yet available or are incomplete.",
     "properties": {

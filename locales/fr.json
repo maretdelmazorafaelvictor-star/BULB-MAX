@@ -31,7 +31,7 @@
     "service_select": {
       "placeholder": "Sélectionner un service"
     },
-    "stop_name_angle_select":{
+    "stop_name_angle_select": {
       "placeholder": "Sélectionner un angle"
     },
     "shape_select": {
@@ -119,7 +119,7 @@
       "rectangle": "Rectangle",
       "rounded_square": "Carré arrondi"
     },
-        "stop_name_angle": {
+    "stop_name_angle": {
       "custom": "Personnalisé",
       "horizontal": "Horizontal",
       "tilted": "Normal",
@@ -202,13 +202,13 @@
         "export_all": "Exporter les pictogrammes",
         "export_one": "Exporter le pictogramme",
         "header": "Répertoire d’indices personnalisés",
-         "new_library_placeholder": "Nouvelle bibliothèque",
-         "delete_library": "Supprimer la bibliothèque",
-         "delete_library_accept": "Supprimer",
-         "delete_library_reject": "Annuler",
-          "empty_state": "Créez votre première bibliothèque pour commencer à ranger vos pictogrammes.",
-          "library_placeholder": "Bibliothèque",
-          "delete_library_confirmation": "Supprimer « {libraryName} » ? Les {count} pictogramme(s) qu'elle contient seront définitivement supprimés."
+        "new_library_placeholder": "Nouvelle bibliothèque",
+        "delete_library": "Supprimer la bibliothèque",
+        "delete_library_accept": "Supprimer",
+        "delete_library_reject": "Annuler",
+        "empty_state": "Créez votre première bibliothèque pour commencer à ranger vos pictogrammes.",
+        "library_placeholder": "Bibliothèque",
+        "delete_library_confirmation": "Supprimer « {libraryName} » ? Les {count} pictogramme(s) qu'elle contient seront définitivement supprimés."
       },
       "custom_line_thickness": {
         "accept": "Terminé",
@@ -363,10 +363,10 @@
         "interest_point_color": "Couleur du point d’intérêt",
         "inverted_elements": "Élements inversés",
         "name_weight": {
-            "bold": "Gras",
-            "medium": "Moyen",
-            "normal": "Normal",
-            "title": "Graisse du nom"
+          "bold": "Gras",
+          "medium": "Moyen",
+          "normal": "Normal",
+          "title": "Graisse du nom"
         },
         "outside_idf": "Hors Île-de-France (hachures et fond gris)",
         "preventOverlapping": "Empêcher la colision du nom et du sous-titre",
@@ -435,6 +435,22 @@
         "file_name": "Nom du fichier",
         "cancel": "Annuler",
         "accept": "Exporter"
+      },
+      "mode_pictos": {
+        "header": "Pictogrammes des modes de transport",
+        "import": "Importer",
+        "import_failure": {
+          "title": "Échec de l'import",
+          "too_large": "L'image est trop lourde, même après redimensionnement.",
+          "unreadable": "L'image n'a pas pu être lue."
+        },
+        "notice": "Remplacez le pictogramme d'un mode par votre propre image.",
+        "reset_all": "Tout rétablir",
+        "reset_all_accept": "Rétablir",
+        "reset_all_confirmation": "Rétablir tous les pictogrammes par défaut ? Vos images importées seront supprimées.",
+        "reset_all_reject": "Annuler",
+        "state_custom": "Personnalisé",
+        "state_default": "Par défaut"
       }
     },
     "map_editor": {
@@ -469,7 +485,8 @@
       "troubleshooting": "Dépannage",
       "guide": "Guide d'utilisation",
       "lumiplan_export": "Exporter vers Lumiplan",
-      "lumiplan_import": "Importer depuis Lumiplan"
+      "lumiplan_import": "Importer depuis Lumiplan",
+      "mode_pictos": "Pictogrammes des modes"
     },
     "nag": "<b>RAPPEL</b> : Application en phase de développement. Certaines fonctionnalités ne sont pas encore disponibles ou sont incomplètes.",
     "properties": {
