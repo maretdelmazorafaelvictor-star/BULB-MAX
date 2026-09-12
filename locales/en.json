@@ -577,6 +577,7 @@
         "interchanges": "{count} interchanges",
         "empty": "No network loaded.",
         "reference": "Reference: {count} geolocated stops ({files} file(s))",
+        "from_projects": "{count} of {total} stations placed from the projects' own coordinates",
         "geolocated": "{count} of {total} stations placed at their GPS coordinates",
         "unmatched": "Stations without coordinates ({count})",
         "fuzzy": "Approximate matches ({count})"

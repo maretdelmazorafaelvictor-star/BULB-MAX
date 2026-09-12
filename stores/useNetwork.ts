@@ -24,6 +24,8 @@ export interface ImportReport {
   projects: number
   stations: number
   interchanges: number
+  /** stations placées grâce au champ position des projets eux-mêmes */
+  fromProjects: number
   geolocated: number
   unmatched: string[]
   fuzzy: { station: string, ref: string }[]
@@ -124,6 +126,17 @@ export const useNetwork = defineStore('network', () => {
         unmatched = m.unmatched
         fuzzy = [...m.positions.entries()].filter(([, v]) => v.how === 'fuzzy').map(([k, v]) => ({ station: imported.stations.find(s => s.key === k)?.name ?? k, ref: v.ref }))
       }
+      // positions portées par les projets eux-mêmes : elles font foi sur le référentiel
+      const known = new Set(imported.stations.map(s => s.key))
+      const placed = new Set<string>()
+      for (const p of projects.value) {
+        for (const [key, pos] of Object.entries(p.positions ?? {})) {
+          if (!known.has(key)) continue
+          anchors.set(key, { ...pos, commune: anchors.get(key)?.commune ?? null })
+          placed.add(key)
+        }
+      }
+      const fromProjects = placed.size
       const useAnchors = [...anchors.keys()].filter(k => imported.stations.some(s => s.key === k)).length >= 3
       const layout = layoutNetwork(imported, useAnchors ? { anchors } : {})
       const city = data.value?.meta?.city
@@ -133,6 +146,7 @@ export const useNetwork = defineStore('network', () => {
         projects: projects.value.length,
         stations: imported.stations.length,
         interchanges: imported.stations.filter(s => s.lines.length > 1).length,
+        fromProjects,
         geolocated,
         unmatched,
         fuzzy,

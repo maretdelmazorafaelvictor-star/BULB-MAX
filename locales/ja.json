@@ -583,6 +583,7 @@
         "interchanges": "乗換駅{count}",
         "empty": "路線網が読み込まれていません。",
         "reference": "参照データ：{count}停留所（{files}ファイル）",
+        "from_projects": "{total} 駅のうち {count} 駅をプロジェクトの座標で配置しました",
         "geolocated": "{total}駅中{count}駅をGPS座標に配置",
         "unmatched": "座標のない駅（{count}）",
         "fuzzy": "近似一致（{count}）"

@@ -583,6 +583,7 @@
         "interchanges": "{count} correspondances",
         "empty": "Aucun réseau chargé.",
         "reference": "Référentiel : {count} arrêts géolocalisés ({files} fichier(s))",
+        "from_projects": "{count} stations sur {total} placées par les coordonnées des projets",
         "geolocated": "{count} stations sur {total} placées à leurs coordonnées GPS",
         "unmatched": "Stations sans coordonnées ({count})",
         "fuzzy": "Rapprochements approchés ({count})"

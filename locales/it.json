@@ -583,6 +583,7 @@
         "interchanges": "{count} interscambi",
         "empty": "Nessuna rete caricata.",
         "reference": "Riferimento: {count} fermate geolocalizzate ({files} file)",
+        "from_projects": "{count} stazioni su {total} posizionate dalle coordinate dei progetti",
         "geolocated": "{count} stazioni su {total} posizionate alle loro coordinate GPS",
         "unmatched": "Stazioni senza coordinate ({count})",
         "fuzzy": "Corrispondenze approssimative ({count})"

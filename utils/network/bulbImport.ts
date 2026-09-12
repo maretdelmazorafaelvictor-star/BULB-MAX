@@ -58,7 +58,7 @@ export const DEFAULT_SERVICE: Record<NetworkMode, { start: string, end: string, 
   bus: { start: '06:00', end: '22:30', frequency_min: 10 },
 }
 
-export interface ServiceStop { name: string, key: string, terminus: boolean }
+export interface ServiceStop { name: string, key: string, terminus: boolean, lat?: number, lon?: number }
 export interface ParsedProject {
   id: string
   name: string
@@ -68,6 +68,8 @@ export interface ParsedProject {
   color: string
   services: ServiceStop[][]
   stopCount: number
+  /** Arrêts dont le projet porte une position géographique : clé normalisée → coordonnées. */
+  positions: Record<string, { lat: number, lon: number }>
 }
 export interface ImportedLine {
   id: string
@@ -146,11 +148,19 @@ export function parseProject(project: Project, fileName?: string): ParsedProject
   const index = lineIndexText(project)
   const elements = line.topology.flatMap(s => s.$lineSection?.elements ?? [])
   const services = expandElements(elements)
-    .map(p => p.map(s => ({ name: displayName(s.$stop.name), key: normalizeName(s.$stop.name), terminus: !!s.$stop.terminus })))
+    .map(p => p.map((s) => {
+      const pos = s.$stop.position
+      const geo = pos && Number.isFinite(pos.lat) && Number.isFinite(pos.lon) ? { lat: pos.lat, lon: pos.lon } : {}
+      return { name: displayName(s.$stop.name), key: normalizeName(s.$stop.name), terminus: !!s.$stop.terminus, ...geo }
+    }))
     .map(p => p.filter((s, i) => i === 0 || s.key !== p[i - 1].key))
     .filter(p => p.length >= 2)
   if (!services.length) throw new Error(`${fileName ?? 'fichier'} : aucune branche avec au moins deux arrêts`)
   const label = MODE_LABEL[bulbMode] ?? bulbMode
+  const positions: Record<string, { lat: number, lon: number }> = {}
+  for (const stop of services.flat()) {
+    if (stop.lat !== undefined && stop.lon !== undefined && !positions[stop.key]) positions[stop.key] = { lat: stop.lat, lon: stop.lon }
+  }
   return {
     id: `${MODE_PREFIX[mode]}${index || (fileName ?? '').replace(/\.json$/i, '')}`,
     name: index ? `${label} ${index}` : label,
@@ -160,6 +170,7 @@ export function parseProject(project: Project, fileName?: string): ParsedProject
     color: line.color || DEFAULT_COLOR[mode],
     services,
     stopCount: new Set(services.flat().map(s => s.key)).size,
+    positions,
   }
 }
 

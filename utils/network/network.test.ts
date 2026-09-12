@@ -128,3 +128,14 @@ describe('géolocalisation et disposition', () => {
     expect(() => build(data)).not.toThrow()
   })
 })
+
+describe('positions portées par les projets', () => {
+  it('lit le champ position des arrêts et place les stations sans référentiel', () => {
+    const project = JSON.parse(JSON.stringify(metro1)) as Project
+    const parsed = parseProject(project, 'metro_1.json')
+    expect(Object.keys(parsed.positions).length).toBeGreaterThan(20)
+    const laDefense = parsed.positions[normalizeName('La Défense')]
+    expect(laDefense.lat).toBeCloseTo(48.892, 2)
+    expect(laDefense.lon).toBeCloseTo(2.237, 2)
+  })
+})

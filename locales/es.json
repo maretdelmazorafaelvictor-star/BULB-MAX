@@ -583,6 +583,7 @@
         "interchanges": "{count} correspondencias",
         "empty": "Ninguna red cargada.",
         "reference": "Referencia: {count} paradas geolocalizadas ({files} archivo(s))",
+        "from_projects": "{count} de {total} estaciones situadas con las coordenadas de los proyectos",
         "geolocated": "{count} de {total} estaciones situadas en sus coordenadas GPS",
         "unmatched": "Estaciones sin coordenadas ({count})",
         "fuzzy": "Coincidencias aproximadas ({count})"

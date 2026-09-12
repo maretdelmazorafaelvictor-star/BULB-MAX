@@ -583,6 +583,7 @@
         "interchanges": "{count} Umsteigebahnhöfe",
         "empty": "Kein Netz geladen.",
         "reference": "Referenz: {count} geolokalisierte Haltestellen ({files} Datei(en))",
+        "from_projects": "{count} von {total} Stationen anhand der Koordinaten der Projekte platziert",
         "geolocated": "{count} von {total} Stationen an ihren GPS-Koordinaten platziert",
         "unmatched": "Stationen ohne Koordinaten ({count})",
         "fuzzy": "Ungefähre Zuordnungen ({count})"

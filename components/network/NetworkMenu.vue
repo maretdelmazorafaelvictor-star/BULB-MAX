@@ -113,6 +113,9 @@ function clearNetwork() {
         {{ $t('ui.network.summary.reference', { count: reference.length, files: referenceFiles.length }) }}
       </div>
       <template v-if="report">
+        <div v-if="report.fromProjects" class="text-gray">
+          {{ $t('ui.network.summary.from_projects', { count: report.fromProjects, total: report.stations }) }}
+        </div>
         <div v-if="reference.length" class="text-gray">
           {{ $t('ui.network.summary.geolocated', { count: report.geolocated, total: report.stations }) }}
         </div>
