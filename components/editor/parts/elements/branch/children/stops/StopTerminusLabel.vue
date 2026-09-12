@@ -25,6 +25,7 @@ const {
 
 const stopContext = inject<StopContext>(StopContextKey)!
 
+const flat = computed(() => lineContext.stopNameAngle.value === 0)
 const effectiveValue = computed(() => value.trim())
 const frame = ref<HTMLDivElement | null>(null)
 const { stop } = useResizeObserver(frame, e => updateMargins(e[0].target as HTMLDivElement))
@@ -42,6 +43,12 @@ watch([() => interestPoint, () => subtitle], ([_interestPoint, _subtitle]) => {
 }, { immediate: true })
 
 function updateMargins(element: HTMLElement) {
+  if (lineContext.stopNameAngle.value === 0) {
+    const half = `calc(${element.offsetWidth / 2}px - .5em)`
+    stopContext.margins.leftMargin.name = half
+    stopContext.margins.rightMargin.name = half
+    return
+  }
   const size = element.offsetHeight
   if (reverse) {
     stopContext.margins.rightMargin.name = `calc(${size * 2}px - 1.5em)`
@@ -60,7 +67,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="terminus-label" :class="{ reverse }">
+  <div class="terminus-label" :class="{ reverse, flat }">
         <TiltedText :reverse="reverse" :angle="lineContext.stopNameAngle.value">
       <div ref="frame" class="flex flex-col items-end gap-1" :class="{ 'opacity-50 export-hide': !effectiveValue }">
         <div class="title-holder">
@@ -84,6 +91,18 @@ onUnmounted(() => {
 </template>
 
 <style scoped lang="scss">
+.terminus-label.flat {
+  width: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .1em;
+}
+
+.terminus-label.flat.reverse {
+  justify-content: flex-start;
+}
+
 .terminus-label {
   display: flex;
   flex-direction: row;
