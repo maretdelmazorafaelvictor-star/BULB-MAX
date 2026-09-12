@@ -348,6 +348,9 @@
         "city_name": "市の名前",
         "closed": "運休",
         "commune": "自治体",
+        "position": "位置（緯度、経度）",
+        "position_placeholder": "48.8584, 2.2945",
+        "position_invalid": "数値を2つ入力してください（例：48.8584, 2.2945）",
         "end_of_line_connection": {
           "line": "路線",
           "mode": "交通機関",

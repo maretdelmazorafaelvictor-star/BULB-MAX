@@ -348,6 +348,9 @@
         "city_name": "Ort",
         "closed": "Aufgelassen",
         "commune": "Gemeinde",
+        "position": "Position (Breite, Länge)",
+        "position_placeholder": "48.8584, 2.2945",
+        "position_invalid": "Geben Sie zwei Zahlen ein, zum Beispiel 48.8584, 2.2945",
         "end_of_line_connection": {
           "line": "Linie",
           "mode": "Verkehrsmittel",

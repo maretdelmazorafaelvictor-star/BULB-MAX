@@ -203,6 +203,8 @@ declare global {
       name: string
       subtitle: string | null
       commune?: string | null
+      /** Position géographique de l'arrêt (degrés décimaux, WGS 84). */
+      position?: { lat: number, lon: number } | null
       fareZone?: number | null
       nameWeight?: 'normal' | 'medium' | 'bold'
       branch_color?: string | null

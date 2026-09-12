@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import { computed, inject, watch } from 'vue'
+import { computed, inject, ref, watch } from 'vue'
 import { cleanName } from '~/utils/text'
 import { LineContextKey } from '~/utils/symbols'
 const { allowCity } = defineProps<{
@@ -19,6 +19,35 @@ const outsideIdf = computed({
     stop.value.$stop.grayed = val
   },
 })
+/* Position géographique : saisie sur une seule ligne, « latitude, longitude » en degrés décimaux
+ * (la forme que donnent les cartes en ligne). Champ vide = pas de position. */
+function parsePosition(text: string): { lat: number, lon: number } | null {
+  const m = /^\s*(-?\d+(?:\.\d+)?)(?:\s|\s*[,;])\s*(-?\d+(?:\.\d+)?)\s*$/.exec(text)
+  if (!m) return null
+  const lat = Number(m[1])
+  const lon = Number(m[2])
+  if (Math.abs(lat) > 90 || Math.abs(lon) > 180) return null
+  return { lat, lon }
+}
+
+const position = ref(stop.value.$stop.position ? `${stop.value.$stop.position.lat}, ${stop.value.$stop.position.lon}` : '')
+const positionInvalid = computed(() => position.value.trim() !== '' && parsePosition(position.value) === null)
+
+// on relit la valeur du modèle à l'ouverture et au changement d'arrêt
+watch([visible, stop], () => {
+  const p = stop.value.$stop.position
+  position.value = p ? `${p.lat}, ${p.lon}` : ''
+})
+
+function applyPosition() {
+  if (position.value.trim() === '') {
+    stop.value.$stop.position = null
+    return
+  }
+  const p = parsePosition(position.value)
+  if (p) stop.value.$stop.position = p
+}
+
 const accessibilityOptions = [
   { label: 'ui.dialogs.stop_properties.accessible.undefined', value: 'undefined' },
   { label: 'ui.dialogs.stop_properties.accessible.yes', value: true },
@@ -130,6 +159,16 @@ function openConnectionsEditor() {
         <div class="flex flex-col gap-1">
           <label :for="`${stop.id}_commune`">{{ $t('ui.dialogs.stop_properties.commune') }}</label>
           <InputText :id="`${stop.id}_commune`" v-model="stop.$stop.commune" :spellcheck="false" />
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label :for="`${stop.id}_position`">{{ $t('ui.dialogs.stop_properties.position') }}</label>
+          <InputText
+            :id="`${stop.id}_position`" v-model="position" :spellcheck="false"
+            :placeholder="$t('ui.dialogs.stop_properties.position_placeholder')"
+            :invalid="positionInvalid" @blur="applyPosition" @keyup.enter="applyPosition"
+          />
+          <small v-if="positionInvalid" class="text-red-500">{{ $t('ui.dialogs.stop_properties.position_invalid') }}</small>
         </div>
 
         <div class="flex flex-col gap-1">

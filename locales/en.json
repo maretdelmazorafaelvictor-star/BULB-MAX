@@ -348,6 +348,9 @@
         "city_name": "City",
         "closed": "Closed",
         "commune": "Municipality",
+        "position": "Position (latitude, longitude)",
+        "position_placeholder": "48.8584, 2.2945",
+        "position_invalid": "Enter two numbers, for example 48.8584, 2.2945",
         "end_of_line_connection": {
           "line": "Line",
           "mode": "Transport mode",

@@ -348,6 +348,9 @@
         "city_name": "Città",
         "closed": "Fermata chiusa",
         "commune": "Comune",
+        "position": "Posizione (latitudine, longitudine)",
+        "position_placeholder": "48.8584, 2.2945",
+        "position_invalid": "Inserisci due numeri, ad esempio 48.8584, 2.2945",
         "end_of_line_connection": {
           "line": "Linea",
           "mode": "Modo di trasporto",
