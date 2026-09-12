@@ -619,7 +619,9 @@
         "from_projects": "{count} de {total} estaciones situadas con las coordenadas de los proyectos",
         "geolocated": "{count} de {total} estaciones situadas en sus coordenadas GPS",
         "unmatched": "Estaciones sin coordenadas ({count})",
-        "fuzzy": "Coincidencias aproximadas ({count})"
+        "fuzzy": "Coincidencias aproximadas ({count})",
+        "hidden": "Paradas ocultas ({count})",
+        "restore": "Restablecer esta parada"
       },
       "dialogs": {
         "clear": {

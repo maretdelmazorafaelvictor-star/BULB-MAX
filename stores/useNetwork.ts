@@ -296,6 +296,15 @@ export const useNetwork = defineStore('network', () => {
     recompute()
   }
 
+  /** Arrêts masqués, avec leur nom d'origine : ils ne figurent plus sur le plan ni dans la recherche. */
+  const hiddenStations = computed(() => (edits.value.hide ?? []).map(key => ({ key, name: nameByKey.value[key] ?? key })))
+
+  /** Rétablit un arrêt masqué à partir de sa clé (le nom affiché n'est plus disponible). */
+  function unhideStation(key: string) {
+    edits.value.hide = (edits.value.hide ?? []).filter(k => k !== key)
+    recompute()
+  }
+
   function isStationHidden(name: string): boolean {
     return (edits.value.hide ?? []).includes(keyOf(name))
   }
@@ -348,6 +357,8 @@ export const useNetwork = defineStore('network', () => {
     renameStation,
     toggleStationHidden,
     isStationHidden,
+    hiddenStations,
+    unhideStation,
     clearEdits,
   }
 }, {

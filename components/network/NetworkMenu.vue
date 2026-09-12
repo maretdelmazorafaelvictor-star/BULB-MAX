@@ -10,7 +10,7 @@ import { useNetwork } from '~/stores/useNetwork'
 import { useProject } from '~/stores/useProject'
 
 const store = useNetwork()
-const { projects, reference, referenceFiles, data, report, network } = storeToRefs(store)
+const { projects, reference, referenceFiles, data, report, network, hiddenStations } = storeToRefs(store)
 const { openProjects, openReference, openNetwork, saveNetwork } = useNetworkFiles()
 const project = useProject()
 const { indices } = storeToRefs(useCustomLineIndices())
@@ -136,9 +136,22 @@ function clearNetwork() {
           </div>
         </details>
       </template>
+      <details v-if="hiddenStations.length">
+        <summary class="cursor-pointer">
+          {{ $t('ui.network.summary.hidden', { count: hiddenStations.length }) }}
+        </summary>
+        <div class="max-h-30 overflow-y-auto flex flex-col items-start">
+          <Button
+            v-for="st of hiddenStations" :key="st.key"
+            :label="st.name" icon="i-tabler-eye" size="small" severity="secondary" text
+            :title="$t('ui.network.summary.restore')"
+            @click="store.unhideStation(st.key)"
+          />
+        </div>
+      </details>
     </div>
     <div v-if="projects.length" class="px-3 pb-2 flex flex-col gap-1">
-      <div class="text-xs uppercase tracking-wider text-gray">
+      <div class="text-xs tracking-wider text-gray">
         {{ $t('ui.network.menu.projects', { count: projects.length }) }}
       </div>
       <div v-for="p of projects" :key="p.id" class="flex flex-row items-center gap-2 text-sm">

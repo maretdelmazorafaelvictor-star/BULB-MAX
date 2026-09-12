@@ -619,7 +619,9 @@
         "from_projects": "{total} 駅のうち {count} 駅をプロジェクトの座標で配置しました",
         "geolocated": "{total}駅中{count}駅をGPS座標に配置",
         "unmatched": "座標のない駅（{count}）",
-        "fuzzy": "近似一致（{count}）"
+        "fuzzy": "近似一致（{count}）",
+        "hidden": "非表示の停車（{count}）",
+        "restore": "この停車を戻す"
       },
       "dialogs": {
         "clear": {

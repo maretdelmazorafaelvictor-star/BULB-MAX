@@ -613,7 +613,9 @@
         "from_projects": "{count} of {total} stations placed from the projects' own coordinates",
         "geolocated": "{count} of {total} stations placed at their GPS coordinates",
         "unmatched": "Stations without coordinates ({count})",
-        "fuzzy": "Approximate matches ({count})"
+        "fuzzy": "Approximate matches ({count})",
+        "hidden": "Hidden stops ({count})",
+        "restore": "Restore this stop"
       },
       "dialogs": {
         "clear": {

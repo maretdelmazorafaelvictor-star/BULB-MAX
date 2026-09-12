@@ -307,8 +307,7 @@ const groupStations = computed(() => {
 .section-title {
   font-size: .75rem;
   font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+  letter-spacing: .04em;
   color: var(--p-text-muted-color);
 }
 
@@ -357,8 +356,7 @@ const groupStations = computed(() => {
 
   .svc {
     font-size: .7rem;
-    text-transform: uppercase;
-    letter-spacing: .06em;
+    letter-spacing: .03em;
     color: var(--p-text-muted-color);
     margin: .4rem 0 .15rem;
   }

@@ -619,7 +619,9 @@
         "from_projects": "{count} stazioni su {total} posizionate dalle coordinate dei progetti",
         "geolocated": "{count} stazioni su {total} posizionate alle loro coordinate GPS",
         "unmatched": "Stazioni senza coordinate ({count})",
-        "fuzzy": "Corrispondenze approssimative ({count})"
+        "fuzzy": "Corrispondenze approssimative ({count})",
+        "hidden": "Fermate nascoste ({count})",
+        "restore": "Ripristina questa fermata"
       },
       "dialogs": {
         "clear": {

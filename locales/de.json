@@ -619,7 +619,9 @@
         "from_projects": "{count} von {total} Stationen anhand der Koordinaten der Projekte platziert",
         "geolocated": "{count} von {total} Stationen an ihren GPS-Koordinaten platziert",
         "unmatched": "Stationen ohne Koordinaten ({count})",
-        "fuzzy": "Ungefähre Zuordnungen ({count})"
+        "fuzzy": "Ungefähre Zuordnungen ({count})",
+        "hidden": "Ausgeblendete Halte ({count})",
+        "restore": "Halt wiederherstellen"
       },
       "dialogs": {
         "clear": {

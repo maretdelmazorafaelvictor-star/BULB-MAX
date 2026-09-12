@@ -620,7 +620,9 @@
         "from_projects": "{count} stations sur {total} placées par les coordonnées des projets",
         "geolocated": "{count} stations sur {total} placées à leurs coordonnées GPS",
         "unmatched": "Stations sans coordonnées ({count})",
-        "fuzzy": "Rapprochements approchés ({count})"
+        "fuzzy": "Rapprochements approchés ({count})",
+        "hidden": "Arrêts masqués ({count})",
+        "restore": "Rétablir cet arrêt"
       },
       "dialogs": {
         "clear": {
