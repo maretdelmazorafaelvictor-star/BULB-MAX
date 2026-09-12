@@ -315,7 +315,7 @@ declare global {
     lineStyle: LineStyle | null
     dotsColorPolicy: DotsColorPolicy | null
     mapSize: number | null
-    stopNameAngle?: number
+    stopNameAngle?: string
     fullyAccessible: boolean
     frameTerminusNames: boolean
     terminusNamesLineColor: boolean
@@ -332,6 +332,7 @@ declare global {
     frameTerminusNames: Ref<boolean>
     terminusNamesLineColor: Ref<boolean>
     brandStyle: Ref<BrandStyle>
+    stopNameAngle: ComputedRef<number>
   }
 
   export interface BranchContext {

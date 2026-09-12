@@ -31,6 +31,9 @@
     "service_select": {
       "placeholder": "Select a service"
     },
+    "stop_name_angle_select": {
+      "placeholder": "Select an angle"
+    },
     "shape_select": {
       "placeholder": "Select a shape"
     }
@@ -115,6 +118,14 @@
       "lines": "Lines",
       "rectangle": "Rectangle",
       "rounded_square": "Rounded square"
+    },
+    "stop_name_angle": {
+      "custom": "Custom",
+      "horizontal": "Horizontal",
+      "tilted": "Normal",
+      "tilted_45": "Diagonal",
+      "tilted_60": "Tilted",
+      "vertical": "Vertical"
     }
   },
   "misc": {
@@ -205,6 +216,10 @@
       "custom_map_size": {
         "accept": "Done",
         "header": "Custom frame size"
+      },
+      "custom_stop_name_angle": {
+        "accept": "Done",
+        "header": "Custom stop name angle"
       },
       "end_of_year_celebrations": {
         "close": "Close",
@@ -458,6 +473,7 @@
       "mode": "Transport mode",
       "operator": "Operator",
       "size": "Frame size",
+      "stop_name_angle": "Stop name angle",
       "title": "Properties",
       "use_preset": "Use a preset",
       "terminus_line_color": "Termini in line color"

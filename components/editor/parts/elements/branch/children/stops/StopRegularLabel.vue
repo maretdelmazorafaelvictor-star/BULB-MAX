@@ -56,7 +56,7 @@ watch([shift, () => interestPoint, () => subtitle], ([_shift, _interestPoint, _s
 <template>
   <div class="regular-label" :class="{ reverse, 'opacity-50 export-hide': valueParts.length === 0 }">
     <div class="flex gap-1em">
-      <TiltedText v-for="(part, index) in valueParts" :key="`${part}-${index}`" :reverse="reverse">
+      <TiltedText v-for="(part, index) in valueParts" :key="`${part}-${index}`" :reverse="reverse" :angle="lineContext.stopNameAngle.value">
         <div class="title-holder" :style="terminusStyle">
           <TitleLabel :value="part" />
           <Wheelchair
@@ -66,8 +66,7 @@ watch([shift, () => interestPoint, () => subtitle], ([_shift, _interestPoint, _s
           />
         </div>
       </TiltedText>
-      <TiltedText v-if="valueParts.length === 0" :reverse="reverse">
-        <TitleLabel :value="$t('ui.map_editor.toolbox.untitled_stop')" />
+      <TiltedText v-if="valueParts.length === 0" :reverse="reverse" :angle="lineContext.stopNameAngle.value">        <TitleLabel :value="$t('ui.map_editor.toolbox.untitled_stop')" />
       </TiltedText>
     </div>
     <div
@@ -78,8 +77,7 @@ watch([shift, () => interestPoint, () => subtitle], ([_shift, _interestPoint, _s
         shift,
       }"
     >
-      <TiltedText :reverse="reverse">
-        <StopSubtitle :interest-point="interestPoint" :interest-point-color="interestPointColor" :value="subtitle" />
+      <TiltedText :reverse="reverse" :angle="lineContext.stopNameAngle.value">        <StopSubtitle :interest-point="interestPoint" :interest-point-color="interestPointColor" :value="subtitle" />
       </TiltedText>
     </div>
   </div>

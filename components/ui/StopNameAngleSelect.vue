@@ -16,11 +16,10 @@ const ANGLES: StopNameAngleChoice[] = [
   { label: 'data.stop_name_angle.custom', value: '' },
 ]
 
-function findAngleByValue(value: string | null) {
-  return ANGLES.find(angle => angle.value === value) ?? { label: 'data.stop_name_angle.custom', value: '' }
+function findAngleByValue(value: string | null | undefined) {  return ANGLES.find(angle => angle.value === value) ?? { label: 'data.stop_name_angle.custom', value: '' }
 }
 
-const angle = defineModel<string | null>({ required: true })
+const angle = defineModel<string | null | undefined>({ required: true })
 const selectedAngle = ref<StopNameAngleChoice | null>(findAngleByValue(angle.value))
 const showCustomDialog = ref(false)
 

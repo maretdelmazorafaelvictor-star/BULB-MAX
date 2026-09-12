@@ -56,6 +56,11 @@ function updateColor(newColor: string | null) {
         <span class="text-nowrap">{{ $t('ui.properties.line_style') }}</span>
         <LineStyleSelect v-model="line.lineStyle" />
       </div>
+      
+      <div class="flex flex-col gap-1 flex-auto">
+        <span class="text-nowrap">{{ $t('ui.properties.stop_name_angle') }}</span>
+        <StopNameAngleSelect v-model="line.stopNameAngle" />
+      </div>
 
       <div class="flex flex-col gap-1 flex-auto">
         <span class="text-nowrap">{{ $t('ui.properties.dots_color') }}</span>

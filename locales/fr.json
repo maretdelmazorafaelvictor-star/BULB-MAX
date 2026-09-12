@@ -31,6 +31,9 @@
     "service_select": {
       "placeholder": "Sélectionner un service"
     },
+    "stop_name_angle_select":{
+      "placeholder": "Sélectionner un angle"
+    },
     "shape_select": {
       "placeholder": "Sélectionner une forme"
     }
@@ -115,6 +118,14 @@
       "lines": "Lignes",
       "rectangle": "Rectangle",
       "rounded_square": "Carré arrondi"
+    },
+        "stop_name_angle": {
+      "custom": "Personnalisé",
+      "horizontal": "Horizontal",
+      "tilted": "Normal",
+      "tilted_45": "Diagonal",
+      "tilted_60": "Incliné",
+      "vertical": "Vertical"
     }
   },
   "misc": {
@@ -205,6 +216,10 @@
       "custom_map_size": {
         "accept": "Terminé",
         "header": "Taille du cadre personnalisée"
+      },
+      "custom_stop_name_angle": {
+        "accept": "Terminé",
+        "header": "Angle personnalisé des noms d'arrêts"
       },
       "end_of_year_celebrations": {
         "close": "Fermer",
@@ -458,6 +473,7 @@
       "mode": "Mode de transport",
       "operator": "Opérateur",
       "size": "Taille du cadre",
+      "stop_name_angle": "Angle des noms d'arrêts",
       "title": "Propriétés",
       "use_preset": "Utiliser un préréglage",
       "terminus_line_color": "Terminus en couleur de ligne"

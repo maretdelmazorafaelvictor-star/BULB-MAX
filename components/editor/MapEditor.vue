@@ -19,6 +19,7 @@ const error = ref(false)
 
 provide<LineContext>(LineContextKey, {
   color: computed(() => line.value.color ?? '#000000'),
+  stopNameAngle: computed(() => Number.parseFloat(line.value.stopNameAngle ?? '-30') || 0),
   lineThickness: computed(() => Number.parseFloat(line.value.lineThickness ?? '1') || 1),
   lineStyle: computed(() => line.value.lineStyle ?? 'PLAIN'),
   dotsColorPolicy: computed(() => line.value.dotsColorPolicy ?? 'INHERIT'),

@@ -1,11 +1,17 @@
 <script setup lang="ts">
+import { computed, inject } from 'vue'
+import { LineContextKey } from '~/utils/symbols'
+
 const { value } = defineProps<{
   value: string
 }>()
+
+const lineContext = inject<LineContext>(LineContextKey)!
+const steep = computed(() => Math.abs(lineContext.stopNameAngle.value) >= 45)
 </script>
 
 <template>
-  <div class="subtitle">
+  <div class="subtitle" :class="{ upright: steep }">
     <Typography>{{ value }}</Typography>
   </div>
 </template>
@@ -19,5 +25,9 @@ const { value } = defineProps<{
   font-weight: bold;
   font-size: .5em;
   font-style: italic;
+
+  &.upright {
+    font-style: normal;
+  }
 }
 </style>

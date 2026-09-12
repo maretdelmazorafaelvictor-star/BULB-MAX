@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useResizeObserver } from '@vueuse/core'
 import { computed, inject, onUnmounted, ref, watch } from 'vue'
-import { StopContextKey } from '~/utils/symbols'
-
+import { LineContextKey, StopContextKey } from '~/utils/symbols'
+const lineContext = inject<LineContext>(LineContextKey)!
 const {
   value,
   placeName = '',
@@ -61,7 +61,7 @@ onUnmounted(() => {
 
 <template>
   <div class="terminus-label" :class="{ reverse }">
-    <TiltedText :reverse="reverse">
+        <TiltedText :reverse="reverse" :angle="lineContext.stopNameAngle.value">
       <div ref="frame" class="flex flex-col items-end gap-1" :class="{ 'opacity-50 export-hide': !effectiveValue }">
         <div class="title-holder">
           <TerminusLabel :value="effectiveValue || $t('ui.map_editor.toolbox.untitled_stop')" :place-name="placeName" />
@@ -73,6 +73,7 @@ onUnmounted(() => {
     <TiltedText
       v-if="subtitle && !reverse"
       class="subtitle-holder"
+      :angle="lineContext.stopNameAngle.value"
       :class="{
         'interest-point': interestPoint,
       }"
