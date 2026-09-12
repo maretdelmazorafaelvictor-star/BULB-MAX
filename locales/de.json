@@ -31,6 +31,9 @@
     "service_select": {
       "placeholder": "Knotenpunkt wählen…"
     },
+    "stop_name_angle_select": {
+      "placeholder": "Einen Winkel auswählen"
+    },
     "shape_select": {
       "placeholder": "Form wählen…"
     }
@@ -115,6 +118,14 @@
       "lines": "Linie",
       "rectangle": "Rechteck",
       "rounded_square": "Quadrat"
+    },
+    "stop_name_angle": {
+      "custom": "Benutzerdefiniert",
+      "horizontal": "Horizontal",
+      "tilted": "Normal",
+      "tilted_45": "Diagonal",
+      "tilted_60": "Geneigt",
+      "vertical": "Vertikal"
     }
   },
   "misc": {
@@ -197,7 +208,6 @@
         "empty_state": "Erstellen Sie Ihre erste Bibliothek, um Ihre Piktogramme zu organisieren.",
         "library_placeholder": "Bibliothek wählen…",
         "new_library_placeholder": "Neue Bibliothek"
-        
       },
       "custom_line_thickness": {
         "accept": "Anwenden",
@@ -206,6 +216,10 @@
       "custom_map_size": {
         "accept": "Anwenden",
         "header": "Größe des Rahmens"
+      },
+      "custom_stop_name_angle": {
+        "accept": "Fertig",
+        "header": "Benutzerdefinierter Winkel der Haltestellennamen"
       },
       "end_of_year_celebrations": {
         "close": "Schließen",
@@ -459,6 +473,7 @@
       "mode": "Transportmittel",
       "operator": "Betreiber",
       "size": "Höhe des Linienbandes",
+      "stop_name_angle": "Winkel der Haltestellennamen",
       "title": "Optionen",
       "use_preset": "Vorlage verwenden",
       "terminus_line_color": "Endstationen in Linienfarbe"

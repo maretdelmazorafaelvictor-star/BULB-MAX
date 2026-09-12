@@ -31,6 +31,9 @@
     "service_select": {
       "placeholder": "交通サービスの選択"
     },
+    "stop_name_angle_select": {
+      "placeholder": "角度を選択"
+    },
     "shape_select": {
       "placeholder": "形の選択"
     }
@@ -115,6 +118,14 @@
       "lines": "線",
       "rectangle": "長方形",
       "rounded_square": "角丸四角形"
+    },
+    "stop_name_angle": {
+      "custom": "カスタム",
+      "horizontal": "水平",
+      "tilted": "標準",
+      "tilted_45": "斜め45°",
+      "tilted_60": "斜め60°",
+      "vertical": "垂直"
     }
   },
   "misc": {
@@ -190,7 +201,7 @@
         "export_all": "ピクトグラムをエクスポート",
         "export_one": "ピクトグラムをエクスポート",
         "header": "特注の路線記号帳",
-         "delete_library": "ライブラリを削除",
+        "delete_library": "ライブラリを削除",
         "delete_library_accept": "削除",
         "delete_library_confirmation": "「{name}」を削除しますか？含まれている{count}個のピクトグラムは完全に削除されます。",
         "delete_library_reject": "キャンセル",
@@ -205,6 +216,10 @@
       "custom_map_size": {
         "accept": "確定",
         "header": "枠のサイズを指定"
+      },
+      "custom_stop_name_angle": {
+        "accept": "完了",
+        "header": "駅名のカスタム角度"
       },
       "end_of_year_celebrations": {
         "close": "閉じる",
@@ -458,6 +473,7 @@
       "mode": "交通機関",
       "operator": "運行事業者",
       "size": "路線図の額のサイズ",
+      "stop_name_angle": "駅名の角度",
       "title": "プロパティ",
       "use_preset": "プリセット値の使用",
       "terminus_line_color": "終着駅を路線色で表示"

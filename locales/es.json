@@ -15,7 +15,7 @@
       "official_indices": "Índices oficiales",
       "placeholder": "Seleccionar un índice",
       "unknown_index": "Desconocido"
-      },
+    },
     "line_style_select": {
       "placeholder": "Seleccionar un estilo"
     },
@@ -30,6 +30,9 @@
     },
     "service_select": {
       "placeholder": "Seleccionar un servicio"
+    },
+    "stop_name_angle_select": {
+      "placeholder": "Seleccionar un ángulo"
     },
     "shape_select": {
       "placeholder": "Seleccionar una forma"
@@ -115,6 +118,14 @@
       "lines": "Líneas",
       "rectangle": "Rectángulo",
       "rounded_square": "Cuadrado redondeado"
+    },
+    "stop_name_angle": {
+      "custom": "Personalizado",
+      "horizontal": "Horizontal",
+      "tilted": "Normal",
+      "tilted_45": "Diagonal",
+      "tilted_60": "Inclinado",
+      "vertical": "Vertical"
     }
   },
   "misc": {
@@ -205,6 +216,10 @@
       "custom_map_size": {
         "accept": "Listo",
         "header": "Tamaño del marco personalizado"
+      },
+      "custom_stop_name_angle": {
+        "accept": "Listo",
+        "header": "Ángulo personalizado de los nombres de parada"
       },
       "end_of_year_celebrations": {
         "close": "Cerrar",
@@ -458,6 +473,7 @@
       "mode": "Modo de transporte",
       "operator": "Operador",
       "size": "Tamaño del marco",
+      "stop_name_angle": "Ángulo de los nombres de parada",
       "title": "Propiedades",
       "use_preset": "Usar un modelo predefinido",
       "terminus_line_color": "Terminales en color de línea"

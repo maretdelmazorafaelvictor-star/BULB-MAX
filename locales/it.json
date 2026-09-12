@@ -31,6 +31,9 @@
     "service_select": {
       "placeholder": "Selezionare un servizio"
     },
+    "stop_name_angle_select": {
+      "placeholder": "Seleziona un angolo"
+    },
     "shape_select": {
       "placeholder": "Selezionare una forma"
     }
@@ -115,6 +118,14 @@
       "lines": "Linee",
       "rectangle": "Rettangolo",
       "rounded_square": "Quadrato arrotondato"
+    },
+    "stop_name_angle": {
+      "custom": "Personalizzato",
+      "horizontal": "Orizzontale",
+      "tilted": "Normale",
+      "tilted_45": "Diagonale",
+      "tilted_60": "Inclinato",
+      "vertical": "Verticale"
     }
   },
   "misc": {
@@ -205,6 +216,10 @@
       "custom_map_size": {
         "accept": "OK",
         "header": "Dimensione personalizzata del riquadro"
+      },
+      "custom_stop_name_angle": {
+        "accept": "Fatto",
+        "header": "Angolo personalizzato dei nomi delle fermate"
       },
       "end_of_year_celebrations": {
         "close": "Chiudi",
@@ -458,6 +473,7 @@
       "mode": "Mezzo di trasporto",
       "operator": "Operatore",
       "size": "Dimensione riquadro mappa",
+      "stop_name_angle": "Angolo dei nomi delle fermate",
       "title": "Proprietà",
       "use_preset": "Caricare un modello",
       "terminus_line_color": "Capolinea nel colore della linea"
