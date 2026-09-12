@@ -99,6 +99,7 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
           :interest-point-color="stop.$stop.interestPointColor"
           :prevent-subtitle-overlapping="stop.$stop.preventSubtitleOverlapping"
           :terminus="stop.$stop.terminus"
+          :name-weight="stop.$stop.nameWeight"
           :accessible="stop.$stop.accessible"
           :accessible-direction="stop.$stop.accessibleDirection"
           :reverse="inverted"

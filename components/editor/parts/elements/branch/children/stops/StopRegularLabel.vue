@@ -13,6 +13,7 @@ const {
   accessibleDirection = null,
   reverse = false,
   terminus = false,
+  nameWeight = undefined,
 } = defineProps<{
   value: string
   preventSubtitleOverlapping: boolean
@@ -24,6 +25,7 @@ const {
   interestPointColor?: string
   reverse?: boolean
   terminus?: boolean
+  nameWeight?: 'normal' | 'bold'
 }>()
 
 const stopContext = inject<StopContext>(StopContextKey)!
@@ -34,7 +36,10 @@ const sncfTerminus = computed(() => terminus && lineContext.brandStyle.value ===
 const terminusStyle = computed(() => sncfTerminus.value
   ? { fontWeight: 'bold', color: lineContext.terminusNamesLineColor.value ? lineContext.color.value : 'black' }
   : undefined)
-
+const WEIGHTS = { normal: '400', medium: '500', bold: '700' }
+const nameFontWeight = computed(() =>
+  lineContext.brandStyle.value === 'RATP' ? '700' : WEIGHTS[nameWeight ?? 'bold'],
+)
 const valueParts = computed(() => value.split('\n').filter(part => part.trim() !== ''))
 const shift = computed(() => {
   if (valueParts.value.length === 0) return false
@@ -57,9 +62,14 @@ watch([shift, () => interestPoint, () => subtitle], ([_shift, _interestPoint, _s
 <template>
   <div class="regular-label" :class="{ reverse, flat, 'opacity-50 export-hide': valueParts.length === 0 }">
     <div class="flex gap-1em" :class="{ 'name-parts-flat': flat }">
-      <TiltedText v-for="(part, index) in valueParts" :key="`${part}-${index}`" :reverse="reverse" :angle="lineContext.stopNameAngle.value">
+      <TiltedText
+        v-for="(part, index) in valueParts"
+        :key="`${part}-${index}`"
+        :reverse="reverse"
+        :angle="lineContext.stopNameAngle.value"
+      >
         <div class="title-holder" :style="terminusStyle">
-          <TitleLabel :value="part" />
+          <TitleLabel :value="part" :weight="nameFontWeight" />
           <Wheelchair
             v-if="index === valueParts.length - 1 && accessible !== 'undefined'"
             :off="!accessible"
@@ -67,7 +77,8 @@ watch([shift, () => interestPoint, () => subtitle], ([_shift, _interestPoint, _s
           />
         </div>
       </TiltedText>
-      <TiltedText v-if="valueParts.length === 0" :reverse="reverse" :angle="lineContext.stopNameAngle.value">        <TitleLabel :value="$t('ui.map_editor.toolbox.untitled_stop')" />
+      <TiltedText v-if="valueParts.length === 0" :reverse="reverse" :angle="lineContext.stopNameAngle.value">
+        <TitleLabel :value="$t('ui.map_editor.toolbox.untitled_stop')" :weight="nameFontWeight" />
       </TiltedText>
     </div>
     <div
@@ -79,7 +90,8 @@ watch([shift, () => interestPoint, () => subtitle], ([_shift, _interestPoint, _s
         'subtitle-flat': flat,
       }"
     >
-      <TiltedText :reverse="reverse" :angle="lineContext.stopNameAngle.value">        <StopSubtitle :interest-point="interestPoint" :interest-point-color="interestPointColor" :value="subtitle" />
+      <TiltedText :reverse="reverse" :angle="lineContext.stopNameAngle.value">
+        <StopSubtitle :interest-point="interestPoint" :interest-point-color="interestPointColor" :value="subtitle" />
       </TiltedText>
     </div>
   </div>

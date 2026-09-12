@@ -13,6 +13,7 @@ const props = defineProps<{
   reverse: boolean
   accessible: boolean | 'undefined' | undefined
   accessibleDirection?: 'left' | 'right' | null
+  nameWeight?: 'normal' | 'medium' | 'bold'
 }>()
 
 const lineContext = inject<LineContext>(LineContextKey)!

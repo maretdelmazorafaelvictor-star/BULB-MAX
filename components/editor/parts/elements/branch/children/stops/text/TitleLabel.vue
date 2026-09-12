@@ -1,12 +1,13 @@
 <script setup lang="ts">
-const { value } = defineProps<{
+const { value, weight = 'bold' } = defineProps<{
   value: string
+  weight?: string
 }>()
 </script>
 
 <template>
   <div class="flex flex-row items-center h-1em">
-    <Typography class="title">
+    <Typography class="title" :style="{ fontWeight: weight }">
       {{ value }}
     </Typography>
   </div>
@@ -15,7 +16,6 @@ const { value } = defineProps<{
 <style scoped lang="scss">
 .title {
   color: var(--brand-color);
-  font-weight: bold;
 }
 
 span {

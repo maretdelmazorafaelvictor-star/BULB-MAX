@@ -358,6 +358,12 @@
         "interest_point": "Punto d'interesse",
         "interest_point_color": "Colore del punto d'interesse",
         "inverted_elements": "Elementi invertiti",
+        "name_weight": {
+          "bold": "Grassetto",
+          "medium": "Medio",
+          "normal": "Normale",
+          "title": "Spessore del nome"
+        },
         "outside_idf": "Fuori dall'Île-de-France (tratteggio e sfondo grigio)",
         "preventOverlapping": "Impedisci sovrapposizioni tra nome e sottotitolo",
         "reverse": "Inverti etichetta",

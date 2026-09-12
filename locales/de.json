@@ -358,6 +358,12 @@
         "interest_point": "relevanter Ort",
         "interest_point_color": "Farbe des relevanten Ortes",
         "inverted_elements": "Invertierte Elemente",
+        "name_weight": {
+            "bold": "Fett",
+            "medium": "Mittel",
+            "normal": "Normal",
+            "title": "Schriftstärke des Namens"
+        },
         "outside_idf": "Außerhalb der Île-de-France (Schraffur und grauer Hintergrund)",
         "preventOverlapping": "Vermeide Kolissionen zwischen dem Haltestellennamen und -zusatz.",
         "reverse": "Invertieren",

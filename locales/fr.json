@@ -358,6 +358,12 @@
         "interest_point": "Point d’intérêt",
         "interest_point_color": "Couleur du point d’intérêt",
         "inverted_elements": "Élements inversés",
+        "name_weight": {
+            "bold": "Gras",
+            "medium": "Moyen",
+            "normal": "Normal",
+            "title": "Graisse du nom"
+        },
         "outside_idf": "Hors Île-de-France (hachures et fond gris)",
         "preventOverlapping": "Empêcher la colision du nom et du sous-titre",
         "reverse": "Inversé",

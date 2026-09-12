@@ -358,6 +358,12 @@
         "interest_point": "興味ポイント",
         "interest_point_color": "興味ポイントの色",
         "inverted_elements": "逆さまの要素",
+        "name_weight": {
+          "bold": "太字",
+          "medium": "中太",
+          "normal": "標準",
+          "title": "駅名の太さ"
+        },
         "outside_idf": "イル・ド・フランス外（破線とグレー背景）",
         "preventOverlapping": "名前と副題が衝突しないようにする",
         "reverse": "逆さま",

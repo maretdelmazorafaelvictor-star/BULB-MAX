@@ -358,6 +358,12 @@
         "interest_point": "Punto de interés",
         "interest_point_color": "Color del punto de interés",
         "inverted_elements": "Elementos invertidos",
+        "name_weight": {
+            "bold": "Negrita",
+            "medium": "Media",
+            "normal": "Normal",
+            "title": "Grosor del nombre"
+        },
         "outside_idf": "Fuera de Île-de-France (rayado y fondo gris)",
         "preventOverlapping": "Impedir la colisión del nombre y el subtítulo",
         "reverse": "Invertido",

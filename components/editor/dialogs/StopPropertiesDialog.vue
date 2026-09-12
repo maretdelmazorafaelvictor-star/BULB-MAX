@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import { computed, watch } from 'vue'
+import { computed, inject, watch } from 'vue'
 import { cleanName } from '~/utils/text'
-
+import { LineContextKey } from '~/utils/symbols'
 const { allowCity } = defineProps<{
   allowCity: boolean
 }>()
@@ -11,7 +11,7 @@ const emit = defineEmits<{
 }>()
 const visible = defineModel<boolean>('visible', { required: true })
 const stop = defineModel<Stop>({ required: true })
-
+const lineContext = inject<LineContext>(LineContextKey)!
 const outsideIdf = computed({
   get: () => (stop.value.$stop.hatched ?? false) || (stop.value.$stop.grayed ?? false),
   set: (val: boolean) => {
@@ -34,7 +34,11 @@ const stopTypeOptions = [
   { label: 'ui.dialogs.stop_properties.stop_type.regular', value: false },
   { label: 'ui.dialogs.stop_properties.stop_type.terminus', value: true },
 ]
-
+const nameWeightOptions = [
+  { label: 'ui.dialogs.stop_properties.name_weight.normal', value: 'normal' },
+  { label: 'ui.dialogs.stop_properties.name_weight.medium', value: 'medium' },
+  { label: 'ui.dialogs.stop_properties.name_weight.bold', value: 'bold' },
+]
 const accessibleDirectionOptions = [
   { label: 'ui.dialogs.stop_properties.accessible_direction.both', value: null },
   { label: 'ui.dialogs.stop_properties.accessible_direction.left', value: 'left' },
@@ -195,7 +199,17 @@ function openConnectionsEditor() {
             :allow-empty="false"
           />
         </div>
-
+        <div v-if="lineContext.brandStyle.value !== 'RATP'" class="flex flex-col gap-1">          <label>{{ $t('ui.dialogs.stop_properties.name_weight.title') }}</label>
+          <SelectButton
+            v-model="stop.$stop.nameWeight"
+            pt:pc-toggle-button:root:class="flex-grow"
+            :options="nameWeightOptions"
+            :option-label="option => $t(option.label)"
+            option-value="value"
+            :allow-empty="false"
+          />
+        </div>
+        
         <div v-if="stop.$stop.terminus" class="flex flex-col gap-1">
           <label>{{ $t('ui.dialogs.stop_properties.branch_color') }}</label>
           <div class="flex items-center gap-2">
