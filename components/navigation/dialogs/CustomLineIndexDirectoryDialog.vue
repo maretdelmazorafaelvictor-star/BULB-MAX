@@ -3,8 +3,9 @@ import * as htmlToImage from 'html-to-image'
 import { storeToRefs } from 'pinia'
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
-import { nextTick, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { MODES } from '~/data/modes'
+import { useCustomModes } from '~/stores/useCustomModes'
 import { useCustomLineIndices } from '~/stores/useCustomLineIndices'
 import { useI18n } from 'vue-i18n'
 
@@ -23,6 +24,12 @@ const toast = useToast()
 const confirm = useConfirm()
 const { t } = useI18n()
 const showEditor = ref(false)
+const customModes = useCustomModes()
+const allModes = computed(() => [
+  ...MODES.map(it => ({ value: it.value as Mode, label: it.label, custom: false })),
+  ...customModes.modes.map(it => ({ value: it.id as Mode, label: it.name, custom: true })),
+])
+
 const newLibraryName = ref('')
 const selectedLibraryId = ref<string | undefined>(undefined)
 const selectedIndex = ref<CustomLineIndexDescription | null>(null)
@@ -243,14 +250,14 @@ function exportSingleIndex(index: CustomLineIndexDescription) {
 
     <template v-else>
       <Fieldset
-        v-for="mode in MODES"
-        :key="mode.label"
+        v-for="mode in allModes"
+        :key="mode.value"
         :legend="mode.label"
       >
       <template #legend>
         <div class="flex items-center gap-2">
           <Mode class="text-xl" :mode="mode.value" />
-          <span>{{ $t(mode.label) }}</span>
+          <span>{{ mode.custom ? mode.label : $t(mode.label) }}</span>
         </div>
       </template>
       <div class="btn-group">
