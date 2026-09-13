@@ -68,6 +68,7 @@ const customIndex = computed(() => {
       :index="customIndex.index"
       :suffix="customIndex.suffix"
       :color="customIndex.color"
+      :image="customIndex.image"
     />
   </div>
 </template>

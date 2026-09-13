@@ -189,10 +189,12 @@
         "color": "色",
         "delete": "消す",
         "header": "特注の路線記号のエディター",
+        "import_image": "画像をインポート",
         "index": "路線記号",
         "mode": "交通機関",
         "prefix": "値前",
         "preview": "プレビュー",
+        "remove_image": "画像を削除",
         "shape": "形",
         "suffix": "値後",
         "value": "値"

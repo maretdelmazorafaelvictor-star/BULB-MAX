@@ -190,10 +190,12 @@
         "color": "Couleur",
         "delete": "Supprimer",
         "header": "Éditeur d’indice personnalisé",
+        "import_image": "Importer une image",
         "index": "Indice",
         "mode": "Mode",
         "prefix": "Préfixe",
         "preview": "Prévisualisation",
+        "remove_image": "Retirer l'image",
         "shape": "Forme",
         "suffix": "Suffixe",
         "value": "Valeur"

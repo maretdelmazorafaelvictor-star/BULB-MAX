@@ -1,12 +1,36 @@
 <script setup lang="ts">
-import { watch } from 'vue'
+import { useToast } from 'primevue/usetoast'
+import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { modeToShape } from '~/data/modes'
+import { resizeImage } from '~/utils/images'
 
 const emit = defineEmits<{
   delete: [id: string]
 }>()
 const index = defineModel<CustomLineIndexDescription>({ required: true })
 const visible = defineModel<boolean>('visible')
+
+const toast = useToast()
+const { t } = useI18n()
+const imageInput = ref<HTMLInputElement | null>(null)
+
+async function onImageChosen(event: Event) {
+  const input = event.target as HTMLInputElement
+  const file = input.files?.[0]
+  input.value = ''
+  if (!file) return
+  try {
+    index.value.image = await resizeImage(file)
+  } catch {
+    toast.add({
+      severity: 'error',
+      summary: t('ui.dialogs.mode_pictos.import_failure.title'),
+      detail: t('ui.dialogs.mode_pictos.import_failure.unreadable'),
+      life: 5000,
+    })
+  }
+}
 
 function filterShape(shape: ShapeChoice) {
   if (index.value.mode === 'BUS') {
@@ -83,9 +107,35 @@ watch(() => index.value.mode, (mode) => {
             :prefix="index.prefix"
             :suffix="index.suffix"
             :color="index.color"
+            :image="index.image"
             text-color="auto"
           />
         </div>
+        <div class="flex flex-row items-center justify-center gap-1 mt-2">
+          <Button
+            size="small"
+            text
+            icon="i-tabler-upload"
+            :label="$t('ui.dialogs.custom_index_editor.import_image')"
+            @click="imageInput?.click()"
+          />
+          <Button
+            v-if="index.image"
+            size="small"
+            text
+            severity="secondary"
+            icon="i-tabler-rotate"
+            :label="$t('ui.dialogs.custom_index_editor.remove_image')"
+            @click="index.image = null"
+          />
+        </div>
+        <input
+          ref="imageInput"
+          type="file"
+          accept="image/png,image/jpeg,image/svg+xml,image/webp"
+          class="hidden"
+          @change="onImageChosen"
+        >
       </Panel>
     </div>
     <template #footer>

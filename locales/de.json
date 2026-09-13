@@ -189,10 +189,12 @@
         "color": "Farbe",
         "delete": "Löschen",
         "header": "Benutzerdefinierte Liniensignale bearbeiten",
+        "import_image": "Bild importieren",
         "index": "Liniensignal",
         "mode": "Transportmittel",
         "prefix": "Prefix",
         "preview": "Vorschau",
+        "remove_image": "Bild entfernen",
         "shape": "Form",
         "suffix": "Suffix",
         "value": "Bezeichnung"

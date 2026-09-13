@@ -115,6 +115,7 @@ declare global {
     mode: Mode
     color: string
     libraryId?: string
+    image?: string | null
   }
 
   interface CustomModeDescription {

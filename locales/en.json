@@ -189,10 +189,12 @@
         "color": "Color",
         "delete": "Delete",
         "header": "Custom index editor",
+        "import_image": "Import an image",
         "index": "Index",
         "mode": "Mode",
         "prefix": "Prefix",
         "preview": "Preview",
+        "remove_image": "Remove image",
         "shape": "Shape",
         "suffix": "Suffix",
         "value": "Value"

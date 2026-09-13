@@ -8,12 +8,14 @@ const {
   suffix = '',
   shape,
   color,
+  image = null,
 } = defineProps<{
   index: string
   prefix?: string
   suffix?: string
   shape: IndexShape
   color: string
+  image?: string | null
 }>()
 
 const NARROW_CHARS = []
@@ -32,16 +34,26 @@ const textColor = computed(() => textContrast(color) ? 'var(--light-text)' : 'va
       'cut-rectangle': shape === 'CUT_RECTANGLE',
     }"
   >
-    <Shape :shape="shape" :color="color" />
-    <span class="index">
+    <img v-if="image" class="index-image" :src="image" alt="">
+    <template v-else>
+      <Shape :shape="shape" :color="color" />
+      <span class="index">
       <span v-if="prefix && shape === 'LINES'" class="prefix">{{ prefix }}</span>
       <span v-for="(c, i) in index" :key="i" :class="{ narrow: NARROW_CHARS.includes(c) }">{{ c }}</span>
-      <span v-if="suffix" class="suffix">{{ suffix }}</span>
-    </span>
+        <span v-if="suffix" class="suffix">{{ suffix }}</span>
+      </span>
+    </template>
   </div>
 </template>
 
 <style scoped lang="scss">
+.index-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .wrapper {
   position: relative;
   display: block;
