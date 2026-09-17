@@ -6,6 +6,7 @@ import { useI18n } from 'vue-i18n'
 import { useProjectVersionCheck } from '~/composables/useProjectVersionCheck'
 import useVersion from '~/composables/useVersion'
 import { useCustomLineIndices } from '~/stores/useCustomLineIndices'
+import { useCustomModes } from '~/stores/useCustomModes'
 import { useModePictos } from '~/stores/useModePictos'
 import { useProject } from '~/stores/useProject'
 
@@ -26,10 +27,12 @@ export default function useLoadProject() {
   const { version, line, presetBased } = storeToRefs(lineStore)
   const indicesStore = storeToRefs(useCustomLineIndices())
   const modePictos = useModePictos()
+  const customModes = useCustomModes()
 
   function preload(project: Project) {
     const hasExtras = project.customIndices.length > 0
       || Object.keys(project.modePictos ?? {}).length > 0
+      || (project.customModes ?? []).length > 0
     if (hasExtras) {
       confirm.require({
         header: t('ui.dialogs.loading_custom_indices_prompt.header'),
@@ -74,6 +77,12 @@ export default function useLoadProject() {
       const newIndices = project.customIndices.filter(it => !existingIndicesIds.includes(it.id))
 
       indicesStore.indices.value.push(...newIndices)
+
+      for (const mode of project.customModes ?? []) {
+        if (customModes.findById(mode.id) === null) {
+          customModes.modes.push({ ...mode })
+        }
+      }
 
       for (const [mode, picto] of Object.entries(project.modePictos ?? {})) {
         if (!modePictos.isCustomized(mode as Mode)) {
