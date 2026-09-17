@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useNow } from '@vueuse/core'
+import { useElementSize, useMutationObserver, useNow } from '@vueuse/core'
 import { useDateFormat } from '@vueuse/shared'
 import { storeToRefs } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import idfmLogo from '~/assets/svg/brands/idfm.svg'
 import idfmLightLogo from '~/assets/svg/brands/idfm_light.png'
 import transilienSncfLogo from '~/assets/svg/brands/transilien_sncf.png'
@@ -24,10 +24,45 @@ const hasBottomCommunes = ref(false)
 const hasFareZones = ref(false)
 const singleFareZone = ref<string | null>(null)
 
+
+
 const now = useNow()
 const date = useDateFormat(now.value, 'DD.MM.YYYY')
 
 const mapArea = ref<HTMLElement | null>(null)
+/**
+ * Les noms du premier arrêt d'une branche débordent à gauche de la feuille
+ * (marge négative de centrage). On mesure ce débordement et on réserve
+ * d'autant, pour que rien ne sorte du plan ni ne chevauche l'identité.
+ */
+const leftOverflow = ref(0)
+
+function measureOverflow() {
+  const area = mapArea.value
+  if (!area) return
+  const base = area.getBoundingClientRect()
+  let leftmost = base.left
+  for (const label of area.querySelectorAll<HTMLElement>('.regular-label, .terminus-label')) {
+    const rect = label.getBoundingClientRect()
+    if (rect.width > 0) leftmost = Math.min(leftmost, rect.left)
+  }
+  leftOverflow.value = Math.max(0, Math.round(base.left - leftmost))
+}
+
+function scheduleOverflow() {
+  nextTick(() => requestAnimationFrame(measureOverflow))
+}
+
+const { width: areaWidth, height: areaHeight } = useElementSize(mapArea)
+watch([areaWidth, areaHeight], scheduleOverflow)
+useMutationObserver(mapArea, scheduleOverflow, {
+  attributes: true,
+  attributeFilter: ['style', 'class'],
+  childList: true,
+  subtree: true,
+  characterData: true,
+})
+onMounted(scheduleOverflow)
 </script>
 
 <template>
@@ -84,6 +119,7 @@ const mapArea = ref<HTMLElement | null>(null)
       <SectionsGroup
         v-model="line.topology"
         class="w-max-content min-h-15em p-1em pt-20 pr-10em"
+        :style="{ paddingLeft: `calc(1em + ${leftOverflow}px)` }"
       />
     </div>
 
