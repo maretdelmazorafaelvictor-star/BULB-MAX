@@ -16,6 +16,14 @@ const {
 
 const lineContext = inject<LineContext>(LineContextKey)!
 const idfm = computed(() => lineContext.brandStyle.value === 'IDFM')
+
+/**
+ * Trams et tram-trains en signalétique IDFM : le point reste contenu dans
+ * l'épaisseur du tracé au lieu de garder une taille fixe qui la déborde.
+ */
+const fitsLine = computed(() => idfm.value
+  && (lineContext.mode.value === 'TRAM' || lineContext.mode.value === 'TRAM_TRAIN'))
+const dotSize = computed(() => fitsLine.value ? `${lineContext.lineThickness.value}em` : '1.125em')
 const dotColor = computed(() => {
   if (lineContext.dotsColorPolicy.value === 'WHITE') {
     return 'white'
@@ -26,7 +34,11 @@ const dotColor = computed(() => {
 
 <template>
   <div class="w-1em h-1em flex items-center justify-center relative">
-    <div class="absolute dot dynamic-part" :class="{ terminus, connection: connection || closed, idfm }">
+    <div
+      class="absolute dot dynamic-part"
+      :class="{ terminus, connection: connection || closed, idfm }"
+      :style="terminus ? undefined : { width: dotSize, height: dotSize }"
+    >
       <span v-if="terminus" class="inner-dot" :style="{ backgroundColor: color }" />
     </div>
     <img v-if="closed" class="absolute closed" src="~/assets/svg/closed.svg">

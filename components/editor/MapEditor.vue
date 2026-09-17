@@ -26,6 +26,7 @@ provide<LineContext>(LineContextKey, {
   frameTerminusNames: computed(() => line.value.frameTerminusNames),
   terminusNamesLineColor: computed(() => line.value.terminusNamesLineColor),
   brandStyle: computed(() => line.value.brandStyle ?? 'RATP'),
+  mode: computed(() => line.value.mode),
 })
 
 function doExport() {
