@@ -350,6 +350,12 @@
         "city_name": "Città",
         "closed": "Fermata chiusa",
         "commune": "Comune",
+        "direction_arrow": {
+          "left": "Verso sinistra",
+          "none": "Nessuna",
+          "right": "Verso destra",
+          "title": "Freccia di senso"
+        },
         "position": "Posizione (latitudine, longitudine)",
         "position_placeholder": "48.8584, 2.2945",
         "position_invalid": "Inserisci due numeri, ad esempio 48.8584, 2.2945",
@@ -479,7 +485,7 @@
         "stop": "Fermata",
         "untitled_stop": "Fermata senza nome"
       },
-      "watermark": "Realizzato tramite BULB"
+      "watermark": "Realizzato tramite BULB-MAX"
     },
     "menu": {
       "brand_style": "Stile grafico",

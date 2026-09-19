@@ -350,6 +350,12 @@
         "city_name": "市の名前",
         "closed": "運休",
         "commune": "自治体",
+        "direction_arrow": {
+          "left": "左方向",
+          "none": "なし",
+          "right": "右方向",
+          "title": "方向矢印"
+        },
         "position": "位置（緯度、経度）",
         "position_placeholder": "48.8584, 2.2945",
         "position_invalid": "数値を2つ入力してください（例：48.8584, 2.2945）",
@@ -479,7 +485,7 @@
         "stop": "駅",
         "untitled_stop": "〇〇駅"
       },
-      "watermark": "BULBで作成"
+      "watermark": "BULB-MAXで作成"
     },
     "menu": {
       "brand_style": "グラフィックスタイル",

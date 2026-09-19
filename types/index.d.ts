@@ -234,6 +234,7 @@ declare global {
       grayed?: boolean
       reverse: boolean
       connections: Connection[]
+      directionArrow?: 'left' | 'right' | null
     }
   }
 

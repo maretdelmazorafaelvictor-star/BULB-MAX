@@ -9,6 +9,11 @@ const { allowCity } = defineProps<{
 const emit = defineEmits<{
   openConnections: []
 }>()
+const directionArrowOptions = [
+  { label: 'ui.dialogs.stop_properties.direction_arrow.none', value: null },
+  { label: 'ui.dialogs.stop_properties.direction_arrow.left', value: 'left' },
+  { label: 'ui.dialogs.stop_properties.direction_arrow.right', value: 'right' },
+]
 const visible = defineModel<boolean>('visible', { required: true })
 const stop = defineModel<Stop>({ required: true })
 const lineContext = inject<LineContext>(LineContextKey)!
@@ -238,11 +243,24 @@ function openConnectionsEditor() {
             :allow-empty="false"
           />
         </div>
-        <div v-if="lineContext.brandStyle.value !== 'RATP'" class="flex flex-col gap-1">          <label>{{ $t('ui.dialogs.stop_properties.name_weight.title') }}</label>
+        <div v-if="lineContext.brandStyle.value !== 'RATP'" class="flex flex-col gap-1">          
+          <label>{{ $t('ui.dialogs.stop_properties.name_weight.title') }}</label>
           <SelectButton
             v-model="stop.$stop.nameWeight"
             pt:pc-toggle-button:root:class="flex-grow"
             :options="nameWeightOptions"
+            :option-label="option => $t(option.label)"
+            option-value="value"
+            :allow-empty="false"
+          />
+          
+        </div>
+                <div class="flex flex-col gap-1">
+          <label>{{ $t('ui.dialogs.stop_properties.direction_arrow.title') }}</label>
+          <SelectButton
+            v-model="stop.$stop.directionArrow"
+            pt:pc-toggle-button:root:class="flex-grow"
+            :options="directionArrowOptions"
             :option-label="option => $t(option.label)"
             option-value="value"
             :allow-empty="false"

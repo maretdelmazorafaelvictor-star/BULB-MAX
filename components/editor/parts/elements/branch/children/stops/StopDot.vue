@@ -7,11 +7,13 @@ const {
   terminus = false,
   connection = false,
   closed = false,
+  directionArrow = null,
 } = defineProps<{
   color: string
   terminus?: boolean
   connection?: boolean
   closed?: boolean
+  directionArrow?: 'left' | 'right' | null
 }>()
 
 const lineContext = inject<LineContext>(LineContextKey)!
@@ -34,6 +36,7 @@ const dotColor = computed(() => {
 
 <template>
   <div class="w-1em h-1em flex items-center justify-center relative">
+    <div v-if="directionArrow" class="absolute direction-arrow" :class="directionArrow" />
     <div
       class="absolute dot dynamic-part"
       :class="{ terminus, connection: connection || closed, idfm }"
@@ -96,5 +99,24 @@ const dotColor = computed(() => {
   scale: 1.375;
   object-fit: cover;
   pointer-events: none;
+}
+
+.direction-arrow {
+  width: 0;
+  height: 0;
+  border-top: .3em solid transparent;
+  border-bottom: .3em solid transparent;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &.right {
+    left: 1.4em;
+    border-left: .45em solid black;
+  }
+
+  &.left {
+    right: 1.4em;
+    border-right: .45em solid black;
+  }
 }
 </style>

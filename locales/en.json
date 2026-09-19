@@ -350,6 +350,12 @@
         "city_name": "City",
         "closed": "Closed",
         "commune": "Municipality",
+        "direction_arrow": {
+          "left": "Leftward",
+          "none": "None",
+          "right": "Rightward",
+          "title": "Direction arrow"
+        },
         "position": "Position (latitude, longitude)",
         "position_placeholder": "48.8584, 2.2945",
         "position_invalid": "Enter two numbers, for example 48.8584, 2.2945",
@@ -473,7 +479,7 @@
         "stop": "Stop",
         "untitled_stop": "Untitled stop"
       },
-      "watermark": "Created with BULB"
+      "watermark": "Created with BULB-MAX"
     },
     "menu": {
       "brand_style": "Graphic style",

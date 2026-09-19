@@ -350,6 +350,12 @@
         "city_name": "Ciudad",
         "closed": "Cerrado",
         "commune": "Municipio",
+        "direction_arrow": {
+          "left": "Hacia la izquierda",
+          "none": "Ninguna",
+          "right": "Hacia la derecha",
+          "title": "Flecha de sentido"
+        },
         "position": "Posición (latitud, longitud)",
         "position_placeholder": "48.8584, 2.2945",
         "position_invalid": "Introduzca dos números, por ejemplo 48.8584, 2.2945",
@@ -479,7 +485,7 @@
         "stop": "Parada",
         "untitled_stop": "Parada sin nombre"
       },
-      "watermark": "Creado con BULB"
+      "watermark": "Creado con BULB-MAX"
     },
     "menu": {
       "brand_style": "Estilo gráfico",

@@ -350,6 +350,12 @@
         "city_name": "Ort",
         "closed": "Aufgelassen",
         "commune": "Gemeinde",
+        "direction_arrow": {
+          "left": "Nach links",
+          "none": "Keine",
+          "right": "Nach rechts",
+          "title": "Richtungspfeil"
+        },
         "position": "Position (Breite, Länge)",
         "position_placeholder": "48.8584, 2.2945",
         "position_invalid": "Geben Sie zwei Zahlen ein, zum Beispiel 48.8584, 2.2945",
@@ -479,7 +485,7 @@
         "stop": "Haltestelle",
         "untitled_stop": "Haltestelle ohne Namen"
       },
-      "watermark": "Erstellt mithilfe von BULB"
+      "watermark": "Erstellt mithilfe von BULB-MAX"
     },
     "menu": {
       "brand_style": "Grafikstil",

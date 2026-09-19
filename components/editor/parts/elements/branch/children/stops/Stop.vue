@@ -125,6 +125,7 @@ provide<StopContext>(StopContextKey, { margins, namesWidth, inverted })
             :connection="stop.$stop.connections.length > 0"
             :color="stop.$stop.terminus ? (stop.$stop.branch_color ?? lineContext.color.value) : lineContext.color.value"
             :closed="stop.$stop.closed"
+            :direction-arrow="stop.$stop.directionArrow"
             @click="(e: Event) => e.stopPropagation()"
           />
           <EndOfLineConnection

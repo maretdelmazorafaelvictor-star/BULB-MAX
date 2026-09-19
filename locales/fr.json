@@ -351,6 +351,12 @@
         "city_name": "Ville",
         "closed": "Fermé",
         "commune": "Commune",
+        "direction_arrow": {
+          "left": "Vers la gauche",
+          "none": "Aucune",
+          "right": "Vers la droite",
+          "title": "Flèche de sens"
+        },
         "position": "Position (latitude, longitude)",
         "position_placeholder": "48.8584, 2.2945",
         "position_invalid": "Saisissez deux nombres, par exemple 48.8584, 2.2945",
@@ -480,7 +486,7 @@
         "stop": "Arrêt",
         "untitled_stop": "Arrêt sans nom"
       },
-      "watermark": "Créé à l’aide de BULB"
+      "watermark": "Créé à l’aide de BULB-MAX"
     },
     "menu": {
       "brand_style": "Style graphique",
