@@ -10,6 +10,7 @@ import useVersion from '~/composables/useVersion'
 import { findBrandStyleByValue } from '~/data/brands'
 import { findOperatorByValue } from '~/data/operators'
 import { useProject } from '~/stores/useProject'
+import { isBranch, isParallelBranches, isStop } from '~/utils/types'
 
 const { applicationVersion } = useVersion()
 const { line, outdated, presetBased } = storeToRefs(useProject())
@@ -17,6 +18,32 @@ const { line, outdated, presetBased } = storeToRefs(useProject())
 const brand = computed(() => findBrandStyleByValue(line.value.brandStyle) ?? findBrandStyleByValue('RATP')!)
 
 const idfm = computed(() => brand.value.value === 'IDFM')
+const idfmBus = computed(() => idfm.value && (line.value.mode === 'BUS' || line.value.mode === 'BRT' || line.value.mode === 'NOCTILIEN'))
+const terminusNames = computed(() => {
+  const names: string[] = []
+  function scan(section: LineSection) {
+    for (const element of section.$lineSection.elements) {
+      if (isBranch(element)) {
+        for (const child of element.$branch.elements) {
+          if (isStop(child) && child.$stop.terminus) {
+            const name = child.$stop.name.split('\n').join(' ').trim()
+            if (name !== '') names.push(name)
+          }
+        }
+      } else if (isParallelBranches(element)) {
+        element.$parallelBranches.sections.forEach(scan)
+      }
+    }
+  }
+  line.value.topology.forEach(scan)
+  return names
+})
+const terminusLabel = computed(() => {
+  const names = terminusNames.value
+  if (names.length === 1) return `${names[0]} (Circulaire)`
+  if (names.length <= 2) return names.join(' ⟷ ')
+  return `${names[0]} ⟷ ${names.slice(1).join(' / ')}`
+})
 const sncf = computed(() => brand.value.value === 'SNCF')
 const operator = computed(() => findOperatorByValue(line.value.operator))
 
@@ -67,31 +94,38 @@ onMounted(scheduleOverflow)
 
 <template>
   <div
-    v-bind="$attrs" class="relative isolate content bg-white flex gap-10 flex-row" :class="`brand-${brand.value.toLowerCase()}`"
-    :style="{ minHeight: `${line.mapSize}em` }"
+    v-bind="$attrs" class="relative isolate content bg-white flex gap-10" :class="[`brand-${brand.value.toLowerCase()}`, idfmBus ? 'flex-col' : 'flex-row']"    :style="{ minHeight: `${line.mapSize}em` }"
   >
     <div class="hors-idf-layer" />
-    <div class="flex flex-col min-w-fit gap-3" :class="idfm ? 'side-column-idfm' : 'ml-3'">
-      <div v-if="idfm" class="band-idfm flex justify-center items-center bg-[var(--brand-color)] py-.625em px-.75em">
+    <div
+      class="flex min-w-fit gap-3"
+      :class="[idfmBus ? 'flex-row items-center top-band-idfm-bus' : 'flex-col', idfm && !idfmBus ? 'side-column-idfm' : '', !idfm ? 'ml-3' : '']"
+    >
+      <div v-if="idfm && !idfmBus" class="band-idfm flex justify-center items-center bg-[var(--brand-color)] py-.625em px-.75em">
         <img :src="idfmLogo" alt="Île-de-France Mobilités" class="authority-logo">
       </div>
-      <div v-else class="w-full h-8" :class="sncf ? '' : 'bg-[var(--brand-color)]'" />
-      <div v-if="idfm" class="flex-grow" />
-      <div class="w-full flex flex-row gap-3 items-center text-4em" :class="sncf ? 'justify-start' : 'justify-center'">
+      <div v-else-if="!idfmBus" class="w-full h-8" :class="sncf ? '' : 'bg-[var(--brand-color)]'" />
+      <div v-if="idfm && !idfmBus" class="flex-grow" />
+      <div class="flex flex-row gap-3 items-center text-4em" :class="[sncf ? 'justify-start' : 'justify-center', idfmBus ? '' : 'w-full']">
         <Mode :mode="line.mode" />
         <LineIndex :mode="line.mode" :index="line.index" />
       </div>
       <div
         v-if="line.fullyAccessible"
-        class="w-full flex flex-row gap-3 justify-center items-center mt-.5em py-3 text-1.75em"
-        :class="idfm ? '' : 'bg-[var(--brand-color-secondary)]/50'"
+        class="flex flex-row gap-3 justify-center items-center mt-.5em py-3 text-1.75em"
+        :class="[idfm ? '' : 'bg-[var(--brand-color-secondary)]/50', idfmBus ? '' : 'w-full']"
       >
         <Wheelchair />
       </div>
+            <div v-if="idfmBus" class="terminus-band flex-grow flex items-center px-.75em">
+        <span class="terminus-band-text">{{ terminusLabel }}</span>
+        
+      </div>
       <div v-if="singleFareZone" class="single-fare-zone w-full flex justify-center items-center mt-.5em py-.35em">
+        
         <span>ZONE TARIFAIRE {{ singleFareZone }}</span>
       </div>
-      <div class="flex-grow" />
+      <div v-if="!idfmBus" class="flex-grow" />
       <div v-if="idfm && operator && operator.logos.length" class="flex flex-col items-start gap-.25em mb-.75em px-.75em">
         <span class="operated-by">OPÉRÉ PAR</span>
         <img v-for="logo of operator.logos" :key="logo" :src="logo" :alt="operator.value" class="operator-logo">
@@ -101,7 +135,7 @@ onMounted(scheduleOverflow)
         <span class="brand-pour">pour</span>
         <img :src="idfmLightLogo" alt="Île-de-France Mobilités" class="idfm-inline-logo">
       </div>
-      <div class="text-.25em flex flex-col line-height-1.75 text-[var(--brand-color)] mb-3">
+      <div v-if="!idfmBus" class="text-.25em flex flex-col line-height-1.75 text-[var(--brand-color)] mb-3">
         <div class="flex flex-row gap-.5">
           <span>BULB-{{ brand.footer }} •</span>
           <!-- Preset Based Project -->
@@ -123,10 +157,10 @@ onMounted(scheduleOverflow)
       />
     </div>
 
-    <div class="mr-3 my-3 rotate-180 text-[var(--brand-color)] text-.125em opacity-50">
-      <div class="legal-notice flex flex-col line-height-1">
+    <div class="text-[var(--brand-color)] text-.15em opacity-50" :class="idfmBus ? 'mx-3 mb-2' : 'mr-3 my-3 rotate-180'">
+      <div class="legal-notice flex flex-col line-height-1" :class="idfmBus ? 'legal-flat' : ''">
         <span>Non affilié à la RATP, à Île-de-France Mobilités, à SNCF Voyageurs ou à toute autre société. Les pictogrammes ainsi que les polices utilisés demeurent la propriété intellectuelle exclusive des entités susmentionnées.</span>
-        <span class="italic text-.75em">Not affiliated with RATP, Île-de-France Mobilités, SNCF Voyageurs or any other company. The pictograms and fonts used remain the exclusive intellectual property of the aforementioned entities.</span>
+        <span class="italic text-.99em">Not affiliated with RATP, Île-de-France Mobilités, SNCF Voyageurs or any other company. The pictograms and fonts used remain the exclusive intellectual property of the aforementioned entities.</span>
       </div>
     </div>
   </div>
@@ -169,9 +203,33 @@ onMounted(scheduleOverflow)
   padding-right: .75em;
 }
 
+.top-band-idfm-bus {
+  width: 100%;
+  padding: .5em .75em;
+  gap: .75em;
+}
+
+.terminus-band {
+  background: var(--idfm-anthracite, #2a2f38);
+  min-height: 2em;
+}
+
+.terminus-band-text {
+  color: white;
+  font-size: .9em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .band-idfm {
   margin-left: -.75em;
   width: calc(100% + 1.5em);
+}
+
+.top-band-idfm-bus .band-idfm {
+  margin-left: 0;
+  width: auto;
+  flex-shrink: 0;
 }
 
 .authority-logo {
@@ -227,5 +285,10 @@ onMounted(scheduleOverflow)
 
 .legal-notice {
   writing-mode: vertical-rl;
+}
+
+.legal-flat {
+  writing-mode: horizontal-tb;
+  line-height: 1.6;
 }
 </style>
