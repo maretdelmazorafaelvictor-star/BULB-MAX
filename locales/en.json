@@ -215,6 +215,10 @@
         "accept": "Done",
         "header": "Custom line thickness"
       },
+      "custom_modes": {
+        "header": "Custom transport modes",
+        "notice": "Create your own transport modes: they are added to the official ones in every selector."
+      },
       "custom_map_size": {
         "accept": "Done",
         "header": "Custom frame size"
@@ -494,7 +498,8 @@
       "guide": "User guide",
       "lumiplan_export": "Export to Lumiplan",
       "lumiplan_import": "Import from Lumiplan",
-      "mode_pictos": "Mode pictograms"
+      "mode_pictos": "Mode pictograms",
+      "custom_modes": "Transport modes"
     },
     "nag": "<b>DISCLAIMER</b>: This application is under development. Some features are not yet available or are incomplete.",
     "properties": {

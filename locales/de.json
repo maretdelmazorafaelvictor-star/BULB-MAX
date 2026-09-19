@@ -215,6 +215,10 @@
         "accept": "Anwenden",
         "header": "Liniendicke"
       },
+      "custom_modes": {
+        "header": "Benutzerdefinierte Verkehrsmittel",
+        "notice": "Erstellen Sie eigene Verkehrsmittel: Sie erscheinen in allen Auswahllisten neben den offiziellen."
+      },
       "custom_map_size": {
         "accept": "Anwenden",
         "header": "Größe des Rahmens"
@@ -500,7 +504,8 @@
       "guide": "Benutzerhandbuch",
       "lumiplan_export": "Nach Lumiplan exportieren",
       "lumiplan_import": "Aus Lumiplan importieren",
-      "mode_pictos": "Verkehrsmittel-Piktogramme"
+      "mode_pictos": "Verkehrsmittel-Piktogramme",
+      "custom_modes": "Verkehrsmittel"
     },
     "nag": "<b>ACHTUNG</b>: BULB ist im Entwicklungsstadium. Einige Funktionen sind noch nicht vollständig oder gänzlich nicht verfügbar.",
     "properties": {

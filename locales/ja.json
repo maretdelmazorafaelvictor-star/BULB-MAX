@@ -215,6 +215,10 @@
         "accept": "確定",
         "header": "カスタム線の太さ"
       },
+      "custom_modes": {
+        "header": "カスタム交通手段",
+        "notice": "独自の交通手段を作成すると、すべての選択肢に公式の交通手段と並んで表示されます。"
+      },
       "custom_map_size": {
         "accept": "確定",
         "header": "枠のサイズを指定"
@@ -500,7 +504,8 @@
       "guide": "使い方ガイド",
       "lumiplan_export": "Lumiplanへエクスポート",
       "lumiplan_import": "Lumiplanからインポート",
-      "mode_pictos": "交通手段のピクトグラム"
+      "mode_pictos": "交通手段のピクトグラム",
+      "custom_modes": "交通手段"
     },
     "nag": "<b>注意</b> : このアプリケーションは現在開発中です。一部の機能はまだ利用できないか、不完全です。",
     "properties": {

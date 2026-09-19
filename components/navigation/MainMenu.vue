@@ -14,6 +14,7 @@ const { line } = storeToRefs(projectStore)
 
 const showLineIndexDirectory = ref(false)
 const showModePictos = ref(false)
+const showCustomModes = ref(false)
 const showSaveDialog = ref(false)
 const showLumiplanExportDialog = ref(false)
 const showTroubleshootingDialog = ref(false)
@@ -65,6 +66,14 @@ function newProject() {
       icon="i-tabler-photo"
       text
       @click="showModePictos = true"
+    />
+    <Button
+      pt:root:class="important-justify-start"
+      :label="$t('ui.menu.custom_modes')"
+      severity="secondary"
+      icon="i-tabler-route"
+      text
+      @click="showCustomModes = true"
     />
     <Divider />
     <Button
@@ -131,6 +140,7 @@ function newProject() {
 
   <CustomLineIndexDirectoryDialog v-model:visible="showLineIndexDirectory" />
   <ModePictosDialog v-model:visible="showModePictos" />
+  <CustomModesDialog v-model:visible="showCustomModes" />
   <TroubleshootingDialog v-model:visible="showTroubleshootingDialog" />
   <GuideDialog v-model:visible="showGuideDialog" />
   <SaveDialog v-model:visible="showSaveDialog" />

@@ -215,6 +215,10 @@
         "accept": "Listo",
         "header": "Grosor de línea personalizado"
       },
+      "custom_modes": {
+        "header": "Modos de transporte personalizados",
+        "notice": "Cree sus propios modos de transporte: se añaden a los oficiales en todos los selectores."
+      },
       "custom_map_size": {
         "accept": "Listo",
         "header": "Tamaño del marco personalizado"
@@ -500,7 +504,8 @@
       "guide": "Guía de uso",
       "lumiplan_export": "Exportar a Lumiplan",
       "lumiplan_import": "Importar desde Lumiplan",
-      "mode_pictos": "Pictogramas de los modos"
+      "mode_pictos": "Pictogramas de los modos",
+      "custom_modes": "Modos de transporte"
     },
     "nag": "<b>ATENCIÓN</b>: Aplicación en fase de desarrollo. Algunas funcionalidades no están disponibles o están incompletas.",
     "properties": {

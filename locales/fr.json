@@ -216,6 +216,10 @@
         "accept": "Terminé",
         "header": "Épaisseur de ligne personnalisée"
       },
+      "custom_modes": {
+        "header": "Modes de transport personnalisés",
+        "notice": "Créez vos propres modes de transport : ils s'ajoutent aux modes officiels dans tous les sélecteurs."
+      },
       "custom_map_size": {
         "accept": "Terminé",
         "header": "Taille du cadre personnalisée"
@@ -501,7 +505,8 @@
       "guide": "Guide d'utilisation",
       "lumiplan_export": "Exporter vers Lumiplan",
       "lumiplan_import": "Importer depuis Lumiplan",
-      "mode_pictos": "Pictogrammes des modes"
+      "mode_pictos": "Pictogrammes des modes",
+      "custom_modes": "Modes de transport"
     },
     "nag": "<b>RAPPEL</b> : Application en phase de développement. Certaines fonctionnalités ne sont pas encore disponibles ou sont incomplètes.",
     "properties": {

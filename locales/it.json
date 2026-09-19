@@ -215,6 +215,10 @@
         "accept": "OK",
         "header": "Spessore linea personalizzato"
       },
+      "custom_modes": {
+        "header": "Modi di trasporto personalizzati",
+        "notice": "Crea i tuoi modi di trasporto: si aggiungono a quelli ufficiali in tutti i selettori."
+      },
       "custom_map_size": {
         "accept": "OK",
         "header": "Dimensione personalizzata del riquadro"
@@ -500,7 +504,8 @@
       "guide": "Guida all'uso",
       "lumiplan_export": "Esporta verso Lumiplan",
       "lumiplan_import": "Importa da Lumiplan",
-      "mode_pictos": "Pittogrammi dei modi"
+      "mode_pictos": "Pittogrammi dei modi",
+      "custom_modes": "Modi di trasporto"
     },
     "nag": "<b>ATTENZIONE</b>: Applicazione è in fase di sviluppo. Alcune funzioni non sono ancora disponibili, o sono incomplete.",
     "properties": {
